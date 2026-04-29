@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@heroui/react";
 import React, { useState } from "react";
-import logo from "@/app/assets/logo.png";
+import logo from "@/assets/logo.png";
 import Image from "next/image";
 import MyNavLink from "../ui/MyNavLink";
 

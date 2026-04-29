@@ -1,0 +1,167 @@
+[
+  {
+    "id": 1,
+    "title": "Complete Web Development Bootcamp",
+    "instructor": "John Doe",
+    "duration": "20 hours",
+    "rating": 4.8,
+    "level": "Beginner",
+    "description": "Learn full-stack web development from scratch.",
+    "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800",
+    "category": "Development"
+  },
+  {
+    "id": 2,
+    "title": "React & Next.js Masterclass",
+    "instructor": "Sarah Williams",
+    "duration": "18 hours",
+    "rating": 4.9,
+    "level": "Intermediate",
+    "description": "Build modern web applications using React and Next.js.",
+    "image": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800",
+    "category": "Development"
+  },
+  {
+    "id": 3,
+    "title": "UI/UX Design Fundamentals",
+    "instructor": "Emily Carter",
+    "duration": "12 hours",
+    "rating": 4.7,
+    "level": "Beginner",
+    "description": "Learn the basics of UI/UX design and prototyping.",
+    "image": "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800",
+    "category": "Design"
+  },
+  {
+    "id": 4,
+    "title": "Python for Data Science",
+    "instructor": "Michael Brown",
+    "duration": "22 hours",
+    "rating": 4.8,
+    "level": "Intermediate",
+    "description": "Analyze data and build machine learning models with Python.",
+    "image": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=800",
+    "category": "Data Science"
+  },
+  {
+    "id": 5,
+    "title": "Digital Marketing Essentials",
+    "instructor": "Olivia Johnson",
+    "duration": "10 hours",
+    "rating": 4.6,
+    "level": "Beginner",
+    "description": "Master SEO, social media marketing, and online branding.",
+    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800",
+    "category": "Marketing"
+  },
+  {
+    "id": 6,
+    "title": "Advanced JavaScript Concepts",
+    "instructor": "David Miller",
+    "duration": "16 hours",
+    "rating": 4.9,
+    "level": "Advanced",
+    "description": "Deep dive into closures, async JS, and advanced patterns.",
+    "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800",
+    "category": "Development"
+  },
+  {
+    "id": 7,
+    "title": "Mobile App Development with Flutter",
+    "instructor": "Sophia Lee",
+    "duration": "19 hours",
+    "rating": 4.7,
+    "level": "Intermediate",
+    "description": "Build cross-platform mobile apps using Flutter.",
+    "image": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800",
+    "category": "Development"
+  },
+  {
+    "id": 8,
+    "title": "Photography Mastery",
+    "instructor": "Daniel Harris",
+    "duration": "8 hours",
+    "rating": 4.5,
+    "level": "Beginner",
+    "description": "Improve your photography skills and editing techniques.",
+    "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800",
+    "category": "Photography"
+  },
+  {
+    "id": 9,
+    "title": "Machine Learning A-Z",
+    "instructor": "James Wilson",
+    "duration": "25 hours",
+    "rating": 4.9,
+    "level": "Advanced",
+    "description": "Learn machine learning algorithms and AI fundamentals.",
+    "image": "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=800",
+    "category": "AI & ML"
+  },
+  {
+    "id": 10,
+    "title": "Graphic Design with Adobe Photoshop",
+    "instructor": "Emma Davis",
+    "duration": "14 hours",
+    "rating": 4.6,
+    "level": "Beginner",
+    "description": "Learn image editing and graphic design techniques.",
+    "image": "https://images.unsplash.com/photo-1545239351-1141bd82e8a6?w=800",
+    "category": "Design"
+  },
+  {
+    "id": 11,
+    "title": "Cybersecurity Basics",
+    "instructor": "Chris Anderson",
+    "duration": "11 hours",
+    "rating": 4.7,
+    "level": "Beginner",
+    "description": "Understand online security, hacking, and defense basics.",
+    "image": "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?w=800",
+    "category": "Security"
+  },
+  {
+    "id": 12,
+    "title": "AWS Cloud Practitioner Course",
+    "instructor": "Robert Clark",
+    "duration": "15 hours",
+    "rating": 4.8,
+    "level": "Intermediate",
+    "description": "Learn cloud computing concepts using AWS services.",
+    "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800",
+    "category": "Cloud"
+  },
+  {
+    "id": 13,
+    "title": "Video Editing with Premiere Pro",
+    "instructor": "Natalie Scott",
+    "duration": "13 hours",
+    "rating": 4.5,
+    "level": "Intermediate",
+    "description": "Create professional videos using Adobe Premiere Pro.",
+    "image": "https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=800",
+    "category": "Video Editing"
+  },
+  {
+    "id": 14,
+    "title": "SQL Database Essentials",
+    "instructor": "Kevin Martinez",
+    "duration": "9 hours",
+    "rating": 4.7,
+    "level": "Beginner",
+    "description": "Learn SQL queries, joins, and database management.",
+    "image": "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=800",
+    "category": "Database"
+  },
+  {
+    "id": 15,
+    "title": "Blockchain & Cryptocurrency Basics",
+    "instructor": "Ryan Walker",
+    "duration": "17 hours",
+    "rating": 4.6,
+    "level": "Intermediate",
+    "description": "Understand blockchain technology and crypto fundamentals.",
+    "image": "https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=800",
+    "category": "Technology"
+  }
+]

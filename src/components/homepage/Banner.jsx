@@ -1,10 +1,10 @@
 import Image from "next/image";
 import React from "react";
-import bannerImage from "@/app/assets/banner.png";
-import dot from "@/app/assets/dot.png";
-import student from "@/app/assets/student.png";
-import instructor from "@/app/assets/instructor.png";
-import course from "@/app/assets/course.png";
+import bannerImage from "@/assets/banner.png";
+import dot from "@/assets/dot.png";
+import student from "@/assets/student.png";
+import instructor from "@/assets/instructor.png";
+import course from "@/assets/course.png";
 
 const Banner = () => {
   return (
