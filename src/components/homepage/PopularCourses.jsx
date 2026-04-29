@@ -15,7 +15,9 @@ const PopularCourses = async () => {
   return (
     <div className=" container mx-auto my-20 space-y-10 px-3">
       <div className="flex flex-col md:flex-row justify-center gap-5 md:justify-between items-center">
-        <h1 className="font-bold text-3xl sm:text-4xl "><span className="hidden md:inline-block">🔥</span> Popular courses</h1>
+        <h1 className="font-bold text-3xl sm:text-4xl ">
+          <span className="hidden md:inline-block">🔥</span> Popular courses
+        </h1>
 
         <div className="flex items-center gap-2 group cursor-pointer">
           <Link
@@ -29,7 +31,7 @@ const PopularCourses = async () => {
         </div>
       </div>
 
-      <div className="grid md:grid-cols-3 md:gap-10 lg:gap-15  ">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-15 max-w-7xl mx-auto ">
         {topCourses.map((course) => (
           <CourseCard key={course.id} course={course} />
         ))}
