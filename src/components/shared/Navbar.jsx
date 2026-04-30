@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import logo from "@/assets/logo.png";
 import Image from "next/image";
 import MyNavLink from "../ui/MyNavLink";
+import Link from "next/link";
 
 const Navbar = () => {
   const links = (
@@ -61,20 +62,30 @@ const Navbar = () => {
 
           <ul className="hidden items-center gap-6 md:flex">{links}</ul>
           <div className="md:flex gap-2 items-center hidden">
-            <Button className={"bg-main-gradient rounded-md "}>SignUp</Button>
-            <Button className={"border-gradient text-black rounded-md"}>
-              SignIn
-            </Button>
+            <Link href={"/signup"}>
+              <Button className={"bg-main-gradient rounded-md "}>SignUp</Button>
+            </Link>
+            <Link href={"/signin"}>
+              <Button className={"border-gradient text-black rounded-md"}>
+                SignIn
+              </Button>
+            </Link>
           </div>
         </header>
         {isMenuOpen && (
           <div className="border-t border-separator md:hidden">
             <ul className="flex flex-col gap-2 p-4">{links}</ul>
             <div className="flex flex-col gap-3 space-y-2 m-2">
-              <Button className={"bg-main-gradient rounded-md "}>SignUp</Button>
-              <Button className={"border-gradient text-black rounded-md"}>
-                SignIn
-              </Button>
+              <Link href={"/signin"}>
+                <Button className={"bg-main-gradient rounded-md "}>
+                  SignUp
+                </Button>
+              </Link>
+              <Link href={"/signin"}>
+                <Button className={"border-gradient text-black rounded-md"}>
+                  SignIn
+                </Button>
+              </Link>
             </div>
           </div>
         )}

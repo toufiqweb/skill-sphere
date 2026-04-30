@@ -3,7 +3,6 @@ import Image from "next/image";
 import {
   Clock,
   Users,
-  Star,
   Award,
   PlayCircle,
   ChevronRight,
@@ -22,7 +21,7 @@ const curriculum = [
   "Common Challenges and Solutions",
   "Industry Best Practices",
   "Final Project & Assessment",
-  "Course Summary & Next Steps"
+  "Course Summary & Next Steps",
 ];
 const CourseDetailPage = async ({ params }) => {
   const { id } = await params;
@@ -86,7 +85,7 @@ const CourseDetailPage = async ({ params }) => {
               </h3>
               <div className="flex items-center gap-4">
                 <div className="w-16 h-16 bg-main-gradient rounded-2xl flex items-center justify-center text-white text-2xl font-bold">
-                  SW
+                  {course.instructor[0]}
                 </div>
                 <div>
                   <h4 className="font-semibold text-xl">{course.instructor}</h4>
@@ -130,7 +129,7 @@ const CourseDetailPage = async ({ params }) => {
             <div className="  bg-white  rounded-3xl shadow-sm p-8 border border-gray-100 ">
               <div className="text-center mb-8">
                 <div className="text-4xl font-bold text-gray-900 mb-2">$89</div>
-                <p className="text-gray-500 ">$149</p>
+                <p className="text-gray-500 line-through">$149</p>
               </div>
 
               <button className="w-full bg-main-gradient cursor-pointer text-white font-semibold py-4 rounded-2xl  mb-4">

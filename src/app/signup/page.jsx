@@ -1,0 +1,138 @@
+"use client";
+import { FcGoogle } from "react-icons/fc";
+
+const SignUpPage = () => {
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
+    console.log(data);
+  };
+  const handleGoogleLogin = () => {
+    // Add your Google login logic here
+    // console.log("Google login clicked");
+    // alert("Google Sign-In clicked (Add your logic here)");
+  };
+  return (
+    <div className="min-h-[80vh]  flex items-center justify-center p-6">
+      <div className="w-full max-w-md">
+        <div className="bg-white  rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
+          <div className="bg-main-gradient px-8 py-10 text-white">
+            <h2 className="text-3xl font-bold text-center">Create Account</h2>
+            <p className="text-white/80 text-center mt-2">
+              Join us and start your learning journey
+            </p>
+          </div>
+          {/* Google Login */}
+          <div className="p-8 space-y-6">
+            <button
+              onClick={handleGoogleLogin}
+              className="w-full flex items-center justify-center gap-3 border border-gray-300  hover:bg-gray-50  py-3 rounded-xl transition-all "
+            >
+              <FcGoogle className="text-2xl" />
+              <span>Continue with Google</span>
+            </button>
+
+            <div className="relative flex items-center justify-center my-4">
+              <div className="border-t border-gray-300  w-full"></div>
+              <span className="absolute bg-white  px-4 text-sm text-gray-500 ">
+                OR
+              </span>
+            </div>
+          </div>
+          <form onSubmit={onSubmit} className="px-8 pb-8 space-y-6">
+            {/* Name */}
+            <div>
+              <label className="block text-sm text-gray-700  mb-1.5">
+                Full Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                placeholder="Enter your full name"
+                className="w-full px-4 py-3 rounded-2xl border border-gray-300 focus:border-violet-500 focus:ring-2 focus:ring-violet-200  outline-none transition-all"
+                required
+              />
+            </div>
+
+            {/* Photo*/}
+            <div>
+              <label className="block text-sm text-gray-700  mb-1.5">
+                Profile Photo URL
+              </label>
+              <input
+                type="url"
+                name="photo"
+                placeholder="https://example.com/your-photo.jpg"
+                className="w-full px-4 py-3 rounded-2xl border border-gray-300 focus:border-violet-500 focus:ring-2 focus:ring-violet-200  outline-none transition-all"
+              />
+            </div>
+
+            {/* Email */}
+            <div>
+              <label className="block text-sm text-gray-700  mb-1.5">
+                Email Address
+              </label>
+              <input
+                type="email"
+                name="email"
+                placeholder="john@example.com"
+                className="w-full px-4 py-3 rounded-2xl border border-gray-300 focus:border-violet-500 focus:ring-2 focus:ring-violet-200  outline-none transition-all"
+                required
+              />
+            </div>
+
+            {/* Password */}
+            <div>
+              <label className="block text-sm text-gray-700  mb-1.5">
+                Password
+              </label>
+              <input
+                type="password"
+                name="password"
+                placeholder="Create a strong password"
+                className="w-full px-4 py-3 rounded-2xl border border-gray-300 focus:border-violet-500 focus:ring-2 focus:ring-violet-200  outline-none transition-all"
+                required
+              />
+              <p className="mt-2 text-xs text-gray-500 ">
+                Must be at least 8 characters with 1 uppercase letter and 1
+                number
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-3 pt-4">
+              <button
+                type="submit"
+                className="flex-1 bg-main-gradient text-white font-semibold py-3.5 rounded-2xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg shadow-violet-500/30"
+              >
+                Create Account
+              </button>
+
+              <button
+                type="reset"
+                className="flex-1 border border-gray-300  hover:bg-gray-50  font-medium py-3 rounded-2xl transition-all"
+              >
+                Reset
+              </button>
+            </div>
+          </form>
+
+          <div className="px-8 py-6 border-t border-gray-100  text-center">
+            <p className="text-sm text-gray-600 ">
+              Already have an account?
+              <a href="/signin" className="text-main-gradient font-medium">
+                Sign in
+              </a>
+            </p>
+          </div>
+        </div>
+
+        <p className="text-center text-xs text-gray-500 mt-6">
+          Secured by industry-leading encryption
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default SignUpPage;
