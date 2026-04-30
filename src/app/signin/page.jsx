@@ -4,7 +4,6 @@ import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 
 const SignInPage = () => {
-
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -18,11 +17,11 @@ const SignInPage = () => {
       rememberMe: false,
     });
     console.log(data, error);
-    
   };
-  const handleGoogleLogin = () => {
-    // console.log("Google login clicked");
-    // alert("Google Sign-In clicked (Add your logic here)");
+  const handleGoogleLogin = async () => {
+    const data = await authClient.signIn.social({
+      provider: "google",
+    });
   };
   return (
     <div className="min-h-[80vh]  flex items-center justify-center p-6">

@@ -34,16 +34,13 @@ const SignUpPage = () => {
           alert(ctx.error.message);
         },
       },
-
-      
-      
     );
-    console.log(data , error);
-
+    console.log(data, error);
   };
-  const handleGoogleLogin = () => {
-    // console.log("Google login clicked");
-    // alert("Google Sign-In clicked (Add your logic here)");
+  const handleGoogleLogin = async () => {
+    const data = await authClient.signIn.social({
+      provider: "google",
+    });
   };
   return (
     <div className="min-h-[80vh]  flex items-center justify-center p-6">
