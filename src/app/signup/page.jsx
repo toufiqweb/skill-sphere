@@ -1,13 +1,45 @@
 "use client";
+import { authClient } from "@/lib/auth-client";
+import { error } from "better-auth/api";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 
 const SignUpPage = () => {
-  const onSubmit = (e) => {
+  const router = useRouter();
+
+  const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
-    console.log(data);
+    const userData = Object.fromEntries(formData.entries());
+    console.log(userData);
+    const { name, email, password, image } = userData;
+    const { data, error } = await authClient.signUp.email(
+      {
+        email, // user email address
+        password, // user password -> min 8 characters by default
+        name, // user display name
+        image, // User image URL (optional)
+      },
+      {
+        onRequest: (ctx) => {
+          //show loading
+        },
+        onSuccess: (ctx) => {
+          //redirect to the dashboard or sign in page
+          router.push("/");
+        },
+        onError: (ctx) => {
+          // display the error message
+          alert(ctx.error.message);
+        },
+      },
+
+      
+      
+    );
+    console.log(data , error);
+
   };
   const handleGoogleLogin = () => {
     // console.log("Google login clicked");
@@ -62,7 +94,7 @@ const SignUpPage = () => {
               </label>
               <input
                 type="url"
-                name="photo"
+                name="image"
                 placeholder="https://example.com/your-photo.jpg"
                 className="w-full px-4 py-3 rounded-2xl border border-gray-300 focus:border-violet-500 focus:ring-2 focus:ring-violet-200  outline-none transition-all"
               />

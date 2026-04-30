@@ -1,13 +1,24 @@
 "use client";
+import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 
 const SignInPage = () => {
-  const onSubmit = (e) => {
+
+  const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
-    console.log(data);
+    const userData = Object.fromEntries(formData.entries());
+    const { email, password } = userData;
+    // console.log(data);
+    const { data, error } = await authClient.signIn.email({
+      email,
+      password,
+      callbackURL: "/",
+      rememberMe: false,
+    });
+    console.log(data, error);
+    
   };
   const handleGoogleLogin = () => {
     // console.log("Google login clicked");
@@ -19,7 +30,7 @@ const SignInPage = () => {
         <div className="bg-white  rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
           <div className="bg-main-gradient px-8 py-10 text-white">
             <h2 className="text-3xl font-bold text-center">
-              Login to Your Account
+              Sign In to Your Account
             </h2>
             <p className="text-white/80 text-center mt-2">
               Welcome back! Sign in to continue your learning journey
@@ -75,13 +86,13 @@ const SignInPage = () => {
               type="submit"
               className="w-full bg-main-gradient text-white font-semibold py-3.5 rounded-2xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg shadow-violet-500/30"
             >
-              Login
+              Sign In
             </button>
           </form>
 
           <div className="px-8 py-6 border-t border-gray-100  text-center">
             <p className="text-sm text-gray-600 ">
-                  Don&apos;t have an account?{" "}
+              Don&apos;t have an account?{" "}
               <Link href="/signup" className="text-main-gradient font-medium">
                 Sign up
               </Link>
