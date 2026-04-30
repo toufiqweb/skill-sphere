@@ -5,7 +5,7 @@
   --primary-gradient-start: #7c3aed;
   --primary-gradient-end: #2563eb;
 }
-
+ 
 .bg-main-gradient {
   background: linear-gradient(
     135deg,

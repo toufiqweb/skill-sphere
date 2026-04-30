@@ -1,4 +1,4 @@
-import { Linkedin, Twitter, Star, Users } from "lucide-react";
+import { Users } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaArrowRight, FaStar } from "react-icons/fa";
@@ -12,6 +12,7 @@ const instructors = [
       "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
     rating: 4.8,
     students: "1.2K",
+    courses: 12,
   },
   {
     id: 2,
@@ -21,6 +22,7 @@ const instructors = [
       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=face",
     rating: 4.9,
     students: "856",
+    courses: 8,
   },
   {
     id: 3,
@@ -30,6 +32,7 @@ const instructors = [
       "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
     rating: 4.7,
     students: "1.5K",
+    courses: 15,
   },
   {
     id: 4,
@@ -39,11 +42,12 @@ const instructors = [
       "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
     rating: 4.6,
     students: "734",
+    courses: 9,
   },
 ];
 const TopInstructors = () => {
   return (
-    <div className="container mx-auto px-6 py-16">
+    <div className="container mx-auto my-20 px-6 ">
       <div className="flex flex-col md:flex-row justify-center gap-5 md:justify-between items-center mb-10">
         <div className="flex items-center gap-3">
           <div className="p-3 bg-[#f6f8fd]  hidden sm:inline-block   rounded-2xl">
@@ -94,7 +98,7 @@ const TopInstructors = () => {
                   {instructor.rating}
                 </span>
                 <span className="text-gray-500  text-sm">
-                  ({instructor.students} Students)
+                  ({instructor.students}+ Students  &  {instructor.courses} Courses)
                 </span>
               </div>
             </div>

@@ -99,7 +99,12 @@ const Navbar = () => {
                 </Button>
               </Link>
               <Link href={"/signin"}>
-                <Button className={"border-gradient text-black rounded-md"}>
+                <Button
+                  variant="outline"
+                  className={
+                    "hover:bg-white/90 transition-all active:scale-95 hover:shadow-lg text-main-gradient rounded-md"
+                  }
+                >
                   Login
                 </Button>
               </Link>
@@ -117,7 +122,7 @@ const Navbar = () => {
               </div>
             )}
             <ul className="flex flex-col gap-2 p-4">{links}</ul>
-            <div className="flex flex-col gap-3 space-y-2 m-2">
+            <div className="flex gap-3 space-y-2 m-2">
               {user ? (
                 <>
                   <Link href={"/"}>
@@ -132,13 +137,18 @@ const Navbar = () => {
                 </>
               ) : (
                 <>
-                  <Link href={"/signin"}>
-                    <Button className={"bg-main-gradient rounded-md "}>
+                  <Link href={"/signup"}>
+                    <Button className={"bg-main-gradient rounded-md  "}>
                       Register
                     </Button>
                   </Link>
                   <Link href={"/signin"}>
-                    <Button className={"border-gradient text-black rounded-md"}>
+                    <Button
+                      variant="outline"
+                      className={
+                        "hover:bg-white/90 transition-all active:scale-95 hover:shadow-lg text-main-gradient rounded-md"
+                      }
+                    >
                       Login
                     </Button>
                   </Link>

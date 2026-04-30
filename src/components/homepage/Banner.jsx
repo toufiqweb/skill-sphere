@@ -8,39 +8,39 @@ import course from "@/assets/course.png";
 
 const Banner = () => {
   return (
-    <div className="container mx-auto px5 bg-[#e6edfc] my-10 rounded-2xl py-10">
+    <div className="container mx-auto px-5 bg-[#e6edfc] my-20 rounded-2xl py-10">
       <div className="flex flex-col lg:flex-row justify-around items-center ">
         {/* right side */}
         <div className="max-h[60vh] flex items-center justify-center p-6">
-          <div className="max-w-2xl w-full text-center">
-            <div className="inline-flex items-center gap-2 bg-white/60 backdrop-blur-md border border-black/20 rounded-full px-5 py-2">
+          <div className="max-w-3xl w-full text-center space-y-3">
+            <div className="flex w-fit items-center gap-2 bg-white/60 backdrop-blur-md border border-black/20 rounded-full px-5 py-2">
               <span className="text-white text-xl">🎓</span>
               <span className="text-main-gradient font-medium">
                 Online Learning Platform
               </span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-normal text-[#0F172A]  my-6">
+            <h1 className="text-4xl text-center md:text-left sm:text-5xl md:text-6xl font-bold leading-relaxed text-[#0F172A]  my-6">
               Upgrade Your
               <br />
               <span className="text-[#E0E7FF] text-main-gradient">
                 Skills Today
               </span>
-              <span className="ml-3"> 🚀</span>
+              <span className="ml-2 hidden md:inline-block"> 🚀</span>
             </h1>
 
-            <p className="text-lg md:text-xl text-black/90 mb-10 max-w-md mx-auto">
+            <p className="text-md sm:text-lg md:text-xl text-black/80 mb-10 max-w-md mx-auto">
               Learn from industry experts and advance your career with our
               high-quality online courses.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <button className="bg-white text-[#7C3AED] font-semibold px-8 py-3 rounded-2xl hover:bg-white/90 transition-all active:scale-95 shadow-lg">
+              <button className="bg-main-gradient text-white font-semibold px-8 py-3 rounded-2xl hover:bg-white/90 transition-all active:scale-95 shadow-lg">
                 Explore Courses
               </button>
 
-              <button className="border border-[#7C3AED]/70 text-[#7C3AED] font-medium px-8 py-3 rounded-2xl hover:bg-white/10 transition-all flex items-center gap-2">
-                <div className="w-5 h-5 rounded-full border-2 border-[#7C3AED] flex items-center justify-center">
+              <button className= "flex items-center gap-2 bg-white text-[#7C3AED] font-semibold px-8 py-3 rounded-2xl hover:bg-white/90 transition-all active:scale-95 shadow-lg">
+                <div className="w-5 h-5 animate-pulse rounded-full border-2 border-[#7C3AED] flex items-center justify-center">
                   <div className="w-2 h-2 bg-[#7C3AED] rounded-full"></div>
                 </div>
                 How It Works

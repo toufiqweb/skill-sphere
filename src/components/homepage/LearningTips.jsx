@@ -30,7 +30,7 @@ const learningTips = [
 
 const LearningTips = () => {
   return (
-    <div className="container mx-auto px-6 py-12">
+    <div className="container mx-auto px-6 my-20">
       <div className="flex items-center justify-between  flex-col md:flex-row  gap-5 md:justify-between  mb-8">
         <div className="flex items-center gap-3">
           <div className="p-2 bg-blue-100 hidden sm:inline-block  rounded-xl">
@@ -57,7 +57,7 @@ const LearningTips = () => {
         {learningTips.map((learningTip) => (
           <div
             key={learningTip.id}
-            className="group bg-[#f6f8fd]   rounded-3xl p-8 border border-gray-100  hover:border-gray-200  transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+            className=" bg-linear-to-br from-purple-100  to-blue-100   rounded-3xl p-8 border border-gray-100 group hover:border-gray-200  hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
           >
             <div
               className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 ${learningTip.color}`}

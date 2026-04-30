@@ -5,7 +5,7 @@ import { FaStar } from "react-icons/fa";
 const CourseCard = ({ course }) => {
   const { id, rating, instructor, image, title } = course;
   return (
-    <div className=" bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 flex flex-col h-full">
+    <div className=" bg-white rounded-2xl  overflow-hidden border border-gray-100 flex flex-col h-full group  border-gray-100  hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
       <div>
         <Image
           alt={title}

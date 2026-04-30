@@ -4,15 +4,17 @@ import NewReleases from "@/components/homepage/NewReleases";
 import PopularCourses from "@/components/homepage/PopularCourses";
 import Stats from "@/components/homepage/Stats";
 import TopInstructors from "@/components/homepage/TopInstructors";
+import WhatOurStudentSay from "@/components/homepage/WhatOurStudentSay";
 
 export default function Home() {
   return (
-    <div>
+    <div className="space-y-15">
       <Banner/>
       <PopularCourses/>
       <LearningTips/>
       <TopInstructors/>
       <Stats/>
+      <WhatOurStudentSay/>
       <NewReleases/>
     </div>
   );
