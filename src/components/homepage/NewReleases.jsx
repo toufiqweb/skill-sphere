@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { FaArrowRight } from "react-icons/fa";
 import CourseCard from "../ui/CourseCard";
+import { IoSparklesSharp } from "react-icons/io5";
 
 const NewReleases = async () => {
   const courses = await getAllCoursesData();
@@ -10,13 +11,17 @@ const NewReleases = async () => {
 
   const topCourses = courses.reverse().slice(0, 3);
 
-  console.log(topCourses);
+  console.log(courses);
   return (
     <div className=" container mx-auto my-20 space-y-10 px-3">
       <div className="flex flex-col md:flex-row justify-center gap-5 md:justify-between items-center">
-        <h1 className="font-bold text-3xl sm:text-4xl ">
-          <span className="hidden md:inline-block">🔥</span> New Releases
-        </h1>
+        <div className="flex items-center gap-3">
+          <div className="hidden sm:flex items-center justify-center p-3 bg-yellow-100 rounded-2xl">
+            <IoSparklesSharp className="w-7 h-7 text-yellow-500" />
+          </div>
+
+          <h2 className="text-3xl font-semibold text-gray-900">New Releases</h2>
+        </div>
 
         <div className="flex items-center gap-2 group cursor-pointer">
           <Link
