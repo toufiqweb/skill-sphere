@@ -53,7 +53,7 @@ const LearningTips = () => {
         </div>
       </div>
 
-      <div className="grid  md:grid-cols-2 lg:grid-cols-3 gap-10">
+      <div className="grid  md:grid-cols-2   lg:grid-cols-3 gap-10">
         {learningTips.map((learningTip) => (
           <div
             key={learningTip.id}

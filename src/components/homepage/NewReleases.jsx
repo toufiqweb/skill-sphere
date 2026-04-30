@@ -9,7 +9,7 @@ const NewReleases = async () => {
   const courses = await getAllCoursesData();
   // console.log(courses);
 
-  const topCourses = courses.reverse().slice(0, 3);
+  const topCourses = courses.reverse().slice(0, 5);
 
   console.log(courses);
   return (
@@ -35,7 +35,7 @@ const NewReleases = async () => {
         </div>
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-20    ">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-10 md:gap-10    ">
         {topCourses.map((course) => (
           <CourseCard key={course.id} course={course} />
         ))}
