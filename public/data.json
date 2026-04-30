@@ -163,5 +163,38 @@
     "description": "Understand blockchain technology and crypto fundamentals.",
     "image": "https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=800",
     "category": "Technology"
+  },
+   {
+    "id": 16,
+    "title": "Java Programming for Beginners",
+    "instructor": "Andrew Smith",
+    "duration": "14 hours",
+    "rating": 4.7,
+    "level": "Beginner",
+    "description": "Learn Java programming basics and object-oriented concepts.",
+    "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800",
+    "category": "Programming"
+  },
+  {
+    "id": 17,
+    "title": "Full Stack MERN Development",
+    "instructor": "Jessica Taylor",
+    "duration": "24 hours",
+    "rating": 4.9,
+    "level": "Intermediate",
+    "description": "Build complete web applications using MongoDB, Express, React, and Node.js.",
+    "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800",
+    "category": "Development"
+  },
+  {
+    "id": 18,
+    "title": "Artificial Intelligence Fundamentals",
+    "instructor": "Daniel Cooper",
+    "duration": "21 hours",
+    "rating": 4.8,
+    "level": "Beginner",
+    "description": "Understand AI concepts, neural networks, and practical applications.",
+    "image": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800",
+    "category": "AI & ML"
   }
 ]

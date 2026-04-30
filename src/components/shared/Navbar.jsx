@@ -87,7 +87,7 @@ const Navbar = () => {
                   variant="outline"
                   className={"text-red-400 border border-red-100 "}
                 >
-                  Sign Out
+                  Logout
                 </Button>
               </Link>
             </div>
@@ -95,12 +95,12 @@ const Navbar = () => {
             <div className="md:flex gap-2 items-center hidden">
               <Link href={"/signup"}>
                 <Button className={"bg-main-gradient rounded-md "}>
-                  SignUp
+                  Register
                 </Button>
               </Link>
               <Link href={"/signin"}>
                 <Button className={"border-gradient text-black rounded-md"}>
-                  SignIn
+                  Login
                 </Button>
               </Link>
             </div>
@@ -126,7 +126,7 @@ const Navbar = () => {
                       variant="outline"
                       className={"text-red-400 border border-red-100 "}
                     >
-                      Sign Out
+                      Logout
                     </Button>
                   </Link>
                 </>
@@ -134,12 +134,12 @@ const Navbar = () => {
                 <>
                   <Link href={"/signin"}>
                     <Button className={"bg-main-gradient rounded-md "}>
-                      SignUp
+                      Register
                     </Button>
                   </Link>
                   <Link href={"/signin"}>
                     <Button className={"border-gradient text-black rounded-md"}>
-                      SignIn
+                      Login
                     </Button>
                   </Link>
                 </>

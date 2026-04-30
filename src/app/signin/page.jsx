@@ -29,7 +29,7 @@ const SignInPage = () => {
         <div className="bg-white  rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
           <div className="bg-main-gradient px-8 py-10 text-white">
             <h2 className="text-3xl font-bold text-center">
-              Sign In to Your Account
+              Login to Your Account
             </h2>
             <p className="text-white/80 text-center mt-2">
               Welcome back! Sign in to continue your learning journey
@@ -85,7 +85,7 @@ const SignInPage = () => {
               type="submit"
               className="w-full bg-main-gradient text-white font-semibold py-3.5 rounded-2xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg shadow-violet-500/30"
             >
-              Sign In
+              Login
             </button>
           </form>
 
@@ -93,7 +93,7 @@ const SignInPage = () => {
             <p className="text-sm text-gray-600 ">
               Don&apos;t have an account?
               <Link href="/signup" className="text-main-gradient font-medium">
-                Sign up
+                Register
               </Link>
             </p>
           </div>

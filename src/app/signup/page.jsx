@@ -27,21 +27,17 @@ const SignUpPage = () => {
         },
         onSuccess: (ctx) => {
           //redirect to the dashboard or sign in page
-          router.push("/");
+          router.push("/signin");
         },
         onError: (ctx) => {
           // display the error message
           alert(ctx.error.message);
         },
       },
-
-      
-      
     );
-    console.log(data , error);
-
+    console.log(data, error);
   };
- const handleGoogleLogin = async () => {
+  const handleGoogleLogin = async () => {
     const data = await authClient.signIn.social({
       provider: "google",
     });
@@ -154,7 +150,7 @@ const SignUpPage = () => {
             <p className="text-sm text-gray-600 ">
               Already have an account?
               <Link href="/signin" className="text-main-gradient font-medium">
-                Sign in
+                Login 
               </Link>
             </p>
           </div>
