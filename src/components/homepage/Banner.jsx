@@ -9,7 +9,7 @@ import course from "@/assets/course.png";
 const Banner = () => {
   return (
     <div className="container mx-auto px-5 bg-[#e6edfc] my-20 rounded-2xl py-10">
-      <div className="flex flex-col lg:flex-row justify-around items-center ">
+      <div className="flex flex-col lg:flex-row justify-around  items-center ">
         {/* right side */}
         <div className="max-h[60vh] flex items-center justify-center p-6">
           <div className="max-w-3xl w-full text-center space-y-3">
