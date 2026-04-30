@@ -54,7 +54,7 @@ const NewReleases = async () => {
       <div className=" flex flex-col gap-10    ">
         {topCourses.map((course) => (
           <Card key={course.id} className="w-full items-stretch md:flex-row">
-            <div className="relative h-[140px] w-full shrink-0 overflow-hidden rounded-2xl sm:h-[120px] sm:w-[120px]">
+            <div className="relative h-35 w-full shrink-0 overflow-hidden rounded-2xl sm:h-30 sm:w-30">
               <Image
                 alt={course.name}
                 className="pointer-events-none absolute inset-0 h-full w-full scale-125 object-cover select-none"
