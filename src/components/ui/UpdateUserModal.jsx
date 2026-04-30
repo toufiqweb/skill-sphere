@@ -72,7 +72,7 @@ const UpdateUserModal = ({ user }) => {
                       <Button
                         slot="close"
                         variant="secondary"
-                        className="text-purple-700"
+                        className="text-purple-700 "
                       >
                         Cancel
                       </Button>

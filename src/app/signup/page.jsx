@@ -152,7 +152,7 @@ const SignUpPage = () => {
 
           <div className="px-8 py-6 border-t border-gray-100  text-center">
             <p className="text-sm text-gray-600 ">
-              Already have an account?{" "}
+              Already have an account?
               <Link href="/signin" className="text-main-gradient font-medium">
                 Sign in
               </Link>

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Mail, Edit2 } from "lucide-react";
+import { Mail } from "lucide-react";
 import Image from "next/image";
 import { authClient } from "@/lib/auth-client";
 import UpdateUserModal from "@/components/ui/UpdateUserModal";
@@ -27,8 +27,8 @@ const ProfilePage = () => {
               <Image
                 src={user?.image}
                 alt={user?.name}
-                width={500}
-                height={500}
+                width={300}
+                height={300}
                 className="w-32 h-32 rounded-full border-4 border-white  object-cover shadow-md"
               />
             </div>
