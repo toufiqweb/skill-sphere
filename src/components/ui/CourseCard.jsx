@@ -1,10 +1,11 @@
 import Image from "next/image";
+import Link from "next/link";
 import { FaStar } from "react-icons/fa";
 
 const CourseCard = ({ course }) => {
-  const { rating, instructor, image, title } = course;
+  const { id, rating, instructor, image, title } = course;
   return (
-    <div className= " bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 flex flex-col h-full">
+    <div className=" bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 flex flex-col h-full">
       <div>
         <Image
           alt={title}
@@ -27,11 +28,12 @@ const CourseCard = ({ course }) => {
           </div>
         </div>
 
-       
         <div className="mt-4">
-          <button className="bg-main-gradient w-full cursor-pointer text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition duration-300">
-            View Details
-          </button>
+          <Link href={`/courses/${id}`}>
+            <button className="bg-main-gradient w-full cursor-pointer text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition duration-300">
+              View Details
+            </button>
+          </Link>
         </div>
       </div>
     </div>

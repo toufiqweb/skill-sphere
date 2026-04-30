@@ -31,9 +31,9 @@ const learningTips = [
 const LearningTips = () => {
   return (
     <div className="container mx-auto px-6 py-12">
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex items-center justify-between  flex-col md:flex-row  gap-5 md:justify-between  mb-8">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-blue-100  rounded-xl">
+          <div className="p-2 bg-blue-100 hidden sm:inline-block  rounded-xl">
             <IoBookSharp className="w-6 h-6 text-blue-600 " />
           </div>
           <h2 className="text-3xl font-semibold text-gray-900 ">

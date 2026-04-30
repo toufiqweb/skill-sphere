@@ -44,9 +44,9 @@ const instructors = [
 const TopInstructors = () => {
   return (
     <div className="container mx-auto px-6 py-16">
-      <div className="flex items-center justify-between mb-10">
+      <div className="flex flex-col md:flex-row justify-center gap-5 md:justify-between items-center mb-10">
         <div className="flex items-center gap-3">
-          <div className="p-3 bg-[#f6f8fd]   rounded-2xl">
+          <div className="p-3 bg-[#f6f8fd]  hidden sm:inline-block   rounded-2xl">
             <Users className="w-7 h-7 text-violet-600 " />
           </div>
           <h2 className="text-3xl font-semibold text-gray-900 ">
@@ -66,7 +66,7 @@ const TopInstructors = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-4 gap-10">
         {instructors.map((instructor) => (
           <div
             key={instructor.id}
