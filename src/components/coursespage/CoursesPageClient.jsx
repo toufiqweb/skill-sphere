@@ -12,8 +12,13 @@ const CoursesPageClient = ({ courses }) => {
   const displayCourses = filteredCourses.length > 0 ? filteredCourses : courses;
 
   return (
-    <div className="container mx-auto px-5 my-10 space-y-15">
-      <h1 className="font-bold text-5xl text-center">All Courses</h1>
+    <div className="container mx-auto px-5 my-10 space-y-10">
+      <div className="text-center space-y-3">
+        <h1 className="font-bold text-5xl ">All Courses</h1>
+        <p className="text-gray-500 text-lg">
+          Explore all available courses and start learning at your own pace
+        </p>
+      </div>
 
       <SearchCourses courses={courses} />
 
