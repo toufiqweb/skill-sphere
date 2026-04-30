@@ -11,6 +11,25 @@ import {
 import { getAllCoursesData } from "@/lib/getAllCourses";
 import { FaStar } from "react-icons/fa";
 
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+
+  const courses = await getAllCoursesData();
+  const course = courses.find((c) => c.id === Number(id));
+
+  if (!course) {
+    return {
+      title: "Course Not Found | Skill Sphere",
+      description: "The requested course could not be found.",
+    };
+  }
+
+  return {
+    title: `${course.title} | Skill Sphere`,
+    description: course.description,
+  };
+}
+
 const curriculum = [
   "Course Introduction & Overview",
   "Understanding the Fundamentals",
@@ -23,6 +42,7 @@ const curriculum = [
   "Final Project & Assessment",
   "Course Summary & Next Steps",
 ];
+
 const CourseDetailPage = async ({ params }) => {
   const { id } = await params;
   //   console.log(id);
