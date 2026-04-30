@@ -1,4 +1,5 @@
 import Banner from "@/components/homepage/Banner";
+import LearningTips from "@/components/homepage/LearningTips";
 import PopularCourses from "@/components/homepage/PopularCourses";
 
 export default function Home() {
@@ -6,6 +7,7 @@ export default function Home() {
     <div>
       <Banner/>
       <PopularCourses/>
+      <LearningTips/>
     </div>
   );
 }
