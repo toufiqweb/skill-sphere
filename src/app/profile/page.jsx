@@ -4,6 +4,7 @@ import React from "react";
 import { Mail, Edit2 } from "lucide-react";
 import Image from "next/image";
 import { authClient } from "@/lib/auth-client";
+import UpdateUserModal from "@/components/ui/UpdateUserModal";
 
 const ProfilePage = () => {
   const {
@@ -60,10 +61,9 @@ const ProfilePage = () => {
         </div>
 
         <div className="flex gap-4 mt-8">
-          <button className="flex-1 cursor-pointer bg-main-gradient text-white py-4 rounded-2xl  flex items-center justify-center gap-2">
-            <Edit2 className="w-5 h-5" />
-            Edit Profile
-          </button>
+          <div className={"flex-1 text-white py-4 rounded-2xl h-full cursor-pointer bg-main-gradient "}>
+            <UpdateUserModal className="w-full" user={user}/>
+          </div>
 
           <button className="flex-1 cursor-pointer border border-gray-300  hover:bg-gray-50 transition-all active:scale-95  py-4 rounded-2xl ">
             View My Courses

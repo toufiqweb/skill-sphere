@@ -34,10 +34,14 @@ const SignUpPage = () => {
           alert(ctx.error.message);
         },
       },
+
+      
+      
     );
-    console.log(data, error);
+    console.log(data , error);
+
   };
-  const handleGoogleLogin = async () => {
+ const handleGoogleLogin = async () => {
     const data = await authClient.signIn.social({
       provider: "google",
     });
