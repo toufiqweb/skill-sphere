@@ -5,8 +5,20 @@ import logo from "@/assets/logo.png";
 import Image from "next/image";
 import MyNavLink from "../ui/MyNavLink";
 import Link from "next/link";
+import { Avatar } from "@heroui/react";
+import { authClient } from "@/lib/auth-client";
 
 const Navbar = () => {
+  const {
+    data: session,
+    isPending, //loading state
+    error, //error object
+    refetch, //refetch the session
+  } = authClient.useSession();
+
+  const user = session?.user;
+  console.log(user);
+
   const links = (
     <>
       <li>
@@ -61,22 +73,27 @@ const Navbar = () => {
           </div>
 
           <ul className="hidden items-center gap-6 md:flex">{links}</ul>
-          <div className="md:flex gap-2 items-center hidden">
-            <Link href={"/signup"}>
-              <Button className={"bg-main-gradient rounded-md "}>SignUp</Button>
-            </Link>
-            <Link href={"/signin"}>
-              <Button className={"border-gradient text-black rounded-md"}>
-                SignIn
-              </Button>
-            </Link>
-          </div>
-        </header>
-        {isMenuOpen && (
-          <div className="border-t border-separator md:hidden">
-            <ul className="flex flex-col gap-2 p-4">{links}</ul>
-            <div className="flex flex-col gap-3 space-y-2 m-2">
-              <Link href={"/signin"}>
+
+          {user ? (
+            <div className="md:flex gap-3 items-center hidden">
+              <Avatar size="sm">
+                <Avatar.Image alt={user?.name} src={user?.image} />
+                <Avatar.Fallback>{user?.name[0]}</Avatar.Fallback>
+              </Avatar>
+
+              <Link href={"/"}>
+                <Button
+                  onClick={async () => await authClient.signOut()}
+                  variant="outline"
+                  className={"text-red-400 border border-red-100 "}
+                >
+                  Sign Out
+                </Button>
+              </Link>
+            </div>
+          ) : (
+            <div className="md:flex gap-2 items-center hidden">
+              <Link href={"/signup"}>
                 <Button className={"bg-main-gradient rounded-md "}>
                   SignUp
                 </Button>
@@ -86,6 +103,47 @@ const Navbar = () => {
                   SignIn
                 </Button>
               </Link>
+            </div>
+          )}
+        </header>
+        {isMenuOpen && (
+          <div className="border-t border-separator md:hidden">
+            {user && (
+              <div className="mx-5 mt-5 ">
+                <Avatar size="sm">
+                  <Avatar.Image alt={user?.name} src={user?.image} />
+                  <Avatar.Fallback>{user?.name[0]}</Avatar.Fallback>
+                </Avatar>
+              </div>
+            )}
+            <ul className="flex flex-col gap-2 p-4">{links}</ul>
+            <div className="flex flex-col gap-3 space-y-2 m-2">
+              {user ? (
+                <>
+                  <Link href={"/"}>
+                    <Button
+                      onClick={async () => await authClient.signOut()}
+                      variant="outline"
+                      className={"text-red-400 border border-red-100 "}
+                    >
+                      Sign Out
+                    </Button>
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link href={"/signin"}>
+                    <Button className={"bg-main-gradient rounded-md "}>
+                      SignUp
+                    </Button>
+                  </Link>
+                  <Link href={"/signin"}>
+                    <Button className={"border-gradient text-black rounded-md"}>
+                      SignIn
+                    </Button>
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         )}
