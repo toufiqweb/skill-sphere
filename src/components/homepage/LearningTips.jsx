@@ -1,5 +1,6 @@
 import { Clock, Target, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { FaArrowRight } from "react-icons/fa";
 import { IoBookSharp } from "react-icons/io5";
 import { MdMenuBook } from "react-icons/md";
 
@@ -9,21 +10,21 @@ const learningTips = [
     title: "Effective Study Techniques",
     description:
       "Use active recall and spaced repetition to remember more in less time.",
-    color: "bg-blue-100 text-blue-600 ",
+    color: "bg-blue-200 text-blue-600 ",
   },
   {
     id: 2,
     title: "Time Management",
     description:
       "Create a study schedule and stick to it. Consistency is the key to success.",
-    color: "bg-purple-100 text-purple-600 ",
+    color: "bg-purple-200 text-purple-600 ",
   },
   {
     id: 3,
     title: "Stay Focused & Motivated",
     description:
       "Set goals, eliminate distractions, and celebrate small achievements.",
-    color: "bg-rose-100 text-rose-600 ",
+    color: "bg-rose-200 text-rose-600 ",
   },
 ];
 
@@ -40,20 +41,23 @@ const LearningTips = () => {
           </h2>
         </div>
 
-        <Link
-          href="/"
-          className="flex items-center gap-2 text-blue-600  hover:text-blue-700  font-medium transition-colors "
-        >
-          View All Tips
-          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-        </Link>
+        <div className="flex items-center gap-2 group cursor-pointer">
+          <Link
+            href={"/"}
+            className="text-main-gradient font-semibold transition-all duration-300 hover:opacity-80"
+          >
+            View All Tips
+          </Link>
+
+          <FaArrowRight className="text-[#2563eb] transition-transform duration-300 group-hover:translate-x-1" />
+        </div>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid  md:grid-cols-2 lg:grid-cols-3 gap-10">
         {learningTips.map((learningTip) => (
           <div
             key={learningTip.id}
-            className="group bg-white  rounded-3xl p-8 border border-gray-100  hover:border-gray-200  transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+            className="group bg-[#f6f8fd]   rounded-3xl p-8 border border-gray-100  hover:border-gray-200  transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
           >
             <div
               className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 ${learningTip.color}`}

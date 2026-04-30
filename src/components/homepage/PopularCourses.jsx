@@ -8,7 +8,7 @@ const PopularCourses = async () => {
   const courses = await getAllCoursesData();
   // console.log(courses);
 
-  const topCourses = courses.sort((a, b) => b.rating - a.rating).slice(0, 3);
+  const topCourses = courses.sort((a, b) => b.rating - a.rating).slice(0, 4);
 
   console.log(topCourses);
 
@@ -31,7 +31,7 @@ const PopularCourses = async () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-15 max-w-7xl mx-auto ">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10    ">
         {topCourses.map((course) => (
           <CourseCard key={course.id} course={course} />
         ))}
