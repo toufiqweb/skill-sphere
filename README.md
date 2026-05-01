@@ -1,14 +1,35 @@
+<div align="center">
+
 # 🎓 SkillSphere – Online Learning Platform
 
-SkillSphere is a modern and fully responsive online learning platform where users can explore skill-based courses, view detailed course information, and manage their profiles. The platform provides a smooth learning experience with secure authentication, protected routes, search functionality, and an intuitive user interface.
+### SkillSphere is a modern and fully responsive online learning platform where users can explore skill-based courses, view detailed course information, and manage their profiles. The platform provides a smooth learning experience with secure authentication, protected routes, search functionality, and an intuitive user interface.
 
-# 🌐 Live Demo
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-0F172A?style=for-the-badge&logo=tailwind-css&logoColor=38B2AC)
+![MongoDB](https://img.shields.io/badge/MongoDB-001E2B?style=for-the-badge&logo=mongodb&logoColor=4DB33D)
+![BetterAuth](https://img.shields.io/badge/BetterAuth-121212?style=for-the-badge&logo=auth0&logoColor=white)
+![HeroUI](https://img.shields.io/badge/HeroUI-000000?style=for-the-badge&logo=vercel&logoColor=white)
+![Swiper](https://img.shields.io/badge/Swiper-6332F6?style=for-the-badge&logo=swiper&logoColor=white)
+![Motion](https://img.shields.io/badge/Motion-000000?style=for-the-badge&logo=framer&logoColor=white)
+![React Toastify](https://img.shields.io/badge/React--Toastify-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 
-🔗 **Live Website:**[https://skill-sphere-ecru-ten.vercel.app](https://skill-sphere-ecru-ten.vercel.app/)
+<br/>
 
-🔗 **GitHub Repository:**[https://github.com/toufiqweb/skill-sphere](https://github.com/toufiqweb/skill-sphere)
+<a href="https://skill-sphere-ecru-ten.vercel.app/" target="_blank">
+  <strong>🌐 Live Demo</strong>
+</a>
+•
+<a href="https://github.com/toufiqweb/skill-sphere" target="_blank">
+  <strong>💻 GitHub Repo</strong>
+</a>
 
----
+</div>
+
+##  Mockup
+
+
+![Skill-Sphere Mockup](https://i.ibb.co.com/V0PjcqrB/skill-sphere-mockup.png)
 
 ## 🎯 Project Purpose
 
@@ -49,18 +70,12 @@ The purpose of SkillSphere is to create a modern online learning platform where 
 ## Installation
 
 ```bash
-git clone your-github-repo-link
-```
+git clone https://github.com/toufiqweb/skill-sphere.git
 
-```bash
 cd skill-sphere
-```
 
-```bash
 npm install
-```
 
-```bash
 npm run dev
 ```
 
