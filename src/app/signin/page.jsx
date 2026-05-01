@@ -1,10 +1,12 @@
 "use client";
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
 
 const SignInPage = () => {
+  const router = useRouter();
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -14,14 +16,16 @@ const SignInPage = () => {
     const { data, error } = await authClient.signIn.email({
       email,
       password,
-      callbackURL: "/",
       rememberMe: false,
     });
     // console.log(data, error);
     if (data) {
       toast.success("Login successful!");
+      router.back();
+      return;
     } else {
       toast.error(error.message || "Something went wrong");
+      return;
     }
   };
   const handleGoogleLogin = async () => {
@@ -34,6 +38,7 @@ const SignInPage = () => {
     } else {
       toast.error("Something went wrong");
     }
+    router.back();
   };
   return (
     <div className="min-h-[80vh]  flex items-center justify-center p-6">
