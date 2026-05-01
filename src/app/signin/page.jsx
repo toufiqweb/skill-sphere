@@ -38,7 +38,6 @@ const SignInPage = () => {
     } else {
       toast.error("Something went wrong");
     }
-    router.back();
   };
   return (
     <div className="min-h-[80vh]  flex items-center justify-center p-6">
