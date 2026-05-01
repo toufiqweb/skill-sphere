@@ -6,18 +6,22 @@ import StartLearningToday from "@/components/homepage/StartLearningToday";
 import Stats from "@/components/homepage/Stats";
 import TopInstructors from "@/components/homepage/TopInstructors";
 import WhatOurStudentSay from "@/components/homepage/WhatOurStudentSay";
+import { getAllCoursesData } from "@/lib/getAllCourses";
 
-export default function Home() {
+export default async function Home() {
+
+  const courses = await getAllCoursesData();
+
   return (
     <div className="space-y-15">
       <Banner/>
-      <PopularCourses/>
-      <LearningTips/>
-      <TopInstructors/>
       <Stats/>
+      <PopularCourses courses={courses}/>
+      <TopInstructors/>
       <WhatOurStudentSay/>
       <StartLearningToday/>
       <NewReleases/>
+      <LearningTips/>
     </div>
   );
 }

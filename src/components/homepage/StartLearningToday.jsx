@@ -45,7 +45,7 @@ const StartLearningToday = () => {
             </div>
 
             <div className="bg-gray-50 p-3 rounded-lg">
-              <p className="font-semibold text-black/80">1000+ Students</p>
+              <p className="font-semibold text-black/80">10000+ Students</p>
               <p>Learning actively</p>
             </div>
 

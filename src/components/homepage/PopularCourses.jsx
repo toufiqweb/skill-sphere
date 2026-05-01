@@ -1,14 +1,23 @@
-import { getAllCoursesData } from "@/lib/getAllCourses";
+"use client";
 import Link from "next/link";
 import React from "react";
 import { FaArrowRight } from "react-icons/fa";
 import CourseCard from "../ui/CourseCard";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation } from "swiper/modules";
 
-const PopularCourses = async () => {
-  const courses = await getAllCoursesData();
-  // console.log(courses);
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/autoplay";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
-  const topCourses = courses.sort((a, b) => b.rating - a.rating).slice(0, 4);
+const PopularCourses = ({ courses }) => {
+  // const courses = await getAllCoursesData();
+  // // console.log(courses);
+
+  const topCourses = courses.sort((a, b) => b.rating - a.rating).slice(0, 8);
 
   console.log(topCourses);
 
@@ -31,10 +40,50 @@ const PopularCourses = async () => {
         </div>
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10    ">
-        {topCourses.map((course) => (
-          <CourseCard key={course.id} course={course} />
-        ))}
+      <div className="w-full h-full py-5 relative overflow-hidden">
+        <button className="custom-prev absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white text-[#7c3aed] p-3 shadow-lg transition hover:scale-105 hover:bg-[#7c3aed] hover:text-white">
+          <ChevronLeft size={20} />
+        </button>
+
+        <button className="custom-next absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white text-[#7c3aed] p-3 shadow-lg transition hover:scale-105 hover:bg-[#7c3aed] hover:text-white">
+          <ChevronRight size={20} />
+        </button>
+        <Swiper
+          modules={[Navigation, Autoplay]}
+          spaceBetween={50}
+          className=" overflow-visible! "
+          slidesPerView={4}
+          watchOverflow={true}
+          navigation={{
+            prevEl: ".custom-prev",
+            nextEl: ".custom-next",
+          }}
+          loop={true}
+          autoplay={{ delay: 1500 }}
+          breakpoints={{
+            0: {
+              slidesPerView: 1,
+            },
+            768: {
+              slidesPerView: 2,
+            },
+
+            992: {
+              slidesPerView: 3,
+            },
+            1200: {
+              slidesPerView: 4,
+            },
+          }}
+          onSlideChange={() => console.log("slide change")}
+          onSwiper={(swiper) => console.log(swiper)}
+        >
+          {topCourses.map((course) => (
+            <SwiperSlide key={course.id} className="h-auto! flex ">
+              <CourseCard course={course} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </div>
   );
