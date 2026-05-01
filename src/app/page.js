@@ -6,22 +6,28 @@ import StartLearningToday from "@/components/homepage/StartLearningToday";
 import Stats from "@/components/homepage/Stats";
 import TopInstructors from "@/components/homepage/TopInstructors";
 import WhatOurStudentSay from "@/components/homepage/WhatOurStudentSay";
+import NewReleasesLoading from "@/components/loadingpages/NewReleasesLoading";
+import PopularCardLoading from "@/components/loadingpages/PopularCardLoading";
 import { getAllCoursesData } from "@/lib/getAllCourses";
+import { Suspense } from "react";
 
 export default async function Home() {
-
   const courses = await getAllCoursesData();
 
   return (
     <div className="space-y-15">
-      <Banner/>
-      <Stats/>
-      <PopularCourses courses={courses}/>
-      <TopInstructors/>
-      <WhatOurStudentSay/>
-      <StartLearningToday/>
-      <NewReleases/>
-      <LearningTips/>
+      <Banner />
+      <Stats />
+      <Suspense fallback={<PopularCardLoading />}>
+        <PopularCourses courses={courses} />
+      </Suspense>
+      <TopInstructors />
+      <WhatOurStudentSay />
+      <StartLearningToday />
+      <Suspense fallback={<NewReleasesLoading />}>
+        <NewReleases />
+      </Suspense>
+      <LearningTips />
     </div>
   );
 }
