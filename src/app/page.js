@@ -26,7 +26,7 @@ export default async function Home() {
       <WhatOurStudentSay />
       <StartLearningToday />
       <Suspense fallback={<NewReleasesLoading />}>
-        <NewReleases />
+        <NewReleases courses={courses}/>
       </Suspense>
       <LearningTips />
       <LearningJourney />

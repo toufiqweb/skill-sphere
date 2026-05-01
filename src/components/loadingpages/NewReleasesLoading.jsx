@@ -14,11 +14,11 @@ const NewReleasesLoading = () => {
       </div>
       <div className="flex flex-col gap-10">
         <div className="w-full flex flex-col md:flex-row gap-4 p-4 border rounded-2xl">
-          <Skeleton className="h-35 w-full md:w-30 rounded-2xl" />=
+          <Skeleton className="h-35 w-full md:w-30 rounded-2xl" />
           <div className="flex-1 space-y-3">
             <Skeleton className="h-6 w-2/3 rounded-lg" />
             <Skeleton className="h-4 w-full rounded-lg" />
-            <Skeleton className="h-4 w-5/6 rounded-lg" />=
+            <Skeleton className="h-4 w-5/6 rounded-lg" />
             <div className="flex justify-between items-center mt-6">
               <div className="space-y-2">
                 <Skeleton className="h-4 w-24 rounded" />
@@ -29,11 +29,11 @@ const NewReleasesLoading = () => {
           </div>
         </div>
         <div className="w-full flex flex-col md:flex-row gap-4 p-4 border rounded-2xl">
-          <Skeleton className="h-35 w-full md:w-30 rounded-2xl" />=
+          <Skeleton className="h-35 w-full md:w-30 rounded-2xl" />
           <div className="flex-1 space-y-3">
             <Skeleton className="h-6 w-2/3 rounded-lg" />
             <Skeleton className="h-4 w-full rounded-lg" />
-            <Skeleton className="h-4 w-5/6 rounded-lg" />=
+            <Skeleton className="h-4 w-5/6 rounded-lg" />
             <div className="flex justify-between items-center mt-6">
               <div className="space-y-2">
                 <Skeleton className="h-4 w-24 rounded" />
@@ -44,11 +44,11 @@ const NewReleasesLoading = () => {
           </div>
         </div>
         <div className="w-full flex flex-col md:flex-row gap-4 p-4 border rounded-2xl">
-          <Skeleton className="h-35 w-full md:w-30 rounded-2xl" />=
+          <Skeleton className="h-35 w-full md:w-30 rounded-2xl" />
           <div className="flex-1 space-y-3">
             <Skeleton className="h-6 w-2/3 rounded-lg" />
             <Skeleton className="h-4 w-full rounded-lg" />
-            <Skeleton className="h-4 w-5/6 rounded-lg" />=
+            <Skeleton className="h-4 w-5/6 rounded-lg" />
             <div className="flex justify-between items-center mt-6">
               <div className="space-y-2">
                 <Skeleton className="h-4 w-24 rounded" />
@@ -59,7 +59,7 @@ const NewReleasesLoading = () => {
           </div>
         </div>
         <div className="w-full flex flex-col md:flex-row gap-4 p-4 border rounded-2xl">
-          <Skeleton className="h-35 w-full md:w-30 rounded-2xl" />=
+          <Skeleton className="h-35 w-full md:w-30 rounded-2xl" />
           <div className="flex-1 space-y-3">
             <Skeleton className="h-6 w-2/3 rounded-lg" />
             <Skeleton className="h-4 w-full rounded-lg" />

@@ -4,6 +4,7 @@ import { error } from "better-auth/api";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
+import { toast } from "react-toastify";
 
 const SignUpPage = () => {
   const router = useRouter();
@@ -14,6 +15,26 @@ const SignUpPage = () => {
     const userData = Object.fromEntries(formData.entries());
     console.log(userData);
     const { name, email, password, image } = userData;
+
+    // email verification
+    const emailVerification = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    if (!emailVerification.test(email)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
+    // Password validation
+    if (password.length < 8) {
+      toast.error("Password must be at least 8 characters");
+      return;
+    } else if (!/[A-Z]/.test(password)) {
+      toast.error("Password must contain at least one uppercase letter");
+      return;
+    } else if (!/[0-9]/.test(password)) {
+      toast.error("Password must contain at least one number");
+      return;
+    }
+    
     const { data, error } = await authClient.signUp.email(
       {
         email, // user email address
@@ -23,19 +44,20 @@ const SignUpPage = () => {
       },
       {
         onRequest: (ctx) => {
-          //show loading
+          // toast.loading("Creating your account...");
         },
         onSuccess: (ctx) => {
           //redirect to the dashboard or sign in page
-          router.push("/signin");
+          toast.success("Account created successfully!");
+          router.push("/");
         },
         onError: (ctx) => {
           // display the error message
-          alert(ctx.error.message);
+          toast.error(ctx.error.message || "Something went wrong");
         },
       },
     );
-    console.log(data, error);
+    // console.log(data, error);
   };
   const handleGoogleLogin = async () => {
     const data = await authClient.signIn.social({

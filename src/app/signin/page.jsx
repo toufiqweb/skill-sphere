@@ -2,6 +2,7 @@
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
+import { toast } from "react-toastify";
 
 const SignInPage = () => {
   const onSubmit = async (e) => {
@@ -16,12 +17,23 @@ const SignInPage = () => {
       callbackURL: "/",
       rememberMe: false,
     });
-    console.log(data, error);
+    // console.log(data, error);
+    if (data) {
+      toast.success("Login successful!");
+    } else {
+      toast.error(error.message || "Something went wrong");
+    }
   };
   const handleGoogleLogin = async () => {
     const data = await authClient.signIn.social({
       provider: "google",
     });
+
+    if (data) {
+      toast.success("Login successful!");
+    } else {
+      toast.error("Something went wrong");
+    }
   };
   return (
     <div className="min-h-[80vh]  flex items-center justify-center p-6">

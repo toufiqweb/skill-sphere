@@ -1,9 +1,8 @@
 import { Avatar } from "@heroui/react";
-import { ArrowRight, Link } from "lucide-react";
 import React from "react";
-import { FaArrowRight, FaQuoteLeft, FaStar } from "react-icons/fa";
+import {  FaQuoteLeft, FaStar } from "react-icons/fa";
 
-import { SiUnacademy } from "react-icons/si";
+
 
 const testimonial = [
   {
