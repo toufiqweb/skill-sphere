@@ -33,9 +33,7 @@ const SignInPage = () => {
       provider: "google",
     });
 
-    if (data) {
-      toast.success("Login successful!");
-    } else {
+    if (!data) {
       toast.error("Something went wrong");
     }
   };

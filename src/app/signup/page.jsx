@@ -34,7 +34,7 @@ const SignUpPage = () => {
       toast.error("Password must contain at least one number");
       return;
     }
-    
+
     const { data, error } = await authClient.signUp.email(
       {
         email, // user email address
@@ -63,6 +63,9 @@ const SignUpPage = () => {
     const data = await authClient.signIn.social({
       provider: "google",
     });
+    if (!data) {
+      toast.error("Something went wrong");
+    }
   };
   return (
     <div className="min-h-[80vh]  flex items-center justify-center p-6">
