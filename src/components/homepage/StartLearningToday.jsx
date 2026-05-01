@@ -5,7 +5,7 @@ import person from "@/assets/person.jpg";
 const StartLearningToday = () => {
   return (
     <div className="container mx-auto px-5 my-20">
-      <div className="border p-2 sm:p-10 border-base-100 justify-between flex flex-col lg:flex-row items-center gap-10 bg-white shadow-sm rounded-2xl overflow-hidden">
+      <div className="border-t border-b  p-2 sm:p-10 border-base-100 justify-between flex flex-col lg:flex-row items-center gap-10 bg-white  overflow-hidden">
         <div className="flex-1  lg:border-r border-r-black/10">
           <Image
             height={250}
@@ -18,7 +18,7 @@ const StartLearningToday = () => {
 
         <div className="flex-1 w-full lg:w-1/2 p-8 space-y-5 ">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-            Learn Anytime, Anywhere
+            Start Learning, Today
           </h2>
 
           <p className="text-gray-600 text-base leading-relaxed">

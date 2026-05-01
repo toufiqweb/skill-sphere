@@ -90,6 +90,7 @@ const SignUpPage = () => {
                 Profile Photo URL
               </label>
               <input
+                required
                 type="url"
                 name="image"
                 placeholder="https://example.com/your-photo.jpg"
@@ -123,10 +124,6 @@ const SignUpPage = () => {
                 className="w-full px-4 py-3 rounded-2xl border border-gray-300 focus:border-violet-500 focus:ring-2 focus:ring-violet-200  outline-none transition-all"
                 required
               />
-              <p className="mt-2 text-xs text-gray-500 ">
-                Must be at least 8 characters with 1 uppercase letter and 1
-                number
-              </p>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 pt-4">
@@ -150,7 +147,7 @@ const SignUpPage = () => {
             <p className="text-sm text-gray-600 ">
               Already have an account?
               <Link href="/signin" className="text-main-gradient font-medium">
-                Login 
+                Login
               </Link>
             </p>
           </div>

@@ -10,6 +10,7 @@ import NewReleasesLoading from "@/components/loadingpages/NewReleasesLoading";
 import PopularCardLoading from "@/components/loadingpages/PopularCardLoading";
 import { getAllCoursesData } from "@/lib/getAllCourses";
 import { Suspense } from "react";
+import LearningJourney from "@/components/homepage/LearningJourney";
 
 export default async function Home() {
   const courses = await getAllCoursesData();
@@ -28,6 +29,7 @@ export default async function Home() {
         <NewReleases />
       </Suspense>
       <LearningTips />
+      <LearningJourney />
     </div>
   );
 }
