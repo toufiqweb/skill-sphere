@@ -4,21 +4,22 @@ import { Search } from "lucide-react";
 import React, { useContext } from "react";
 
 const SearchCourses = ({ courses }) => {
-  const { filteredCourses, setFilteredCourses } = useContext(CourseContext);
+  const {  setFilteredCourses , setSearchPerformed } = useContext(CourseContext);
   const handleSearch = (e) => {
     e.preventDefault();
 
     const inputValue = e.target.search.value.toLowerCase().trim();
 
-    const filteredCourses = courses.filter((course) =>
+    const filtered = courses.filter((course) =>
       course.title.toLowerCase().includes(inputValue),
     );
 
-    setFilteredCourses(filteredCourses);
+    setFilteredCourses(filtered);
+    setSearchPerformed(true)
     // console.log(filteredCourses);
   };
 
-  console.log(filteredCourses);
+  // console.log(filteredCourses);
 
   return (
     <form

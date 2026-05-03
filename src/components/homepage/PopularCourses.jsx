@@ -12,21 +12,28 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/autoplay";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { TbChartBarPopular } from "react-icons/tb";
 
 const PopularCourses = ({ courses }) => {
   // const courses = await getAllCoursesData();
   // // console.log(courses);
 
-  const topCourses = courses.sort((a, b) => b.rating - a.rating).slice(0, 8);
+  const topCourses = courses.sort((a, b) => b.rating - a.rating).slice(0, 5);
 
   console.log(topCourses);
 
   return (
     <div className=" container mx-auto my-20 space-y-10 px-3">
       <div className="flex flex-col md:flex-row justify-center gap-5 md:justify-between items-center">
-        <h1 className="font-bold text-3xl sm:text-4xl ">
-          <span className="hidden md:inline-block">🔥</span> Popular courses
-        </h1>
+      
+        <div className="flex items-center gap-3">
+          <div className="p-3 bg-[#f6f8fd]  hidden sm:inline-block   rounded-2xl">
+            <TbChartBarPopular className="w-7 h-7 text-violet-600 " />
+          </div>
+          <h2 className="text-3xl font-semibold text-gray-900 ">
+             Popular courses
+          </h2>
+        </div>
 
         <div className="flex items-center gap-2 group cursor-pointer">
           <Link
@@ -59,7 +66,7 @@ const PopularCourses = ({ courses }) => {
             nextEl: ".custom-next",
           }}
           loop={true}
-          autoplay={{ delay: 1500 }}
+          autoplay={{ delay: 2000 }}
           breakpoints={{
             0: {
               slidesPerView: 1,

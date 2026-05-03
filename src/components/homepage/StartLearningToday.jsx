@@ -55,7 +55,7 @@ const StartLearningToday = () => {
             </div>
           </div>
 
-          <div className="flex gap-3 pt-3">
+          <div className="flex flex-col md:flex-row gap-3 pt-3">
             <button className="bg-main-gradient px-6 cursor-pointer text-white py-3 rounded-full  hover:bg-blue-700 transition duration-300">
               Stat Learning
             </button>

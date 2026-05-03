@@ -31,7 +31,7 @@ const CourseCard = ({ course }) => {
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
       whileHover={{ y: -10 }}
-      className=" bg-white h-full flex flex-col rounded-2xl  overflow-hidden border border-gray-100 group   hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
+      className=" bg-white h-full flex flex-col rounded-2xl  overflow-hidden border border-gray-100 group   hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
     >
       <div>
         <Image
@@ -53,7 +53,7 @@ const CourseCard = ({ course }) => {
         <div className="flex-1 space-y-4">
           <motion.h2
             variants={itemVariants}
-            className="text-xl font-bold text-gray-800"
+            className="text-xl font-bold text-gray-800 line-clamp-1"
           >
             {title}
           </motion.h2>

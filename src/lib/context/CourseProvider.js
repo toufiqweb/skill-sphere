@@ -6,6 +6,7 @@ export const CourseContext = createContext();
 
 export const CourseProvider = ({ children }) => {
   const [filteredCourses, setFilteredCourses] = useState([]);
+  const [searchPerformed, setSearchPerformed] = useState(false);
   
 
   return (
@@ -13,6 +14,8 @@ export const CourseProvider = ({ children }) => {
       value={{
         filteredCourses,
         setFilteredCourses,
+        searchPerformed,
+        setSearchPerformed
       }}
     >
       {children}
