@@ -1,57 +1,130 @@
-import React from "react";
-import {
-  FaUsers,
-  FaBookOpen,
-  FaChalkboardTeacher,
-  FaStar,
-} from "react-icons/fa";
+"use client";
+import { motion } from "framer-motion";
+import { Users, BookOpen, GraduationCap, Star } from "lucide-react";
 
-const Stats = () => {
-  return (
-    <div className="bg-main-gradient container mx-auto py-6 rounded-xl text-white">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
-        <div className="flex flex-col items-center justify-center gap-2 border-white/20 md:border-r">
-          <div className="flex items-center gap-2">
-            <div className="bg-white/10 p-2 rounded-full">
-              <FaUsers className="text-white" />
-            </div>
-            <p className="text-3xl font-bold">200k+</p>
-          </div>
-          <p className="text-white/70 text-sm">Happy Students</p>
-        </div>
-
-        <div className="flex flex-col items-center justify-center gap-2 border-white/20 md:border-r">
-          <div className="flex items-center gap-2">
-            <div className="bg-white/10 p-2 rounded-full">
-              <FaBookOpen className="text-white" />
-            </div>
-            <p className="text-3xl font-bold">500+</p>
-          </div>
-          <p className="text-white/70 text-sm">Online Courses</p>
-        </div>
-
-        <div className="flex flex-col items-center justify-center gap-2 border-white/20 md:border-r">
-          <div className="flex items-center gap-2">
-            <div className="bg-white/10 p-2 rounded-full">
-              <FaChalkboardTeacher className="text-white" />
-            </div>
-            <p className="text-3xl font-bold">200+</p>
-          </div>
-          <p className="text-white/70 text-sm">Expert Instructors</p>
-        </div>
-
-        <div className="flex flex-col items-center justify-center gap-2">
-          <div className="flex items-center gap-2">
-            <div className="bg-white/10 p-2 rounded-full">
-              <FaStar className="text-white" />
-            </div>
-            <p className="text-3xl font-bold">98%</p>
-          </div>
-          <p className="text-white/70 text-sm">Satisfaction Rate</p>
-        </div>
-      </div>
-    </div>
-  );
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
 };
 
-export default Stats;
+const stagger = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.05,
+    },
+  },
+};
+
+const stats = [
+  {
+    icon: Users,
+    value: "200K+",
+    label: "Happy Students",
+  },
+  {
+    icon: BookOpen,
+    value: "500+",
+    label: "Online Courses",
+  },
+  {
+    icon: GraduationCap,
+    value: "200+",
+    label: "Expert Instructors",
+  },
+  {
+    icon: Star,
+    value: "98%",
+    label: "Satisfaction Rate",
+  },
+];
+
+export default function Stats() {
+  return (
+    <section className="relative w-full px-6 py-16 lg:px-10">
+      <div className="mx-auto max-w-7xl">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{
+            duration: 0.8,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+          className="relative overflow-hidden rounded-3xl border border-[var(--glass-border)] p-1 shadow-[var(--shadow-glow)]"
+          style={{ backgroundImage: "var(--gradient-primary)" }}
+        >
+          {/* Inner glass surface */}
+          <div className="relative overflow-hidden rounded-[1.4rem] bg-[oklch(0.14_0.04_280_/_0.55)] backdrop-blur-xl">
+            {/* Decorative blobs */}
+            <div className="pointer-events-none absolute inset-0">
+              <div className="absolute -left-20 -top-20 h-72 w-72 rounded-full bg-[var(--brand-purple)]/30 blur-[100px]" />
+              <div className="absolute -right-20 -bottom-20 h-72 w-72 rounded-full bg-[var(--brand-blue)]/25 blur-[100px]" />
+            </div>
+
+            {/* Grid */}
+            <div
+              className="pointer-events-none absolute inset-0 opacity-[0.05]"
+              style={{
+                backgroundImage:
+                  "linear-gradient(var(--foreground) 1px, transparent 1px), linear-gradient(90deg, var(--foreground) 1px, transparent 1px)",
+                backgroundSize: "48px 48px",
+              }}
+            />
+
+            <motion.ul
+              variants={stagger}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-80px" }}
+              className="relative grid grid-cols-1 gap-y-10 px-6 py-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-y-0"
+            >
+              {stats.map(({ icon: Icon, value, label }, i) => (
+                <motion.li
+                  key={label}
+                  variants={fadeUp}
+                  className={`group relative flex flex-col items-center justify-center text-center ${
+                    i < stats.length - 1
+                      ? "lg:border-r lg:border-white/10"
+                      : ""
+                  }`}
+                >
+                  <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl border border-[var(--glass-border)] bg-gradient-to-br from-white/10 to-white/[0.02] backdrop-blur-xl transition-all duration-500 group-hover:scale-110 group-hover:border-white/25">
+                    <div className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-br from-[var(--brand-indigo)]/0 to-[var(--brand-purple)]/0 blur-xl transition-all duration-500 group-hover:from-[var(--brand-indigo)]/40 group-hover:to-[var(--brand-purple)]/40" />
+
+                    <Icon
+                      className="h-6 w-6 text-white"
+                      strokeWidth={1.75}
+                    />
+                  </div>
+
+                  <div
+                    className="bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-5xl"
+                    style={{
+                      backgroundImage: "var(--gradient-text)",
+                    }}
+                  >
+                    {value}
+                  </div>
+
+                  <div className="mt-2 text-sm font-medium tracking-wide text-foreground/65">
+                    {label}
+                  </div>
+                </motion.li>
+              ))}
+            </motion.ul>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
