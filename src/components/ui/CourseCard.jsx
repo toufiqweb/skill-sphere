@@ -49,7 +49,7 @@ export default function CourseCard({ course }) {
     category ,
   } = course;
 
-  console.log(course);
+  // console.log(course);
   
 
   return (

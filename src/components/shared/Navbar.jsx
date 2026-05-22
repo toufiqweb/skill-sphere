@@ -18,9 +18,9 @@ const Navbar = () => {
   const user = session?.user;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  console.log("SESSION:", session);
-  console.log("ERROR:", error);
-  console.log("PENDING:", isPending);
+  // console.log("SESSION:", session);
+  // console.log("ERROR:", error);
+  // console.log("PENDING:", isPending);
 
   const links = (
     <>
