@@ -20,7 +20,7 @@ const PopularCourses = ({ courses }) => {
 
   const topCourses = courses.sort((a, b) => b.rating - a.rating).slice(0, 5);
 
-  console.log(topCourses);
+  // console.log(topCourses);
 
   return (
     <div className=" container mx-auto my-20 space-y-10 px-3">
@@ -82,8 +82,8 @@ const PopularCourses = ({ courses }) => {
               slidesPerView: 4,
             },
           }}
-          onSlideChange={() => console.log("slide change")}
-          onSwiper={(swiper) => console.log(swiper)}
+          // onSlideChange={() => console.log("slide change")}
+          // onSwiper={(swiper) => console.log(swiper)}
         >
           {topCourses.map((course) => (
             <SwiperSlide key={course.id} className="h-auto! flex ">

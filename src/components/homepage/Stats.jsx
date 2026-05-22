@@ -60,15 +60,15 @@ export default function Stats() {
             duration: 0.8,
             ease: [0.22, 1, 0.36, 1],
           }}
-          className="relative overflow-hidden rounded-3xl border border-[var(--glass-border)] p-1 shadow-[var(--shadow-glow)]"
+          className="relative overflow-hidden rounded-3xl border border-(--glass-border) p-1 shadow-(--shadow-glow)"
           style={{ backgroundImage: "var(--gradient-primary)" }}
         >
           {/* Inner glass surface */}
-          <div className="relative overflow-hidden rounded-[1.4rem] bg-[oklch(0.14_0.04_280_/_0.55)] backdrop-blur-xl">
+          <div className="relative overflow-hidden rounded-[1.4rem] bg-[oklch(0.14_0.04_280/0.55)] backdrop-blur-xl">
             {/* Decorative blobs */}
             <div className="pointer-events-none absolute inset-0">
-              <div className="absolute -left-20 -top-20 h-72 w-72 rounded-full bg-[var(--brand-purple)]/30 blur-[100px]" />
-              <div className="absolute -right-20 -bottom-20 h-72 w-72 rounded-full bg-[var(--brand-blue)]/25 blur-[100px]" />
+              <div className="absolute -left-20 -top-20 h-72 w-72 rounded-full bg-(--brand-purple)/30 blur-[100px]" />
+              <div className="absolute -right-20 -bottom-20 h-72 w-72 rounded-full bg-(--brand-blue)/25 blur-[100px]" />
             </div>
 
             {/* Grid */}
@@ -98,8 +98,8 @@ export default function Stats() {
                       : ""
                   }`}
                 >
-                  <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl border border-[var(--glass-border)] bg-gradient-to-br from-white/10 to-white/[0.02] backdrop-blur-xl transition-all duration-500 group-hover:scale-110 group-hover:border-white/25">
-                    <div className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-br from-[var(--brand-indigo)]/0 to-[var(--brand-purple)]/0 blur-xl transition-all duration-500 group-hover:from-[var(--brand-indigo)]/40 group-hover:to-[var(--brand-purple)]/40" />
+                  <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl border border-(--glass-border) bg-linear-to-br from-white/10 to-white/2 backdrop-blur-xl transition-all duration-500 group-hover:scale-110 group-hover:border-white/25">
+                    <div className="absolute inset-0 -z-10 rounded-2xl bg-linear-to-br from-(--brand-indigo)/0 to-(--brand-purple)/0 blur-xl transition-all duration-500 group-hover:from-(--brand-indigo)/40 group-hover:to-(--brand-purple)/40" />
 
                     <Icon
                       className="h-6 w-6 text-white"

@@ -7,19 +7,20 @@ import Image from "next/image";
 import MyNavLink from "../ui/MyNavLink";
 import Link from "next/link";
 import { Avatar } from "@heroui/react";
-import { authClient } from "@/lib/auth-client";
 import { Menu, X, LogOut } from "lucide-react";
+import { authClient } from "@/lib/auth-client";
 
 const Navbar = () => {
-  const {
-    data: session,
-    isPending,
-    error,
-    refetch,
-  } = authClient.useSession();
+  const { data: session, isPending, error, refetch } = authClient.useSession();
+
+  console.log(session);
 
   const user = session?.user;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  console.log("SESSION:", session);
+  console.log("ERROR:", error);
+  console.log("PENDING:", isPending);
 
   const links = (
     <>
@@ -37,11 +38,9 @@ const Navbar = () => {
 
   return (
     <div className="fixed top-5 left-1/2 -translate-x-1/2 z-50 w-full container px-4 md:px-6">
-      
       {/* Premium Light Capsule Container */}
       <div className="bg-white/70 backdrop-blur-xl border border-white shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] rounded-full px-5 md:px-7 py-2.5 transition-all duration-300">
         <nav className="flex items-center justify-between h-12">
-          
           {/* Left Side: Hamburger Menu & Logo */}
           <div className="flex items-center gap-3">
             <button
@@ -49,15 +48,22 @@ const Navbar = () => {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
             >
-              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {isMenuOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
             </button>
-            
-            <Link href="/" className="flex items-center active:scale-95 transition-transform">
-              <Image 
-                src={logo} 
-                alt="logo" 
-                width={105} 
-                height={105} 
+
+            <Link
+              href="/"
+              className="flex items-center active:scale-95 transition-transform"
+            >
+              <Image
+                src={logo}
+                alt="logo"
+                width={105}
+                height={105}
                 className="object-contain" // লাইট থিমে নরমাল কালারড লোগো ভালো ফুটবে
                 priority
               />
@@ -118,17 +124,14 @@ const Navbar = () => {
               </Avatar>
             </div>
           )}
-
         </nav>
       </div>
 
       {/* Mobile Floating Menu Dropdown (Light Theme) */}
       {isMenuOpen && (
         <div className="mt-3 md:hidden bg-white/95 backdrop-blur-xl border border-slate-100 rounded-3xl p-5 shadow-[0_20px_40px_-5px_rgba(0,0,0,0.08)] animate-in fade-in slide-in-from-top-4 duration-200 z-50">
-          <ul className="flex flex-col gap-3 px-2 py-1 text-base">
-            {links}
-          </ul>
-          
+          <ul className="flex flex-col gap-3 px-2 py-1 text-base">{links}</ul>
+
           {/* Mobile Auth Actions */}
           <div className="border-t border-slate-100 mt-4 pt-4 flex flex-col gap-2.5">
             {user ? (

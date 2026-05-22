@@ -1,6 +1,5 @@
 "use client";
 import { authClient } from "@/lib/auth-client";
-import { error } from "better-auth/api";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
@@ -35,29 +34,40 @@ const SignUpPage = () => {
       return;
     }
 
-    const { data, error } = await authClient.signUp.email(
-      {
-        email, // user email address
-        password, // user password -> min 8 characters by default
-        name, // user display name
-        image, // User image URL (optional)
-      },
-      {
-        onRequest: (ctx) => {
-          // toast.loading("Creating your account...");
+    try {
+      const response = await authClient.signUp.email(
+        {
+          email, // user email address
+          password, // user password -> min 8 characters by default
+          name, // user display name
+          image, // User image URL (optional)
         },
-        onSuccess: (ctx) => {
-          //redirect to the dashboard or sign in page
-          toast.success("Account created successfully!");
-          router.push("/");
+        {
+          onRequest: () => {
+            // toast.loading("Creating your account...");
+          },
+          onSuccess: () => {
+            //redirect to the dashboard or sign in page
+            toast.success("Account created successfully!");
+            router.push("/");
+          },
+          onError: (ctx) => {
+            toast.error(
+              String(ctx?.error?.message || ctx?.error || "Something went wrong"),
+            );
+          },
         },
-        onError: (ctx) => {
-          // display the error message
-          toast.error(ctx.error.message || "Something went wrong");
-        },
-      },
-    );
-    // console.log(data, error);   
+      );
+
+      const data = response?.data;
+      const error = response?.error;
+      if (!data && error) {
+        toast.error(String(error?.message || error || "Something went wrong"));
+      }
+    } catch (err) {
+      console.error("Signup error:", err);
+      toast.error(String(err?.message || err || "Something went wrong"));
+    }
   };
   const handleGoogleLogin = async () => {
     const data = await authClient.signIn.social({

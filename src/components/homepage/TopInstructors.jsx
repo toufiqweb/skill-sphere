@@ -47,7 +47,7 @@ const instructors = [
 ];
 const TopInstructors = () => {
   return (
-    <div className="container mx-auto my-20 px-6 ">
+    <div className="container mx-auto my-20 px-6  " >
       <div className="flex flex-col md:flex-row justify-center gap-5 md:justify-between items-center mb-10">
         <div className="flex items-center gap-3">
           <div className="p-3 bg-[#f6f8fd]  hidden sm:inline-block   rounded-2xl">

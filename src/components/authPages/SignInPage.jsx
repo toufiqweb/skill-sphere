@@ -1,7 +1,7 @@
 "use client";
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
-import { useRouter ,useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
 
@@ -11,38 +11,50 @@ const SignInPage = () => {
   const callbackUrl = searchParams.get("callbackUrl") || "/";
 
   // console.log(router);
-  
+
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const userData = Object.fromEntries(formData.entries());
     const { email, password } = userData;
-    // console.log(data);
-    const { data, error } = await authClient.signIn.email({
-      email,
-      password,
-      rememberMe: false,
-    });
-    // console.log(data, error);
-    if (data) {
-      toast.success("Login successful!");
-      router.push(callbackUrl);
-      return;
-    } else {
-      toast.error(error.message || "Something went wrong");
-      return;
+
+    try {
+      const response = await authClient.signIn.email({
+        email,
+        password,
+        rememberMe: false,
+      });
+
+      const data = response?.data;
+      const error = response?.error;
+
+      if (data) {
+        toast.success("Login successful!");
+        router.push(callbackUrl);
+        router.refresh();
+        return;
+      }
+
+      toast.error(String(error?.message || error || "Something went wrong"));
+    } catch (err) {
+      console.error("Login error:", err);
+      toast.error(String(err?.message || err || "Something went wrong"));
     }
   };
   const handleGoogleLogin = async () => {
-    const data = await authClient.signIn.social({
-      provider: "google",
-       callbackURL: callbackUrl,
-    });
+    try {
+      const data = await authClient.signIn.social({
+        provider: "google",
+        callbackURL: callbackUrl,
+      });
 
-    if (!data) {
-      toast.error("Something went wrong");
+      if (!data) {
+        toast.error("Something went wrong");
+      }
+    } catch (err) {
+      console.error("Google login error:", err);
+      toast.error(String(err?.message || err || "Something went wrong"));
     }
-
   };
   return (
     <div className="min-h-[80vh] pt-28 lg:pt-36 flex items-center justify-center p-6">

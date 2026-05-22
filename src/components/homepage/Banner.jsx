@@ -49,10 +49,10 @@ function StatCard({ icon, value, label, className = "", delay = 0 }) {
     <motion.div
       animate={float(delay)}
       whileHover={{ scale: 1.06, y: -6 }}
-      className={`absolute z-20 rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-bg)] p-4 backdrop-blur-xl shadow-[var(--shadow-card)] ${className}`}
+      className={`absolute z-20 rounded-2xl border border-(--glass-border) bg-(--glass-bg) p-4 backdrop-blur-xl shadow-(--shadow-card) ${className}`}
     >
       <div className="flex items-center gap-3">
-        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-[var(--brand-indigo)] to-[var(--brand-purple)] shadow-lg shadow-[var(--brand-purple)]/30">
+        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-linear-to-br from-(--brand-indigo) to-(--brand-purple) shadow-lg shadow-(--brand-purple)/30">
           {icon}
         </div>
         <div>

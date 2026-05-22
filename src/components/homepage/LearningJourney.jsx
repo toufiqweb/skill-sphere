@@ -3,7 +3,7 @@ import React from "react";
 
 const LearningJourney = () => {
   return (
-    <div className="container mx-auto my-15 border-2 bg-white/10 border-black/10 rounded-2xl p-3">
+    <div   className="container mx-auto my-15 border-2 bg-white/10 border-black/10 rounded-2xl p-3">
       <div className="hero bg-main-gradient rounded-2xl py-12">
         <div className="hero-content text-center px-4">
           <div className="max-w-2xl mx-auto">
