@@ -45,7 +45,7 @@ const SignInPage = () => {
 
   };
   return (
-    <div className="min-h-[80vh]  flex items-center justify-center p-6">
+    <div className="min-h-[80vh] pt-28 lg:pt-36 flex items-center justify-center p-6">
       <div className="w-full max-w-md">
         <div className="bg-white  rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
           <div className="bg-main-gradient px-8 py-10 text-white">

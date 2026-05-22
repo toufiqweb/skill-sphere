@@ -1,225 +1,254 @@
-"use client";
-
-import Image from "next/image";
-import React from "react";
-import Link from "next/link";
+"use client"
 import { motion } from "framer-motion";
 import {
-  GraduationCap,
-  Rocket,
+  Sparkles,
   PlayCircle,
   Users,
   UserCheck,
   BookOpen,
+  ArrowRight,
 } from "lucide-react";
+import bannerImage from "@/assets/download.jpg";
+import Link from "next/link";
+import Image from "next/image";
 
-import bannerImage from "@/assets/banner.png";
-import dot from "@/assets/dot.png";
-
-const Banner = () => {
-  // Framer Motion Animation Settings
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: { staggerChildren: 0.12 },
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+      ease: [0.22, 1, 0.36, 1],
     },
-  };
-
-  const fadeUp = {
-    hidden: { opacity: 0, y: 35 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.6, type: "spring", bounce: 0.2 } },
-  };
-
-  const floatAnimation = (delay) => ({
-    initial: { y: 0 },
-    animate: {
-      y: [-10, 10, -10],
-      transition: { duration: 4.5, repeat: Infinity, ease: "easeInOut", delay },
-    },
-  });
-
-  return (
-    <header className="bg-linear-to-br from-[#e6edfc] to-[#f4f7ff] pt-28 lg:pt-36 overflow-hidden">
-      <div className="container mx-auto px-5 pb-16 lg:pb-24 relative">
-        <div className="flex flex-col lg:flex-row justify-between items-center gap-16 lg:gap-8">
-          
-          {/* Left Side: Content & Action Buttons */}
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.1 }}
-            className="flex-1 flex flex-col items-center lg:items-start z-10"
-          >
-            <div className="max-w-2xl w-full text-center lg:text-left space-y-6">
-              
-              {/* Modern Micro-Badge */}
-              <motion.div
-                variants={fadeUp}
-                className="flex w-fit mx-auto lg:mx-0 items-center gap-2 bg-white/80 backdrop-blur-md border border-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-full px-5 py-2"
-              >
-                <GraduationCap className="text-indigo-600 w-5 h-5" />
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 text-sm md:text-base font-bold tracking-wide">
-                  Online Learning Platform
-                </span>
-              </motion.div>
-
-              {/* High-Impact Typography Heading */}
-              <motion.h1
-                variants={fadeUp}
-                className="text-4xl sm:text-5xl md:text-6xl font-black leading-[1.15] text-slate-900 tracking-tight"
-              >
-                Upgrade Your
-                <br />
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
-                  Skills Today
-                </span>
-                <Rocket className="inline-block ml-3 w-8 h-8 md:w-12 md:h-12 text-purple-500 animate-bounce" />
-              </motion.h1>
-
-              {/* Subtitle Paragraph */}
-              <motion.p
-                variants={fadeUp}
-                className="text-base sm:text-lg md:text-xl text-slate-600 max-w-md mx-auto lg:mx-0 font-medium leading-relaxed"
-              >
-                Learn from industry experts and advance your career with our
-                high-quality online courses.
-              </motion.p>
-
-              {/* Interactive Call to Actions */}
-              <motion.div
-                variants={fadeUp}
-                className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center pt-2"
-              >
-                <Link href={"/courses"}>
-                  <button className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold px-9 py-4 rounded-2xl hover:shadow-[0_15px_30px_rgba(79,70,229,0.4)] hover:-translate-y-1 transition-all duration-300 active:scale-95">
-                    Explore Courses
-                  </button>
-                </Link>
-
-                <button className="flex items-center gap-2.5 bg-white text-indigo-600 font-bold px-9 py-4 rounded-2xl hover:bg-slate-50 hover:shadow-lg transition-all duration-300 active:scale-95 border border-slate-100 group shadow-sm">
-                  <PlayCircle className="w-5 h-5 group-hover:scale-110 transition-transform text-indigo-600" />
-                  How It Works
-                </button>
-              </motion.div>
-            </div>
-          </motion.div>
-
-          {/* Right Side: Structural Image & Dynamic Stat Cards */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.93 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: true }}
-            className="flex-1 flex items-center justify-center relative p-4 w-full"
-          >
-            <div className="relative flex justify-center items-center w-full max-w-[440px] lg:max-w-[460px]">
-              
-              {/* Geometric Dot Decors */}
-              <Image
-                src={dot}
-                alt="decoration dot"
-                width={75}
-                height={75}
-                className="absolute -bottom-10 -left-10 opacity-40 select-none hidden sm:block"
-              />
-              <Image
-                src={dot}
-                alt="decoration dot"
-                width={75}
-                height={75}
-                className="absolute -top-10 -right-10 opacity-40 select-none hidden sm:block"
-              />
-
-              {/* Hero Spotlight Background Glow */}
-              <div className="absolute inset-0 bg-indigo-400/20 blur-3xl rounded-full scale-75 -z-10 animate-pulse"></div>
-
-              {/* Premium Image Frame */}
-              <div className="relative z-10 w-full aspect-square">
-                <Image
-                  src={bannerImage}
-                  alt="Woman learning"
-                  fill
-                  className="rounded-[3rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.15)] object-cover border-4 border-white"
-                  priority
-                  sizes="(max-w-7xl) 100vw, 450px"
-                />
-              </div>
-
-              {/* Floating Stat Card 1: Active Students */}
-              <motion.div
-                variants={floatAnimation(0)}
-                initial="initial"
-                animate="animate"
-                className="absolute -top-6 -left-4 md:-left-12 z-20 backdrop-blur-xl bg-white/90 border border-white/60 shadow-[0_20px_40px_rgba(0,0,0,0.08)] rounded-2xl p-3.5 md:p-4"
-              >
-                <div className="flex items-center gap-3.5">
-                  <div className="p-2.5 rounded-xl bg-indigo-50 text-indigo-600 shadow-xs">
-                    <img src="" alt="" /><Users className="w-6 h-6 md:w-7 md:h-7" />
-                  </div>
-                  <div className="flex flex-col pr-3">
-                    <h2 className="font-black text-slate-800 text-base md:text-xl leading-none mb-1">
-                      20K+
-                    </h2>
-                    <p className="text-slate-500 text-xs md:text-sm font-semibold whitespace-nowrap">
-                      Active Students
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Floating Stat Card 2: Expert Instructors */}
-              <motion.div
-                variants={floatAnimation(1.6)}
-                initial="initial"
-                animate="animate"
-                className="absolute top-1/2 -translate-y-1/2 -right-6 md:-right-14 z-20 backdrop-blur-xl bg-white/90 border border-white/60 shadow-[0_20px_40px_rgba(0,0,0,0.08)] rounded-2xl p-3.5 md:p-4"
-              >
-                <div className="flex items-center gap-3.5">
-                  <div className="p-2.5 rounded-xl bg-emerald-50 text-emerald-600 shadow-xs">
-                    <UserCheck className="w-6 h-6 md:w-7 md:h-7" />
-                  </div>
-                  <div className="flex flex-col pr-3">
-                    <h2 className="font-black text-slate-800 text-base md:text-xl leading-none mb-1">
-                      200+
-                    </h2>
-                    <p className="text-slate-500 text-xs md:text-sm font-semibold whitespace-nowrap">
-                      Expert Instructors
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Floating Stat Card 3: Online Courses */}
-              <motion.div
-                variants={floatAnimation(0.8)}
-                initial="initial"
-                animate="animate"
-                className="absolute -bottom-8 left-6 md:left-10 z-20 backdrop-blur-xl bg-white/90 border border-white/60 shadow-[0_20px_40px_rgba(0,0,0,0.08)] rounded-2xl p-3.5 md:p-4"
-              >
-                <div className="flex items-center gap-3.5">
-                  <div className="p-2.5 rounded-xl bg-orange-50 text-orange-600 shadow-xs">
-                    <BookOpen className="w-6 h-6 md:w-7 md:h-7" />
-                  </div>
-                  <div className="flex flex-col pr-3">
-                    <h2 className="font-black text-slate-800 text-base md:text-xl leading-none mb-1">
-                      500+
-                    </h2>
-                    <p className="text-slate-500 text-xs md:text-sm font-semibold whitespace-nowrap">
-                      Online Courses
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-
-            </div>
-          </motion.div>
-          
-        </div>
-      </div>
-    </header>
-  );
+  },
 };
 
-export default Banner;
+const stagger = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.1,
+    },
+  },
+};
+const float = (delay = 0, distance = 12) => ({
+  y: [-distance, distance, -distance],
+  transition: {
+    duration: 6,
+    repeat: Infinity,
+    ease: "easeInOut",
+    delay,
+  },
+});
+
+function StatCard({ icon, value, label, className = "", delay = 0 }) {
+  return (
+    <motion.div
+      animate={float(delay)}
+      whileHover={{ scale: 1.06, y: -6 }}
+      className={`absolute z-20 rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-bg)] p-4 backdrop-blur-xl shadow-[var(--shadow-card)] ${className}`}
+    >
+      <div className="flex items-center gap-3">
+        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-[var(--brand-indigo)] to-[var(--brand-purple)] shadow-lg shadow-[var(--brand-purple)]/30">
+          {icon}
+        </div>
+        <div>
+          <div className="text-lg font-bold text-foreground leading-tight">
+            {value}
+          </div>
+          <div className="text-xs text-foreground/60 whitespace-nowrap">
+            {label}
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+export default function Banner() {
+  return (
+    <section
+      className="relative min-h-screen w-full overflow-hidden"
+      style={{ background: "var(--gradient-hero)" }}
+    >
+      {/* Mesh gradient blobs */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <motion.div
+          animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0.7, 0.5] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-32 -left-32 h-[500px] w-[500px] rounded-full bg-[var(--brand-purple)]/30 blur-[120px]"
+        />
+        <motion.div
+          animate={{ scale: [1.1, 1, 1.1], opacity: [0.4, 0.6, 0.4] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/3 -right-40 h-[600px] w-[600px] rounded-full bg-[var(--brand-blue)]/25 blur-[140px]"
+        />
+        <motion.div
+          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-0 left-1/3 h-[400px] w-[400px] rounded-full bg-[var(--brand-indigo)]/30 blur-[100px]"
+        />
+      </div>
+
+      {/* Grid noise overlay */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.04]"
+        style={{
+          backgroundImage:
+            "linear-gradient(var(--foreground) 1px, transparent 1px), linear-gradient(90deg, var(--foreground) 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
+        }}
+      />
+
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl items-center px-6 py-20 lg:px-10">
+        <div className="grid w-full items-center gap-16 lg:grid-cols-2">
+          {/* LEFT */}
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            animate="show"
+            className="space-y-8"
+          >
+            <motion.div variants={fadeUp}>
+              <div className="inline-flex items-center gap-2 rounded-full border border-[var(--glass-border)] bg-[var(--glass-bg)] px-4 py-1.5 backdrop-blur-xl">
+                <Sparkles className="h-3.5 w-3.5 text-[var(--brand-purple)]" />
+                <span className="text-xs font-medium tracking-wide text-foreground/80">
+                  Online Learning Platform
+                </span>
+              </div>
+            </motion.div>
+
+            <motion.h1
+              variants={fadeUp}
+              className="text-5xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl"
+            >
+              Upgrade Your
+              <br />
+              <span
+                className="inline-block bg-clip-text text-transparent"
+                style={{
+                  backgroundImage: "var(--gradient-text)",
+                  filter: "drop-shadow(0 0 30px oklch(0.65 0.24 305 / 0.4))",
+                }}
+              >
+                Skills Today
+              </span>
+            </motion.h1>
+
+            <motion.p
+              variants={fadeUp}
+              className="max-w-lg text-lg leading-relaxed text-foreground/65"
+            >
+              Learn from industry experts and advance your career with our
+              high-quality, hands-on online courses crafted for ambitious
+              learners.
+            </motion.p>
+
+            <motion.div
+              variants={fadeUp}
+              className="flex flex-wrap items-center gap-4"
+            >
+              <Link
+                href="/"
+                className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full px-7 py-3.5 text-sm font-semibold text-white shadow-(--shadow-glow) transition-all hover:scale-[1.03] hover:shadow-[0_25px_70px_-15px_oklch(0.60_0.25_290/0.7)]"
+                style={{ backgroundImage: "var(--gradient-primary)" }}
+              >
+                <span className="relative z-10">Explore Courses</span>
+                <ArrowRight className="relative z-10 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                <span className="absolute inset-0 bg-white/0 transition-colors group-hover:bg-white/10" />
+              </Link>
+
+              <button className="group inline-flex items-center gap-2.5 rounded-full border border-[var(--glass-border)] bg-(--glass-bg) px-6 py-3.5 text-sm font-semibold text-foreground backdrop-blur-xl transition-all hover:border-white/25 hover:bg-white/10">
+                <PlayCircle className="h-5 w-5 text-[var(--brand-purple)] transition-transform group-hover:scale-110" />
+                How It Works
+              </button>
+            </motion.div>
+
+            <motion.div
+              variants={fadeUp}
+              className="flex items-center gap-6 pt-4"
+            >
+              <div className="flex -space-x-2">
+                {[0, 1, 2, 3].map((i) => (
+                  <div
+                    key={i}
+                    className="h-8 w-8 rounded-full border-2 border-background bg-gradient-to-br from-[var(--brand-indigo)] to-[var(--brand-purple)]"
+                  />
+                ))}
+              </div>
+              <p className="text-sm text-foreground/60">
+                <span className="font-semibold text-foreground">20,000+</span>{" "}
+                learners growing daily
+              </p>
+            </motion.div>
+          </motion.div>
+
+          {/* RIGHT */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+            className="relative mx-auto aspect-square w-full max-w-[560px]"
+          >
+            {/* Glow */}
+            <div className="absolute inset-8 rounded-[2rem] bg-gradient-to-br from-[var(--brand-purple)]/40 via-[var(--brand-indigo)]/30 to-[var(--brand-blue)]/40 blur-3xl" />
+
+            {/* Animated rings */}
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+              className="absolute inset-0 rounded-full border border-dashed border-white/10"
+            />
+            <motion.div
+              animate={{ rotate: -360 }}
+              transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+              className="absolute inset-6 rounded-full border border-white/5"
+            />
+
+            {/* Image card */}
+            <motion.div
+              animate={float(0, 8)}
+              className="relative h-full w-full overflow-hidden rounded-[2rem] border border-[var(--glass-border)] bg-[var(--glass-bg)] p-2 backdrop-blur-xl shadow-2xl"
+            >
+              <div className="relative h-full w-full overflow-hidden rounded-[1.7rem]">
+                <Image
+                  src={bannerImage}
+                  alt="Online learning illustration"
+                  width={1024}
+                  height={1024}
+                  className="h-full w-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
+              </div>
+            </motion.div>
+
+            <StatCard
+              icon={<Users className="h-5 w-5 text-white" />}
+              value="20K+"
+              label="Active Students"
+              className="-left-4 top-8 sm:-left-10"
+              delay={0}
+            />
+            <StatCard
+              icon={<UserCheck className="h-5 w-5 text-white" />}
+              value="200+"
+              label="Expert Instructors"
+              className="-right-2 top-1/2 sm:-right-8"
+              delay={1.5}
+            />
+            <StatCard
+              icon={<BookOpen className="h-5 w-5 text-white" />}
+              value="500+"
+              label="Online Courses"
+              className="bottom-6 left-4 sm:left-0"
+              delay={3}
+            />
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}

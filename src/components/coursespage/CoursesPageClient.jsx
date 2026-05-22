@@ -22,7 +22,7 @@ const CoursesPageClient = ({ courses }) => {
   };
 
   return (
-    <div className="container mx-auto px-5 my-10 space-y-10">
+    <div className="container mx-auto px-5 my-10  pt-28 lg:pt-36 space-y-10">
       <div className="text-center space-y-3">
         <h1 className="font-bold text-5xl ">All Courses</h1>
         <p className="text-gray-500 text-lg">
