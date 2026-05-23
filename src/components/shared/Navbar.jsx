@@ -33,9 +33,9 @@ const Navbar = () => {
   );
 
   return (
-    <div className="fixed left-1/2 top-5 z-50 w-full max-w-7xl -translate-x-1/2 px-4">
+    <div className="fixed left-1/2 top-5 z-50 w-full max-w-7xl -translate-x-1/2 px-4 ">
       {/* Premium Light Capsule Container */}
-      <div className="glass-card rounded-full border border-white/10 px-5 md:px-7 py-2.5 shadow-[0_10px_40px_rgba(124,58,237,0.08)] hover:shadow-[0_15px_50px_rgba(124,58,237,0.15)] transition-all duration-300">
+      <div className="bg-(--glass-bg) p-4 backdrop-blur-xl  rounded-full border border-white/10 px-5 md:px-7 py-2.5 shadow-[0_10px_40px_rgba(124,58,237,0.08)] hover:shadow-[0_15px_50px_rgba(124,58,237,0.15)] transition-all duration-300">
         <nav className="flex items-center justify-between h-12">
           {/* Left Side: Hamburger Menu & Logo */}
           <div className="flex items-center gap-3">
@@ -133,7 +133,7 @@ const Navbar = () => {
 
       {/* Mobile Floating Menu Dropdown */}
       {isMenuOpen && (
-        <div className="mt-4 rounded-3xl glass-card border border-white/10 p-5 shadow-[0_15px_50px_rgba(124,58,237,0.12)] animate-in fade-in slide-in-from-top-4 duration-300">
+        <div className="mt-4 rounded-3xl glass-card border border-white/10 p-5 shadow-[0_15px_50px_rgba(124,58,237,0.12)] animate-in fade-in slide-in-from-top-4 duration-300 bg-(--glass-bg)  backdrop-blur-xl ">
           <ul className="flex flex-col gap-3 px-2 py-1 text-base">{links}</ul>
 
           {/* Mobile Auth Actions */}

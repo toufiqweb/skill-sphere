@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { motion } from "framer-motion";
 import {
   Sparkles,
@@ -13,13 +13,13 @@ import Link from "next/link";
 import Image from "next/image";
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 20 },
   show: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.7,
-      ease: [0.22, 1, 0.36, 1],
+      duration: 0.45,
+      ease: "easeOut",
     },
   },
 };
@@ -29,8 +29,8 @@ const stagger = {
   show: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.1,
+      delayChildren: 0.05,
+      staggerChildren: 0.08,
     },
   },
 };
@@ -71,7 +71,7 @@ function StatCard({ icon, value, label, className = "", delay = 0 }) {
 export default function Banner() {
   return (
     <section
-      className="relative min-h-screen w-full overflow-hidden"
+      className="relative min-h-screen w-full overflow-hidden pt-10 xl:pt-0"
       style={{ background: "var(--gradient-hero)" }}
     >
       {/* Mesh gradient blobs */}
@@ -110,7 +110,7 @@ export default function Banner() {
             variants={stagger}
             initial="hidden"
             animate="show"
-            className="space-y-8"
+            className="space-y-8 text-center lg:text-left flex flex-col items-center lg:items-start"
           >
             <motion.div variants={fadeUp}>
               <div className="inline-flex items-center gap-2 rounded-full border border-[var(--glass-border)] bg-[var(--glass-bg)] px-4 py-1.5 backdrop-blur-xl">
@@ -140,7 +140,7 @@ export default function Banner() {
 
             <motion.p
               variants={fadeUp}
-              className="max-w-lg text-lg leading-relaxed text-foreground/65"
+              className="max-w-lg text-lg leading-relaxed text-foreground/65 mx-auto lg:mx-0"
             >
               Learn from industry experts and advance your career with our
               high-quality, hands-on online courses crafted for ambitious
@@ -149,7 +149,7 @@ export default function Banner() {
 
             <motion.div
               variants={fadeUp}
-              className="flex flex-wrap items-center gap-4"
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-4"
             >
               <Link
                 href="/"
@@ -169,7 +169,7 @@ export default function Banner() {
 
             <motion.div
               variants={fadeUp}
-              className="flex items-center gap-6 pt-4"
+              className="flex items-center justify-center lg:justify-start gap-6 pt-4"
             >
               <div className="flex -space-x-2">
                 {[0, 1, 2, 3].map((i) => (
@@ -196,7 +196,7 @@ export default function Banner() {
             {/* Glow */}
             <div className="absolute inset-8 rounded-[2rem] bg-gradient-to-br from-[var(--brand-purple)]/40 via-[var(--brand-indigo)]/30 to-[var(--brand-blue)]/40 blur-3xl" />
 
-            {/* Animated rings */}
+            {/* Animated rings
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
@@ -206,7 +206,7 @@ export default function Banner() {
               animate={{ rotate: -360 }}
               transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
               className="absolute inset-6 rounded-full border border-white/5"
-            />
+            /> */}
 
             {/* Image card */}
             <motion.div
