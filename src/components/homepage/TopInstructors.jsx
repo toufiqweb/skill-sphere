@@ -1,7 +1,17 @@
-import { Users } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
-import { FaArrowRight, FaStar } from "react-icons/fa";
+import Image from "next/image";
+
+import {
+  Users,
+  BookOpen,
+  GraduationCap,
+  Star,
+  BadgeCheck,
+  Briefcase,
+  Award,
+} from "lucide-react";
+
+import { FaArrowRight } from "react-icons/fa";
 
 const instructors = [
   {
@@ -13,6 +23,8 @@ const instructors = [
     rating: 4.8,
     students: "1.2K",
     courses: 12,
+    experience: "8+ Years",
+    featured: true,
   },
   {
     id: 2,
@@ -23,6 +35,8 @@ const instructors = [
     rating: 4.9,
     students: "856",
     courses: 8,
+    experience: "6+ Years",
+    featured: true,
   },
   {
     id: 3,
@@ -33,6 +47,8 @@ const instructors = [
     rating: 4.7,
     students: "1.5K",
     courses: 15,
+    experience: "10+ Years",
+    featured: true,
   },
   {
     id: 4,
@@ -43,70 +59,192 @@ const instructors = [
     rating: 4.6,
     students: "734",
     courses: 9,
+    experience: "7+ Years",
+    featured: true,
   },
 ];
-const TopInstructors = () => {
+
+export default function TopInstructors() {
   return (
-    <div className="container mx-auto my-20 px-6  " >
-      <div className="flex flex-col md:flex-row justify-center gap-5 md:justify-between items-center mb-10">
-        <div className="flex items-center gap-3">
-          <div className="p-3 bg-[#f6f8fd]  hidden sm:inline-block   rounded-2xl">
-            <Users className="w-7 h-7 text-violet-600 " />
-          </div>
-          <h2 className="text-3xl font-semibold text-gray-900 ">
-            Top Instructors
-          </h2>
-        </div>
-
-        <div className="flex items-center gap-2 group cursor-pointer">
-          <Link
-            href={"/"}
-            className="text-main-gradient font-semibold transition-all duration-300 hover:opacity-80"
-          >
-            View All Instructors
-          </Link>
-
-          <FaArrowRight className="text-[#2563eb] transition-transform duration-300 group-hover:translate-x-1" />
-        </div>
+    <section className="relative overflow-hidden py-24">
+      {/* Background Glow */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-10 top-10 h-72 w-72 rounded-full bg-violet-600/15 blur-[120px]" />
+        <div className="absolute bottom-10 right-10 h-72 w-72 rounded-full bg-blue-600/15 blur-[120px]" />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-4 gap-10">
-        {instructors.map((instructor) => (
-          <div
-            key={instructor.id}
-            className="group bg-white  rounded-3xl overflow-hidden border border-gray-100  hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
-          >
-            <div className=" h-56 bg-linear-to-br from-blue-100 to-purple-100  flex items-center justify-center">
-              <Image
-                src={instructor.image}
-                width={400}
-                height={400}
-                alt={instructor.name}
-                className="w-40 h-40 object-cover rounded-full border-4 border-white shadow-md"
-              />
+      <div className="container relative z-10 mx-auto px-4">
+        {/* Header */}
+        <div className="mb-14 flex flex-col items-center justify-between gap-6 md:flex-row">
+          <div className="flex items-center gap-4">
+            <div className="glass-card rounded-2xl p-4">
+              <Users className="h-7 w-7 text-violet-400" />
             </div>
 
-            <div className="p-6 text-center">
-              <h3 className="font-semibold  text-xl text-gray-900  mb-1">
-                {instructor.name}
-              </h3>
-              <p className="text-gray-600  text-sm mb-4">{instructor.role}</p>
+            <div>
+              <span className="mb-2 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-violet-400">
+                Expert Mentors
+              </span>
 
-              <div className="flex items-center  justify-center gap-1 mb-5">
-                <FaStar className="w-5 h-5 text-yellow-400" />
-                <span className="font-semibold text-gray-900 ">
-                  {instructor.rating}
-                </span>
-                <span className="text-gray-500  text-sm">
-                  ({instructor.students}+ Students  &  {instructor.courses} Courses)
-                </span>
+              <h2 className="text-3xl font-bold text-primary md:text-4xl">
+                Top Instructors
+              </h2>
+
+              <p className="mt-2 text-sm text-muted md:text-base">
+                Learn from industry-leading professionals with years of
+                experience and proven teaching excellence.
+              </p>
+            </div>
+          </div>
+
+          <Link
+            href="/instructors"
+            className="group flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-3 backdrop-blur-xl transition-all duration-300 hover:border-violet-500/40 hover:shadow-[0_0_30px_rgba(124,58,237,0.2)]"
+          >
+            <span className="text-main-gradient font-semibold">
+              View All Instructors
+            </span>
+
+            <FaArrowRight className="text-violet-400 transition-transform duration-300 group-hover:translate-x-1" />
+          </Link>
+        </div>
+
+        {/* Cards */}
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {instructors.map((instructor) => (
+            <div
+              key={instructor.id}
+              className="group overflow-hidden rounded-3xl glass-card transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02]"
+            >
+              {/* Top Banner */}
+              <div className="relative h-32 bg-gradient-to-br from-violet-500/20 via-purple-500/20 to-blue-500/20">
+                {instructor.featured && (
+                  <div className="absolute right-4 top-4 z-10">
+                    <div className="rounded-full bg-main-gradient px-3 py-1 text-xs font-medium text-white shadow-lg">
+                      Featured
+                    </div>
+                  </div>
+                )}
+
+                <div className="absolute left-1/2 top-full -translate-x-1/2 -translate-y-1/2">
+                  <Image
+                    src={instructor.image}
+                    alt={instructor.name}
+                    width={120}
+                    height={120}
+                    className="h-28 w-28 rounded-full border-4 border-white object-cover shadow-xl transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="px-6 pb-6 pt-16 text-center">
+                {/* Verified Badge */}
+                <div className="mb-3 flex justify-center">
+                  <div className="flex items-center gap-1 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1">
+                    <BadgeCheck
+                      size={14}
+                      className="text-emerald-500"
+                    />
+                    <span className="text-xs font-medium text-emerald-500">
+                      Verified Instructor
+                    </span>
+                  </div>
+                </div>
+
+                <h3 className="text-xl font-bold text-primary">
+                  {instructor.name}
+                </h3>
+
+                <p className="mt-1 text-sm text-muted">
+                  {instructor.role}
+                </p>
+
+                {/* Rating */}
+                <div className="mt-4 flex items-center justify-center gap-2">
+                  <Star
+                    size={18}
+                    className="fill-yellow-400 text-yellow-400"
+                  />
+
+                  <span className="font-semibold text-primary">
+                    {instructor.rating}
+                  </span>
+
+                  <span className="text-sm text-muted">
+                    Rating
+                  </span>
+                </div>
+
+                {/* Tags */}
+                <div className="mt-5 flex flex-wrap justify-center gap-2">
+                  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-muted">
+                    🏆 Top Mentor
+                  </span>
+
+                  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-muted">
+                    ⭐ Expert Trainer
+                  </span>
+                </div>
+
+                {/* Stats */}
+                <div className="mt-6 grid grid-cols-3 gap-3">
+                  <div className="rounded-xl border border-white/10 bg-white/5 p-3">
+                    <GraduationCap
+                      size={18}
+                      className="mx-auto mb-2 text-violet-400"
+                    />
+
+                    <p className="font-bold text-primary">
+                      {instructor.students}
+                    </p>
+
+                    <p className="text-xs text-muted">
+                      Students
+                    </p>
+                  </div>
+
+                  <div className="rounded-xl border border-white/10 bg-white/5 p-3">
+                    <BookOpen
+                      size={18}
+                      className="mx-auto mb-2 text-blue-400"
+                    />
+
+                    <p className="font-bold text-primary">
+                      {instructor.courses}
+                    </p>
+
+                    <p className="text-xs text-muted">
+                      Courses
+                    </p>
+                  </div>
+
+                  <div className="rounded-xl border border-white/10 bg-white/5 p-3">
+                    <Briefcase
+                      size={18}
+                      className="mx-auto mb-2 text-amber-400"
+                    />
+
+                    <p className="font-bold text-primary">
+                      {instructor.experience}
+                    </p>
+
+                    <p className="text-xs text-muted">
+                      Experience
+                    </p>
+                  </div>
+                </div>
+
+                {/* CTA */}
+                <button className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-main-gradient py-3 font-medium text-white transition-all duration-300 hover:scale-[1.02]">
+                  <Award size={18} />
+                  View Profile
+                </button>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
-};
-
-export default TopInstructors;
+}
