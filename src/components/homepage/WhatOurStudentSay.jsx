@@ -1,7 +1,3 @@
-"use client";
-
-import React from "react";
-import { Avatar } from "@heroui/react";
 import { FaQuoteLeft, FaStar, FaCheckCircle } from "react-icons/fa";
 import Image from "next/image";
 

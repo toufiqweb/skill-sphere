@@ -1,9 +1,5 @@
-"use client";
-
 import Link from "next/link";
-
 import { Clock, Target, ArrowRight, BookOpen, Lightbulb } from "lucide-react";
-
 import { FaArrowRight } from "react-icons/fa";
 import { IoBookSharp } from "react-icons/io5";
 
