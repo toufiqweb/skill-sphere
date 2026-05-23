@@ -4,6 +4,7 @@ import React, { useContext, useState, useEffect } from "react";
 import CourseCard from "../ui/CourseCard";
 import { CourseContext } from "@/lib/context/CourseProvider";
 import SearchCourses from "./SearchCourses";
+import { Sparkles } from "lucide-react";
 
 const CoursesPageClient = ({ courses }) => {
   const {
@@ -40,10 +41,21 @@ const CoursesPageClient = ({ courses }) => {
   return (
     <div className="container mx-auto px-5 my-10 pt-28 lg:pt-36 space-y-10">
       {/* Header */}
-      <div className="text-center space-y-3">
-        <h1 className="font-bold text-5xl">All Courses</h1>
-        <p className="text-gray-500 text-lg">
-          Explore all available courses and start learning at your own pace
+      {/* Header */}
+      <div className="mb-10 text-center">
+        <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-4 py-2 text-sm font-medium text-violet-400">
+          <Sparkles size={16} />
+          Explore Knowledge
+        </div>
+
+        <h1 className="mt-5 text-4xl font-black text-primary sm:text-5xl lg:text-6xl">
+          Discover Our
+          <span className="text-main-gradient"> Premium Courses</span>
+        </h1>
+
+        <p className="mx-auto mt-4 flex max-w-3xl items-center justify-center gap-2 text-base text-muted sm:text-lg">
+          Explore industry-focused courses, learn from expert instructors, and
+          build real-world skills to accelerate your career.
         </p>
       </div>
 

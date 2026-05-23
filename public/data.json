@@ -42,7 +42,7 @@
     "originalPrice": 79,
     "description": "Learn the basics of UI/UX design and prototyping.",
     "image": "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800",
-    "category": "Development"
+    "category": "Design"
   },
   {
     "id": 4,
@@ -57,7 +57,7 @@
     "originalPrice": 129,
     "description": "Analyze data and build machine learning models with Python.",
     "image": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=800",
-    "category": "Development"
+    "category": "Data Science"
   },
   {
     "id": 5,
@@ -72,7 +72,7 @@
     "originalPrice": 70,
     "description": "Master SEO, social media marketing, and online branding.",
     "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800",
-    "category": "Development"
+    "category": "Marketing"
   },
   {
     "id": 6,
@@ -117,7 +117,7 @@
     "originalPrice": 59,
     "description": "Improve your photography skills and editing techniques.",
     "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800",
-    "category": "Development"
+    "category": "Design"
   },
   {
     "id": 9,
@@ -132,7 +132,7 @@
     "originalPrice": 149,
     "description": "Learn machine learning algorithms and AI fundamentals.",
     "image": "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=800",
-    "category": "Development"
+    "category": "Data Science"
   },
   {
     "id": 10,
@@ -147,7 +147,7 @@
     "originalPrice": 84,
     "description": "Learn image editing and graphic design techniques.",
     "image": "https://images.unsplash.com/photo-1545239351-1141bd82e8a6?w=800",
-    "category": "Development"
+    "category": "Design"
   },
   {
     "id": 11,
@@ -162,7 +162,7 @@
     "originalPrice": 90,
     "description": "Understand online security, hacking, and defense basics.",
     "image": "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?w=800",
-    "category": "Development"
+    "category": "Security"
   },
   {
     "id": 12,
@@ -177,7 +177,7 @@
     "originalPrice": 110,
     "description": "Learn cloud computing concepts using AWS services.",
     "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800",
-    "category": "Development"
+    "category": "Cloud"
   },
   {
     "id": 13,
@@ -192,7 +192,7 @@
     "originalPrice": 79,
     "description": "Create professional videos using Adobe Premiere Pro.",
     "image": "https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=800",
-    "category": "Development"
+    "category": "Design"
   },
   {
     "id": 14,
@@ -207,7 +207,7 @@
     "originalPrice": 69,
     "description": "Learn SQL queries, joins, and database management.",
     "image": "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=800",
-    "category": "Development"
+    "category": "Data Science"
   },
   {
     "id": 15,
@@ -222,7 +222,7 @@
     "originalPrice": 104,
     "description": "Understand blockchain technology and crypto fundamentals.",
     "image": "https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=800",
-    "category": "Development"
+    "category": "Security"
   },
   {
     "id": 16,
@@ -267,6 +267,6 @@
     "originalPrice": 129,
     "description": "Understand AI concepts, neural networks, and practical applications.",
     "image": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800",
-    "category": "Development"
+    "category": "Cloud"
   }
 ]
