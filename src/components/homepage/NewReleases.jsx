@@ -1,182 +1,198 @@
 "use client";
+
 import Link from "next/link";
-import React from "react";
-import { FaArrowRight, FaStar, FaRegStar, FaStarHalfAlt } from "react-icons/fa";
-import { Card } from "@heroui/react";
-import { IoSparklesSharp } from "react-icons/io5";
 import Image from "next/image";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
+
+import {
+  Clock3,
+  BookOpen,
+  Star,
+  Sparkles,
+  ArrowRight,
+} from "lucide-react";
+
+import { FaArrowRight } from "react-icons/fa";
+import { IoSparklesSharp } from "react-icons/io5";
 
 const containerVariants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.2,
+      staggerChildren: 0.12,
     },
   },
 };
+
 const cardVariants = {
   hidden: {
     opacity: 0,
-    y: 50,
+    y: 40,
   },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.5,
-      ease: "easeOut",
+      duration: 0.6,
     },
   },
 };
 
-const NewReleases = ({ courses }) => {
-// console.log(courses);
-
-  const topCourses = courses.reverse().slice(0, 4);
-  const renderStars = (rating) => {
-    const stars = [];
-
-    for (let i = 1; i <= 5; i++) {
-      if (rating >= i) {
-        stars.push(<FaStar key={i} className="text-yellow-400" />);
-      } else if (rating >= i - 0.5) {
-        stars.push(<FaStarHalfAlt key={i} className="text-yellow-400" />);
-      } else {
-        stars.push(<FaRegStar key={i} className="text-yellow-400" />);
-      }
-    }
-
-    return stars;
-  };
+const NewReleases = ({ courses = [] }) => {
+  const latestCourses = [...courses].reverse().slice(0, 4);
 
   return (
-    <div className=" container mx-auto my-20 space-y-10 px-3">
-      <motion.div
-        initial={{ opacity: 0, y: -30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="flex flex-col md:flex-row justify-center gap-5 md:justify-between items-center">
-      
-        <div className="flex items-center gap-3">
-          <motion.div
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2, type: "spring" }}
-            className="hidden sm:flex items-center justify-center p-3 bg-yellow-100 rounded-2xl"
-          >
-            <IoSparklesSharp className="w-7 h-7 text-yellow-500" />
-          </motion.div>
+    <section className="relative overflow-hidden py-24">
+      {/* Background Glow */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-10 top-10 h-72 w-72 rounded-full bg-yellow-500/10 blur-[120px]" />
+        <div className="absolute right-10 bottom-10 h-72 w-72 rounded-full bg-violet-500/10 blur-[120px]" />
+      </div>
 
-          <h2 className="text-3xl font-semibold text-gray-900">
-            New Releases
-          </h2>
-        </div>
-
+      <div className="container relative z-10 mx-auto px-4">
+        {/* Header */}
         <motion.div
-          whileHover={{ x: 5 }}
-          className="flex items-center gap-2 group cursor-pointer"
+          initial={{ opacity: 0, y: -25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-14 flex flex-col items-center justify-between gap-6 md:flex-row"
         >
+          <div className="flex items-center gap-4">
+            <div className="glass-card rounded-2xl p-4">
+              <IoSparklesSharp className="h-7 w-7 text-yellow-400" />
+            </div>
+
+            <div>
+              <span className="mb-2 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-yellow-400">
+                Fresh Content
+              </span>
+
+              <h2 className="text-3xl font-bold text-primary md:text-4xl">
+                New Releases
+              </h2>
+
+              <p className="mt-2 text-sm text-muted md:text-base">
+                Discover our newest courses and stay ahead of the curve.
+              </p>
+            </div>
+          </div>
+
           <Link
-            href={"/courses"}
-            className="text-main-gradient font-semibold transition-all duration-300 hover:opacity-80"
+            href="/courses"
+            className="group flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-3 backdrop-blur-xl transition-all duration-300 hover:border-yellow-500/40 hover:shadow-[0_0_30px_rgba(250,204,21,0.15)]"
           >
-            View all courses
+            <span className="font-semibold text-main-gradient">
+              View All Courses
+            </span>
+
+            <FaArrowRight className="text-yellow-400 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
-
-          <FaArrowRight className="text-[#2563eb] transition-transform duration-300 group-hover:translate-x-1" />
         </motion.div>
-      </motion.div>
-      
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        className="flex flex-col gap-10"
-      >
-        {topCourses.map((course) => (
-          <motion.div
-            key={course.id}
-            variants={cardVariants}
-            whileHover={{ y: -8, scale: 1.01 }}
-          >
-            <Card className="w-full items-stretch md:flex-row overflow-hidden">
-              <div className="relative h-35 w-full shrink-0 overflow-hidden rounded-2xl sm:h-30 sm:w-30">
-                <motion.div whileHover={{ scale: 1.08 }}>
+
+        {/* Courses */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid gap-6 lg:grid-cols-2"
+        >
+          {latestCourses.map((course) => (
+            <motion.div
+              key={course.id}
+              variants={cardVariants}
+              whileHover={{ y: -8 }}
+              className="group glass-card overflow-hidden rounded-3xl"
+            >
+              <div className="flex flex-col md:flex-row">
+                {/* Image */}
+                <div className="relative h-64 md:h-auto md:w-72 overflow-hidden">
                   <Image
-                    alt={course.name}
-                    className="pointer-events-none absolute inset-0 h-full w-full object-cover select-none"
-                    loading="lazy"
                     src={course.image}
-                    width={400}
-                    height={400}
+                    alt={course.title}
+                    fill
+                    className="object-cover transition duration-700 group-hover:scale-110"
                   />
-                </motion.div>
-              </div>
 
-              <div className="flex flex-1 flex-col gap-3">
-                <Card.Header className="gap-1">
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.1 }}
-                  >
-                    <Card.Title className="pr-8 pt-1 text-xl">
-                      {course.title}
-                    </Card.Title>
-                  </motion.div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.2 }}
-                  >
-                    <Card.Description>{course.description}</Card.Description>
-                  </motion.div>
-                </Card.Header>
-
-                <Card.Footer className="mt-auto flex w-full flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
-                  <motion.div
-                    initial={{ opacity: 0, y: 15 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3 }}
-                    className="flex flex-col"
-                  >
-                    <span className="text-sm font-medium text-foreground">
+                  <div className="absolute left-4 top-4">
+                    <span className="rounded-full border border-white/20 bg-black/30 px-3 py-1 text-xs font-medium text-white backdrop-blur-md">
                       {course.category}
                     </span>
+                  </div>
+                </div>
 
-                    <span className="text-xs text-muted flex items-center gap-2">
-                      {renderStars(course.rating)}
-                      <span className="ml-1 font-semibold">
-                        {course.rating}
-                      </span>
+                {/* Content */}
+                <div className="flex flex-1 flex-col p-6">
+                  {/* Rating */}
+                  <div className="mb-4 flex items-center gap-2">
+                    <Star
+                      size={16}
+                      className="fill-yellow-400 text-yellow-400"
+                    />
+
+                    <span className="font-semibold text-primary">
+                      {course.rating}
                     </span>
-                  </motion.div>
 
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Link href={`/courses/${course.id}`}>
-                      <button className="bg-main-gradient w-full cursor-pointer text-white px-4 py-2 rounded-full font-medium transition duration-300">
-                        View Details
-                      </button>
+                    <span className="text-muted text-sm">
+                      Course Rating
+                    </span>
+                  </div>
+
+                  <h3 className="text-2xl font-bold text-primary line-clamp-2">
+                    {course.title}
+                  </h3>
+
+                  <p className="mt-3 line-clamp-3 text-muted">
+                    {course.description}
+                  </p>
+
+                  {/* Stats */}
+                  <div className="mt-6 flex flex-wrap gap-4">
+                    <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2">
+                      <BookOpen
+                        size={16}
+                        className="text-violet-400"
+                      />
+
+                      <span className="text-sm text-primary">
+                        {course.lessons || 20} Lessons
+                      </span>
+                    </div>
+
+                    <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2">
+                      <Clock3
+                        size={16}
+                        className="text-blue-400"
+                      />
+
+                      <span className="text-sm text-primary">
+                        {course.duration || "12 Hours"}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Footer */}
+                  <div className="mt-auto pt-6">
+                    <Link
+                      href={`/courses/${course.id}`}
+                      className="inline-flex items-center gap-2 rounded-xl bg-main-gradient px-5 py-3 font-medium text-white transition-all duration-300 hover:scale-105"
+                    >
+                      View Details
+
+                      <ArrowRight size={16} />
                     </Link>
-                  </motion.div>
-                </Card.Footer>
+                  </div>
+                </div>
               </div>
-            </Card>
-          </motion.div>
-        ))}
-      </motion.div>
-    </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
   );
 };
 
