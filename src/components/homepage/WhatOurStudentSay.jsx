@@ -1,17 +1,18 @@
-import { Avatar } from "@heroui/react";
+"use client";
+
 import React from "react";
-import {  FaQuoteLeft, FaStar } from "react-icons/fa";
+import { Avatar } from "@heroui/react";
+import { FaQuoteLeft, FaStar, FaCheckCircle } from "react-icons/fa";
+import Image from "next/image";
 
-
-
-const testimonial = [
+const testimonials = [
   {
     id: 1,
     name: "Jessica Miller",
     role: "Web Developer",
     rating: 5,
     image:
-      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=face",
+      "https://i.pinimg.com/736x/8b/46/d2/8b46d25ecd777e3a1e22829fa4f88eb1.jpg",
     review:
       "SkillSphere has completely transformed the way I learn. The courses are well-structured and the instructors are amazing!",
   },
@@ -39,49 +40,88 @@ const testimonial = [
 
 const WhatOurStudentSay = () => {
   return (
-    <div className="container mx-auto px-6 my-20">
-      <div className="flex items-center justify-center   mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 ">
-          What Our <span className="text-main-gradient ">Student Say</span>
-        </h2>
+    <section className="relative overflow-hidden py-24">
+      {/* Background Glow */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-10 top-10 h-72 w-72 rounded-full bg-violet-600/10 blur-[120px]" />
+        <div className="absolute right-10 bottom-10 h-72 w-72 rounded-full bg-blue-600/10 blur-[120px]" />
       </div>
 
-      <div className="grid  md:grid-cols-2 lg:grid-cols-3 gap-10">
-        {testimonial.map((test) => (
-          <div
-            key={test.id}
-            className=" bg-[#f5f8ff]  rounded-3xl p-8 border border-gray-100 group hover:border-gray-200  hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
-          >
-            <div className="flex items-center gap-5">
-              <FaQuoteLeft className="text-4xl text-[#7ca6ff]" />
-              <div className=" text-orange-400 text-xl flex items-center gap-1">
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
+      <div className="container relative z-10 mx-auto px-4">
+        {/* Header */}
+        <div className="mb-14 text-center">
+          <span className="mb-3 inline-block rounded-full border border-violet-500/20 bg-violet-500/10 px-4 py-2 text-sm font-medium text-violet-400">
+            Testimonials
+          </span>
+
+          <h2 className="text-3xl font-bold text-primary md:text-5xl">
+            What Our Students Say
+          </h2>
+
+          <p className="mx-auto mt-4 max-w-2xl text-muted">
+            Discover how our courses have helped students build skills, advance
+            their careers, and achieve their goals.
+          </p>
+        </div>
+
+        {/* Cards */}
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {testimonials.map((test) => (
+            <div
+              key={test.id}
+              className="group relative overflow-hidden rounded-3xl glass-card border border-white/10 p-8 transition-all duration-300 hover:-translate-y-2 hover:border-violet-500/20 hover:shadow-[0_20px_60px_rgba(124,58,237,0.15)]"
+            >
+              {/* Quote Icon */}
+              <div className="absolute right-6 top-6 opacity-10">
+                <FaQuoteLeft className="text-7xl text-violet-500" />
               </div>
-            </div>
 
-            <p className="p-7  text-black/70 mb-3">{test.review}</p>
-
-            <div className="flex gap-3 items-center">
-              <Avatar>
-                <Avatar.Image alt={test.name} src={test.image} />
-                <Avatar.Fallback>JD</Avatar.Fallback>
-              </Avatar>
-
-              <div>
-                <p className="text-black/80 font-semibold text-lg  ">
-                  {test.name}
-                </p>
-                <p className="text-black/50   leading-relaxed ">{test.role}</p>
+              {/* Rating */}
+              <div className="mb-6 flex items-center gap-1">
+                {[...Array(test.rating)].map((_, index) => (
+                  <FaStar key={index} className="text-yellow-400" size={18} />
+                ))}
               </div>
+
+              {/* Review */}
+              <p className="mb-8 leading-relaxed text-secondary">
+                {`"${test.review}"`}
+              </p>
+
+              {/* User */}
+              <div className="flex items-center gap-4">
+                <div className="overflow-hidden rounded-full ring-2 ring-violet-500/20">
+                  <Image
+                    src={test.image}
+                    alt={test.name}
+                    width={56}
+                    height={56}
+                    className="h-14 w-14 object-cover"
+                  />
+                </div>
+
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h4 className="font-semibold text-primary">{test.name}</h4>
+
+                    <FaCheckCircle className="text-emerald-500" size={14} />
+                  </div>
+
+                  <p className="text-sm text-muted">{test.role}</p>
+
+                  <span className="mt-1 inline-block text-xs text-violet-400">
+                    Verified Student
+                  </span>
+                </div>
+              </div>
+
+              {/* Bottom Accent */}
+              <div className="absolute bottom-0 left-0 h-1 w-0 bg-main-gradient transition-all duration-500 group-hover:w-full" />
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
