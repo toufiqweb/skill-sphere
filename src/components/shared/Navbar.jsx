@@ -29,6 +29,9 @@ const Navbar = () => {
       <li>
         <MyNavLink href="/profile">Profile</MyNavLink>
       </li>
+      <li>
+        <MyNavLink href="/blogs">Blogs</MyNavLink>
+      </li>
     </>
   );
 

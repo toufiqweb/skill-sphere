@@ -45,7 +45,7 @@ const ProfilePage = () => {
   // Handle unauthenticated or missing user profiles gracefully
   if (error || !user) {
     return (
-      <div className="hero-bg min-h-screen flex items-center justify-center px-4">
+      <div className="hero-bg min-h-screen flex items-center justify-center  pt-28 lg:pt-36 px-4">
         <div className="glass-card max-w-md w-full rounded-3xl p-8 border border-[var(--glass-border)] text-center">
           <div className="w-14 h-14 bg-red-500/10 text-red-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
             <ShieldCheck className="w-7 h-7" />

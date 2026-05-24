@@ -50,10 +50,10 @@ const WhatOurStudentSay = () => {
             Testimonials
           </span>
 
-          <h2 className="text-3xl font-bold text-primary md:text-5xl">
-            What Our Students Say
+          <h2 className="text-3xl font-bold text-primary sm:text-4xl lg:text-6xl">
+            What Our
+            <span className="text-main-gradient"> Students </span> Say
           </h2>
-
           <p className="mx-auto mt-4 max-w-2xl text-muted">
             Discover how our courses have helped students build skills, advance
             their careers, and achieve their goals.
