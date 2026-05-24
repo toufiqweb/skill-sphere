@@ -59,7 +59,7 @@ const SignInPage = () => {
   };
 
   return (
-    <div className="hero-bg min-h-screen my-10 pt-28 lg:pt-36 flex items-center justify-center p-6 transition-colors duration-300">
+    <div className="hero-bg min-h-screen  pt-28 lg:pt-36 flex items-center justify-center p-6 transition-colors duration-300">
       <div className="w-full max-w-md">
         
         {/* Unified Glassmorphism Card Frame */}
