@@ -33,7 +33,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="fixed left-1/2 top-5 z-50 w-full max-w-7xl -translate-x-1/2 px-4 ">
+    <div className="fixed left-1/2 top-5 z-50 w-full container -translate-x-1/2 px-4 ">
       {/* Premium Light Capsule Container */}
       <div className="bg-(--glass-bg) p-4 backdrop-blur-xl  rounded-full border border-white/10 px-5 md:px-7 py-2.5 shadow-[0_10px_40px_rgba(124,58,237,0.08)] hover:shadow-[0_15px_50px_rgba(124,58,237,0.15)] transition-all duration-300">
         <nav className="flex items-center justify-between h-12">
@@ -62,7 +62,14 @@ const Navbar = () => {
               <div className="flex flex-col">
                 <h1 className="text-xl md:text-2xl font-black tracking-tight">
                   <span className="text-white">Skill</span>
-                  <span className="text-blue-500">Sphere</span>
+                  <span
+                    className="bg-clip-text text-transparent"
+                    style={{
+                      backgroundImage: "var(--gradient-text)",
+                    }}
+                  >
+                    Sphere
+                  </span>{" "}
                 </h1>
 
                 <span className="hidden lg:block text-[10px] uppercase tracking-[0.25em] text-violet-400">

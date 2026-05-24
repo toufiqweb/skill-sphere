@@ -21,10 +21,7 @@ const Footer = () => {
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="space-y-5">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-3"
-            >
+            <Link href="/" className="inline-flex items-center gap-3">
               <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-r from-violet-600 to-blue-500 text-white shadow-lg">
                 <GraduationCap size={20} />
               </div>
@@ -32,7 +29,14 @@ const Footer = () => {
               <div className="flex flex-col">
                 <h1 className="text-xl font-black tracking-tight">
                   <span className="text-primary">Skill</span>
-                  <span className="text-blue-500">Sphere</span>
+                  <span
+                    className="bg-clip-text text-transparent"
+                    style={{
+                      backgroundImage: "var(--gradient-text)",
+                    }}
+                  >
+                    Sphere
+                  </span>
                 </h1>
 
                 <span className="text-[10px] uppercase tracking-[0.25em] text-violet-400">
@@ -79,9 +83,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="mb-5 text-lg font-bold text-primary">
-              Quick Links
-            </h3>
+            <h3 className="mb-5 text-lg font-bold text-primary">Quick Links</h3>
 
             <ul className="space-y-3">
               {[
@@ -106,9 +108,7 @@ const Footer = () => {
 
           {/* Support */}
           <div>
-            <h3 className="mb-5 text-lg font-bold text-primary">
-              Support
-            </h3>
+            <h3 className="mb-5 text-lg font-bold text-primary">Support</h3>
 
             <ul className="space-y-3">
               {[
@@ -132,32 +132,22 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h3 className="mb-5 text-lg font-bold text-primary">
-              Contact Us
-            </h3>
+            <h3 className="mb-5 text-lg font-bold text-primary">Contact Us</h3>
 
             <div className="space-y-4">
               <div className="flex items-center gap-3 text-muted">
-                <Mail
-                  size={18}
-                  className="text-violet-400"
-                />
+                <Mail size={18} className="text-violet-400" />
                 <span>hello@skillsphere.com</span>
               </div>
 
               <div className="flex items-center gap-3 text-muted">
-                <Phone
-                  size={18}
-                  className="text-blue-400"
-                />
+                <Phone size={18} className="text-blue-400" />
                 <span>+123 456 7890</span>
               </div>
             </div>
 
             <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-4">
-              <p className="text-sm text-muted">
-                Need help choosing a course?
-              </p>
+              <p className="text-sm text-muted">Need help choosing a course?</p>
 
               <p className="mt-1 font-semibold text-primary">
                 We're here to help.
@@ -168,9 +158,7 @@ const Footer = () => {
 
         {/* Bottom */}
         <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-sm text-muted md:flex-row">
-          <p>
-            © 2026 SkillSphere. All rights reserved.
-          </p>
+          <p>© 2026 SkillSphere. All rights reserved.</p>
 
           <div className="flex gap-6">
             <Link

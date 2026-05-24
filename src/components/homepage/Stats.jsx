@@ -78,7 +78,7 @@ export default function Stats() {
         <div className="absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-fuchsia-500/10 blur-[160px]" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4">
+      <div className="relative z-10 mx-auto container px-4">
         {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}

@@ -103,7 +103,7 @@ export default function Banner() {
         }}
       />
 
-      <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl items-center px-6 py-20 lg:px-10">
+      <div className="relative z-10 mx-auto flex min-h-screen container items-center px-6 py-20 lg:px-10">
         <div className="grid w-full items-center gap-16 lg:grid-cols-2">
           {/* LEFT */}
           <motion.div
