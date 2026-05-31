@@ -49,7 +49,7 @@ const float = (delay = 0, distance = 8) => ({
 
 export default function Banner() {
   return (
-    <section className="relative min-h-screen w-full overflow-hidden bg-[#060419] px-4 py-10 flex items-center">
+    <section className="relative min-h-screen w-full overflow-hidden bg-[#060419] px-4 py-20 flex items-center">
       {/* Dynamic Background Glows matching reference asset color weight */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute top-[-10%] left-[-10%] h-[600px] w-[600px] rounded-full bg-violet-900/20 blur-[140px]" />
