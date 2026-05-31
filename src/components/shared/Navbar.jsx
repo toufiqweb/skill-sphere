@@ -7,7 +7,7 @@ import Image from "next/image";
 import MyNavLink from "../ui/MyNavLink";
 import Link from "next/link";
 import { Avatar } from "@heroui/react";
-import { Menu, X, LogOut, Search } from "lucide-react";
+import { Menu, X, LogOut, Search, GraduationCap } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
 
 const Navbar = () => {
@@ -57,10 +57,10 @@ const Navbar = () => {
               href="/"
               className="flex items-center gap-2.5 active:scale-98 transition-transform"
             >
-              <div className="relative h-7 w-7 flex items-center justify-center rounded-lg bg-gradient-to-br from-violet-600 to-indigo-600 text-white shadow-md shadow-violet-600/20">
-                {/* Fallback styling for SkillSphere branding vector icon structure */}
-                <div className="h-3 w-3 rounded-full border-2 border-white" />
+               <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-[#5643ff] to-[#4332eb] text-white shadow-md">
+                <GraduationCap size={18} />
               </div>
+
 
               <div className="flex flex-col">
                 <h1 className="text-xl font-bold tracking-tight text-white flex items-center gap-0.5">

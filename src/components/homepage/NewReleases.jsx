@@ -4,15 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-import {
-  Clock3,
-  BookOpen,
-  Star,
-  Sparkles,
-  ArrowRight,
-} from "lucide-react";
+import { Clock3, BookOpen, Star, ArrowRight } from "lucide-react";
 
-import { FaArrowRight } from "react-icons/fa";
 import { IoSparklesSharp } from "react-icons/io5";
 
 const containerVariants = {
@@ -27,48 +20,48 @@ const containerVariants = {
 const cardVariants = {
   hidden: {
     opacity: 0,
-    y: 40,
+    y: 30,
   },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.6,
+      duration: 0.5,
+      ease: "easeOut",
     },
   },
 };
 
 const NewReleases = ({ courses = [] }) => {
+  // Pulling the top 4 latest items to build out the template matrix
   const latestCourses = [...courses].reverse().slice(0, 4);
 
   return (
-    <section className="relative overflow-hidden py-24">
+    <section className="relative overflow-hidden bg-[#060419] py-20 lg:py-24">
+      {/* Background Soft Glow Layer */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute top-20 left-12 h-[300px] w-[300px] rounded-full bg-violet-600/10 blur-[120px]" />
+      </div>
 
-
-      <div className="container relative z-10 mx-auto px-4">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: -25 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-14 flex flex-col items-center justify-between gap-6 md:flex-row"
-        >
-          <div className="flex items-center gap-4">
-            <div className="glass-card rounded-2xl p-4">
-              <IoSparklesSharp className="h-7 w-7 text-yellow-400" />
+      <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Header Block matching ChatGPT Image May 31, 2026, 04_46_30 PM.png */}
+        <div className="mb-12 flex flex-col justify-between items-start md:flex-row md:items-center gap-6">
+          <div className="flex items-start gap-4">
+            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-[#0d0a2d]/60 text-violet-400 shadow-[0_0_20px_rgba(86,67,255,0.15)]">
+              <IoSparklesSharp size={22} className="text-violet-400" />
             </div>
 
-            <div>
-              <span className="mb-2 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-yellow-400">
-                Fresh Content
+            <div className="space-y-1">
+              <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-violet-400 block">
+                FRESH CONTENT
               </span>
-
-              <h2 className="text-3xl font-bold text-primary md:text-4xl">
-                New Releases
+              <h2 className="text-3xl font-black tracking-tight text-white sm:text-4xl">
+                New{" "}
+                <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
+                  Releases
+                </span>
               </h2>
-
-              <p className="mt-2 text-sm text-muted md:text-base">
+              <p className="text-xs sm:text-sm text-slate-400 font-medium">
                 Discover our newest courses and stay ahead of the curve.
               </p>
             </div>
@@ -76,110 +69,103 @@ const NewReleases = ({ courses = [] }) => {
 
           <Link
             href="/courses"
-            className="group flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-3 backdrop-blur-xl transition-all duration-300 hover:border-yellow-500/40 hover:shadow-[0_0_30px_rgba(250,204,21,0.15)]"
+            className="group inline-flex items-center gap-2 rounded-full border border-violet-500/30 bg-[#0d0a2d]/40 px-5 py-2 text-xs font-semibold text-slate-200 backdrop-blur-md transition-all duration-300 hover:border-violet-500 hover:text-white hover:shadow-[0_0_15px_rgba(86,67,255,0.2)]"
           >
-            <span className="font-semibold text-main-gradient">
-              View All Courses
-            </span>
-
-            <FaArrowRight className="text-yellow-400 transition-transform duration-300 group-hover:translate-x-1" />
+            <span>View All Courses</span>
+            <ArrowRight
+              size={13}
+              className="text-violet-400 transition-transform duration-300 group-hover:translate-x-1"
+            />
           </Link>
-        </motion.div>
+        </div>
 
-        {/* Courses */}
+        {/* 2-Column Responsive Card Layout */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-50px" }}
           className="grid gap-6 lg:grid-cols-2"
         >
           {latestCourses.map((course) => (
             <motion.div
               key={course.id}
               variants={cardVariants}
-              whileHover={{ y: -8 }}
-              className="group glass-card overflow-hidden rounded-3xl"
+              className="group relative overflow-hidden rounded-3xl border border-white/5 bg-[#08061f]/60 transition-all duration-300 hover:border-violet-500/30 hover:bg-[#0c092b]/80"
             >
-              <div className="flex flex-col md:flex-row">
-                {/* Image */}
-                <div className="relative h-64 md:h-auto md:w-72 overflow-hidden">
+              <div className="flex flex-col sm:flex-row h-full">
+                {/* Left Side Thumbnail Image Layout */}
+                <div className="relative h-56 sm:h-auto sm:w-[42%] min-h-[240px] overflow-hidden shrink-0">
                   <Image
-                    src={course.image}
+                    src={course.image || "/placeholder-course.png"}
                     alt={course.title}
                     fill
-                    className="object-cover transition duration-700 group-hover:scale-110"
+                    className="object-cover transition duration-500 group-hover:scale-105"
                   />
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                  {/* Overlay Gradient Vignette */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-[#08061f]/40" />
 
+                  {/* Top-Left Absolute Position Floating Category Badge */}
                   <div className="absolute left-4 top-4">
-                    <span className="rounded-full border border-white/20 bg-black/30 px-3 py-1 text-xs font-medium text-white backdrop-blur-md">
-                      {course.category}
+                    <span className="rounded-xl border border-violet-400/20 bg-[#5643ff]/20 px-3 py-1 text-[10px] font-bold tracking-wide text-violet-200 backdrop-blur-md">
+                      {course.category || "Development"}
                     </span>
                   </div>
                 </div>
 
-                {/* Content */}
-                <div className="flex flex-1 flex-col p-6">
-                  {/* Rating */}
-                  <div className="mb-4 flex items-center gap-2">
-                    <Star
-                      size={16}
-                      className="fill-yellow-400 text-yellow-400"
-                    />
-
-                    <span className="font-semibold text-primary">
-                      {course.rating}
-                    </span>
-
-                    <span className="text-muted text-sm">
-                      Course Rating
-                    </span>
-                  </div>
-
-                  <h3 className="text-2xl font-bold text-primary line-clamp-2">
-                    {course.title}
-                  </h3>
-
-                  <p className="mt-3 line-clamp-3 text-muted">
-                    {course.description}
-                  </p>
-
-                  {/* Stats */}
-                  <div className="mt-6 flex flex-wrap gap-4">
-                    <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2">
-                      <BookOpen
-                        size={16}
-                        className="text-violet-400"
+                {/* Right Side Typography & Stats Body */}
+                <div className="flex flex-1 flex-col p-6 justify-between space-y-4">
+                  <div className="space-y-2.5">
+                    {/* Course Global Scoring Flag */}
+                    <div className="flex items-center gap-1.5 text-[11px] font-medium text-slate-400">
+                      <Star
+                        size={12}
+                        className="fill-amber-400 text-amber-400"
                       />
-
-                      <span className="text-sm text-primary">
-                        {course.lessons || 20} Lessons
+                      <span className="font-bold text-slate-200">
+                        {course.rating || "4.8"}
                       </span>
+                      <span className="text-slate-500">Course Rating</span>
                     </div>
 
-                    <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2">
-                      <Clock3
-                        size={16}
-                        className="text-blue-400"
-                      />
+                    {/* Content Title Header */}
+                    <h3 className="text-lg font-black tracking-tight text-white leading-snug line-clamp-2">
+                      {course.title}
+                    </h3>
 
-                      <span className="text-sm text-primary">
-                        {course.duration || "12 Hours"}
-                      </span>
+                    {/* Excerpt Body Block */}
+                    <p className="text-xs font-medium leading-relaxed text-slate-400 line-clamp-2">
+                      {course.description ||
+                        "Master these concepts, strategies, and industry standard execution practices."}
+                    </p>
+
+                    {/* Horizontally Arranged Micro Metadata Tag Pills */}
+                    <div className="flex flex-wrap gap-2 pt-1.5">
+                      <div className="flex items-center gap-1.5 rounded-lg border border-white/5 bg-[#030214]/60 px-3 py-1.5">
+                        <BookOpen size={12} className="text-violet-400" />
+                        <span className="text-[10px] font-bold text-slate-300 tracking-wide">
+                          {course.lessons || 20} Lessons
+                        </span>
+                      </div>
+
+                      <div className="flex items-center gap-1.5 rounded-lg border border-white/5 bg-[#030214]/60 px-3 py-1.5">
+                        <Clock3 size={12} className="text-violet-400" />
+                        <span className="text-[10px] font-bold text-slate-300 tracking-wide">
+                          {course.duration || "12 hours"}
+                        </span>
+                      </div>
                     </div>
                   </div>
 
-                  {/* Footer */}
-                  <div className="mt-auto pt-6">
+                  {/* Actions / CTA Trigger Strip */}
+                  <div className="pt-2">
                     <Link
                       href={`/courses/${course.id}`}
-                      className="inline-flex items-center gap-2 rounded-xl bg-main-gradient px-5 py-3 font-medium text-white transition-all duration-300 hover:scale-105"
+                      className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#5643ff] px-5 py-2.5 text-xs font-bold text-white transition-all duration-300 hover:bg-[#4332eb] hover:shadow-[0_4px_20px_rgba(86,67,255,0.3)]"
                     >
-                      View Details
-
-                      <ArrowRight size={16} />
+                      <span>View Details</span>
+                      <ArrowRight size={13} />
                     </Link>
                   </div>
                 </div>
