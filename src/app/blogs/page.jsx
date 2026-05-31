@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -59,22 +61,29 @@ const BlogPage = () => {
   const regularPosts = MOCK_POSTS.slice(1);
 
   return (
-    <div className="hero-bg min-h-screen py-12 pt-28 lg:pt-36 px-4 transition-colors duration-300">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+    <div className="relative min-h-screen bg-[#05041a] py-12 pt-28 lg:pt-36 px-4 transition-colors duration-300 overflow-hidden">
+      
+      {/* Background Graphic Curves & Neon Spot Highlights */}
+      <div className="pointer-events-none absolute inset-0 z-0">
+        <div className="absolute top-1/4 left-[-10%] w-[600px] h-[600px] bg-indigo-600/5 rounded-full blur-[140px]" />
+        <div className="absolute bottom-1/4 right-[-10%] w-[500px] h-[500px] bg-purple-600/5 rounded-full blur-[140px]" />
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 space-y-12 max-w-7xl relative z-10">
         
         {/* =========================================================
             SECTION 1: Dynamic Page Header Context
             ========================================================= */}
         <div className="text-center max-w-2xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[var(--glass-border)] bg-[var(--card-bg)]/30 text-xs font-bold tracking-widest uppercase text-[var(--brand-purple)]">
-            <BookOpen className="w-3.5 h-3.5" /> Platform Knowledge Base
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-xs font-bold tracking-wider uppercase text-purple-300 shadow-[0_0_15px_rgba(168,85,247,0.1)]">
+            <BookOpen className="w-3.5 h-3.5 text-[#8b7eff]" /> Platform Knowledge Base
           </div>
 
-          <h2 className="text-3xl font-bold text-primary sm:text-4xl lg:text-6xl tracking-tight">
+          <h2 className="text-3xl font-black text-white sm:text-4xl lg:text-6xl tracking-tight leading-tight">
             Insights, Tutorials &
-            <span className="text-main-gradient"> Structural Guides</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#5643ff] to-[#8b7eff]"> Structural Guides</span>
           </h2>
-          <p className="text-muted text-sm sm:text-base leading-relaxed">
+          <p className="text-slate-400 text-xs sm:text-sm font-medium leading-relaxed max-w-xl mx-auto">
             Stay synchronous with newly deployed technological parameters, learning methodologies, and advanced web development patterns.
           </p>
         </div>
@@ -83,53 +92,53 @@ const BlogPage = () => {
             SECTION 2: Featured Showcase Blueprint (Hero Layout)
             ========================================================= */}
         {featuredPost && (
-          <div className="glass-card rounded-3xl border border-[var(--glass-border)] overflow-hidden shadow-xl grid lg:grid-cols-12 items-center gap-0 group">
+          <div className="bg-[#0b0826]/60 backdrop-blur-2xl rounded-[32px] border border-white/5 overflow-hidden shadow-[0_24px_60px_rgba(0,0,0,0.4)] grid lg:grid-cols-12 items-center gap-0 group">
             
             {/* Featured Image Frame */}
-            <div className="lg:col-span-7 h-64 sm:h-96 w-full relative overflow-hidden bg-[var(--card-bg)]/40">
-              <div className="absolute inset-0 bg-main-gradient opacity-10 mix-blend-overlay z-10 pointer-events-none" />
+            <div className="lg:col-span-7 h-64 sm:h-96 w-full relative overflow-hidden bg-[#06041a]/60">
+              <div className="absolute inset-0 bg-gradient-to-t from-[#05041a] via-transparent to-transparent opacity-60 z-10 pointer-events-none" />
               <Image
                 src={featuredPost.image}
                 alt={featuredPost.title}
                 fill
                 unoptimized
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                 priority
               />
             </div>
 
             {/* Featured Card Content */}
-            <div className="lg:col-span-5 p-8 sm:p-10 space-y-4">
-              <span className="inline-block px-3 py-1 rounded-xl bg-[var(--brand-purple)]/10 text-[var(--brand-purple)] font-bold text-xs uppercase tracking-wide">
+            <div className="lg:col-span-5 p-8 sm:p-10 space-y-5">
+              <span className="inline-block px-3 py-1 rounded-xl bg-purple-500/10 border border-purple-500/20 text-[#8b7eff] font-bold text-[11px] uppercase tracking-wider">
                 {featuredPost.category}
               </span>
-              <h2 className="text-2xl sm:text-3xl font-black text-primary tracking-tight leading-tight group-hover:text-[var(--brand-purple)] transition-colors">
+              <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight leading-tight group-hover:text-[#8b7eff] transition-colors duration-200">
                 <Link href={`/blog/${featuredPost.id}`}>
                   {featuredPost.title}
                 </Link>
               </h2>
-              <p className="text-secondary text-sm leading-relaxed">
+              <p className="text-slate-400 text-xs sm:text-sm font-medium leading-relaxed">
                 {featuredPost.excerpt}
               </p>
 
-              <div className="flex items-center gap-4 text-xs text-muted pt-2 border-t border-[var(--glass-border)]">
-                <span className="flex items-center gap-1 font-semibold">
-                  <User className="w-3.5 h-3.5" /> {featuredPost.author}
+              <div className="flex items-center gap-4 text-[11px] text-slate-500 pt-3 border-t border-white/5">
+                <span className="flex items-center gap-1 font-bold text-slate-400">
+                  <User className="w-3.5 h-3.5 text-indigo-400" /> {featuredPost.author}
                 </span>
-                <span className="flex items-center gap-1">
+                <span className="flex items-center gap-1 font-semibold">
                   <Calendar className="w-3.5 h-3.5" /> {featuredPost.date}
                 </span>
-                <span className="flex items-center gap-1">
+                <span className="flex items-center gap-1 font-semibold">
                   <Clock className="w-3.5 h-3.5" /> {featuredPost.readTime}
                 </span>
               </div>
 
-              <div className="pt-4">
+              <div className="pt-2">
                 <Link
                   href={`/blog/${featuredPost.id}`}
-                  className="bg-main-gradient text-white px-5 py-3 rounded-xl text-xs font-bold uppercase tracking-wider inline-flex items-center gap-2 shadow-md hover:translate-y-[-1px] transition-all"
+                  className="bg-gradient-to-r from-[#5643ff] to-[#6d5dfc] text-white px-5 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider inline-flex items-center gap-2 shadow-md shadow-indigo-600/10 hover:brightness-110 hover:scale-[1.02] transition-all duration-200"
                 >
-                  Read Featured Article <ArrowRight className="w-3.5 h-3.5" />
+                  <span>Read Featured Article</span> <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
             </div>
@@ -146,47 +155,48 @@ const BlogPage = () => {
             {regularPosts.map((post) => (
               <div
                 key={post.id}
-                className="glass-card rounded-3xl border border-[var(--glass-border)] overflow-hidden shadow-md flex flex-col justify-between group hover:shadow-lg transition-all"
+                className="bg-[#0b0826]/60 backdrop-blur-2xl rounded-[28px] border border-white/5 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.3)] flex flex-col justify-between group hover:shadow-[0_0_30px_rgba(109,93,252,0.15)] transition-all duration-300"
               >
                 <div>
                   {/* Article Stream Image Box */}
-                  <div className="h-48 w-full relative overflow-hidden bg-[var(--card-bg)]/40">
+                  <div className="h-48 w-full relative overflow-hidden bg-[#06041a]/60">
                     <Image
                       src={post.image}
                       alt={post.title}
                       fill
                       unoptimized
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0b0826] via-transparent to-transparent opacity-40" />
                   </div>
                   
                   <div className="p-6 space-y-3">
-                    <span className="text-[11px] font-extrabold tracking-wider uppercase text-[var(--brand-indigo)]">
+                    <span className="text-[10px] font-black tracking-wider uppercase text-purple-400">
                       {post.category}
                     </span>
-                    <h3 className="text-lg font-bold text-primary tracking-tight leading-snug group-hover:text-[var(--brand-purple)] transition-colors">
+                    <h3 className="text-base sm:text-17px font-black text-white tracking-tight leading-snug group-hover:text-[#8b7eff] transition-colors duration-200">
                       <Link href={`/blog/${post.id}`}>{post.title}</Link>
                     </h3>
-                    <p className="text-secondary text-xs sm:text-sm line-clamp-3 leading-relaxed">
+                    <p className="text-slate-400 text-xs font-medium line-clamp-3 leading-relaxed">
                       {post.excerpt}
                     </p>
                   </div>
                 </div>
 
                 <div className="p-6 pt-0 mt-auto">
-                  <div className="flex items-center justify-between text-[11px] text-muted pb-4 border-b border-[var(--glass-border)]">
-                    <span className="flex items-center gap-1">
-                      <User className="w-3.5 h-3.5" /> {post.author}
+                  <div className="flex items-center justify-between text-[11px] text-slate-500 pb-4 border-b border-white/5">
+                    <span className="flex items-center gap-1 font-bold text-slate-400">
+                      <User className="w-3.5 h-3.5 text-indigo-400" /> {post.author}
                     </span>
-                    <span className="flex items-center gap-1">
+                    <span className="flex items-center gap-1 font-semibold">
                       <Clock className="w-3.5 h-3.5" /> {post.readTime}
                     </span>
                   </div>
                   <Link
                     href={`/blog/${post.id}`}
-                    className="inline-flex items-center gap-1 text-xs font-bold text-[var(--brand-purple)] pt-4 tracking-wide uppercase group-hover:gap-2 transition-all"
+                    className="inline-flex items-center gap-1 text-xs font-bold text-[#8b7eff] pt-4 tracking-wide uppercase group-hover:gap-2 transition-all"
                   >
-                    Explore Article <ChevronRight className="w-3.5 h-3.5" />
+                    <span>Explore Article</span> <ChevronRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
               </div>
@@ -197,35 +207,35 @@ const BlogPage = () => {
           <div className="lg:col-span-4 space-y-6">
             
             {/* Widget 1: Search */}
-            <div className="glass-card rounded-3xl p-6 border border-[var(--glass-border)] space-y-3">
-              <h4 className="text-sm font-black text-primary tracking-wider uppercase flex items-center gap-2">
-                <Search className="w-4 h-4 text-[var(--brand-purple)]" /> Search Articles
+            <div className="bg-[#0b0826]/60 backdrop-blur-2xl rounded-3xl p-6 border border-white/5 space-y-4">
+              <h4 className="text-xs font-black text-white tracking-widest uppercase flex items-center gap-2">
+                <Search className="w-4 h-4 text-[#8b7eff]" /> Search Articles
               </h4>
               <div className="relative">
                 <input
                   type="text"
                   placeholder="Query key concepts..."
-                  className="w-full pl-4 pr-10 py-3 rounded-xl bg-[var(--card-bg)] border border-[var(--glass-border)] text-primary placeholder:text-muted focus:border-[var(--brand-purple)] focus:ring-2 focus:ring-[var(--brand-purple)]/10 outline-none transition-all text-xs"
+                  className="w-full pl-4 pr-10 py-3.5 rounded-xl bg-[#06041a]/60 border border-white/5 text-xs text-white placeholder:text-slate-600 focus:border-indigo-500 focus:bg-[#06041a] outline-none transition-all duration-200"
                 />
-                <Search className="w-4 h-4 text-muted absolute right-3.5 top-3.5" />
+                <Search className="w-4 h-4 text-slate-600 absolute right-3.5 top-1/2 -translate-y-1/2" />
               </div>
             </div>
 
             {/* Widget 2: Categories */}
-            <div className="glass-card rounded-3xl p-6 border border-[var(--glass-border)] space-y-4">
-              <h4 className="text-sm font-black text-primary tracking-wider uppercase flex items-center gap-2">
-                <TrendingUp className="w-4 h-4 text-[var(--brand-indigo)]" /> Taxonomy Categories
+            <div className="bg-[#0b0826]/60 backdrop-blur-2xl rounded-3xl p-6 border border-white/5 space-y-4">
+              <h4 className="text-xs font-black text-white tracking-widest uppercase flex items-center gap-2">
+                <TrendingUp className="w-4 h-4 text-indigo-400" /> Taxonomy Categories
               </h4>
               <div className="space-y-2">
                 {MOCK_CATEGORIES.map((category, index) => (
                   <div
                     key={index}
-                    className="flex items-center justify-between p-3 rounded-xl border border-[var(--glass-border)] bg-[var(--card-bg)]/40 hover:bg-[var(--glass-border)] transition-colors cursor-pointer group"
+                    className="flex items-center justify-between p-3 rounded-xl border border-white/5 bg-[#06041a]/30 hover:bg-white/5 transition-all duration-200 cursor-pointer group active:scale-[0.99]"
                   >
-                    <span className="text-xs font-bold text-secondary group-hover:text-primary transition-colors">
+                    <span className="text-xs font-bold text-slate-400 group-hover:text-white transition-colors">
                       {category.name}
                     </span>
-                    <span className="text-[10px] font-black px-2 py-0.5 rounded-md bg-[var(--card-bg)] border border-[var(--glass-border)] text-muted">
+                    <span className="text-[10px] font-black px-2 py-0.5 rounded-md bg-[#05041a] border border-white/5 text-slate-500">
                       {category.count}
                     </span>
                   </div>
@@ -234,15 +244,15 @@ const BlogPage = () => {
             </div>
 
             {/* Widget 3: Newsletter */}
-            <div className="glass-card rounded-3xl p-6 border border-[var(--glass-border)] bg-gradient-to-b from-[var(--card-bg)]/40 to-[var(--brand-purple)]/5 relative overflow-hidden space-y-4">
-              <div className="w-8 h-8 rounded-xl bg-[var(--brand-purple)]/10 text-[var(--brand-purple)] flex items-center justify-center">
+            <div className="bg-[#0b0826]/60 backdrop-blur-2xl rounded-3xl p-6 border border-white/5 bg-gradient-to-b from-[#0b0826]/60 to-purple-600/5 relative overflow-hidden space-y-4">
+              <div className="w-8 h-8 rounded-xl bg-purple-500/10 border border-purple-500/20 text-[#8b7eff] flex items-center justify-center">
                 <Mail className="w-4 h-4" />
               </div>
               <div className="space-y-1">
-                <h4 className="text-sm font-black text-primary tracking-tight">
+                <h4 className="text-sm font-black text-white tracking-tight">
                   Join the Engineering Dispatch
                 </h4>
-                <p className="text-muted text-xs leading-relaxed">
+                <p className="text-slate-400 text-xs font-medium leading-relaxed">
                   Get compiled core architecture updates delivered directly to your profile workspace inbox.
                 </p>
               </div>
@@ -250,10 +260,10 @@ const BlogPage = () => {
                 <input
                   type="email"
                   placeholder="secure@email.com"
-                  className="w-full px-4 py-3 rounded-xl bg-[var(--card-bg)] border border-[var(--glass-border)] text-primary placeholder:text-muted focus:border-[var(--brand-purple)] focus:ring-2 focus:ring-[var(--brand-purple)]/10 outline-none transition-all text-xs"
+                  className="w-full px-4 py-3.5 rounded-xl bg-[#06041a]/60 border border-white/5 text-xs text-white placeholder:text-slate-600 focus:border-purple-500 focus:bg-[#06041a] outline-none transition-all duration-200"
                   required
                 />
-                <button className="w-full bg-main-gradient text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider transition-all shadow-md cursor-pointer">
+                <button className="w-full bg-gradient-to-r from-[#5643ff] to-[#6d5dfc] text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider transition-all duration-200 shadow-md shadow-indigo-600/10 hover:brightness-110 cursor-pointer active:scale-[0.99]">
                   Subscribe Setup
                 </button>
               </div>

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
-import { Mail, Lock, ShieldAlert, LogIn, ArrowRight } from "lucide-react";
+import { Mail, Lock, ShieldCheck, LogIn, ArrowRight, GraduationCap, Eye, Paperclip, UserPlus } from "lucide-react";
 
 const SignInPage = () => {
   const router = useRouter();
@@ -59,103 +59,148 @@ const SignInPage = () => {
   };
 
   return (
-    <div className="hero-bg min-h-screen  pt-28 lg:pt-36 flex items-center justify-center p-6 transition-colors duration-300">
-      <div className="w-full max-w-md">
+    <div className="relative min-h-screen bg-[#05041a] pt-32 pb-16 flex flex-col items-center justify-center p-4 overflow-hidden">
+      
+      {/* Background Graphic Curves & Neon Spot Highlights */}
+      <div className="pointer-events-none absolute inset-0 z-0">
+        <div className="absolute top-1/4 left-[-10%] w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[140px]" />
+        <div className="absolute bottom-1/4 right-[-10%] w-[500px] h-[500px] bg-purple-600/5 rounded-full blur-[140px]" />
         
-        {/* Unified Glassmorphism Card Frame */}
-        <div className="glass-card rounded-3xl border border-[var(--glass-border)] overflow-hidden shadow-2xl">
+        {/* Subtle decorative background stars */}
+        <span className="absolute top-1/3 left-24 text-indigo-400/20 font-serif text-xl select-none">✦</span>
+        <span className="absolute bottom-1/3 right-20 text-purple-400/20 font-serif text-2xl select-none">✦</span>
+      </div>
+
+      {/* Top-Left Platform Brand Identity Logo Block */}
+      <div className="absolute top-8 left-6 md:left-12 z-20 flex items-center gap-2.5 select-none">
+        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-600 text-white shadow-lg shadow-indigo-600/20">
+          <Paperclip size={18} className="hidden" /> {/* Structural backup reference */}
+          <GraduationCap size={18} />
+        </div>
+        <div className="flex flex-col">
+          <h1 className="text-base font-black tracking-tight text-white leading-none">
+            Skill<span className="text-slate-400 font-semibold">Sphere</span>
+          </h1>
+          <span className="text-[7px] uppercase tracking-[0.25em] text-slate-500 font-bold mt-0.5">
+            Learn • Grow • Succeed
+          </span>
+        </div>
+      </div>
+
+      {/* Main Form Structural Layout Frame */}
+      <div className="w-full max-w-[480px] relative z-10 mt-6">
+        
+        {/* Floating Top Header Circular Icon Accent Node */}
+        <div className="absolute -top-10 left-1/2 -translate-x-1/2 z-20 flex h-20 w-20 items-center justify-center rounded-full border border-purple-500/30 bg-[#0d092d] text-purple-300 shadow-[0_0_30px_rgba(109,93,252,0.25)]">
+          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-b from-[#6d5dfc]/20 to-transparent">
+            <UserPlus size={22} className="text-[#8b7eff]" />
+          </div>
+        </div>
+
+        {/* Main Card Component Box Framework */}
+        <div className="bg-[#0b0826]/60 backdrop-blur-2xl rounded-[32px] border border-white/5 pt-16 pb-2 overflow-hidden shadow-[0_24px_60px_rgba(0,0,0,0.4)]">
           
-          {/* Header Top Title Section */}
-          <div className="bg-main-gradient px-8 py-10 text-white relative">
-            {/* Soft decorative blur circle inside header area */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl pointer-events-none" />
-            
-            <h2 className="text-3xl font-black text-center tracking-tight">
-              Login to Your Account
+          {/* Main Integrated Header Typography Group */}
+          <div className="px-8 mb-8 text-center">
+            <h2 className="text-2xl font-black text-white tracking-tight sm:text-3xl">
+              Welcome <span className="text-[#8b7eff]">Back</span>
             </h2>
-            <p className="text-white/80 text-center text-sm font-medium mt-2 max-w-xs mx-auto">
-              Welcome back! Sign in to continue your learning journey
+            <p className="text-slate-400 text-xs sm:text-sm font-medium mt-2.5">
+              Sign in to continue your learning journey
             </p>
           </div>
 
-          {/* Social Access Segment Area */}
-          <div className="p-8 pb-0 space-y-6">
+          {/* Social OAuth Integration Interface Link */}
+          <div className="px-8 space-y-6">
             <button
+              type="button"
               onClick={handleGoogleLogin}
-              className="w-full flex items-center justify-center gap-3 border border-[var(--glass-border)] bg-[var(--card-bg)] hover:bg-[var(--glass-border)] text-primary font-bold py-3.5 rounded-2xl text-sm transition-all duration-200 active:scale-[0.99] cursor-pointer"
+              className="w-full flex items-center justify-center gap-3 border border-white/5 bg-[#07051a]/50 hover:bg-white/5 text-slate-200 font-bold py-3.5 rounded-xl text-xs sm:text-sm transition-all duration-200 cursor-pointer"
             >
-              <FcGoogle className="text-2xl shrink-0" />
+              <FcGoogle className="text-lg shrink-0" />
               <span>Continue with Google</span>
             </button>
 
-            {/* Premium Cross-Section Divider */}
-            <div className="relative flex items-center justify-center my-4">
-              <div className="border-t border-[var(--glass-border)] w-full"></div>
-              <span className="absolute bg-[var(--background)] px-4 text-xs font-bold tracking-widest text-muted">
+            {/* Symmetric Midsection Text Separator Module */}
+            <div className="relative flex items-center justify-center py-2">
+              <div className="border-t border-white/5 w-full"></div>
+              <span className="absolute bg-[#0b0826] px-3 py-0.5 rounded-md border border-white/5 text-[9px] font-black tracking-widest text-slate-500 uppercase">
                 OR
               </span>
             </div>
           </div>
 
-          {/* Core Interactive Identification Inputs Form */}
-          <form onSubmit={onSubmit} className="px-8 pb-8 space-y-5">
+          {/* Form Action Handling Module Interface Section */}
+          <form onSubmit={onSubmit} className="px-8 space-y-5">
             
-            {/* Email Address Input Workspace */}
+            {/* Input Block: Electronic Mailing Address Field */}
             <div className="space-y-2">
-              <label className="text-sm font-bold text-primary flex items-center gap-2">
-                <Mail className="w-4 h-4 text-[var(--brand-purple)]" />
+              <label className="text-xs font-bold text-slate-300 flex items-center gap-2 tracking-wide">
+                <Mail size={13} className="text-indigo-400" />
                 Email Address
               </label>
               <input
                 type="email"
                 name="email"
-                placeholder="Enter your email"
-                className="w-full px-4 py-3.5 rounded-2xl bg-[var(--card-bg)] border border-[var(--glass-border)] text-primary placeholder:text-muted focus:border-[var(--brand-purple)] focus:ring-2 focus:ring-[var(--brand-purple)]/20 outline-none transition-all text-sm"
+                placeholder="john@example.com"
+                className="w-full px-4 py-3.5 rounded-xl bg-[#06041a]/60 border border-white/5 text-sm text-white placeholder:text-slate-600 focus:border-indigo-500 focus:bg-[#06041a] outline-none transition-all duration-200"
                 required
               />
             </div>
 
-            {/* Password Input Workspace */}
+            {/* Input Block: Secure Cipher Cryptographic Password Field */}
             <div className="space-y-2">
-              <label className="text-sm font-bold text-primary flex items-center gap-2">
-                <Lock className="w-4 h-4 text-[var(--brand-indigo)]" />
-                Password
-              </label>
-              <input
-                type="password"
-                name="password"
-                placeholder="Enter your password"
-                className="w-full px-4 py-3.5 rounded-2xl bg-[var(--card-bg)] border border-[var(--glass-border)] text-primary placeholder:text-muted focus:border-[var(--brand-indigo)] focus:ring-2 focus:ring-[var(--brand-indigo)]/20 outline-none transition-all text-sm"
-                required
-              />
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-bold text-slate-300 flex items-center gap-2 tracking-wide">
+                  <Lock size={13} className="text-indigo-400" />
+                  Password
+                </label>
+                <Link href="/forgot-password" className="text-[11px] font-bold text-slate-500 hover:text-[#8b7eff] transition-colors">
+                  Forgot?
+                </Link>
+              </div>
+              <div className="relative">
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Enter your password"
+                  className="w-full px-4 py-3.5 pr-10 rounded-xl bg-[#06041a]/60 border border-white/5 text-sm text-white placeholder:text-slate-600 focus:border-indigo-500 focus:bg-[#06041a] outline-none transition-all duration-200"
+                  required
+                />
+                <button type="button" className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300 transition-colors">
+                  <Eye size={14} />
+                </button>
+              </div>
             </div>
 
-            {/* Primary Submit CTA Switch */}
-            <button
-              type="submit"
-              className="w-full bg-main-gradient text-white font-bold py-4 rounded-2xl transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer select-none border-none outline-none text-base tracking-wide shadow-md hover:translate-y-[-1px]"
-            >
-              <LogIn className="w-4 h-4" />
-              Login
-            </button>
+            {/* Primary Navigation / Operational Submission CTA Triggers Section */}
+            <div className="pt-3 pb-2">
+              <button
+                type="submit"
+                className="w-full bg-gradient-to-r from-[#5643ff] to-[#6d5dfc] text-white font-bold py-3.5 px-6 rounded-xl text-xs sm:text-sm transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer border-none outline-none tracking-wide shadow-lg shadow-indigo-600/20 hover:shadow-indigo-600/30 hover:brightness-110 active:scale-[0.99]"
+              >
+                <LogIn size={14} />
+                <span>Sign In to Account</span>
+              </button>
+            </div>
           </form>
 
-          {/* Redirection Navigation Footer Links */}
-          <div className="px-8 py-5 border-t border-[var(--glass-border)] bg-[var(--card-bg)]/20 text-center">
-            <p className="text-sm text-secondary">
+          {/* Bottom Interface Redirection Route Navigation Strip */}
+          <div className="mt-6 px-8 py-4 border-t border-white/5 bg-[#040312]/40 text-center">
+            <p className="text-xs sm:text-sm text-slate-400 font-medium">
               Don&apos;t have an account yet?{" "}
-              <Link href="/signup" className="text-main-gradient font-bold tracking-wide inline-flex items-center gap-0.5 group">
+              <Link href="/signup" className="text-[#8b7eff] font-bold tracking-wide inline-flex items-center gap-0.5 group hover:underline">
                 Register
-                <ArrowRight className="w-3.5 h-3.5 text-[var(--brand-purple)] transition-transform group-hover:translate-x-1" />
+                <ArrowRight size={12} className="text-[#8b7eff] transition-transform duration-200 group-hover:translate-x-0.5" />
               </Link>
             </p>
           </div>
         </div>
 
-        {/* Outer Micro Security Legal Framework Stamp */}
-        <p className="text-center text-[11px] font-bold tracking-wider uppercase text-muted mt-6 flex items-center justify-center gap-1.5">
-          <ShieldAlert className="w-3.5 h-3.5 text-emerald-500" />
-          Secured by industry-leading encryption parameters
+        {/* Global Structural Protection Badge / Validation Seal Element */}
+        <p className="text-center text-[10px] font-bold tracking-wider uppercase text-slate-500 mt-6 flex items-center justify-center gap-2 select-none">
+          <ShieldCheck size={13} className="text-emerald-500 shrink-0" />
+          <span>Secured by industry-leading encryption parameters</span>
         </p>
       </div>
     </div>

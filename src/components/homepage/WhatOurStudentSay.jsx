@@ -63,7 +63,7 @@ const WhatOurStudentSay = () => {
       
       {/* Background Decorative Ambient Flares */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute bottom-0 left-1/2 h-[350px] w-[600px] -translate-x-1/2 rounded-full bg-indigo-500/5 blur-[100px]" />
+        <div className="absolute bottom-1/2 left-1/2 h-[200px] w-[600px] -translate-x-1/2 rounded-full bg-indigo-500/5 blur-[100px]" />
       </div>
 
       <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

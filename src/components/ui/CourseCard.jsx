@@ -51,7 +51,6 @@ export default function CourseCard({ course }) {
 
   // console.log(course);
 
-
   return (
     <motion.article
       initial={{ opacity: 0, y: 20 }}
@@ -62,13 +61,13 @@ export default function CourseCard({ course }) {
         ease: [0.22, 1, 0.36, 1],
       }}
       whileHover={{ y: -8 }}
-      className="group relative h-full rounded-3xl border border-[var(--glass-border)] p-[1px] shadow-[var(--shadow-card)] transition-shadow duration-500 hover:shadow-[var(--shadow-glow)]"
-      style={{ backgroundImage: "var(--gradient-primary)" }}
+      className="group relative h-full rounded-[28px] border border-white/5 p-[1px] shadow-[0_20px_50px_rgba(0,0,0,0.3)] transition-shadow duration-500 hover:shadow-[0_0_30px_rgba(109,93,252,0.2)] bg-gradient-to-b from-white/10 to-transparent"
     >
-      {/* Inner Glass Surface */}
-      <div className="relative flex h-full flex-col overflow-hidden rounded-[1.45rem] bg-[oklch(0.14_0.04_280_/_0.75)] backdrop-blur-xl">
+      {/* Inner Glass Surface — Updated to Deep Space Styling Framework */}
+      <div className="relative flex h-full flex-col overflow-hidden rounded-[27px] bg-[#0b0826]/75 backdrop-blur-2xl">
+        
         {/* Image */}
-        <div className="relative h-56 overflow-hidden">
+        <div className="relative h-52 overflow-hidden m-2 rounded-[20px]">
           <Image
             fill
             src={image}
@@ -77,15 +76,15 @@ export default function CourseCard({ course }) {
             className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
 
-          <div className="absolute inset-0 bg-gradient-to-t from-[oklch(0.10_0.04_280)] via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#05041a] via-transparent to-transparent opacity-60" />
 
           {/* Top Badges */}
-          <div className="absolute left-4 right-4 top-4 flex items-start justify-between">
-            <span className="rounded-full border border-[var(--glass-border)] bg-white/10 px-3 py-1 text-xs font-medium text-white backdrop-blur-md">
+          <div className="absolute left-3 right-3 top-3 flex items-start justify-between">
+            <span className="rounded-full border border-white/10 bg-[#05041a]/60 px-3 py-1 text-[11px] font-semibold text-slate-200 backdrop-blur-md">
               {category}
             </span>
 
-            <span className="flex items-center gap-1 rounded-full border border-[var(--glass-border)] bg-[oklch(0.14_0.04_280_/_0.7)] px-3 py-1 text-xs font-semibold text-white backdrop-blur-md">
+            <span className="flex items-center gap-1 rounded-full border border-white/10 bg-[#05041a]/60 px-2.5 py-1 text-[11px] font-black text-white backdrop-blur-md">
               <Star
                 className="h-3 w-3 fill-yellow-400 text-yellow-400"
                 strokeWidth={1.5}
@@ -95,8 +94,8 @@ export default function CourseCard({ course }) {
           </div>
 
           {/* Level */}
-          <div className="absolute bottom-4 left-4 flex items-center gap-1.5 rounded-full border border-[var(--glass-border)] bg-[oklch(0.14_0.04_280_/_0.7)] px-3 py-1 text-xs font-medium text-white backdrop-blur-md">
-            <Signal className="h-3 w-3" strokeWidth={2} />
+          <div className="absolute bottom-3 left-3 flex items-center gap-1.5 rounded-full border border-white/10 bg-[#05041a]/70 px-2.5 py-1 text-[11px] font-bold text-slate-200 backdrop-blur-md">
+            <Signal className="h-3 w-3 text-indigo-400" strokeWidth={2.5} />
             {level}
           </div>
         </div>
@@ -107,11 +106,11 @@ export default function CourseCard({ course }) {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="flex flex-1 flex-col gap-4 p-6"
+          className="flex flex-1 flex-col gap-4 p-5"
         >
           <motion.h3
             variants={item}
-            className="line-clamp-2 text-lg font-bold leading-snug line-clamp-1 text-white"
+            className="line-clamp-2 text-base sm:text-lg font-black leading-snug text-white tracking-tight group-hover:text-[#8b7eff] transition-colors duration-200"
           >
             {title}
           </motion.h3>
@@ -119,8 +118,8 @@ export default function CourseCard({ course }) {
           {/* Instructor */}
           <motion.div variants={item} className="flex items-center gap-3">
             <div
-              className="flex h-9 w-9 items-center justify-center rounded-full text-xs font-semibold text-white"
-              style={{ backgroundImage: "var(--gradient-primary)" }}
+              className="flex h-9 w-9 items-center justify-center rounded-full text-xs font-black text-white shadow-md shadow-indigo-600/10"
+              style={{ backgroundImage: "linear-gradient(to right, #5643ff, #6d5dfc)" }}
             >
               {instructor
                 .split(" ")
@@ -131,67 +130,64 @@ export default function CourseCard({ course }) {
             </div>
 
             <div className="flex flex-col">
-              <span className="text-xs text-foreground/55">Instructor</span>
+              <span className="text-[10px] uppercase tracking-wider font-bold text-slate-500">Instructor</span>
 
-              <span className="text-sm font-medium text-foreground/90">
+              <span className="text-sm font-bold text-slate-300">
                 {instructor}
               </span>
             </div>
           </motion.div>
 
-          {/* Meta Info */}
+          {/* Meta Info Wrapper Card Setup */}
           <motion.div
             variants={item}
-            className="grid grid-cols-3 gap-2 rounded-2xl border border-[var(--glass-border)] bg-white/[0.04] p-3"
+            className="grid grid-cols-3 gap-1 rounded-2xl border border-white/5 bg-[#06041a]/40 p-2.5"
           >
-            <div className="flex flex-col items-center gap-1 text-center">
+            <div className="flex flex-col items-center gap-1 text-center justify-center">
               <Clock
-                className="h-4 w-4 text-[var(--brand-blue)]"
-                strokeWidth={2}
+                className="h-3.5 w-3.5 text-indigo-400"
+                strokeWidth={2.5}
               />
-              <span className="text-[11px] font-medium text-foreground/80">
+              <span className="text-[10px] font-bold text-slate-400">
                 {duration}
               </span>
             </div>
 
-            <div className="flex flex-col items-center gap-1 border-x border-white/10 text-center">
+            <div className="flex flex-col items-center gap-1 border-x border-white/5 text-center justify-center">
               <BookOpen
-                className="h-4 w-4 text-[var(--brand-purple)]"
-                strokeWidth={2}
+                className="h-3.5 w-3.5 text-purple-400"
+                strokeWidth={2.5}
               />
-              <span className="text-[11px] font-medium text-foreground/80">
+              <span className="text-[10px] font-bold text-slate-400">
                 {lessons} lessons
               </span>
             </div>
 
-            <div className="flex flex-col items-center gap-1 text-center">
+            <div className="flex flex-col items-center gap-1 text-center justify-center">
               <Users
-                className="h-4 w-4 text-[var(--brand-indigo)]"
-                strokeWidth={2}
+                className="h-3.5 w-3.5 text-pink-400"
+                strokeWidth={2.5}
               />
-              <span className="text-[11px] font-medium text-foreground/80">
+              <span className="text-[10px] font-bold text-slate-400">
                 {students} students
               </span>
             </div>
           </motion.div>
 
-          {/* Price + CTA */}
+          {/* Price + CTA Actions Block Section */}
           <motion.div
             variants={item}
-            className="mt-auto flex items-center justify-between gap-3 pt-2"
+            className="mt-auto flex items-center justify-between gap-3 pt-3 border-t border-white/5"
           >
-            <div className="flex items-baseline gap-2">
+            <div className="flex items-baseline gap-1.5">
               <span
-                className="bg-clip-text text-2xl font-bold text-transparent"
-                style={{
-                  backgroundImage: "var(--gradient-text)",
-                }}
+                className="bg-clip-text text-xl font-black text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-400"
               >
                 ${price}
               </span>
 
               {originalPrice > price && (
-                <span className="text-sm text-foreground/40 line-through">
+                <span className="text-xs text-slate-500 font-semibold line-through">
                   ${originalPrice}
                 </span>
               )}
@@ -199,16 +195,13 @@ export default function CourseCard({ course }) {
 
             <Link
               href={`/courses/${id}`}
-              className="group/btn relative inline-flex items-center gap-1.5 overflow-hidden rounded-xl px-4 py-2.5 text-sm font-semibold text-white shadow-[var(--shadow-glow)] transition-transform duration-300 hover:scale-[1.04]"
-              style={{
-                backgroundImage: "var(--gradient-primary)",
-              }}
+              className="group/btn relative inline-flex items-center gap-1.5 overflow-hidden rounded-xl bg-gradient-to-r from-[#5643ff] to-[#6d5dfc] px-4 py-2.5 text-xs font-bold text-white shadow-md shadow-indigo-600/10 transition-all duration-300 hover:scale-[1.03] hover:brightness-110"
             >
               <span>View Details</span>
 
               <ArrowUpRight
-                className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
-                strokeWidth={2.25}
+                className="h-3.5 w-3.5 transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
+                strokeWidth={2.5}
               />
             </Link>
           </motion.div>

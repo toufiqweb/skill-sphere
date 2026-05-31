@@ -1,14 +1,16 @@
+"use client";
+
 import { Skeleton } from "@heroui/react";
 import React from "react";
 
 const PopularCardLoading = () => {
   return (
-    <div className="container mx-auto px-4 transition-colors duration-300">
+    <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 transition-colors duration-300">
       
       {/* Header Row Content Alignment */}
       <div className="flex flex-col sm:flex-row justify-center gap-4 sm:justify-between items-center my-8">
-        <Skeleton className="h-7 w-44 rounded-xl opacity-80" />
-        <Skeleton className="h-6 w-24 rounded-lg opacity-60" />
+        <Skeleton className="h-7 w-44 rounded-xl bg-slate-800/40 before:from-transparent before:via-white/10 before:to-transparent opacity-80" />
+        <Skeleton className="h-6 w-24 rounded-lg bg-slate-800/40 before:from-transparent before:via-white/10 before:to-transparent opacity-60" />
       </div>
       
       {/* Dynamic 4-Column Responsive Grid Layout */}
@@ -16,15 +18,15 @@ const PopularCardLoading = () => {
         {Array.from({ length: 4 }).map((_, index) => (
           <div 
             key={index} 
-            className="space-y-4 p-4 border border-[var(--glass-border)] bg-[var(--card-bg)]/20 rounded-3xl backdrop-blur-sm shadow-sm"
+            className="space-y-4 p-4 border border-white/5 bg-[#0b0826]/50 rounded-[28px] backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
           >
             {/* Visual Media Thumbnail Cover Placeholder */}
-            <Skeleton className="h-44 w-full rounded-2xl opacity-70" />
+            <Skeleton className="h-44 w-full rounded-2xl bg-slate-800/50 before:from-transparent before:via-white/10 before:to-transparent opacity-70" />
             
             {/* Content Details Label Lines */}
             <div className="space-y-2.5 px-1 pb-2">
-              <Skeleton className="h-5 w-3/4 rounded-lg opacity-80" />
-              <Skeleton className="h-4 w-1/2 rounded-md opacity-50" />
+              <Skeleton className="h-5 w-3/4 rounded-lg bg-slate-800/40 before:from-transparent before:via-white/10 before:to-transparent opacity-80" />
+              <Skeleton className="h-4 w-1/2 rounded-md bg-slate-800/30 before:from-transparent before:via-white/5 before:to-transparent opacity-50" />
             </div>
           </div>
         ))}
