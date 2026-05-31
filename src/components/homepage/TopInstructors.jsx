@@ -1,244 +1,161 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
-
-import {
-  Users,
-  BookOpen,
-  GraduationCap,
-  Star,
-  BadgeCheck,
-  Briefcase,
-  Award,
-} from "lucide-react";
-
-import { FaArrowRight } from "react-icons/fa";
+import { Star } from "lucide-react";
 
 const instructors = [
   {
     id: 1,
     name: "John Doe",
-    role: "Web Development Expert",
-    image:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
+    role: "Senior Full Stack Developer",
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
     rating: 4.8,
-    students: "1.2K",
+    reviewsCount: "3.5K Students",
+    experience: "8+",
     courses: 12,
-    experience: "8+ Years",
-    featured: true,
+    students: "50K+",
   },
   {
     id: 2,
     name: "Sarah Johnson",
     role: "UI/UX Design Expert",
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=face",
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=face",
     rating: 4.9,
-    students: "856",
+    reviewsCount: "1.8K Students",
+    experience: "6+",
     courses: 8,
-    experience: "6+ Years",
-    featured: true,
+    students: "32K+",
   },
   {
     id: 3,
     name: "Michael Smith",
-    role: "Data Science Expert",
-    image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
+    role: "Digital Marketing Expert",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
     rating: 4.7,
-    students: "1.5K",
+    reviewsCount: "2.2K Students",
+    experience: "10+",
     courses: 15,
-    experience: "10+ Years",
-    featured: true,
+    students: "45K+",
   },
   {
     id: 4,
     name: "Emily Davis",
-    role: "Digital Marketing Expert",
-    image:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
+    role: "Data Science Expert",
+    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
     rating: 4.6,
-    students: "734",
-    courses: 9,
-    experience: "7+ Years",
-    featured: true,
+    reviewsCount: "2.5K Students",
+    experience: "7+",
+    courses: 10,
+    students: "28K+",
   },
 ];
 
 export default function TopInstructors() {
   return (
-    <section className="relative overflow-hidden py-24">
-
-      <div className="container relative z-10 mx-auto px-4">
-        {/* Header */}
-        <div className="mb-14 flex flex-col items-center justify-between gap-6 md:flex-row">
-          <div className="flex items-center gap-4">
-            <div className="glass-card rounded-2xl p-4">
-              <Users className="h-7 w-7 text-violet-400" />
-            </div>
-
-            <div>
-              <span className="mb-2 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-violet-400">
-                Expert Mentors
-              </span>
-
-              <h2 className="text-3xl font-bold text-primary md:text-4xl">
-                Top Instructors
-              </h2>
-
-              <p className="mt-2 text-sm text-muted md:text-base">
-                Learn from industry-leading professionals with years of
-                experience and proven teaching excellence.
-              </p>
-            </div>
+    <section className="relative overflow-hidden bg-[#060419] py-16 lg:py-20">
+      
+      <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        
+        {/* Header matching exact layout of reference image */}
+        <div className="mb-10 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+          <div className="space-y-1">
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-violet-400 block">
+              OUR EXPERT INSTRUCTORS
+            </span>
+            <h2 className="text-2xl font-black tracking-tight text-white sm:text-3xl">
+              Learn From Industry Experts
+            </h2>
+            <p className="text-xs text-slate-400 font-medium">
+              Our instructors are industry professionals with years of real-world experience.
+            </p>
           </div>
 
           <Link
             href="/instructors"
-            className="group flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-3 backdrop-blur-xl transition-all duration-300 hover:border-violet-500/40 hover:shadow-[0_0_30px_rgba(124,58,237,0.2)]"
+            className="rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-[11px] font-semibold text-slate-300 transition-all duration-200 hover:border-white/20 hover:bg-white/10 hover:text-white"
           >
-            <span className="text-main-gradient font-semibold">
-              View All Instructors
-            </span>
-
-            <FaArrowRight className="text-violet-400 transition-transform duration-300 group-hover:translate-x-1" />
+            View All Instructors
           </Link>
         </div>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Clean Glass Card Grid */}
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {instructors.map((instructor) => (
             <div
               key={instructor.id}
-              className="group overflow-hidden rounded-3xl glass-card transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02]"
+              className="group relative overflow-hidden rounded-2xl border border-white/5 bg-[#0b0826]/40 p-6 transition-all duration-300 hover:border-white/10 hover:bg-[#0f0b34]/60 hover:shadow-xl"
             >
-              {/* Top Banner */}
-              <div className="relative h-32 bg-gradient-to-br from-violet-500/20 via-purple-500/20 to-blue-500/20">
-                {instructor.featured && (
-                  <div className="absolute right-4 top-4 z-10">
-                    <div className="rounded-full bg-main-gradient px-3 py-1 text-xs font-medium text-white shadow-lg">
-                      Featured
-                    </div>
-                  </div>
-                )}
-
-                <div className="absolute left-1/2 top-full -translate-x-1/2 -translate-y-1/2">
+              
+              {/* Profile Headshot Block Layout */}
+              <div className="relative mb-4 flex justify-center">
+                <div className="relative h-20 w-20">
                   <Image
                     src={instructor.image}
                     alt={instructor.name}
-                    width={120}
-                    height={120}
-                    className="h-28 w-28 rounded-full border-4 border-white object-cover shadow-xl transition-transform duration-500 group-hover:scale-105"
+                    width={80}
+                    height={80}
+                    className="h-full w-full rounded-full object-cover border-2 border-violet-500/20"
                   />
+                  {/* Small verified dot decoration badge inside picture radius */}
+                  <div className="absolute bottom-0 right-0 h-4 w-4 rounded-full bg-blue-500 border-2 border-[#0b0826] flex items-center justify-center">
+                    <div className="h-1.5 w-1.5 rounded-full bg-white" />
+                  </div>
                 </div>
               </div>
 
-              {/* Content */}
-              <div className="px-6 pb-6 pt-16 text-center">
-                {/* Verified Badge */}
-                <div className="mb-3 flex justify-center">
-                  <div className="flex items-center gap-1 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1">
-                    <BadgeCheck
-                      size={14}
-                      className="text-emerald-500"
-                    />
-                    <span className="text-xs font-medium text-emerald-500">
-                      Verified Instructor
-                    </span>
-                  </div>
-                </div>
-
-                <h3 className="text-xl font-bold text-primary">
+              {/* Identity & Typography Frame */}
+              <div className="text-center">
+                <h3 className="text-base font-bold text-white tracking-tight">
                   {instructor.name}
                 </h3>
-
-                <p className="mt-1 text-sm text-muted">
+                <p className="text-[11px] font-medium text-slate-400 mt-0.5">
                   {instructor.role}
                 </p>
 
-                {/* Rating */}
-                <div className="mt-4 flex items-center justify-center gap-2">
-                  <Star
-                    size={18}
-                    className="fill-yellow-400 text-yellow-400"
-                  />
-
-                  <span className="font-semibold text-primary">
-                    {instructor.rating}
-                  </span>
-
-                  <span className="text-sm text-muted">
-                    Rating
+                {/* Stars Component Group Row */}
+                <div className="mt-2.5 flex items-center justify-center gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <Star
+                      key={i}
+                      size={10}
+                      className="fill-amber-400 text-amber-400"
+                    />
+                  ))}
+                  <span className="ml-1 text-[10px] font-semibold text-slate-400">
+                    ({instructor.reviewsCount})
                   </span>
                 </div>
 
-                {/* Tags */}
-                <div className="mt-5 flex flex-wrap justify-center gap-2">
-                  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-muted">
-                    🏆 Top Mentor
-                  </span>
-
-                  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-muted">
-                    ⭐ Expert Trainer
-                  </span>
-                </div>
-
-                {/* Stats */}
-                <div className="mt-6 grid grid-cols-3 gap-3">
-                  <div className="rounded-xl border border-white/10 bg-white/5 p-3">
-                    <GraduationCap
-                      size={18}
-                      className="mx-auto mb-2 text-violet-400"
-                    />
-
-                    <p className="font-bold text-primary">
-                      {instructor.students}
-                    </p>
-
-                    <p className="text-xs text-muted">
-                      Students
-                    </p>
+                {/* Flattened Compact Data Stats Block Row Layout */}
+                <div className="mt-5 grid grid-cols-3 border-t border-white/5 pt-4 text-center">
+                  <div>
+                    <p className="text-xs font-black text-white">{instructor.experience}</p>
+                    <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-tight mt-0.5">Years Exp.</p>
                   </div>
-
-                  <div className="rounded-xl border border-white/10 bg-white/5 p-3">
-                    <BookOpen
-                      size={18}
-                      className="mx-auto mb-2 text-blue-400"
-                    />
-
-                    <p className="font-bold text-primary">
-                      {instructor.courses}
-                    </p>
-
-                    <p className="text-xs text-muted">
-                      Courses
-                    </p>
+                  <div className="border-x border-white/5">
+                    <p className="text-xs font-black text-white">{instructor.courses}</p>
+                    <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-tight mt-0.5">Courses</p>
                   </div>
-
-                  <div className="rounded-xl border border-white/10 bg-white/5 p-3">
-                    <Briefcase
-                      size={18}
-                      className="mx-auto mb-2 text-amber-400"
-                    />
-
-                    <p className="font-bold text-primary">
-                      {instructor.experience}
-                    </p>
-
-                    <p className="text-xs text-muted">
-                      Experience
-                    </p>
+                  <div>
+                    <p className="text-xs font-black text-white">{instructor.students}</p>
+                    <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-tight mt-0.5">Students</p>
                   </div>
                 </div>
 
-                {/* CTA */}
-                <button className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-main-gradient py-3 font-medium text-white transition-all duration-300 hover:scale-[1.02]">
-                  <Award size={18} />
+                {/* Primary Interaction Action Anchor */}
+                <Link
+                  href={`/instructors/${instructor.id}`}
+                  className="mt-5 block w-full rounded-xl bg-violet-600 py-2 text-[11px] font-bold text-white transition-all duration-200 hover:bg-violet-500"
+                >
                   View Profile
-                </button>
+                </Link>
               </div>
+
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );

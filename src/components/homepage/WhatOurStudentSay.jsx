@@ -1,117 +1,183 @@
-import { FaQuoteLeft, FaStar, FaCheckCircle } from "react-icons/fa";
+"use client";
+
+import React from "react";
+import { FaStar } from "react-icons/fa";
 import Image from "next/image";
+
+// Import Swiper React components and required modules
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules";
+
+// Import Swiper styles natively
+import "swiper/css";
+import "swiper/css/pagination";
 
 const testimonials = [
   {
     id: 1,
-    name: "Jessica Miller",
-    role: "Web Developer",
-    rating: 5,
-    image:
-      "https://i.pinimg.com/736x/8b/46/d2/8b46d25ecd777e3a1e22829fa4f88eb1.jpg",
-    review:
-      "SkillSphere has completely transformed the way I learn. The courses are well-structured and the instructors are amazing!",
+    name: "Alex Thompson",
+    role: "Software Engineer",
+    image: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150&fit=crop&crop=face",
+    review: "SkillSphere transformed my career. The courses are well-structured and the instructors are amazing!",
   },
   {
     id: 2,
-    name: "David Anderson",
-    role: "UI/UX Designer",
-    rating: 5,
-    image:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",
-    review:
-      "The content quality is top-notch and the support team is always there to help. Highly recommended!",
+    name: "Daniel Martinez",
+    role: "Product Manager",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+    review: "The hands-on projects helped me land my dream job. Highly recommended for anyone serious about tech.",
   },
   {
     id: 3,
-    name: "Sophia Wilson",
-    role: "Marketing Specialist",
-    rating: 5,
-    image:
-      "https://i.pinimg.com/736x/82/48/b7/8248b74f7d5ac340fdb200ce349c20de.jpg",
-    review:
-      "I got a new job after completing the course. Thanks to SkillSphere for helping me achieve my career goals.",
+    name: "Sophie Williams",
+    role: "Data Analyst",
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face",
+    review: "Excellent platform with quality content. The community support is also outstanding!",
+  },
+  {
+    id: 4,
+    name: "Marcus Vance",
+    role: "Full Stack Engineer",
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
+    review: "The comprehensive curriculum bridged all the gaps in my self-taught React knowledge. Exceptional mentorship!",
+  },
+  {
+    id: 5,
+    name: "Elena Rostova",
+    role: "UI/UX Designer",
+    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face",
+    review: "I loved the feedback cycles on design submissions. It genuinely mirrors real studio environments.",
+  },
+  {
+    id: 6,
+    name: "Rajesh Kumar",
+    role: "Cloud Architect",
+    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&h=150&fit=crop&crop=face",
+    review: "Passed my AWS Associate certification on the first try thanks to the realistic sandboxed practice tests.",
   },
 ];
 
 const WhatOurStudentSay = () => {
   return (
-    <section className="relative overflow-hidden py-24">
+    <section className="relative overflow-hidden bg-[#060419] py-16 lg:py-20">
+      
+      {/* Background Decorative Ambient Flares */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute bottom-0 left-1/2 h-[350px] w-[600px] -translate-x-1/2 rounded-full bg-indigo-500/5 blur-[100px]" />
+      </div>
 
-      <div className="container relative z-10 mx-auto px-4">
-        {/* Header */}
-        <div className="mb-14 text-center">
-          <span className="mb-3 inline-block rounded-full border border-violet-500/20 bg-violet-500/10 px-4 py-2 text-sm font-medium text-violet-400">
-            Testimonials
+      <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        
+        {/* Header Stack */}
+        <div className="mb-12 text-center space-y-2">
+          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-violet-400 block">
+            TESTIMONIALS
           </span>
 
-          <h2 className="text-3xl font-bold text-primary sm:text-4xl lg:text-6xl">
-            What Our
-            <span className="text-main-gradient"> Students </span> Say
+          <h2 className="text-2xl font-black tracking-tight text-white sm:text-3xl lg:text-4xl">
+            What Our <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">Students</span> Say
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-muted">
-            Discover how our courses have helped students build skills, advance
-            their careers, and achieve their goals.
+          
+          <p className="mx-auto max-w-md text-xs sm:text-sm text-slate-400 font-medium">
+            Real feedback from our learners about their experience.
           </p>
         </div>
 
-        {/* Cards */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {testimonials.map((test) => (
-            <div
-              key={test.id}
-              className="group relative overflow-hidden rounded-3xl glass-card border border-white/10 p-8 transition-all duration-300 hover:-translate-y-2 hover:border-violet-500/20 hover:shadow-[0_20px_60px_rgba(124,58,237,0.15)]"
-            >
-              {/* Quote Icon */}
-              <div className="absolute right-6 top-6 opacity-10">
-                <FaQuoteLeft className="text-7xl text-violet-500" />
-              </div>
+        {/* Swiper Layout Component Container */}
+        <div className="swiper-custom-wrapper">
+          <Swiper
+            modules={[Autoplay, Pagination]}
+            spaceBetween={20}
+            slidesPerView={1}
+            autoplay={{
+              delay: 5000,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            }}
+            pagination={{
+              clickable: true,
+              el: ".custom-swiper-pagination",
+            }}
+            breakpoints={{
+              640: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+              },
+              1024: {
+                slidesPerView: 3,
+                spaceBetween: 24,
+              },
+            }}
+            className="!pb-4"
+          >
+            {testimonials.map((test) => (
+              <SwiperSlide key={test.id} className="h-auto">
+                <div className="group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-white/5 bg-[#0b0826]/40 p-6 transition-all duration-300 hover:border-white/10 hover:bg-[#0f0b34]/50 min-h-[190px]">
+                  <div>
+                    {/* 5-Star Rating Array Row */}
+                    <div className="mb-3.5 flex items-center gap-0.5">
+                      {[...Array(5)].map((_, index) => (
+                        <FaStar key={index} className="text-amber-400" size={11} />
+                      ))}
+                    </div>
 
-              {/* Rating */}
-              <div className="mb-6 flex items-center gap-1">
-                {[...Array(test.rating)].map((_, index) => (
-                  <FaStar key={index} className="text-yellow-400" size={18} />
-                ))}
-              </div>
-
-              {/* Review */}
-              <p className="mb-8 leading-relaxed text-secondary">
-                {`"${test.review}"`}
-              </p>
-
-              {/* User */}
-              <div className="flex items-center gap-4">
-                <div className="overflow-hidden rounded-full ring-2 ring-violet-500/20">
-                  <Image
-                    src={test.image}
-                    alt={test.name}
-                    width={56}
-                    height={56}
-                    className="h-14 w-14 object-cover"
-                  />
-                </div>
-
-                <div>
-                  <div className="flex items-center gap-2">
-                    <h4 className="font-semibold text-primary">{test.name}</h4>
-
-                    <FaCheckCircle className="text-emerald-500" size={14} />
+                    {/* Primary User Review Copy Block */}
+                    <p className="text-xs font-medium leading-relaxed text-slate-300">
+                      {`"${test.review}"`}
+                    </p>
                   </div>
 
-                  <p className="text-sm text-muted">{test.role}</p>
+                  {/* Left-Aligned Identity Profile Footer Layout */}
+                  <div className="mt-6 flex items-center gap-3">
+                    <div className="relative h-9 w-9 overflow-hidden rounded-full border border-violet-500/20">
+                      <Image
+                        src={test.image}
+                        alt={test.name}
+                        width={36}
+                        height={36}
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
 
-                  <span className="mt-1 inline-block text-xs text-violet-400">
-                    Verified Student
-                  </span>
+                    <div className="space-y-0.5">
+                      <h4 className="text-xs font-bold text-white tracking-tight">
+                        {test.name}
+                      </h4>
+                      <p className="text-[10px] font-medium text-slate-400">
+                        {test.role}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-
-              {/* Bottom Accent */}
-              <div className="absolute bottom-0 left-0 h-1 w-0 bg-main-gradient transition-all duration-500 group-hover:w-full" />
-            </div>
-          ))}
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
+
+        {/* Global Pagination Targeted Output Node */}
+        <div className="custom-swiper-pagination mt-8 flex justify-center gap-2" />
+
       </div>
+
+      {/* Embedded Swiper Custom Navigation Color Overrides */}
+      <style jsx global>{`
+        .custom-swiper-pagination .swiper-pagination-bullet {
+          width: 6px !important;
+          height: 6px !important;
+          background: #334155 !important; /* slate-700 */
+          opacity: 1 !important;
+          border-radius: 9999px !important;
+          transition: all 0.3s ease !important;
+          margin: 0 4px !important;
+          border: none !important;
+          outline: none !important;
+          cursor: pointer;
+        }
+        .custom-swiper-pagination .swiper-pagination-bullet-active {
+          width: 16px !important; /* Pill expansion active indicator */
+          background: #8b5cf6 !important; /* violet-500 */
+        }
+      `}</style>
     </section>
   );
 };

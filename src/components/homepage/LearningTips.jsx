@@ -1,136 +1,129 @@
+import React from "react";
 import Link from "next/link";
-import { Clock, Target, ArrowRight, BookOpen, Lightbulb } from "lucide-react";
-import { FaArrowRight } from "react-icons/fa";
-import { IoBookSharp } from "react-icons/io5";
+import { Clock, Target, ArrowRight, BookOpen } from "lucide-react";
 
 const learningTips = [
   {
     id: 1,
     title: "Effective Study Techniques",
     description:
-      "Use active recall and spaced repetition to retain information faster and improve long-term memory.",
+      "Learn proven methods to improve focus and retention.",
     icon: BookOpen,
-    color: "text-violet-400",
-    badge: "Study Smart",
+    iconColor: "text-purple-400",
+    badges: [
+      { text: "Study Smart", className: "bg-purple-500/10 text-purple-400" },
+      { text: "Optimization", className: "bg-slate-500/10 text-slate-400" }
+    ],
   },
   {
     id: 2,
     title: "Time Management",
     description:
-      "Create a structured study schedule and prioritize tasks to stay productive every day.",
+      "Master time management and boost your productivity.",
     icon: Clock,
-    color: "text-blue-400",
-    badge: "Productivity",
+    iconColor: "text-emerald-400",
+    badges: [
+      { text: "Productivity", className: "bg-emerald-500/10 text-emerald-400" }
+    ],
   },
   {
     id: 3,
     title: "Stay Focused & Motivated",
     description:
-      "Set achievable goals, avoid distractions, and celebrate progress to maintain momentum.",
+      "Tips to maintain motivation throughout your learning.",
     icon: Target,
-    color: "text-emerald-400",
-    badge: "Mindset",
+    iconColor: "text-blue-400",
+    badges: [
+      { text: "Mindset", className: "bg-blue-500/10 text-blue-400" }
+    ],
   },
 ];
 
 const LearningTips = () => {
   return (
-    <section className="relative overflow-hidden py-24">
+    <section className="relative overflow-hidden bg-[#060419] py-16 lg:py-20">
+      
+      {/* Background Ambient Glow */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/2 left-1/4 h-[300px] w-[500px] -translate-y-1/2 rounded-full bg-indigo-500/5 blur-[120px]" />
+      </div>
 
-
-      <div className="container relative z-10 mx-auto px-4">
-        {/* Header */}
-        <div className="mb-14 flex flex-col items-center justify-between gap-6 md:flex-row">
-          <div className="flex items-center gap-4">
-            <div className="glass-card rounded-2xl p-4">
-              <IoBookSharp className="h-7 w-7 text-violet-400" />
-            </div>
-
-            <div>
-              <span className="mb-2 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-violet-400">
-                Student Success
-              </span>
-
-              <h2 className="text-3xl font-bold text-primary md:text-4xl">
-                Learning Tips
-              </h2>
-
-              <p className="mt-2 text-sm text-muted md:text-base">
-                Practical strategies to help you learn faster and achieve better
-                results.
-              </p>
-            </div>
+      <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        
+        {/* Header Block matching ChatGPT Image May 31, 2026, 03_05_55 PM_11.png */}
+        <div className="mb-10 flex flex-col justify-between items-start md:flex-row md:items-end gap-4">
+          <div className="space-y-1">
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-violet-400 block">
+              LEARNING RESOURCES
+            </span>
+            <h2 className="text-2xl font-black tracking-tight text-white sm:text-3xl">
+              Learning Tips & Guides
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-400 font-medium">
+              Practical tips and insights to accelerate your learning journey.
+            </p>
           </div>
 
           <Link
             href="/tips"
-            className="group flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-3 backdrop-blur-xl transition-all duration-300 hover:border-violet-500/40 hover:shadow-[0_0_30px_rgba(124,58,237,0.2)]"
+            className="text-[11px] font-medium text-slate-300 border border-slate-800 rounded-full px-4 py-1.5 hover:bg-white/5 hover:text-white transition-all duration-300"
           >
-            <span className="text-main-gradient font-semibold">
-              View All Tips
-            </span>
-
-            <FaArrowRight className="text-violet-400 transition-transform duration-300 group-hover:translate-x-1" />
+            View All Tips
           </Link>
         </div>
 
-        {/* Cards */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {/* 3-Column Content Grid */}
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {learningTips.map((tip) => {
             const Icon = tip.icon;
 
             return (
               <div
                 key={tip.id}
-                className="group glass-card relative overflow-hidden rounded-3xl border border-white/10 p-8 transition-all duration-300 hover:-translate-y-2 hover:border-violet-500/20 hover:shadow-[0_20px_60px_rgba(124,58,237,0.12)]"
+                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/5 bg-[#0b0826]/30 p-6 transition-all duration-300 hover:border-white/10 hover:bg-[#0f0b34]/40 min-h-[190px]"
               >
-                {/* Top Badge */}
-                <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1">
-                  <Lightbulb size={14} className="text-yellow-400" />
+                <div>
+                  {/* Row for Multiple Badges */}
+                  <div className="mb-4 flex flex-wrap gap-2">
+                    {tip.badges.map((badge, idx) => (
+                      <span 
+                        key={idx} 
+                        className={`text-[9px] font-bold px-2 py-0.5 rounded ${badge.className}`}
+                      >
+                        {badge.text}
+                      </span>
+                    ))}
+                  </div>
 
-                  <span className="text-xs font-medium text-muted">
-                    {tip.badge}
-                  </span>
+                  {/* Card Title Layer */}
+                  <h3 className="text-sm font-bold text-white tracking-tight sm:text-base mb-2">
+                    {tip.title}
+                  </h3>
+
+                  {/* Card Description Paragraph */}
+                  <p className="text-xs text-slate-400 leading-relaxed font-medium">
+                    {tip.description}
+                  </p>
                 </div>
 
-                {/* Icon */}
-                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
-                  <Icon className={`${tip.color}`} size={30} />
+                {/* Unified Footer Call-To-Action Link */}
+                <div className="mt-6 flex items-center justify-between">
+                  <Link
+                    href="/tips"
+                    className="inline-flex items-center gap-1 text-[11px] font-bold text-violet-400 transition-all duration-300 hover:text-violet-300 group-hover:gap-2"
+                  >
+                    Read More
+                    <ArrowRight size={12} className="mt-0.5 transition-transform duration-300" />
+                  </Link>
+
+                  {/* Contextual Icon Indicator */}
+                  <Icon className={`${tip.iconColor} opacity-40 group-hover:opacity-90 transition-all duration-300`} size={16} />
                 </div>
-
-                {/* Content */}
-                <h3 className="mb-3 text-xl font-bold text-primary">
-                  {tip.title}
-                </h3>
-
-                <p className="mb-8 leading-relaxed text-muted">
-                  {tip.description}
-                </p>
-
-                {/* Read More */}
-                <Link
-                  href="/tips"
-                  className="inline-flex items-center gap-2 font-medium text-violet-400 transition-all duration-300 hover:gap-3"
-                >
-                  Read More
-                  <ArrowRight
-                    size={16}
-                    className="transition-transform duration-300"
-                  />
-                </Link>
-
-                {/* Bottom Gradient Line */}
-                <div className="absolute bottom-0 left-0 h-1 w-0 bg-main-gradient transition-all duration-500 group-hover:w-full" />
               </div>
             );
           })}
         </div>
-        <div className="mt-16 text-center">
-          <p className="text-muted">
-            Join <span className="text-violet-400 font-semibold">10,000+</span>{" "}
-            learners already improving their skills every day.
-          </p>
-        </div>
+
       </div>
     </section>
   );
