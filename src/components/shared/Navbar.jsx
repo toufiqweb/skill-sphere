@@ -24,7 +24,7 @@ const Navbar = () => {
         <MyNavLink href="/courses">Courses</MyNavLink>
       </li>
       <li>
-        <MyNavLink href="/profile">Instructors</MyNavLink> {/* Profile mapping to Instructors view context */}
+        <MyNavLink href="/profile">Profile</MyNavLink> {/* Profile mapping to Instructors view context */}
       </li>
       <li>
         <MyNavLink href="/pricing">Pricing</MyNavLink>
