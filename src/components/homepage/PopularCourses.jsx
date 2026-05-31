@@ -2,8 +2,6 @@
 
 import Link from "next/link";
 import React, { useMemo } from "react";
-import { FaArrowRight } from "react-icons/fa";
-import { TbChartBarPopular } from "react-icons/tb";
 import CourseCard from "../ui/CourseCard";
 
 const PopularCourses = ({ courses = [] }) => {
@@ -14,60 +12,52 @@ const PopularCourses = ({ courses = [] }) => {
   }, [courses]);
 
   return (
-    <section className="relative overflow-hidden py-24">
-      {/* Background Glow */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-10 top-10 h-72 w-72 rounded-full bg-violet-600/15 blur-[120px]" />
-        <div className="absolute right-10 bottom-10 h-72 w-72 rounded-full bg-blue-600/15 blur-[120px]" />
+    <section className="relative overflow-hidden bg-[#060419] py-16 lg:py-20">
+      
+      {/* Background Section Glow Accent */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/4 right-0 h-[400px] w-[400px] rounded-full bg-violet-900/10 blur-[120px]" />
       </div>
 
-      <div className="container relative z-10 mx-auto px-4">
-        {/* Header */}
-        <div className="mb-12 flex flex-col items-center justify-between gap-6 md:flex-row">
-          <div className="flex items-center gap-4">
-            <div className="glass-card rounded-2xl p-4">
-              <TbChartBarPopular className="h-7 w-7 text-violet-400" />
-            </div>
-
-            <div>
-              <span className="mb-2 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-violet-400">
-                Top Rated Courses
-              </span>
-
-              <h2 className="text-3xl font-bold text-primary md:text-4xl">
-                Popular Courses
-              </h2>
-
-              <p className="mt-2 text-sm text-muted md:text-base">
-                Discover the highest-rated courses loved by thousands of
-                students.
-              </p>
-            </div>
-          </div>
-
-          <Link
-            href="/courses"
-            className="group flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-3 backdrop-blur-xl transition-all duration-300 hover:border-violet-500/40 hover:shadow-[0_0_30px_rgba(124,58,237,0.2)]"
-          >
-            <span className="text-main-gradient font-semibold">
-              View all courses
+      <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        
+        {/* Header Stack Layout matching reference asset */}
+        <div className="mb-10 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+          <div className="space-y-1">
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-violet-400 block">
+              BROWSE TOP COURSES
             </span>
 
-            <FaArrowRight className="text-violet-400 transition-transform duration-300 group-hover:translate-x-1" />
+            <h2 className="text-2xl font-black tracking-tight text-white sm:text-3xl">
+              Popular Courses
+            </h2>
+
+            <p className="text-xs text-slate-400 font-medium">
+              Discover our most in-demand courses across various fields.
+            </p>
+          </div>
+
+          {/* Clean Premium View All Link Button */}
+          <Link
+            href="/courses"
+            className="rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-[11px] font-semibold text-slate-300 transition-all duration-200 hover:border-white/20 hover:bg-white/10 hover:text-white"
+          >
+            View All Courses
           </Link>
         </div>
 
-        {/* Courses Grid */}
-        <div className="grid gap-6 md:gap-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {/* Dynamic Multi-Row Core Courses Grid Layout */}
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {topCourses.map((course) => (
             <div
               key={course.id}
-              className="h-full transition-all duration-500 hover:-translate-y-2"
+              className="h-full transition-transform duration-300 hover:-translate-y-1.5"
             >
               <CourseCard course={course} />
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );

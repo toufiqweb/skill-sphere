@@ -7,12 +7,11 @@ import Image from "next/image";
 import MyNavLink from "../ui/MyNavLink";
 import Link from "next/link";
 import { Avatar } from "@heroui/react";
-import { Menu, X, LogOut, GraduationCap } from "lucide-react";
+import { Menu, X, LogOut, Search } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
 
 const Navbar = () => {
   const { data: session } = authClient.useSession();
-
   const user = session?.user;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -21,156 +20,160 @@ const Navbar = () => {
       <li>
         <MyNavLink href="/">Home</MyNavLink>
       </li>
-
       <li>
         <MyNavLink href="/courses">Courses</MyNavLink>
       </li>
-
       <li>
-        <MyNavLink href="/profile">Profile</MyNavLink>
+        <MyNavLink href="/profile">Instructors</MyNavLink> {/* Profile mapping to Instructors view context */}
       </li>
       <li>
-        <MyNavLink href="/blogs">Blogs</MyNavLink>
+        <MyNavLink href="/pricing">Pricing</MyNavLink>
+      </li>
+      <li>
+        <MyNavLink href="/blogs">Blog</MyNavLink>
+      </li>
+      <li>
+        <MyNavLink href="/about">About</MyNavLink>
       </li>
     </>
   );
 
   return (
-    <div className="fixed left-1/2 top-5 z-50 w-full container -translate-x-1/2 px-4 ">
-      {/* Premium Light Capsule Container */}
-      <div className="bg-(--glass-bg) p-4 backdrop-blur-xl  rounded-full border border-white/10 px-5 md:px-7 py-2.5 shadow-[0_10px_40px_rgba(124,58,237,0.08)] hover:shadow-[0_15px_50px_rgba(124,58,237,0.15)] transition-all duration-300">
-        <nav className="flex items-center justify-between h-12">
-          {/* Left Side: Hamburger Menu & Logo */}
-          <div className="flex items-center gap-3">
+    <div className="fixed top-0 left-0 z-50 w-full border-b border-white/5 bg-[#060419]/70 backdrop-blur-xl">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <nav className="flex h-20 items-center justify-between">
+          
+          {/* Left Side: Hamburger & Logo Identity */}
+          <div className="flex items-center gap-4">
             <button
-              className="md:hidden p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-full transition-all duration-200"
+              className="md:hidden p-2 text-slate-400 hover:text-white hover:bg-white/5 rounded-xl transition-all duration-200"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
             >
-              {isMenuOpen ? (
-                <X className="h-5 w-5" />
-              ) : (
-                <Menu className="h-5 w-5" />
-              )}
+              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
 
             <Link
               href="/"
-              className="flex items-center gap-3 active:scale-95 transition-transform"
+              className="flex items-center gap-2.5 active:scale-98 transition-transform"
             >
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-r from-violet-600 to-blue-500 text-white shadow-lg">
-                <GraduationCap size={20} />
+              <div className="relative h-7 w-7 flex items-center justify-center rounded-lg bg-gradient-to-br from-violet-600 to-indigo-600 text-white shadow-md shadow-violet-600/20">
+                {/* Fallback styling for SkillSphere branding vector icon structure */}
+                <div className="h-3 w-3 rounded-full border-2 border-white" />
               </div>
 
               <div className="flex flex-col">
-                <h1 className="text-xl md:text-2xl font-black tracking-tight">
-                  <span className="text-white">Skill</span>
-                  <span
-                    className="bg-clip-text text-transparent"
-                    style={{
-                      backgroundImage: "var(--gradient-text)",
-                    }}
-                  >
+                <h1 className="text-xl font-bold tracking-tight text-white flex items-center gap-0.5">
+                  <span>Skill</span>
+                  <span className="bg-gradient-to-r from-violet-400 to-indigo-300 bg-clip-text text-transparent">
                     Sphere
-                  </span>{" "}
+                  </span>
                 </h1>
-
-                <span className="hidden lg:block text-[10px] uppercase tracking-[0.25em] text-violet-400">
+                <span className="text-[8px] uppercase tracking-[0.2em] text-slate-400 font-medium -mt-0.5">
                   Learn • Grow • Succeed
                 </span>
               </div>
             </Link>
           </div>
 
-          {/* Middle Side: Navigation Links (Desktop) */}
-          <ul className="hidden items-center gap-10 md:flex text-sm font-medium tracking-wide">
+          {/* Middle Side: Centered Navigation Links */}
+          <ul className="hidden items-center gap-8 md:flex text-[14px] font-medium text-slate-300 tracking-wide">
             {links}
           </ul>
 
-          {/* Right Side: Authentication Actions (Desktop) */}
-          <div className="hidden md:flex items-center gap-3">
-            {user ? (
-              <div className="flex items-center gap-3 rounded-full border border-white/10 bg-white/5 pl-3 pr-2 py-2 backdrop-blur-xl">
-                <span className="max-w-[120px] truncate text-sm font-semibold text-primary">
-                  {user?.name}
-                </span>
+          {/* Right Side: Search Icon & Authentication Flows */}
+          <div className="flex items-center gap-4">
+            {/* Search Glass Anchor Element */}
+            <button className="text-slate-400 hover:text-white p-2 transition-colors duration-200 rounded-full hover:bg-white/5">
+              <Search size={18} />
+            </button>
 
-                <Avatar size="sm" className="h-8 w-8 ring-2 ring-violet-500/20">
-                  <Avatar.Image alt={user?.name} src={user?.image} />
-                  <Avatar.Fallback>{user?.name?.[0]}</Avatar.Fallback>
-                </Avatar>
+            {/* Desktop Auth Conditions */}
+            <div className="hidden md:flex items-center gap-3">
+              {user ? (
+                <div className="flex items-center gap-3 rounded-full border border-white/10 bg-white/5 pl-3 pr-1.5 py-1.5 backdrop-blur-md">
+                  <span className="max-w-[100px] truncate text-xs font-medium text-slate-200">
+                    {user?.name}
+                  </span>
 
-                <Button
-                  onClick={async () => await authClient.signOut()}
-                  variant="flat"
-                  className="bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white border border-red-500/20 font-semibold text-xs h-9 rounded-full transition-all duration-300"
-                >
-                  <LogOut className="mr-1 h-3.5 w-3.5" />
-                  Logout
-                </Button>
-              </div>
-            ) : (
-              <div className="flex gap-2.5 items-center">
-                <Link href="/signup">
-                  <Button className="bg-main-gradient text-white font-semibold rounded-full h-10 px-6 shadow-[0_10px_25px_rgba(124,58,237,0.3)] hover:scale-105 transition-all duration-300">
-                    Register
-                  </Button>
-                </Link>
+                  <Avatar size="sm" className="h-7 w-7 ring-2 ring-violet-500/30">
+                    <Avatar.Image alt={user?.name} src={user?.image} />
+                    <Avatar.Fallback className="bg-slate-800 text-white text-xs">{user?.name?.[0]}</Avatar.Fallback>
+                  </Avatar>
 
-                <Link href="/signin">
                   <Button
+                    onClick={async () => await authClient.signOut()}
                     variant="flat"
-                    className="glass-card text-primary font-semibold rounded-full h-10 px-6 border border-white/10 hover:border-violet-500/30 transition-all duration-300"
+                    className="bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white border border-red-500/10 font-medium text-xs h-7 px-3 rounded-full transition-all duration-200"
                   >
-                    Login
+                    <LogOut className="mr-1 h-3 w-3" />
+                    Logout
                   </Button>
-                </Link>
+                </div>
+              ) : (
+                <div className="flex gap-4 items-center">
+                  <Link href="/signin">
+                    <Button
+                      variant="light"
+                      className="text-slate-300 hover:text-white font-medium text-sm px-3 bg-transparent transition-colors"
+                    >
+                      Login
+                    </Button>
+                  </Link>
+
+                  <Link href="/signup">
+                    <Button className="bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-medium text-sm rounded-xl h-10 px-5 shadow-lg shadow-violet-600/20 hover:brightness-110 active:scale-98 transition-all duration-200">
+                      Sign Up
+                    </Button>
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            {/* Mobile Session Profile Quickview Indicator */}
+            {user && (
+              <div className="md:hidden flex items-center">
+                <Avatar size="sm" className="h-8 w-8 ring-2 ring-violet-500/30">
+                  <Avatar.Image alt={user?.name} src={user?.image} />
+                  <Avatar.Fallback className="bg-slate-800 text-white">{user?.name?.[0]}</Avatar.Fallback>
+                </Avatar>
               </div>
             )}
           </div>
-
-          {/* Mobile Right Side Indicator */}
-          {user && (
-            <div className="md:hidden flex items-center">
-              <Avatar size="sm" className="ring-2 ring-indigo-500/10">
-                <Avatar.Image alt={user?.name} src={user?.image} />
-                <Avatar.Fallback>{user?.name?.[0]}</Avatar.Fallback>
-              </Avatar>
-            </div>
-          )}
         </nav>
       </div>
 
-      {/* Mobile Floating Menu Dropdown */}
+      {/* Mobile Menu Dropdown Panel */}
       {isMenuOpen && (
-        <div className="mt-4 rounded-3xl glass-card border border-white/10 p-5 shadow-[0_15px_50px_rgba(124,58,237,0.12)] animate-in fade-in slide-in-from-top-4 duration-300 bg-(--glass-bg)  backdrop-blur-xl ">
-          <ul className="flex flex-col gap-3 px-2 py-1 text-base">{links}</ul>
+        <div className="md:hidden border-t border-white/5 bg-[#060419]/95 backdrop-blur-2xl px-4 py-6 shadow-xl animate-in fade-in slide-in-from-top-2 duration-200">
+          <ul className="flex flex-col gap-4 text-base text-slate-300 px-2 font-medium">
+            {links}
+          </ul>
 
-          {/* Mobile Auth Actions */}
-          <div className="border-t border-slate-100 mt-4 pt-4 flex flex-col gap-2.5">
+          <div className="border-t border-white/5 mt-5 pt-5 flex flex-col gap-3">
             {user ? (
               <Button
                 onClick={async () => await authClient.signOut()}
                 variant="flat"
-                className="w-full bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white border border-red-500/20 font-semibold rounded-xl h-11 transition-all"
+                className="w-full bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white border border-red-500/10 font-semibold rounded-xl h-11 transition-all"
               >
                 <LogOut className="mr-2 h-4 w-4" />
                 Logout ({user?.name})
               </Button>
             ) : (
               <div className="grid grid-cols-2 gap-3">
-                <Link href="/signup" className="w-full">
-                  <Button className="w-full bg-main-gradient text-white font-bold rounded-xl h-11 shadow-md shadow-indigo-500/5">
-                    Register
-                  </Button>
-                </Link>
-
                 <Link href="/signin" className="w-full">
                   <Button
                     variant="flat"
-                    className="w-full bg-slate-900 text-white hover:bg-slate-800 font-bold rounded-xl h-11"
+                    className="w-full bg-white/5 text-white border border-white/10 hover:bg-white/10 font-semibold rounded-xl h-11"
                   >
                     Login
+                  </Button>
+                </Link>
+
+                <Link href="/signup" className="w-full">
+                  <Button className="w-full bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-semibold rounded-xl h-11 shadow-md">
+                    Sign Up
                   </Button>
                 </Link>
               </div>

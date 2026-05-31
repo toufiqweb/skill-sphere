@@ -40,17 +40,17 @@ export default function CourseCard({ course }) {
     instructor,
     image,
     rating,
-    price ,
-    originalPrice ,
-    duration ,
-    lessons ,
-    students ,
-    level ,
-    category ,
+    price,
+    originalPrice,
+    duration,
+    lessons,
+    students,
+    level,
+    category,
   } = course;
 
   // console.log(course);
-  
+
 
   return (
     <motion.article

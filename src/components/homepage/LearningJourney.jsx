@@ -9,11 +9,7 @@ import {
 const LearningJourney = () => {
   return (
     <section className="relative overflow-hidden py-24">
-      {/* Background Glow */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-0 top-0 h-72 w-72 rounded-full bg-violet-600/15 blur-[120px]" />
-        <div className="absolute bottom-0 right-0 h-72 w-72 rounded-full bg-blue-600/15 blur-[120px]" />
-      </div>
+
 
       <div className="container relative z-10 mx-auto px-4">
         <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-main-gradient p-[1px]">

@@ -16,7 +16,7 @@ export default async function Home() {
   const courses = await getAllCoursesData();
 
   return (
-    <div className="space-y-15">
+    <div >
       <Banner />
       <Stats />
       <Suspense fallback={<PopularCardLoading />}>

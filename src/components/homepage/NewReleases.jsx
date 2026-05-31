@@ -43,11 +43,7 @@ const NewReleases = ({ courses = [] }) => {
 
   return (
     <section className="relative overflow-hidden py-24">
-      {/* Background Glow */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-10 top-10 h-72 w-72 rounded-full bg-yellow-500/10 blur-[120px]" />
-        <div className="absolute right-10 bottom-10 h-72 w-72 rounded-full bg-violet-500/10 blur-[120px]" />
-      </div>
+
 
       <div className="container relative z-10 mx-auto px-4">
         {/* Header */}

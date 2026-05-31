@@ -1,25 +1,28 @@
 "use client";
+
 import { motion } from "framer-motion";
 import {
-  Sparkles,
-  PlayCircle,
-  Users,
-  UserCheck,
-  BookOpen,
+  Award,
+  Clock,
+  FileCheck,
+  Play,
   ArrowRight,
+  GraduationCap,
+  Users2,
+  Smile,
 } from "lucide-react";
 import bannerImage from "@/assets/download.jpg";
 import Link from "next/link";
 import Image from "next/image";
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 24 },
   show: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.45,
-      ease: "easeOut",
+      duration: 0.6,
+      ease: [0.215, 0.61, 0.355, 1],
     },
   },
 };
@@ -29,224 +32,196 @@ const stagger = {
   show: {
     opacity: 1,
     transition: {
-      delayChildren: 0.05,
-      staggerChildren: 0.08,
+      staggerChildren: 0.1,
     },
   },
 };
-const float = (delay = 0, distance = 12) => ({
+
+const float = (delay = 0, distance = 8) => ({
   y: [-distance, distance, -distance],
   transition: {
-    duration: 6,
+    duration: 5,
     repeat: Infinity,
     ease: "easeInOut",
     delay,
   },
 });
 
-function StatCard({ icon, value, label, className = "", delay = 0 }) {
-  return (
-    <motion.div
-      animate={float(delay)}
-      whileHover={{ scale: 1.06, y: -6 }}
-      className={`absolute z-20 rounded-2xl border border-(--glass-border) bg-(--glass-bg) p-4 backdrop-blur-xl shadow-(--shadow-card) ${className}`}
-    >
-      <div className="flex items-center gap-3">
-        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-linear-to-br from-(--brand-indigo) to-(--brand-purple) shadow-lg shadow-(--brand-purple)/30">
-          {icon}
-        </div>
-        <div>
-          <div className="text-lg font-bold text-foreground leading-tight">
-            {value}
-          </div>
-          <div className="text-xs text-foreground/60 whitespace-nowrap">
-            {label}
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
 export default function Banner() {
   return (
-    <section
-      className="relative min-h-screen w-full overflow-hidden pt-10 xl:pt-0"
-      style={{ background: "var(--gradient-hero)" }}
-    >
-      {/* Mesh gradient blobs */}
+    <section className="relative min-h-screen w-full overflow-hidden bg-[#060419] px-4 py-16 flex items-center">
+      {/* Dynamic Background Glows matching reference asset color weight */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <motion.div
-          animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0.7, 0.5] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-32 -left-32 h-[500px] w-[500px] rounded-full bg-[var(--brand-purple)]/30 blur-[120px]"
-        />
-        <motion.div
-          animate={{ scale: [1.1, 1, 1.1], opacity: [0.4, 0.6, 0.4] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/3 -right-40 h-[600px] w-[600px] rounded-full bg-[var(--brand-blue)]/25 blur-[140px]"
-        />
-        <motion.div
-          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-0 left-1/3 h-[400px] w-[400px] rounded-full bg-[var(--brand-indigo)]/30 blur-[100px]"
-        />
+        <div className="absolute top-[-10%] left-[-10%] h-[600px] w-[600px] rounded-full bg-violet-900/20 blur-[140px]" />
+        <div className="absolute bottom-[10%] right-[-5%] h-[500px] w-[500px] rounded-full bg-indigo-900/20 blur-[130px]" />
       </div>
 
-      {/* Grid noise overlay */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage:
-            "linear-gradient(var(--foreground) 1px, transparent 1px), linear-gradient(90deg, var(--foreground) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-        }}
-      />
-
-      <div className="relative z-10 mx-auto flex min-h-screen container items-center px-6 py-20 lg:px-10">
-        <div className="grid w-full items-center gap-16 lg:grid-cols-2">
-          {/* LEFT */}
+      <div className="relative z-10 mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8">
+        <div className="grid w-full items-center gap-12 lg:grid-cols-12">
+          
+          {/* LEFT SIDE: Content Column */}
           <motion.div
             variants={stagger}
             initial="hidden"
             animate="show"
-            className="space-y-8 text-center lg:text-left flex flex-col items-center lg:items-start"
+            className="space-y-6 text-center lg:text-left flex flex-col items-center lg:items-start lg:col-span-5"
           >
-            <motion.div variants={fadeUp}>
-              <div className="inline-flex items-center gap-2 rounded-full border border-[var(--glass-border)] bg-[var(--glass-bg)] px-4 py-1.5 backdrop-blur-xl">
-                <Sparkles className="h-3.5 w-3.5 text-[var(--brand-purple)]" />
-                <span className="text-xs font-medium tracking-wide text-foreground/80">
-                  Online Learning Platform
-                </span>
-              </div>
+            {/* Top Micro Label */}
+            <motion.div variants={fadeUp} className="inline-flex items-center gap-1.5 rounded-full bg-violet-500/10 px-3.5 py-1 border border-violet-500/20">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-violet-400">
+                #1 Online Learning Platform
+              </span>
             </motion.div>
 
+            {/* Typography Heading Structure */}
             <motion.h1
               variants={fadeUp}
-              className="text-5xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl"
+              className="text-4xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-5xl xl:text-6xl"
             >
               Upgrade Your
               <br />
-              <span
-                className="inline-block bg-clip-text text-transparent"
-                style={{
-                  backgroundImage: "var(--gradient-text)",
-                  filter: "drop-shadow(0 0 30px oklch(0.65 0.24 305 / 0.4))",
-                }}
-              >
+              <span className="bg-gradient-to-r from-violet-400 via-indigo-300 to-cyan-300 bg-clip-text text-transparent">
                 Skills Today
               </span>
             </motion.h1>
 
+            {/* Paragraph Subtext */}
             <motion.p
               variants={fadeUp}
-              className="max-w-lg text-lg leading-relaxed text-foreground/65 mx-auto lg:mx-0"
+              className="max-w-md text-sm sm:text-base leading-relaxed text-slate-400"
             >
-              Learn from industry experts and advance your career with our
-              high-quality, hands-on online courses crafted for ambitious
-              learners.
+              Learn from expert instructors and advance your career with our interactive courses and hands-on projects.
             </motion.p>
 
+            {/* Bullet Perks Horizontal Row */}
+            <motion.div 
+              variants={fadeUp} 
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-x-4 gap-y-2 text-xs text-slate-300 font-medium pt-2"
+            >
+              <div className="flex items-center gap-1.5 bg-white/5 border border-white/5 px-3 py-1.5 rounded-xl">
+                <Award size={14} className="text-violet-400" />
+                <span>Expert Instructors</span>
+              </div>
+              <div className="flex items-center gap-1.5 bg-white/5 border border-white/5 px-3 py-1.5 rounded-xl">
+                <Clock size={14} className="text-violet-400" />
+                <span>Lifetime Access</span>
+              </div>
+              <div className="flex items-center gap-1.5 bg-white/5 border border-white/5 px-3 py-1.5 rounded-xl">
+                <FileCheck size={14} className="text-violet-400" />
+                <span>Certificate Included</span>
+              </div>
+            </motion.div>
+
+            {/* Primary & Secondary Action Layout */}
             <motion.div
               variants={fadeUp}
-              className="flex flex-wrap items-center justify-center lg:justify-start gap-4"
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2"
             >
               <Link
-                href="/"
-                className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full px-7 py-3.5 text-sm font-semibold text-white shadow-(--shadow-glow) transition-all hover:scale-[1.03] hover:shadow-[0_25px_70px_-15px_oklch(0.60_0.25_290/0.7)]"
-                style={{ backgroundImage: "var(--gradient-primary)" }}
+                href="/courses"
+                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-violet-600/20 hover:brightness-110 active:scale-98 transition-all duration-200"
               >
-                <span className="relative z-10">Explore Courses</span>
-                <ArrowRight className="relative z-10 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                <span className="absolute inset-0 bg-white/0 transition-colors group-hover:bg-white/10" />
+                Explore Courses
+                <ArrowRight size={14} />
               </Link>
 
-              <button className="group inline-flex items-center gap-2.5 rounded-full border border-[var(--glass-border)] bg-(--glass-bg) px-6 py-3.5 text-sm font-semibold text-foreground backdrop-blur-xl transition-all hover:border-white/25 hover:bg-white/10">
-                <PlayCircle className="h-5 w-5 text-[var(--brand-purple)] transition-transform group-hover:scale-110" />
+              <button className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-white backdrop-blur-md hover:bg-white/10 transition-all duration-200">
+                <div className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-slate-950">
+                  <Play size={10} fill="currentColor" className="ml-0.5" />
+                </div>
                 How It Works
               </button>
             </motion.div>
 
+            {/* Social Social Proof Reviews Badge */}
             <motion.div
               variants={fadeUp}
-              className="flex items-center justify-center lg:justify-start gap-6 pt-4"
+              className="flex items-center justify-center lg:justify-start gap-3 pt-2"
             >
-              <div className="flex -space-x-2">
+              <div className="flex -space-x-2.5">
                 {[0, 1, 2, 3].map((i) => (
                   <div
                     key={i}
-                    className="h-8 w-8 rounded-full border-2 border-background bg-gradient-to-br from-[var(--brand-indigo)] to-[var(--brand-purple)]"
+                    className="h-7 w-7 rounded-full border-2 border-[#060419] bg-gradient-to-tr from-violet-600 to-indigo-400 shadow-inner"
                   />
                 ))}
               </div>
-              <p className="text-sm text-foreground/60">
-                <span className="font-semibold text-foreground">20,000+</span>{" "}
-                learners growing daily
+              <p className="text-xs text-slate-400 font-medium">
+                <span className="text-violet-400 font-bold">4.8/5</span> from{" "}
+                <span className="text-white font-semibold">10K+</span> learners worldwide
               </p>
             </motion.div>
           </motion.div>
 
-          {/* RIGHT */}
+          {/* RIGHT SIDE: Interactive Media Frame with Absolute Badges */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.92 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-            className="relative mx-auto aspect-square w-full max-w-[560px]"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
+            className="relative w-full lg:col-span-7 flex justify-center lg:justify-end"
           >
-            {/* Glow */}
-            <div className="absolute inset-8 rounded-[2rem] bg-gradient-to-br from-[var(--brand-purple)]/40 via-[var(--brand-indigo)]/30 to-[var(--brand-blue)]/40 blur-3xl" />
-
-            {/* Animated rings
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-              className="absolute inset-0 rounded-full border border-dashed border-white/10"
-            />
-            <motion.div
-              animate={{ rotate: -360 }}
-              transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-              className="absolute inset-6 rounded-full border border-white/5"
-            /> */}
-
-            {/* Image card */}
-            <motion.div
-              animate={float(0, 8)}
-              className="relative h-full w-full overflow-hidden rounded-[2rem] border border-[var(--glass-border)] bg-[var(--glass-bg)] p-2 backdrop-blur-xl shadow-2xl"
-            >
-              <div className="relative h-full w-full overflow-hidden rounded-[1.7rem]">
+            {/* Ambient Background Container Ring System */}
+            <div className="relative w-full max-w-[580px] aspect-[4/3] rounded-3xl border border-white/5 bg-[#0b0826]/40 p-4 shadow-2xl backdrop-blur-sm">
+              
+              {/* Internal Framed Core Hero Image Asset */}
+              <div className="relative h-full w-full overflow-hidden rounded-2xl border border-white/10 shadow-inner">
                 <Image
                   src={bannerImage}
                   alt="Online learning illustration"
-                  width={1024}
-                  height={1024}
-                  className="h-full w-full object-cover"
+                  priority
+                  fill
+                  sizes="(max-w-7xl) 50vw, 100vw"
+                  className="object-cover object-center brightness-95 contrast-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
+                {/* Clean vignette matching darkness profile */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#060419]/40 via-transparent to-transparent" />
               </div>
-            </motion.div>
 
-            <StatCard
-              icon={<Users className="h-5 w-5 text-white" />}
-              value="20K+"
-              label="Active Students"
-              className="-left-4 top-8 sm:-left-10"
-              delay={0}
-            />
-            <StatCard
-              icon={<UserCheck className="h-5 w-5 text-white" />}
-              value="200+"
-              label="Expert Instructors"
-              className="-right-2 top-1/2 sm:-right-8"
-              delay={1.5}
-            />
-            <StatCard
-              icon={<BookOpen className="h-5 w-5 text-white" />}
-              value="500+"
-              label="Online Courses"
-              className="bottom-6 left-4 sm:left-0"
-              delay={3}
-            />
+              {/* Floating Badge 1: Expert Courses (Top Left) */}
+              <motion.div
+                animate={float(0, 6)}
+                className="absolute -top-3 -left-3 sm:-left-6 z-20 flex items-center gap-2 rounded-xl border border-white/10 bg-[#0d0a2d]/90 p-2.5 pr-4 backdrop-blur-md shadow-xl"
+              >
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-600/20 text-violet-400">
+                  <GraduationCap size={16} />
+                </div>
+                <div>
+                  <div className="text-xs font-black text-white leading-none">250+</div>
+                  <div className="text-[9px] text-slate-400 font-medium mt-0.5 whitespace-nowrap">Expert Courses</div>
+                </div>
+              </motion.div>
+
+              {/* Floating Badge 2: Expert Instructors (Bottom Left) */}
+              <motion.div
+                animate={float(1.5, 5)}
+                className="absolute -bottom-3 left-4 z-20 flex items-center gap-2 rounded-xl border border-white/10 bg-[#0d0a2d]/90 p-2.5 pr-4 backdrop-blur-md shadow-xl"
+              >
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-600/20 text-indigo-400">
+                  <Users2 size={16} />
+                </div>
+                <div>
+                  <div className="text-xs font-black text-white leading-none">500+</div>
+                  <div className="text-[9px] text-slate-400 font-medium mt-0.5 whitespace-nowrap">Expert Instructors</div>
+                </div>
+              </motion.div>
+
+              {/* Floating Badge 3: Satisfaction Rate (Right Side Center) */}
+              <motion.div
+                animate={float(0.8, 7)}
+                className="absolute top-1/2 -right-3 sm:-right-6 -translate-y-1/2 z-20 flex items-center gap-2 rounded-xl border border-white/10 bg-[#0d0a2d]/90 p-2.5 pr-4 backdrop-blur-md shadow-xl"
+              >
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-cyan-600/20 text-cyan-400">
+                  <Smile size={16} />
+                </div>
+                <div>
+                  <div className="text-xs font-black text-white leading-none">98%</div>
+                  <div className="text-[9px] text-slate-400 font-medium mt-0.5 whitespace-nowrap">Satisfaction Rate</div>
+                </div>
+              </motion.div>
+
+            </div>
           </motion.div>
+
         </div>
       </div>
     </section>
