@@ -12,7 +12,7 @@ const PopularCourses = ({ courses = [] }) => {
   }, [courses]);
 
   return (
-    <section className="relative overflow-hidden bg-[#060419] py-16 lg:py-20">
+    <section className="relative overflow-hidden bg-background transition-colors duration-300 py-16 lg:py-20">
       
       {/* Background Section Glow Accent */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -28,11 +28,11 @@ const PopularCourses = ({ courses = [] }) => {
               BROWSE TOP COURSES
             </span>
 
-            <h2 className="text-2xl font-black tracking-tight text-white sm:text-3xl">
+            <h2 className="text-2xl font-black tracking-tight text-foreground sm:text-3xl transition-colors duration-300 ">
               Popular Courses
             </h2>
 
-            <p className="text-xs text-slate-400 font-medium">
+            <p className="text-xs text-muted transition-colors duration-300 font-medium">
               Discover our most in-demand courses across various fields.
             </p>
           </div>
@@ -40,7 +40,7 @@ const PopularCourses = ({ courses = [] }) => {
           {/* Clean Premium View All Link Button */}
           <Link
             href="/courses"
-            className="rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-[11px] font-semibold text-slate-300 transition-all duration-200 hover:border-white/20 hover:bg-white/10 hover:text-white"
+            className="rounded-full border border-card-border transition-colors duration-300 bg-foreground/5 transition-colors duration-300 px-4 py-1.5 text-[11px] font-semibold text-secondary transition-colors duration-300 transition-all duration-200 hover:border-card-border transition-colors duration-300 hover:bg-foreground/10 transition-colors duration-300 hover:text-foreground transition-colors duration-300 "
           >
             View All Courses
           </Link>

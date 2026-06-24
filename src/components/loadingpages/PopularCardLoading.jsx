@@ -5,7 +5,7 @@ import React from "react";
 
 const PopularCardLoading = () => {
   return (
-    <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 transition-colors duration-300">
+    <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 transition-colors duration-300 ">
       
       {/* Header Row Content Alignment */}
       <div className="flex flex-col sm:flex-row justify-center gap-4 sm:justify-between items-center my-8">
@@ -18,7 +18,7 @@ const PopularCardLoading = () => {
         {Array.from({ length: 4 }).map((_, index) => (
           <div 
             key={index} 
-            className="space-y-4 p-4 border border-white/5 bg-[#0b0826]/50 rounded-[28px] backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
+            className="space-y-4 p-4 border border-card-border transition-colors duration-300 bg-card-bg/50 transition-colors duration-300 rounded-[28px] backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
           >
             {/* Visual Media Thumbnail Cover Placeholder */}
             <Skeleton className="h-44 w-full rounded-2xl bg-slate-800/50 before:from-transparent before:via-white/10 before:to-transparent opacity-70" />

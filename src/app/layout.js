@@ -4,6 +4,7 @@ import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 import { CourseProvider } from "@/lib/context/CourseProvider";
 import { ToastContainer } from "react-toastify";
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
 
 const OutfitFont = Outfit({
   subsets: ["latin"],
@@ -19,16 +20,23 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      data-theme="light"
-      className={`${OutfitFont.className}  h-full antialiased`}
+      className={`${OutfitFont.className} h-full antialiased`}
+      suppressHydrationWarning
     >
       <body>
-        <Navbar />
-        <main>
-          <CourseProvider>{children}</CourseProvider>
-        </main>
-        <Footer />
-        <ToastContainer position="top-center" />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Navbar />
+          <main>
+            <CourseProvider>{children}</CourseProvider>
+          </main>
+          <Footer />
+          <ToastContainer position="top-center" theme="colored" />
+        </ThemeProvider>
       </body>
     </html>
   );

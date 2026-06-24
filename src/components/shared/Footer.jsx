@@ -10,7 +10,7 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="relative overflow-hidden bg-[#030214] border-t border-white/5 pt-16 pb-8">
+    <footer className="relative overflow-hidden bg-background transition-colors duration-300 border-t border-card-border transition-colors duration-300 pt-16 pb-8">
       {/* Structural Atmospheric Glow Accents */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-0 bottom-0 h-64 w-64 rounded-full bg-violet-600/5 blur-[100px]" />
@@ -27,7 +27,7 @@ const Footer = () => {
               </div>
 
               <div className="flex flex-col">
-                <h1 className="text-lg font-black tracking-tight text-white leading-none">
+                <h1 className="text-lg font-black tracking-tight text-foreground leading-none transition-colors duration-300 ">
                   Skill{" "}
                   <span className="bg-gradient-to-r from-violet-400 to-indigo-300 bg-clip-text text-transparent">
                     Sphere
@@ -39,7 +39,7 @@ const Footer = () => {
               </div>
             </Link>
 
-            <p className="max-w-xs text-xs font-medium leading-relaxed text-slate-400">
+            <p className="max-w-xs text-xs font-medium leading-relaxed text-muted transition-colors duration-300 ">
               Empowering learners worldwide through high-quality online
               education, practical skills, and industry-focused courses.
             </p>
@@ -48,28 +48,28 @@ const Footer = () => {
             <div className="flex gap-2 pt-2">
               <Link
                 href="#"
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-white/5 bg-[#0d0a2d]/40 text-slate-400 transition-all duration-300 hover:border-violet-500 hover:bg-[#5643ff] hover:text-white"
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-card-border transition-colors duration-300 bg-card-bg/40 transition-colors duration-300 text-muted transition-colors duration-300 transition-all duration-300 hover:border-violet-500 hover:bg-[#5643ff] hover:text-white"
               >
                 <FaFacebookF size={12} />
               </Link>
 
               <Link
                 href="#"
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-white/5 bg-[#0d0a2d]/40 text-slate-400 transition-all duration-300 hover:border-violet-500 hover:bg-[#5643ff] hover:text-white"
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-card-border transition-colors duration-300 bg-card-bg/40 transition-colors duration-300 text-muted transition-colors duration-300 transition-all duration-300 hover:border-violet-500 hover:bg-[#5643ff] hover:text-white"
               >
                 <FaTwitter size={12} />
               </Link>
 
               <Link
                 href="#"
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-white/5 bg-[#0d0a2d]/40 text-slate-400 transition-all duration-300 hover:border-violet-500 hover:bg-[#5643ff] hover:text-white"
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-card-border transition-colors duration-300 bg-card-bg/40 transition-colors duration-300 text-muted transition-colors duration-300 transition-all duration-300 hover:border-violet-500 hover:bg-[#5643ff] hover:text-white"
               >
                 <FaInstagram size={12} />
               </Link>
 
               <Link
                 href="#"
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-white/5 bg-[#0d0a2d]/40 text-slate-400 transition-all duration-300 hover:border-violet-500 hover:bg-[#5643ff] hover:text-white"
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-card-border transition-colors duration-300 bg-card-bg/40 transition-colors duration-300 text-muted transition-colors duration-300 transition-all duration-300 hover:border-violet-500 hover:bg-[#5643ff] hover:text-white"
               >
                 <FaLinkedinIn size={12} />
               </Link>
@@ -78,7 +78,7 @@ const Footer = () => {
 
           {/* Navigation Column: Quick Links */}
           <div>
-            <h3 className="mb-4 text-sm font-bold text-white tracking-wide">
+            <h3 className="mb-4 text-sm font-bold text-foreground tracking-wide transition-colors duration-300 ">
               Quick Links
             </h3>
             <ul className="space-y-2.5">
@@ -92,7 +92,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <Link
                     href={link.path}
-                    className="text-xs font-semibold text-slate-400 transition-colors duration-300 hover:text-[#5643ff]"
+                    className="text-xs font-semibold text-muted transition-colors duration-300 hover:text-[#5643ff]"
                   >
                     {link.name}
                   </Link>
@@ -103,7 +103,7 @@ const Footer = () => {
 
           {/* Navigation Column: Support Details */}
           <div>
-            <h3 className="mb-4 text-sm font-bold text-white tracking-wide">
+            <h3 className="mb-4 text-sm font-bold text-foreground tracking-wide transition-colors duration-300 ">
               Support
             </h3>
             <ul className="space-y-2.5">
@@ -117,7 +117,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <Link
                     href={link.path}
-                    className="text-xs font-semibold text-slate-400 transition-colors duration-300 hover:text-[#5643ff]"
+                    className="text-xs font-semibold text-muted transition-colors duration-300 hover:text-[#5643ff]"
                   >
                     {link.name}
                   </Link>
@@ -128,22 +128,22 @@ const Footer = () => {
 
           {/* Navigation Column: Contact Details with CTA CTA Button */}
           <div className="space-y-4">
-            <h3 className="text-sm font-bold text-white tracking-wide">
+            <h3 className="text-sm font-bold text-foreground tracking-wide transition-colors duration-300 ">
               Contact Info
             </h3>
 
             <div className="space-y-2.5">
-              <div className="flex items-center gap-2.5 text-xs text-slate-400 font-medium">
+              <div className="flex items-center gap-2.5 text-xs text-muted transition-colors duration-300 font-medium">
                 <Mail size={13} className="text-violet-400 shrink-0" />
                 <span>hello@skillsphere.com</span>
               </div>
 
-              <div className="flex items-center gap-2.5 text-xs text-slate-400 font-medium">
+              <div className="flex items-center gap-2.5 text-xs text-muted transition-colors duration-300 font-medium">
                 <Phone size={13} className="text-violet-400 shrink-0" />
                 <span>+1 (555) 123-4567</span>
               </div>
 
-              <div className="flex items-center gap-2.5 text-xs text-slate-400 font-medium">
+              <div className="flex items-center gap-2.5 text-xs text-muted transition-colors duration-300 font-medium">
                 <MapPin size={13} className="text-violet-400 shrink-0" />
                 <span>New York, USA</span>
               </div>
@@ -153,7 +153,7 @@ const Footer = () => {
             <div className="pt-1">
               <Link
                 href="/become-instructor"
-                className="inline-flex items-center justify-center rounded-full border border-violet-500/30 bg-[#0d0a2d]/60 px-4 py-2 text-[11px] font-bold text-slate-200 transition-all duration-300 hover:border-violet-500 hover:bg-[#5643ff] hover:text-white"
+                className="inline-flex items-center justify-center rounded-full border border-violet-500/30 bg-card-bg/60 transition-colors duration-300 px-4 py-2 text-[11px] font-bold text-primary transition-colors duration-300 transition-all duration-300 hover:border-violet-500 hover:bg-[#5643ff] hover:text-white"
               >
                 Become an Instructor
               </Link>
@@ -162,25 +162,25 @@ const Footer = () => {
         </div>
 
         {/* Global Copyright and Legal Links Row */}
-        <div className="mt-6 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-6 text-[11px] font-medium text-slate-500 sm:flex-row">
+        <div className="mt-6 flex flex-col items-center justify-between gap-4 border-t border-card-border transition-colors duration-300 pt-6 text-[11px] font-medium text-muted transition-colors duration-300 sm:flex-row">
           <p>© 2026 SkillSphere. All rights reserved.</p>
 
           <div className="flex gap-5">
             <Link
               href="/privacy-policy"
-              className="hover:text-violet-400 transition-colors"
+              className="hover:text-violet-400 transition-colors duration-300 "
             >
               Privacy
             </Link>
             <Link
               href="/terms"
-              className="hover:text-violet-400 transition-colors"
+              className="hover:text-violet-400 transition-colors duration-300 "
             >
               Terms
             </Link>
             <Link
               href="/cookies"
-              className="hover:text-violet-400 transition-colors"
+              className="hover:text-violet-400 transition-colors duration-300 "
             >
               Cookies
             </Link>

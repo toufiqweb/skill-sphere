@@ -49,7 +49,7 @@ const float = (delay = 0, distance = 8) => ({
 
 export default function Banner() {
   return (
-    <section className="relative min-h-screen w-full overflow-hidden bg-[#060419] px-4 py-20 flex items-center">
+    <section className="relative min-h-screen w-full overflow-hidden bg-background px-4 py-20 flex items-center transition-colors duration-300 ">
       {/* Dynamic Background Glows matching reference asset color weight */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute top-[-10%] left-[-10%] h-[600px] w-[600px] rounded-full bg-violet-900/20 blur-[140px]" />
@@ -76,7 +76,7 @@ export default function Banner() {
             {/* Typography Heading Structure */}
             <motion.h1
               variants={fadeUp}
-              className="text-4xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-5xl xl:text-6xl"
+              className="text-4xl font-extrabold leading-[1.1] tracking-tight text-foreground sm:text-5xl xl:text-6xl transition-colors duration-300 "
             >
               Upgrade Your
               <br />
@@ -88,7 +88,7 @@ export default function Banner() {
             {/* Paragraph Subtext */}
             <motion.p
               variants={fadeUp}
-              className="max-w-md text-sm sm:text-base leading-relaxed text-slate-400"
+              className="max-w-md text-sm sm:text-base leading-relaxed text-muted transition-colors duration-300 "
             >
               Learn from expert instructors and advance your career with our interactive courses and hands-on projects.
             </motion.p>
@@ -96,17 +96,17 @@ export default function Banner() {
             {/* Bullet Perks Horizontal Row */}
             <motion.div 
               variants={fadeUp} 
-              className="flex flex-wrap items-center justify-center lg:justify-start gap-x-4 gap-y-2 text-xs text-slate-300 font-medium pt-2"
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-x-4 gap-y-2 text-xs text-secondary font-medium pt-2 transition-colors duration-300 "
             >
-              <div className="flex items-center gap-1.5 bg-white/5 border border-white/5 px-3 py-1.5 rounded-xl">
+              <div className="flex items-center gap-1.5 bg-foreground/5 border border-card-border px-3 py-1.5 rounded-xl transition-colors duration-300 ">
                 <Award size={14} className="text-violet-400" />
                 <span>Expert Instructors</span>
               </div>
-              <div className="flex items-center gap-1.5 bg-white/5 border border-white/5 px-3 py-1.5 rounded-xl">
+              <div className="flex items-center gap-1.5 bg-foreground/5 border border-card-border px-3 py-1.5 rounded-xl transition-colors duration-300 ">
                 <Clock size={14} className="text-violet-400" />
                 <span>Lifetime Access</span>
               </div>
-              <div className="flex items-center gap-1.5 bg-white/5 border border-white/5 px-3 py-1.5 rounded-xl">
+              <div className="flex items-center gap-1.5 bg-foreground/5 border border-card-border px-3 py-1.5 rounded-xl transition-colors duration-300 ">
                 <FileCheck size={14} className="text-violet-400" />
                 <span>Certificate Included</span>
               </div>
@@ -125,8 +125,8 @@ export default function Banner() {
                 <ArrowRight size={14} />
               </Link>
 
-              <button className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-white backdrop-blur-md hover:bg-white/10 transition-all duration-200">
-                <div className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-slate-950">
+              <button className="inline-flex items-center gap-2 rounded-full border border-card-border bg-foreground/5 px-6 py-3 text-sm font-semibold text-foreground backdrop-blur-md hover:bg-foreground/10 transition-all duration-200">
+                <div className="flex h-5 w-5 items-center justify-center rounded-full bg-foreground text-background">
                   <Play size={10} fill="currentColor" className="ml-0.5" />
                 </div>
                 How It Works
@@ -142,13 +142,13 @@ export default function Banner() {
                 {[0, 1, 2, 3].map((i) => (
                   <div
                     key={i}
-                    className="h-7 w-7 rounded-full border-2 border-[#060419] bg-gradient-to-tr from-violet-600 to-indigo-400 shadow-inner"
+                    className="h-7 w-7 rounded-full border-2 border-background bg-gradient-to-tr from-violet-600 to-indigo-400 shadow-inner"
                   />
                 ))}
               </div>
-              <p className="text-xs text-slate-400 font-medium">
+              <p className="text-xs text-muted font-medium transition-colors duration-300 ">
                 <span className="text-violet-400 font-bold">4.8/5</span> from{" "}
-                <span className="text-white font-semibold">10K+</span> learners worldwide
+                <span className="text-foreground font-semibold">10K+</span> learners worldwide
               </p>
             </motion.div>
           </motion.div>
@@ -161,10 +161,10 @@ export default function Banner() {
             className="relative w-full lg:col-span-7 flex justify-center lg:justify-end"
           >
             {/* Ambient Background Container Ring System */}
-            <div className="relative w-full max-w-[580px] aspect-[4/3] rounded-3xl border border-white/5 bg-[#0b0826]/40 p-4 shadow-2xl backdrop-blur-sm">
+            <div className="relative w-full max-w-[580px] aspect-[4/3] rounded-3xl border border-card-border bg-card-bg/40 p-4 shadow-2xl backdrop-blur-sm transition-colors duration-300 ">
               
               {/* Internal Framed Core Hero Image Asset */}
-              <div className="relative h-full w-full overflow-hidden rounded-2xl border border-white/10 shadow-inner">
+              <div className="relative h-full w-full overflow-hidden rounded-2xl border border-card-border shadow-inner transition-colors duration-300 ">
                 <Image
                   src={bannerImage}
                   alt="Online learning illustration"
@@ -174,48 +174,48 @@ export default function Banner() {
                   className="object-cover object-center brightness-95 contrast-105"
                 />
                 {/* Clean vignette matching darkness profile */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#060419]/40 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent transition-colors duration-300 " />
               </div>
 
               {/* Floating Badge 1: Expert Courses (Top Left) */}
               <motion.div
                 animate={float(0, 6)}
-                className="absolute -top-3 -left-3 sm:-left-6 z-20 flex items-center gap-2 rounded-xl border border-white/10 bg-[#0d0a2d]/90 p-2.5 pr-4 backdrop-blur-md shadow-xl"
+                className="absolute -top-3 -left-3 sm:-left-6 z-20 flex items-center gap-2 rounded-xl border border-card-border bg-card-bg p-2.5 pr-4 backdrop-blur-md shadow-xl transition-colors duration-300 "
               >
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-600/20 text-violet-400">
                   <GraduationCap size={16} />
                 </div>
                 <div>
-                  <div className="text-xs font-black text-white leading-none">250+</div>
-                  <div className="text-[9px] text-slate-400 font-medium mt-0.5 whitespace-nowrap">Expert Courses</div>
+                  <div className="text-xs font-black text-foreground leading-none transition-colors duration-300 ">250+</div>
+                  <div className="text-[9px] text-muted font-medium mt-0.5 whitespace-nowrap transition-colors duration-300 ">Expert Courses</div>
                 </div>
               </motion.div>
 
               {/* Floating Badge 2: Expert Instructors (Bottom Left) */}
               <motion.div
                 animate={float(1.5, 5)}
-                className="absolute -bottom-3 left-4 z-20 flex items-center gap-2 rounded-xl border border-white/10 bg-[#0d0a2d]/90 p-2.5 pr-4 backdrop-blur-md shadow-xl"
+                className="absolute -bottom-3 left-4 z-20 flex items-center gap-2 rounded-xl border border-card-border bg-card-bg p-2.5 pr-4 backdrop-blur-md shadow-xl transition-colors duration-300 "
               >
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-600/20 text-indigo-400">
                   <Users2 size={16} />
                 </div>
                 <div>
-                  <div className="text-xs font-black text-white leading-none">500+</div>
-                  <div className="text-[9px] text-slate-400 font-medium mt-0.5 whitespace-nowrap">Expert Instructors</div>
+                  <div className="text-xs font-black text-foreground leading-none transition-colors duration-300 ">500+</div>
+                  <div className="text-[9px] text-muted font-medium mt-0.5 whitespace-nowrap transition-colors duration-300 ">Expert Instructors</div>
                 </div>
               </motion.div>
 
               {/* Floating Badge 3: Satisfaction Rate (Right Side Center) */}
               <motion.div
                 animate={float(0.8, 7)}
-                className="absolute top-1/2 -right-3 sm:-right-6 -translate-y-1/2 z-20 flex items-center gap-2 rounded-xl border border-white/10 bg-[#0d0a2d]/90 p-2.5 pr-4 backdrop-blur-md shadow-xl"
+                className="absolute top-1/2 -right-3 sm:-right-6 -translate-y-1/2 z-20 flex items-center gap-2 rounded-xl border border-card-border bg-card-bg p-2.5 pr-4 backdrop-blur-md shadow-xl transition-colors duration-300 "
               >
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-cyan-600/20 text-cyan-400">
                   <Smile size={16} />
                 </div>
                 <div>
-                  <div className="text-xs font-black text-white leading-none">98%</div>
-                  <div className="text-[9px] text-slate-400 font-medium mt-0.5 whitespace-nowrap">Satisfaction Rate</div>
+                  <div className="text-xs font-black text-foreground leading-none transition-colors duration-300 ">98%</div>
+                  <div className="text-[9px] text-muted font-medium mt-0.5 whitespace-nowrap transition-colors duration-300 ">Satisfaction Rate</div>
                 </div>
               </motion.div>
 

@@ -12,7 +12,7 @@ const learningTips = [
     iconColor: "text-purple-400",
     badges: [
       { text: "Study Smart", className: "bg-purple-500/10 text-purple-400" },
-      { text: "Optimization", className: "bg-slate-500/10 text-slate-400" }
+      { text: "Optimization", className: "bg-slate-500/10 text-muted transition-colors duration-300 " }
     ],
   },
   {
@@ -41,7 +41,7 @@ const learningTips = [
 
 const LearningTips = () => {
   return (
-    <section className="relative overflow-hidden bg-[#060419] py-16 lg:py-20">
+    <section className="relative overflow-hidden bg-background transition-colors duration-300 py-16 lg:py-20">
       
       {/* Background Ambient Glow */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -56,17 +56,17 @@ const LearningTips = () => {
             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-violet-400 block">
               LEARNING RESOURCES
             </span>
-            <h2 className="text-2xl font-black tracking-tight text-white sm:text-3xl">
+            <h2 className="text-2xl font-black tracking-tight text-foreground sm:text-3xl transition-colors duration-300 ">
               Learning Tips & Guides
             </h2>
-            <p className="text-xs sm:text-sm text-slate-400 font-medium">
+            <p className="text-xs sm:text-sm text-muted transition-colors duration-300 font-medium">
               Practical tips and insights to accelerate your learning journey.
             </p>
           </div>
 
           <Link
             href="/tips"
-            className="text-[11px] font-medium text-slate-300 border border-slate-800 rounded-full px-4 py-1.5 hover:bg-white/5 hover:text-white transition-all duration-300"
+            className="text-[11px] font-medium text-secondary transition-colors duration-300 border border-slate-800 rounded-full px-4 py-1.5 hover:bg-foreground/5 transition-colors duration-300 hover:text-foreground transition-all duration-300 transition-colors duration-300 "
           >
             View All Tips
           </Link>
@@ -80,7 +80,7 @@ const LearningTips = () => {
             return (
               <div
                 key={tip.id}
-                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/5 bg-[#0b0826]/30 p-6 transition-all duration-300 hover:border-white/10 hover:bg-[#0f0b34]/40 min-h-[190px]"
+                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-card-border transition-colors duration-300 bg-card-bg/30 transition-colors duration-300 p-6 transition-all duration-300 hover:border-card-border transition-colors duration-300 hover:bg-card-bg/40 transition-colors duration-300 min-h-[190px]"
               >
                 <div>
                   {/* Row for Multiple Badges */}
@@ -96,12 +96,12 @@ const LearningTips = () => {
                   </div>
 
                   {/* Card Title Layer */}
-                  <h3 className="text-sm font-bold text-white tracking-tight sm:text-base mb-2">
+                  <h3 className="text-sm font-bold text-foreground tracking-tight sm:text-base mb-2 transition-colors duration-300 ">
                     {tip.title}
                   </h3>
 
                   {/* Card Description Paragraph */}
-                  <p className="text-xs text-slate-400 leading-relaxed font-medium">
+                  <p className="text-xs text-muted transition-colors duration-300 leading-relaxed font-medium">
                     {tip.description}
                   </p>
                 </div>

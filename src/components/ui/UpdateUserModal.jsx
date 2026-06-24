@@ -30,7 +30,7 @@ const UpdateUserModal = ({ user }) => {
     <div>
       <Modal>
         {/* Trigger Button with transparent background inheriting custom styling safely */}
-        <Button className="w-full h-full text-base font-bold bg-transparent text-white flex items-center justify-center gap-2 border-none outline-none cursor-pointer">
+        <Button className="w-full h-full text-base font-bold bg-transparent text-foreground flex items-center justify-center gap-2 border-none outline-none cursor-pointer transition-colors duration-300 ">
           <Edit2 className="w-4 h-4" />
           Edit Profile
         </Button>
@@ -38,7 +38,7 @@ const UpdateUserModal = ({ user }) => {
         <Modal.Backdrop className="backdrop-blur-md bg-black/40">
           <Modal.Container placement="auto" className="p-4">
             <Modal.Dialog className="sm:max-w-md overflow-hidden rounded-3xl border border-[var(--glass-border)] bg-[var(--background)] shadow-2xl">
-              <Modal.CloseTrigger className="text-muted hover:text-primary transition-colors cursor-pointer top-4 right-4" />
+              <Modal.CloseTrigger className="text-muted hover:text-primary transition-colors duration-300 cursor-pointer top-4 right-4" />
               
               {/* Profile Header Block */}
               <Modal.Header className="flex flex-col items-center justify-center gap-3 pt-8 pb-4 px-6 border-b border-[var(--glass-border)] bg-[var(--card-bg)]/20">
@@ -103,7 +103,7 @@ const UpdateUserModal = ({ user }) => {
                       <Button
                         type="submit"
                         slot="close"
-                        className="px-6 py-3 rounded-xl bg-main-gradient text-white font-bold text-xs uppercase tracking-wider transition-all cursor-pointer select-none border-none outline-none shadow-md"
+                        className="px-6 py-3 rounded-xl bg-main-gradient text-foreground font-bold text-xs uppercase tracking-wider transition-all cursor-pointer select-none border-none outline-none shadow-md transition-colors duration-300 "
                       >
                         Update Info
                       </Button>

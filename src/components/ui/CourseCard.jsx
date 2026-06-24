@@ -61,10 +61,10 @@ export default function CourseCard({ course }) {
         ease: [0.22, 1, 0.36, 1],
       }}
       whileHover={{ y: -8 }}
-      className="group relative h-full rounded-[28px] border border-white/5 p-[1px] shadow-[0_20px_50px_rgba(0,0,0,0.3)] transition-shadow duration-500 hover:shadow-[0_0_30px_rgba(109,93,252,0.2)] bg-gradient-to-b from-white/10 to-transparent"
+      className="group relative h-full rounded-[28px] border border-card-border transition-colors duration-300 p-[1px] shadow-[0_20px_50px_rgba(0,0,0,0.3)] transition-shadow duration-500 hover:shadow-[0_0_30px_rgba(109,93,252,0.2)] bg-gradient-to-b from-white/10 to-transparent"
     >
       {/* Inner Glass Surface — Updated to Deep Space Styling Framework */}
-      <div className="relative flex h-full flex-col overflow-hidden rounded-[27px] bg-[#0b0826]/75 backdrop-blur-2xl">
+      <div className="relative flex h-full flex-col overflow-hidden rounded-[27px] bg-card-bg/75 transition-colors duration-300 backdrop-blur-2xl">
         
         {/* Image */}
         <div className="relative h-52 overflow-hidden m-2 rounded-[20px]">
@@ -76,15 +76,15 @@ export default function CourseCard({ course }) {
             className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
 
-          <div className="absolute inset-0 bg-gradient-to-t from-[#05041a] via-transparent to-transparent opacity-60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60 transition-colors duration-300 " />
 
           {/* Top Badges */}
           <div className="absolute left-3 right-3 top-3 flex items-start justify-between">
-            <span className="rounded-full border border-white/10 bg-[#05041a]/60 px-3 py-1 text-[11px] font-semibold text-slate-200 backdrop-blur-md">
+            <span className="rounded-full border border-card-border bg-card-bg/60 px-3 py-1 text-[11px] font-semibold text-primary transition-colors duration-300 backdrop-blur-md">
               {category}
             </span>
 
-            <span className="flex items-center gap-1 rounded-full border border-white/10 bg-[#05041a]/60 px-2.5 py-1 text-[11px] font-black text-white backdrop-blur-md">
+            <span className="flex items-center gap-1 rounded-full border border-card-border bg-card-bg/60 px-2.5 py-1 text-[11px] font-black text-foreground backdrop-blur-md transition-colors duration-300 ">
               <Star
                 className="h-3 w-3 fill-yellow-400 text-yellow-400"
                 strokeWidth={1.5}
@@ -94,7 +94,7 @@ export default function CourseCard({ course }) {
           </div>
 
           {/* Level */}
-          <div className="absolute bottom-3 left-3 flex items-center gap-1.5 rounded-full border border-white/10 bg-[#05041a]/70 px-2.5 py-1 text-[11px] font-bold text-slate-200 backdrop-blur-md">
+          <div className="absolute bottom-3 left-3 flex items-center gap-1.5 rounded-full border border-card-border bg-card-bg/70 px-2.5 py-1 text-[11px] font-bold text-primary transition-colors duration-300 backdrop-blur-md">
             <Signal className="h-3 w-3 text-indigo-400" strokeWidth={2.5} />
             {level}
           </div>
@@ -110,7 +110,7 @@ export default function CourseCard({ course }) {
         >
           <motion.h3
             variants={item}
-            className="line-clamp-2 text-base sm:text-lg font-black leading-snug text-white tracking-tight group-hover:text-[#8b7eff] transition-colors duration-200"
+            className="line-clamp-2 text-base sm:text-lg font-black leading-snug text-foreground tracking-tight group-hover:text-brand-purple transition-colors duration-300 "
           >
             {title}
           </motion.h3>
@@ -118,7 +118,7 @@ export default function CourseCard({ course }) {
           {/* Instructor */}
           <motion.div variants={item} className="flex items-center gap-3">
             <div
-              className="flex h-9 w-9 items-center justify-center rounded-full text-xs font-black text-white shadow-md shadow-indigo-600/10"
+              className="flex h-9 w-9 items-center justify-center rounded-full text-xs font-black text-foreground shadow-md shadow-indigo-600/10 transition-colors duration-300 "
               style={{ backgroundImage: "linear-gradient(to right, #5643ff, #6d5dfc)" }}
             >
               {instructor
@@ -130,9 +130,9 @@ export default function CourseCard({ course }) {
             </div>
 
             <div className="flex flex-col">
-              <span className="text-[10px] uppercase tracking-wider font-bold text-slate-500">Instructor</span>
+              <span className="text-[10px] uppercase tracking-wider font-bold text-muted transition-colors duration-300 ">Instructor</span>
 
-              <span className="text-sm font-bold text-slate-300">
+              <span className="text-sm font-bold text-secondary transition-colors duration-300 ">
                 {instructor}
               </span>
             </div>
@@ -141,24 +141,24 @@ export default function CourseCard({ course }) {
           {/* Meta Info Wrapper Card Setup */}
           <motion.div
             variants={item}
-            className="grid grid-cols-3 gap-1 rounded-2xl border border-white/5 bg-[#06041a]/40 p-2.5"
+            className="grid grid-cols-3 gap-1 rounded-2xl border border-card-border transition-colors duration-300 bg-card-bg/40 p-2.5"
           >
             <div className="flex flex-col items-center gap-1 text-center justify-center">
               <Clock
                 className="h-3.5 w-3.5 text-indigo-400"
                 strokeWidth={2.5}
               />
-              <span className="text-[10px] font-bold text-slate-400">
+              <span className="text-[10px] font-bold text-muted transition-colors duration-300 ">
                 {duration}
               </span>
             </div>
 
-            <div className="flex flex-col items-center gap-1 border-x border-white/5 text-center justify-center">
+            <div className="flex flex-col items-center gap-1 border-x border-card-border transition-colors duration-300 text-center justify-center">
               <BookOpen
                 className="h-3.5 w-3.5 text-purple-400"
                 strokeWidth={2.5}
               />
-              <span className="text-[10px] font-bold text-slate-400">
+              <span className="text-[10px] font-bold text-muted transition-colors duration-300 ">
                 {lessons} lessons
               </span>
             </div>
@@ -168,7 +168,7 @@ export default function CourseCard({ course }) {
                 className="h-3.5 w-3.5 text-pink-400"
                 strokeWidth={2.5}
               />
-              <span className="text-[10px] font-bold text-slate-400">
+              <span className="text-[10px] font-bold text-muted transition-colors duration-300 ">
                 {students} students
               </span>
             </div>
@@ -177,17 +177,17 @@ export default function CourseCard({ course }) {
           {/* Price + CTA Actions Block Section */}
           <motion.div
             variants={item}
-            className="mt-auto flex items-center justify-between gap-3 pt-3 border-t border-white/5"
+            className="mt-auto flex items-center justify-between gap-3 pt-3 border-t border-card-border transition-colors duration-300 "
           >
             <div className="flex items-baseline gap-1.5">
               <span
-                className="bg-clip-text text-xl font-black text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-400"
+                className="bg-clip-text text-xl font-black text-transparent bg-gradient-to-r from-foreground via-foreground/90 to-foreground/70 transition-colors duration-300 "
               >
                 ${price}
               </span>
 
               {originalPrice > price && (
-                <span className="text-xs text-slate-500 font-semibold line-through">
+                <span className="text-xs text-muted transition-colors duration-300 font-semibold line-through">
                   ${originalPrice}
                 </span>
               )}

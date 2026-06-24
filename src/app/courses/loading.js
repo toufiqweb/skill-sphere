@@ -7,7 +7,7 @@ const CourseLoadingSkeleton = () => {
   const skeletonCards = Array.from({ length: 6 });
 
   return (
-    <div className="relative min-h-screen bg-[#05041a] py-12 pt-28 lg:pt-36 px-4 transition-colors duration-300 overflow-hidden">
+    <div className="relative min-h-screen bg-background transition-colors duration-300 py-12 pt-28 lg:pt-36 px-4 transition-colors duration-300 overflow-hidden">
       
       {/* Background Cyber-Aesthetic Vector Glows */}
       <div className="pointer-events-none absolute inset-0 z-0">
@@ -35,7 +35,7 @@ const CourseLoadingSkeleton = () => {
         {/* =========================================================
             SECTION 2: Interactive Toolbar Skeleton (Search/Filter Control)
             ========================================================= */}
-        <div className="w-full max-w-xl mx-auto bg-[#0b0826]/40 border border-white/5 p-2 rounded-2xl shadow-xl backdrop-blur-md">
+        <div className="w-full max-w-xl mx-auto bg-card-bg/40 transition-colors duration-300 border border-card-border transition-colors duration-300 p-2 rounded-2xl shadow-xl backdrop-blur-md">
           <Skeleton className="h-12 w-full rounded-xl bg-white/[0.04]" />
         </div>
 
@@ -46,12 +46,12 @@ const CourseLoadingSkeleton = () => {
           {skeletonCards.map((_, idx) => (
             <div 
               key={idx} 
-              className="bg-[#0b0826]/40 backdrop-blur-2xl rounded-[28px] border border-white/5 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.3)] flex flex-col justify-between p-5 space-y-5"
+              className="bg-card-bg/40 transition-colors duration-300 backdrop-blur-2xl rounded-[28px] border border-card-border transition-colors duration-300 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.3)] flex flex-col justify-between p-5 space-y-5"
             >
               <div className="space-y-4">
                 {/* Simulated Thumbnail Frame Container */}
-                <div className="h-44 w-full bg-[#06041a]/60 rounded-2xl relative overflow-hidden flex items-center justify-center border border-white/[0.02]">
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0b0826]/50 via-transparent to-transparent opacity-40" />
+                <div className="h-44 w-full bg-card-bg/60 transition-colors duration-300 rounded-2xl relative overflow-hidden flex items-center justify-center border border-white/[0.02]">
+                  <div className="absolute inset-0 bg-gradient-to-t from-card-bg/50 transition-colors duration-300 via-transparent to-transparent opacity-40" />
                   <Skeleton className="w-full h-full rounded-2xl bg-white/[0.03]" />
                 </div>
                 
@@ -76,7 +76,7 @@ const CourseLoadingSkeleton = () => {
               </div>
 
               {/* Card Footer Segment (Author / Call to Action) */}
-              <div className="pt-4 border-t border-white/5 flex items-center justify-between px-1">
+              <div className="pt-4 border-t border-card-border transition-colors duration-300 flex items-center justify-between px-1">
                 <div className="flex items-center gap-2">
                   <Skeleton className="w-7 h-7 rounded-lg bg-white/[0.03]" />
                   <Skeleton className="h-3.5 w-20 rounded-md bg-white/[0.02]" />
@@ -90,16 +90,16 @@ const CourseLoadingSkeleton = () => {
         {/* =========================================================
             SECTION 4: Lower Telemetry Diagnostic Feedback
             ========================================================= */}
-        <div className="max-w-md mx-auto bg-[#06041a]/90 border border-white/5 rounded-2xl p-4 flex items-center justify-between shadow-xl backdrop-blur-md">
+        <div className="max-w-md mx-auto bg-card-bg/90 transition-colors duration-300 border border-card-border transition-colors duration-300 rounded-2xl p-4 flex items-center justify-between shadow-xl backdrop-blur-md">
           <div className="flex items-center gap-3 min-w-0">
             <div className="w-8 h-8 rounded-xl bg-purple-500/10 border border-purple-500/20 text-[#8b7eff] flex items-center justify-center shrink-0">
               <Spinner size="sm" color="secondary" />
             </div>
             <div className="min-w-0 text-left">
-              <p className="text-[9px] font-black tracking-widest text-slate-500 uppercase flex items-center gap-1">
+              <p className="text-[9px] font-black tracking-widest text-muted transition-colors duration-300 uppercase flex items-center gap-1">
                 <Terminal className="w-2.5 h-2.5" /> Pipeline Handshake
               </p>
-              <p className="text-xs font-mono font-medium text-slate-300 truncate mt-0.5 animate-pulse">
+              <p className="text-xs font-mono font-medium text-secondary transition-colors duration-300 truncate mt-0.5 animate-pulse">
                 Parsing active database curriculum registries...
               </p>
             </div>

@@ -59,7 +59,7 @@ const testimonials = [
 
 const WhatOurStudentSay = () => {
   return (
-    <section className="relative overflow-hidden bg-[#060419] py-16 lg:py-20">
+    <section className="relative overflow-hidden bg-background transition-colors duration-300 py-16 lg:py-20">
       
       {/* Background Decorative Ambient Flares */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -74,11 +74,11 @@ const WhatOurStudentSay = () => {
             TESTIMONIALS
           </span>
 
-          <h2 className="text-2xl font-black tracking-tight text-white sm:text-3xl lg:text-4xl">
+          <h2 className="text-2xl font-black tracking-tight text-foreground sm:text-3xl lg:text-4xl transition-colors duration-300 ">
             What Our <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">Students</span> Say
           </h2>
           
-          <p className="mx-auto max-w-md text-xs sm:text-sm text-slate-400 font-medium">
+          <p className="mx-auto max-w-md text-xs sm:text-sm text-muted transition-colors duration-300 font-medium">
             Real feedback from our learners about their experience.
           </p>
         </div>
@@ -112,7 +112,7 @@ const WhatOurStudentSay = () => {
           >
             {testimonials.map((test) => (
               <SwiperSlide key={test.id} className="h-auto">
-                <div className="group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-white/5 bg-[#0b0826]/40 p-6 transition-all duration-300 hover:border-white/10 hover:bg-[#0f0b34]/50 min-h-[190px]">
+                <div className="group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-card-border transition-colors duration-300 bg-card-bg/40 transition-colors duration-300 p-6 transition-all duration-300 hover:border-card-border transition-colors duration-300 hover:bg-card-bg/50 transition-colors duration-300 min-h-[190px]">
                   <div>
                     {/* 5-Star Rating Array Row */}
                     <div className="mb-3.5 flex items-center gap-0.5">
@@ -122,7 +122,7 @@ const WhatOurStudentSay = () => {
                     </div>
 
                     {/* Primary User Review Copy Block */}
-                    <p className="text-xs font-medium leading-relaxed text-slate-300">
+                    <p className="text-xs font-medium leading-relaxed text-secondary transition-colors duration-300 ">
                       {`"${test.review}"`}
                     </p>
                   </div>
@@ -140,10 +140,10 @@ const WhatOurStudentSay = () => {
                     </div>
 
                     <div className="space-y-0.5">
-                      <h4 className="text-xs font-bold text-white tracking-tight">
+                      <h4 className="text-xs font-bold text-foreground tracking-tight transition-colors duration-300 ">
                         {test.name}
                       </h4>
-                      <p className="text-[10px] font-medium text-slate-400">
+                      <p className="text-[10px] font-medium text-muted transition-colors duration-300 ">
                         {test.role}
                       </p>
                     </div>
@@ -159,25 +159,6 @@ const WhatOurStudentSay = () => {
 
       </div>
 
-      {/* Embedded Swiper Custom Navigation Color Overrides */}
-      <style jsx global>{`
-        .custom-swiper-pagination .swiper-pagination-bullet {
-          width: 6px !important;
-          height: 6px !important;
-          background: #334155 !important; /* slate-700 */
-          opacity: 1 !important;
-          border-radius: 9999px !important;
-          transition: all 0.3s ease !important;
-          margin: 0 4px !important;
-          border: none !important;
-          outline: none !important;
-          cursor: pointer;
-        }
-        .custom-swiper-pagination .swiper-pagination-bullet-active {
-          width: 16px !important; /* Pill expansion active indicator */
-          background: #8b5cf6 !important; /* violet-500 */
-        }
-      `}</style>
     </section>
   );
 };

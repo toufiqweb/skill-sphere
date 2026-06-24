@@ -37,7 +37,7 @@ const NewReleases = ({ courses = [] }) => {
   const latestCourses = [...courses].reverse().slice(0, 4);
 
   return (
-    <section className="relative overflow-hidden bg-[#060419] py-20 lg:py-24">
+    <section className="relative overflow-hidden bg-background transition-colors duration-300 py-20 lg:py-24">
       {/* Background Soft Glow Layer */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute top-20 left-12 h-[300px] w-[300px] rounded-full bg-violet-600/10 blur-[120px]" />
@@ -47,7 +47,7 @@ const NewReleases = ({ courses = [] }) => {
         {/* Header Block matching ChatGPT Image May 31, 2026, 04_46_30 PM.png */}
         <div className="mb-12 flex flex-col justify-between items-start md:flex-row md:items-center gap-6">
           <div className="flex items-start gap-4">
-            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-[#0d0a2d]/60 text-violet-400 shadow-[0_0_20px_rgba(86,67,255,0.15)]">
+            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-card-border transition-colors duration-300 bg-card-bg/60 transition-colors duration-300 text-violet-400 shadow-[0_0_20px_rgba(86,67,255,0.15)]">
               <IoSparklesSharp size={22} className="text-violet-400" />
             </div>
 
@@ -55,13 +55,13 @@ const NewReleases = ({ courses = [] }) => {
               <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-violet-400 block">
                 FRESH CONTENT
               </span>
-              <h2 className="text-3xl font-black tracking-tight text-white sm:text-4xl">
+              <h2 className="text-3xl font-black tracking-tight text-foreground sm:text-4xl transition-colors duration-300 ">
                 New{" "}
                 <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
                   Releases
                 </span>
               </h2>
-              <p className="text-xs sm:text-sm text-slate-400 font-medium">
+              <p className="text-xs sm:text-sm text-muted transition-colors duration-300 font-medium">
                 Discover our newest courses and stay ahead of the curve.
               </p>
             </div>
@@ -69,7 +69,7 @@ const NewReleases = ({ courses = [] }) => {
 
           <Link
             href="/courses"
-            className="group inline-flex items-center gap-2 rounded-full border border-violet-500/30 bg-[#0d0a2d]/40 px-5 py-2 text-xs font-semibold text-slate-200 backdrop-blur-md transition-all duration-300 hover:border-violet-500 hover:text-white hover:shadow-[0_0_15px_rgba(86,67,255,0.2)]"
+            className="group inline-flex items-center gap-2 rounded-full border border-violet-500/30 bg-card-bg/40 transition-colors duration-300 px-5 py-2 text-xs font-semibold text-primary transition-colors duration-300 backdrop-blur-md transition-all duration-300 hover:border-violet-500 hover:text-foreground hover:shadow-[0_0_15px_rgba(86,67,255,0.2)] transition-colors duration-300 "
           >
             <span>View All Courses</span>
             <ArrowRight
@@ -91,7 +91,7 @@ const NewReleases = ({ courses = [] }) => {
             <motion.div
               key={course.id}
               variants={cardVariants}
-              className="group relative overflow-hidden rounded-3xl border border-white/5 bg-[#08061f]/60 transition-all duration-300 hover:border-violet-500/30 hover:bg-[#0c092b]/80"
+              className="group relative overflow-hidden rounded-3xl border border-card-border transition-colors duration-300 bg-card-bg/60 transition-colors duration-300 transition-all duration-300 hover:border-violet-500/30 hover:bg-card-bg/80 transition-colors duration-300 "
             >
               <div className="flex flex-col sm:flex-row h-full">
                 {/* Left Side Thumbnail Image Layout */}
@@ -104,7 +104,7 @@ const NewReleases = ({ courses = [] }) => {
                   />
 
                   {/* Overlay Gradient Vignette */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-[#08061f]/40" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-card-bg/40 transition-colors duration-300 " />
 
                   {/* Top-Left Absolute Position Floating Category Badge */}
                   <div className="absolute left-4 top-4">
@@ -118,40 +118,40 @@ const NewReleases = ({ courses = [] }) => {
                 <div className="flex flex-1 flex-col p-6 justify-between space-y-4">
                   <div className="space-y-2.5">
                     {/* Course Global Scoring Flag */}
-                    <div className="flex items-center gap-1.5 text-[11px] font-medium text-slate-400">
+                    <div className="flex items-center gap-1.5 text-[11px] font-medium text-muted transition-colors duration-300 ">
                       <Star
                         size={12}
                         className="fill-amber-400 text-amber-400"
                       />
-                      <span className="font-bold text-slate-200">
+                      <span className="font-bold text-primary transition-colors duration-300 ">
                         {course.rating || "4.8"}
                       </span>
-                      <span className="text-slate-500">Course Rating</span>
+                      <span className="text-muted transition-colors duration-300 ">Course Rating</span>
                     </div>
 
                     {/* Content Title Header */}
-                    <h3 className="text-lg font-black tracking-tight text-white leading-snug line-clamp-2">
+                    <h3 className="text-lg font-black tracking-tight text-foreground leading-snug line-clamp-2 transition-colors duration-300 ">
                       {course.title}
                     </h3>
 
                     {/* Excerpt Body Block */}
-                    <p className="text-xs font-medium leading-relaxed text-slate-400 line-clamp-2">
+                    <p className="text-xs font-medium leading-relaxed text-muted transition-colors duration-300 line-clamp-2">
                       {course.description ||
                         "Master these concepts, strategies, and industry standard execution practices."}
                     </p>
 
                     {/* Horizontally Arranged Micro Metadata Tag Pills */}
                     <div className="flex flex-wrap gap-2 pt-1.5">
-                      <div className="flex items-center gap-1.5 rounded-lg border border-white/5 bg-[#030214]/60 px-3 py-1.5">
+                      <div className="flex items-center gap-1.5 rounded-lg border border-card-border transition-colors duration-300 bg-card-bg/60 transition-colors duration-300 px-3 py-1.5">
                         <BookOpen size={12} className="text-violet-400" />
-                        <span className="text-[10px] font-bold text-slate-300 tracking-wide">
+                        <span className="text-[10px] font-bold text-secondary transition-colors duration-300 tracking-wide">
                           {course.lessons || 20} Lessons
                         </span>
                       </div>
 
-                      <div className="flex items-center gap-1.5 rounded-lg border border-white/5 bg-[#030214]/60 px-3 py-1.5">
+                      <div className="flex items-center gap-1.5 rounded-lg border border-card-border transition-colors duration-300 bg-card-bg/60 transition-colors duration-300 px-3 py-1.5">
                         <Clock3 size={12} className="text-violet-400" />
-                        <span className="text-[10px] font-bold text-slate-300 tracking-wide">
+                        <span className="text-[10px] font-bold text-secondary transition-colors duration-300 tracking-wide">
                           {course.duration || "12 hours"}
                         </span>
                       </div>

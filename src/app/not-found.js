@@ -4,7 +4,7 @@ import { Compass, Home, HelpCircle, ArrowLeft, Terminal, AlertTriangle } from "l
 
 const NotFoundPage = () => {
   return (
-    <div className="relative min-h-screen bg-[#05041a] flex flex-col items-center justify-center px-4 transition-colors duration-300 overflow-hidden">
+    <div className="relative min-h-screen bg-background transition-colors duration-300 flex flex-col items-center justify-center px-4 transition-colors duration-300 overflow-hidden">
       
       {/* Background Graphic Ambient Glow Matrix */}
       <div className="pointer-events-none absolute inset-0 z-0">
@@ -17,7 +17,7 @@ const NotFoundPage = () => {
         {/* =========================================================
             MAIN 404 DISPLAY CONTAINER (GLASS FRAME)
             ========================================================= */}
-        <div className="bg-[#0b0826]/40 backdrop-blur-3xl rounded-[32px] border border-white/5 p-8 md:p-10 text-center shadow-[0_24px_60px_rgba(0,0,0,0.5)] relative overflow-hidden">
+        <div className="bg-card-bg/40 transition-colors duration-300 backdrop-blur-3xl rounded-[32px] border border-card-border transition-colors duration-300 p-8 md:p-10 text-center shadow-[0_24px_60px_rgba(0,0,0,0.5)] relative overflow-hidden">
           
           {/* Decorative soft purple radial glow inside the card */}
           <div className="absolute -bottom-12 -left-12 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl pointer-events-none" />
@@ -32,11 +32,11 @@ const NotFoundPage = () => {
             404
           </h1>
           
-          <h2 className="text-xl font-bold text-white tracking-tight mb-3">
+          <h2 className="text-xl font-bold text-foreground tracking-tight mb-3 transition-colors duration-300 ">
             Route Destination Not Found
           </h2>
           
-          <p className="text-slate-400 text-xs sm:text-sm leading-relaxed max-w-xs mx-auto mb-8 font-medium">
+          <p className="text-muted transition-colors duration-300 text-xs sm:text-sm leading-relaxed max-w-xs mx-auto mb-8 font-medium">
             The layout directory or page path parameters you are trying to pull don&apos;t exist or have been completely parsed out of system files.
           </p>
 
@@ -44,9 +44,9 @@ const NotFoundPage = () => {
           <div className="flex flex-col sm:flex-row gap-3">
             <Link
               href="/support"
-              className="flex-1 order-2 sm:order-1 border border-white/5 bg-[#06041a]/40 hover:bg-white/5 text-slate-300 font-bold py-3.5 rounded-2xl text-xs uppercase tracking-wider transition-all active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer backdrop-blur-md"
+              className="flex-1 order-2 sm:order-1 border border-card-border transition-colors duration-300 bg-card-bg/40 transition-colors duration-300 hover:bg-foreground/5 transition-colors duration-300 text-secondary transition-colors duration-300 font-bold py-3.5 rounded-2xl text-xs uppercase tracking-wider transition-all active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer backdrop-blur-md"
             >
-              <HelpCircle className="w-4 h-4 text-slate-500" />
+              <HelpCircle className="w-4 h-4 text-muted transition-colors duration-300 " />
               Get Support
             </Link>
 
@@ -60,10 +60,10 @@ const NotFoundPage = () => {
           </div>
 
           {/* Secondary Escape Action Anchor */}
-          <div className="mt-8 pt-5 border-t border-white/5">
+          <div className="mt-8 pt-5 border-t border-card-border transition-colors duration-300 ">
             <Link 
               href="/" 
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-white transition-colors tracking-wide uppercase group"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-muted transition-colors duration-300 hover:text-foreground transition-colors duration-300 tracking-wide uppercase group transition-colors duration-300 "
             >
               <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-1" />
               Return to primary workspace
@@ -75,15 +75,15 @@ const NotFoundPage = () => {
         {/* =========================================================
             DOWNSTREAM ELEMENT: DIAGNOSTIC TELEMETRY LOG
             ========================================================= */}
-        <div className="bg-[#06041a]/90 border border-white/5 rounded-2xl p-4 flex items-center gap-3 shadow-xl backdrop-blur-md">
-          <div className="w-7 h-7 rounded-lg bg-white/5 flex items-center justify-center shrink-0 border border-white/5">
+        <div className="bg-card-bg/90 transition-colors duration-300 border border-card-border transition-colors duration-300 rounded-2xl p-4 flex items-center gap-3 shadow-xl backdrop-blur-md">
+          <div className="w-7 h-7 rounded-lg bg-foreground/5 transition-colors duration-300 flex items-center justify-center shrink-0 border border-card-border transition-colors duration-300 ">
             <Terminal className="w-3.5 h-3.5 text-amber-500" />
           </div>
           <div className="min-w-0 flex-1 text-left">
-            <p className="text-[9px] font-black tracking-widest text-slate-500 uppercase flex items-center gap-1">
+            <p className="text-[9px] font-black tracking-widest text-muted transition-colors duration-300 uppercase flex items-center gap-1">
               <AlertTriangle className="w-2.5 h-2.5" /> Terminal Warning Log
             </p>
-            <p className="text-xs font-mono font-medium text-slate-300 truncate mt-0.5">
+            <p className="text-xs font-mono font-medium text-secondary transition-colors duration-300 truncate mt-0.5">
               ERR_HTTP_INVALID_ROUTING_PARAMETER // 404_NULL_POINTER
             </p>
           </div>

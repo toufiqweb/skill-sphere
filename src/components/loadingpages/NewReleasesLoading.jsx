@@ -3,7 +3,7 @@ import React from "react";
 
 const NewReleasesLoading = () => {
   return (
-    <div className="container mx-auto my-20 space-y-10 px-4 transition-colors duration-300">
+    <div className="container mx-auto my-20 space-y-10 px-4 transition-colors duration-300 ">
       
       {/* Top Header Row Alignment */}
       <div className="flex flex-col md:flex-row justify-center gap-5 md:justify-between items-center">

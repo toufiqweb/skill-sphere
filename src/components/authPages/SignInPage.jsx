@@ -59,7 +59,7 @@ const SignInPage = () => {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#05041a] pt-32 pb-16 flex flex-col items-center justify-center p-4 overflow-hidden">
+    <div className="relative min-h-screen bg-background transition-colors duration-300 pt-32 pb-16 flex flex-col items-center justify-center p-4 overflow-hidden">
       
       {/* Background Graphic Curves & Neon Spot Highlights */}
       <div className="pointer-events-none absolute inset-0 z-0">
@@ -78,10 +78,10 @@ const SignInPage = () => {
           <GraduationCap size={18} />
         </div>
         <div className="flex flex-col">
-          <h1 className="text-base font-black tracking-tight text-white leading-none">
-            Skill<span className="text-slate-400 font-semibold">Sphere</span>
+          <h1 className="text-base font-black tracking-tight text-foreground leading-none transition-colors duration-300 ">
+            Skill<span className="text-muted transition-colors duration-300 font-semibold">Sphere</span>
           </h1>
-          <span className="text-[7px] uppercase tracking-[0.25em] text-slate-500 font-bold mt-0.5">
+          <span className="text-[7px] uppercase tracking-[0.25em] text-muted transition-colors duration-300 font-bold mt-0.5">
             Learn • Grow • Succeed
           </span>
         </div>
@@ -91,21 +91,21 @@ const SignInPage = () => {
       <div className="w-full max-w-[480px] relative z-10 mt-6">
         
         {/* Floating Top Header Circular Icon Accent Node */}
-        <div className="absolute -top-10 left-1/2 -translate-x-1/2 z-20 flex h-20 w-20 items-center justify-center rounded-full border border-purple-500/30 bg-[#0d092d] text-purple-300 shadow-[0_0_30px_rgba(109,93,252,0.25)]">
+        <div className="absolute -top-10 left-1/2 -translate-x-1/2 z-20 flex h-20 w-20 items-center justify-center rounded-full border border-purple-500/30 bg-background transition-colors duration-300 text-purple-300 shadow-[0_0_30px_rgba(109,93,252,0.25)]">
           <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-b from-[#6d5dfc]/20 to-transparent">
             <UserPlus size={22} className="text-[#8b7eff]" />
           </div>
         </div>
 
         {/* Main Card Component Box Framework */}
-        <div className="bg-[#0b0826]/60 backdrop-blur-2xl rounded-[32px] border border-white/5 pt-16 pb-2 overflow-hidden shadow-[0_24px_60px_rgba(0,0,0,0.4)]">
+        <div className="bg-card-bg/60 transition-colors duration-300 backdrop-blur-2xl rounded-[32px] border border-card-border transition-colors duration-300 pt-16 pb-2 overflow-hidden shadow-[0_24px_60px_rgba(0,0,0,0.4)]">
           
           {/* Main Integrated Header Typography Group */}
           <div className="px-8 mb-8 text-center">
-            <h2 className="text-2xl font-black text-white tracking-tight sm:text-3xl">
+            <h2 className="text-2xl font-black text-foreground tracking-tight sm:text-3xl transition-colors duration-300 ">
               Welcome <span className="text-[#8b7eff]">Back</span>
             </h2>
-            <p className="text-slate-400 text-xs sm:text-sm font-medium mt-2.5">
+            <p className="text-muted transition-colors duration-300 text-xs sm:text-sm font-medium mt-2.5">
               Sign in to continue your learning journey
             </p>
           </div>
@@ -115,7 +115,7 @@ const SignInPage = () => {
             <button
               type="button"
               onClick={handleGoogleLogin}
-              className="w-full flex items-center justify-center gap-3 border border-white/5 bg-[#07051a]/50 hover:bg-white/5 text-slate-200 font-bold py-3.5 rounded-xl text-xs sm:text-sm transition-all duration-200 cursor-pointer"
+              className="w-full flex items-center justify-center gap-3 border border-card-border transition-colors duration-300 bg-card-bg/50 transition-colors duration-300 hover:bg-foreground/5 transition-colors duration-300 text-primary transition-colors duration-300 font-bold py-3.5 rounded-xl text-xs sm:text-sm transition-all duration-200 cursor-pointer"
             >
               <FcGoogle className="text-lg shrink-0" />
               <span>Continue with Google</span>
@@ -123,8 +123,8 @@ const SignInPage = () => {
 
             {/* Symmetric Midsection Text Separator Module */}
             <div className="relative flex items-center justify-center py-2">
-              <div className="border-t border-white/5 w-full"></div>
-              <span className="absolute bg-[#0b0826] px-3 py-0.5 rounded-md border border-white/5 text-[9px] font-black tracking-widest text-slate-500 uppercase">
+              <div className="border-t border-card-border transition-colors duration-300 w-full"></div>
+              <span className="absolute bg-card-bg transition-colors duration-300 px-3 py-0.5 rounded-md border border-card-border transition-colors duration-300 text-[9px] font-black tracking-widest text-muted transition-colors duration-300 uppercase">
                 OR
               </span>
             </div>
@@ -135,7 +135,7 @@ const SignInPage = () => {
             
             {/* Input Block: Electronic Mailing Address Field */}
             <div className="space-y-2">
-              <label className="text-xs font-bold text-slate-300 flex items-center gap-2 tracking-wide">
+              <label className="text-xs font-bold text-secondary transition-colors duration-300 flex items-center gap-2 tracking-wide">
                 <Mail size={13} className="text-indigo-400" />
                 Email Address
               </label>
@@ -143,7 +143,7 @@ const SignInPage = () => {
                 type="email"
                 name="email"
                 placeholder="john@example.com"
-                className="w-full px-4 py-3.5 rounded-xl bg-[#06041a]/60 border border-white/5 text-sm text-white placeholder:text-slate-600 focus:border-indigo-500 focus:bg-[#06041a] outline-none transition-all duration-200"
+                className="w-full px-4 py-3.5 rounded-xl bg-card-bg/60 transition-colors duration-300 border border-card-border transition-colors duration-300 text-sm text-foreground placeholder:text-slate-600 focus:border-indigo-500 focus:bg-background transition-colors duration-300 outline-none transition-all duration-200 transition-colors duration-300 "
                 required
               />
             </div>
@@ -151,11 +151,11 @@ const SignInPage = () => {
             {/* Input Block: Secure Cipher Cryptographic Password Field */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <label className="text-xs font-bold text-slate-300 flex items-center gap-2 tracking-wide">
+                <label className="text-xs font-bold text-secondary transition-colors duration-300 flex items-center gap-2 tracking-wide">
                   <Lock size={13} className="text-indigo-400" />
                   Password
                 </label>
-                <Link href="/forgot-password" className="text-[11px] font-bold text-slate-500 hover:text-[#8b7eff] transition-colors">
+                <Link href="/forgot-password" className="text-[11px] font-bold text-muted transition-colors duration-300 hover:text-[#8b7eff] transition-colors duration-300 ">
                   Forgot?
                 </Link>
               </div>
@@ -164,10 +164,10 @@ const SignInPage = () => {
                   type="password"
                   name="password"
                   placeholder="Enter your password"
-                  className="w-full px-4 py-3.5 pr-10 rounded-xl bg-[#06041a]/60 border border-white/5 text-sm text-white placeholder:text-slate-600 focus:border-indigo-500 focus:bg-[#06041a] outline-none transition-all duration-200"
+                  className="w-full px-4 py-3.5 pr-10 rounded-xl bg-card-bg/60 transition-colors duration-300 border border-card-border transition-colors duration-300 text-sm text-foreground placeholder:text-slate-600 focus:border-indigo-500 focus:bg-background transition-colors duration-300 outline-none transition-all duration-200 transition-colors duration-300 "
                   required
                 />
-                <button type="button" className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300 transition-colors">
+                <button type="button" className="absolute right-3.5 top-1/2 -translate-y-1/2 text-muted transition-colors duration-300 hover:text-secondary transition-colors duration-300 ">
                   <Eye size={14} />
                 </button>
               </div>
@@ -186,8 +186,8 @@ const SignInPage = () => {
           </form>
 
           {/* Bottom Interface Redirection Route Navigation Strip */}
-          <div className="mt-6 px-8 py-4 border-t border-white/5 bg-[#040312]/40 text-center">
-            <p className="text-xs sm:text-sm text-slate-400 font-medium">
+          <div className="mt-6 px-8 py-4 border-t border-card-border transition-colors duration-300 bg-card-bg/40 transition-colors duration-300 text-center">
+            <p className="text-xs sm:text-sm text-muted transition-colors duration-300 font-medium">
               Don&apos;t have an account yet?{" "}
               <Link href="/signup" className="text-[#8b7eff] font-bold tracking-wide inline-flex items-center gap-0.5 group hover:underline">
                 Register
@@ -198,7 +198,7 @@ const SignInPage = () => {
         </div>
 
         {/* Global Structural Protection Badge / Validation Seal Element */}
-        <p className="text-center text-[10px] font-bold tracking-wider uppercase text-slate-500 mt-6 flex items-center justify-center gap-2 select-none">
+        <p className="text-center text-[10px] font-bold tracking-wider uppercase text-muted transition-colors duration-300 mt-6 flex items-center justify-center gap-2 select-none">
           <ShieldCheck size={13} className="text-emerald-500 shrink-0" />
           <span>Secured by industry-leading encryption parameters</span>
         </p>

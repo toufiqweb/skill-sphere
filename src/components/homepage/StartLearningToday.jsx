@@ -15,7 +15,7 @@ const featuresList = [
 
 const StartLearningToday = () => {
   return (
-    <section className="relative overflow-hidden bg-[#060419] py-16 lg:py-20">
+    <section className="relative overflow-hidden bg-background transition-colors duration-300 py-16 lg:py-20">
       
       {/* Background Decorative Ambient Flares */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -25,7 +25,7 @@ const StartLearningToday = () => {
       <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         
         {/* Core Layout Card Panel matching ChatGPT Image May 31, 2026, 03_05_55 PM_12.png */}
-        <div className="overflow-hidden rounded-3xl border border-white/5 bg-[#0b0826]/30 p-8 sm:p-12 lg:p-16">
+        <div className="overflow-hidden rounded-3xl border border-card-border transition-colors duration-300 bg-card-bg/30 transition-colors duration-300 p-8 sm:p-12 lg:p-16">
           <div className="grid items-center gap-12 lg:grid-cols-12">
             
             {/* Left Column: Image Media block */}
@@ -48,14 +48,14 @@ const StartLearningToday = () => {
             <div className="space-y-6 lg:col-span-7 lg:pl-4">
               
               <div className="space-y-3">
-                <h2 className="text-3xl font-black tracking-tight text-white sm:text-4xl lg:text-5xl">
+                <h2 className="text-3xl font-black tracking-tight text-foreground sm:text-4xl lg:text-5xl transition-colors duration-300 ">
                   Start Learning,{" "}
                   <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
                     Today
                   </span>
                 </h2>
                 
-                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed max-w-xl font-medium">
+                <p className="text-xs sm:text-sm text-muted transition-colors duration-300 leading-relaxed max-w-xl font-medium">
                   Join thousands of learners who are already achieving their goals. Our platform delivers bite-sized premium learning engineered for modern industry application.
                 </p>
               </div>
@@ -64,10 +64,10 @@ const StartLearningToday = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 max-w-lg pt-2">
                 {featuresList.map((item, index) => (
                   <div key={index} className="flex items-center gap-3 group">
-                    <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-violet-500/30 bg-violet-500/10 transition-colors group-hover:border-violet-400">
+                    <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-violet-500/30 bg-violet-500/10 transition-colors duration-300 group-hover:border-violet-400">
                       <Check className="text-violet-400" size={12} strokeWidth={3} />
                     </div>
-                    <span className="text-xs font-semibold tracking-wide text-slate-300">
+                    <span className="text-xs font-semibold tracking-wide text-secondary transition-colors duration-300 ">
                       {item.text}
                     </span>
                   </div>
@@ -83,8 +83,8 @@ const StartLearningToday = () => {
                 </Link>
 
                 <Link href="/demo" className="w-full sm:w-auto">
-                  <button className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-xl border border-slate-800 bg-transparent px-7 py-3.5 text-xs font-bold text-slate-300 hover:border-slate-700 hover:bg-white/5 hover:text-white transition-all duration-300">
-                    <Play size={12} className="fill-current text-slate-400" />
+                  <button className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-xl border border-slate-800 bg-transparent px-7 py-3.5 text-xs font-bold text-secondary transition-colors duration-300 hover:border-slate-700 hover:bg-foreground/5 transition-colors duration-300 hover:text-foreground transition-all duration-300 transition-colors duration-300 ">
+                    <Play size={12} className="fill-current text-muted transition-colors duration-300 " />
                     Watch Demo
                   </button>
                 </Link>

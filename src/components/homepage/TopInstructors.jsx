@@ -53,7 +53,7 @@ const instructors = [
 
 export default function TopInstructors() {
   return (
-    <section className="relative overflow-hidden bg-[#060419] py-16 lg:py-20">
+    <section className="relative overflow-hidden bg-background transition-colors duration-300 py-16 lg:py-20">
       
       <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         
@@ -63,17 +63,17 @@ export default function TopInstructors() {
             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-violet-400 block">
               OUR EXPERT INSTRUCTORS
             </span>
-            <h2 className="text-2xl font-black tracking-tight text-white sm:text-3xl">
+            <h2 className="text-2xl font-black tracking-tight text-foreground sm:text-3xl transition-colors duration-300 ">
               Learn From Industry Experts
             </h2>
-            <p className="text-xs text-slate-400 font-medium">
+            <p className="text-xs text-muted transition-colors duration-300 font-medium">
               Our instructors are industry professionals with years of real-world experience.
             </p>
           </div>
 
           <Link
             href="/instructors"
-            className="rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-[11px] font-semibold text-slate-300 transition-all duration-200 hover:border-white/20 hover:bg-white/10 hover:text-white"
+            className="rounded-full border border-card-border transition-colors duration-300 bg-foreground/5 transition-colors duration-300 px-4 py-1.5 text-[11px] font-semibold text-secondary transition-colors duration-300 transition-all duration-200 hover:border-card-border transition-colors duration-300 hover:bg-foreground/10 transition-colors duration-300 hover:text-foreground transition-colors duration-300 "
           >
             View All Instructors
           </Link>
@@ -84,7 +84,7 @@ export default function TopInstructors() {
           {instructors.map((instructor) => (
             <div
               key={instructor.id}
-              className="group relative overflow-hidden rounded-2xl border border-white/5 bg-[#0b0826]/40 p-6 transition-all duration-300 hover:border-white/10 hover:bg-[#0f0b34]/60 hover:shadow-xl"
+              className="group relative overflow-hidden rounded-2xl border border-card-border transition-colors duration-300 bg-card-bg/40 transition-colors duration-300 p-6 transition-all duration-300 hover:border-card-border transition-colors duration-300 hover:bg-card-bg/60 transition-colors duration-300 hover:shadow-xl"
             >
               
               {/* Profile Headshot Block Layout */}
@@ -106,10 +106,10 @@ export default function TopInstructors() {
 
               {/* Identity & Typography Frame */}
               <div className="text-center">
-                <h3 className="text-base font-bold text-white tracking-tight">
+                <h3 className="text-base font-bold text-foreground tracking-tight transition-colors duration-300 ">
                   {instructor.name}
                 </h3>
-                <p className="text-[11px] font-medium text-slate-400 mt-0.5">
+                <p className="text-[11px] font-medium text-muted transition-colors duration-300 mt-0.5">
                   {instructor.role}
                 </p>
 
@@ -122,24 +122,24 @@ export default function TopInstructors() {
                       className="fill-amber-400 text-amber-400"
                     />
                   ))}
-                  <span className="ml-1 text-[10px] font-semibold text-slate-400">
+                  <span className="ml-1 text-[10px] font-semibold text-muted transition-colors duration-300 ">
                     ({instructor.reviewsCount})
                   </span>
                 </div>
 
                 {/* Flattened Compact Data Stats Block Row Layout */}
-                <div className="mt-5 grid grid-cols-3 border-t border-white/5 pt-4 text-center">
+                <div className="mt-5 grid grid-cols-3 border-t border-card-border transition-colors duration-300 pt-4 text-center">
                   <div>
-                    <p className="text-xs font-black text-white">{instructor.experience}</p>
-                    <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-tight mt-0.5">Years Exp.</p>
+                    <p className="text-xs font-black text-foreground transition-colors duration-300 ">{instructor.experience}</p>
+                    <p className="text-[10px] font-semibold text-muted transition-colors duration-300 uppercase tracking-tight mt-0.5">Years Exp.</p>
                   </div>
-                  <div className="border-x border-white/5">
-                    <p className="text-xs font-black text-white">{instructor.courses}</p>
-                    <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-tight mt-0.5">Courses</p>
+                  <div className="border-x border-card-border transition-colors duration-300 ">
+                    <p className="text-xs font-black text-foreground transition-colors duration-300 ">{instructor.courses}</p>
+                    <p className="text-[10px] font-semibold text-muted transition-colors duration-300 uppercase tracking-tight mt-0.5">Courses</p>
                   </div>
                   <div>
-                    <p className="text-xs font-black text-white">{instructor.students}</p>
-                    <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-tight mt-0.5">Students</p>
+                    <p className="text-xs font-black text-foreground transition-colors duration-300 ">{instructor.students}</p>
+                    <p className="text-[10px] font-semibold text-muted transition-colors duration-300 uppercase tracking-tight mt-0.5">Students</p>
                   </div>
                 </div>
 

@@ -45,7 +45,7 @@ const LoadingPage = () => {
   }, [progress]);
 
   return (
-    <div className="min-h-screen bg-[#05041a] flex items-center justify-center px-4 transition-colors duration-300 overflow-hidden relative">
+    <div className="min-h-screen bg-background transition-colors duration-300 flex items-center justify-center px-4 transition-colors duration-300 overflow-hidden relative">
       
       {/* Background Deep-Space Ambient Vector Highlights */}
       <div className="pointer-events-none absolute inset-0 z-0">
@@ -58,7 +58,7 @@ const LoadingPage = () => {
         {/* =========================================================
             MAIN COMPILATION CONTAINER (GLASS FRAME)
             ========================================================= */}
-        <div className="bg-[#0b0826]/40 backdrop-blur-3xl rounded-[32px] border border-white/5 p-8 text-center shadow-[0_24px_60px_rgba(0,0,0,0.5)] relative overflow-hidden">
+        <div className="bg-card-bg/40 transition-colors duration-300 backdrop-blur-3xl rounded-[32px] border border-card-border transition-colors duration-300 p-8 text-center shadow-[0_24px_60px_rgba(0,0,0,0.5)] relative overflow-hidden">
           
           {/* Internal localized glowing pulse nodes */}
           <div className="absolute -top-12 -right-12 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl pointer-events-none animate-pulse" />
@@ -103,17 +103,17 @@ const LoadingPage = () => {
           </div>
 
           {/* Context Metric Indicators Labeling */}
-          <h3 className="text-xl font-black text-white tracking-tight mb-1">
+          <h3 className="text-xl font-black text-foreground tracking-tight mb-1 transition-colors duration-300 ">
             Synchronizing Workspace
           </h3>
           
-          <p className="text-slate-500 text-[11px] font-bold tracking-widest uppercase mb-6 flex items-center justify-center gap-1.5">
+          <p className="text-muted transition-colors duration-300 text-[11px] font-bold tracking-widest uppercase mb-6 flex items-center justify-center gap-1.5">
             <Cpu className="w-3.5 h-3.5 text-indigo-400" />
-            Compiling Modules <span className="text-slate-300 font-black">{Math.floor(progress)}%</span>
+            Compiling Modules <span className="text-secondary transition-colors duration-300 font-black">{Math.floor(progress)}%</span>
           </p>
 
           {/* Fluid Horizontal Skeleton Loading Bar Track */}
-          <div className="w-full h-1.5 bg-white/[0.03] rounded-full overflow-hidden mb-6 border border-white/5">
+          <div className="w-full h-1.5 bg-white/[0.03] rounded-full overflow-hidden mb-6 border border-card-border transition-colors duration-300 ">
             <div 
               className="h-full bg-gradient-to-r from-[#5643ff] via-[#8b7eff] to-[#6d5dfc] transition-all duration-300 ease-out rounded-full shadow-[0_0_10px_rgba(139,126,255,0.3)]"
               style={{ width: `${progress}%` }}
@@ -121,7 +121,7 @@ const LoadingPage = () => {
           </div>
 
           {/* Secondary Footer Security Checkpoint Logs */}
-          <div className="flex items-center justify-between border-t border-white/5 pt-4 text-[10px] font-black tracking-widest uppercase text-slate-500">
+          <div className="flex items-center justify-between border-t border-card-border transition-colors duration-300 pt-4 text-[10px] font-black tracking-widest uppercase text-muted transition-colors duration-300 ">
             <span className="flex items-center gap-1.5 text-emerald-400">
               <ShieldCheck className="w-3.5 h-3.5" /> TLS Secure Node
             </span>
@@ -134,13 +134,13 @@ const LoadingPage = () => {
         {/* =========================================================
             NEW DOWNSTREAM ELEMENT: ACTIVE TELEMETRY TERMINAL FEED
             ========================================================= */}
-        <div className="bg-[#06041a]/90 border border-white/5 rounded-2xl p-4 flex items-center gap-3 shadow-xl backdrop-blur-md">
-          <div className="w-7 h-7 rounded-lg bg-white/5 flex items-center justify-center text-slate-400 shrink-0 border border-white/5">
+        <div className="bg-card-bg/90 transition-colors duration-300 border border-card-border transition-colors duration-300 rounded-2xl p-4 flex items-center gap-3 shadow-xl backdrop-blur-md">
+          <div className="w-7 h-7 rounded-lg bg-foreground/5 transition-colors duration-300 flex items-center justify-center text-muted transition-colors duration-300 shrink-0 border border-card-border transition-colors duration-300 ">
             <Terminal className="w-3.5 h-3.5 text-purple-400" />
           </div>
           <div className="min-w-0 flex-1 text-left">
-            <p className="text-[9px] font-black tracking-widest text-slate-500 uppercase">Process Pipeline Log</p>
-            <p className="text-xs font-mono font-medium text-slate-300 truncate transition-all duration-150 mt-0.5">
+            <p className="text-[9px] font-black tracking-widest text-muted transition-colors duration-300 uppercase">Process Pipeline Log</p>
+            <p className="text-xs font-mono font-medium text-secondary transition-colors duration-300 truncate transition-all duration-150 mt-0.5">
               {currentLog}
             </p>
           </div>

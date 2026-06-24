@@ -118,7 +118,7 @@ const SearchCourses = ({ courses }) => {
   };
 
   return (
-    <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-background/50 backdrop-blur-xl">
+    <div className="relative overflow-hidden rounded-3xl border border-card-border transition-colors duration-300 bg-background/50 backdrop-blur-xl">
       {/* Grid Background */}
       <div
         className="absolute inset-0 opacity-[0.04]"
@@ -174,7 +174,7 @@ const SearchCourses = ({ courses }) => {
                 setSearch(e.target.value)
               }
               placeholder="Search by title or instructor..."
-              className="h-12 w-full rounded-xl border border-white/10 bg-background/50 pl-11 pr-4 outline-none transition-all focus:border-violet-500/40"
+              className="h-12 w-full rounded-xl border border-card-border transition-colors duration-300 bg-background/50 pl-11 pr-4 outline-none transition-all focus:border-violet-500/40"
             />
           </div>
 
@@ -184,7 +184,7 @@ const SearchCourses = ({ courses }) => {
             onChange={(e) =>
               setCategory(e.target.value)
             }
-            className="h-12 rounded-xl border border-white/10 bg-background/50 px-4 outline-none focus:border-violet-500/40"
+            className="h-12 rounded-xl border border-card-border transition-colors duration-300 bg-background/50 px-4 outline-none focus:border-violet-500/40"
           >
             {categories.map((item) => (
               <option
@@ -202,7 +202,7 @@ const SearchCourses = ({ courses }) => {
             onChange={(e) =>
               setLevel(e.target.value)
             }
-            className="h-12 rounded-xl border border-white/10 bg-background/50 px-4 outline-none focus:border-violet-500/40"
+            className="h-12 rounded-xl border border-card-border transition-colors duration-300 bg-background/50 px-4 outline-none focus:border-violet-500/40"
           >
             {levels.map((item) => (
               <option
@@ -220,7 +220,7 @@ const SearchCourses = ({ courses }) => {
             onChange={(e) =>
               setSort(e.target.value)
             }
-            className="h-12 rounded-xl border border-white/10 bg-background/50 px-4 outline-none focus:border-violet-500/40"
+            className="h-12 rounded-xl border border-card-border transition-colors duration-300 bg-background/50 px-4 outline-none focus:border-violet-500/40"
           >
             <option value="">Sort By</option>
             <option value="rating">
@@ -242,7 +242,7 @@ const SearchCourses = ({ courses }) => {
             <button
               type="button"
               onClick={handleReset}
-              className="flex items-center gap-2 rounded-xl border border-white/10 px-5 py-3 transition hover:border-violet-500/30"
+              className="flex items-center gap-2 rounded-xl border border-card-border transition-colors duration-300 px-5 py-3 transition hover:border-violet-500/30"
             >
               <RotateCcw size={16} />
               Reset
@@ -250,7 +250,7 @@ const SearchCourses = ({ courses }) => {
 
             <button
               type="submit"
-              className="bg-main-gradient rounded-xl px-6 py-3 font-medium text-white shadow-lg transition hover:scale-[1.02]"
+              className="bg-main-gradient rounded-xl px-6 py-3 font-medium text-foreground shadow-lg transition hover:scale-[1.02] transition-colors duration-300 "
             >
               Search Courses
             </button>
@@ -271,7 +271,7 @@ const SearchCourses = ({ courses }) => {
                 className={`rounded-full px-4 py-2 text-sm transition ${
                   category === cat
                     ? "bg-violet-600 text-white"
-                    : "border border-white/10 hover:border-violet-500/30"
+                    : "border border-card-border transition-colors duration-300 hover:border-violet-500/30"
                 }`}
               >
                 {cat}
