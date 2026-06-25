@@ -6,11 +6,11 @@ import StartLearningToday from "@/components/homepage/StartLearningToday";
 import Stats from "@/components/homepage/Stats";
 import TopInstructors from "@/components/homepage/TopInstructors";
 import WhatOurStudentSay from "@/components/homepage/WhatOurStudentSay";
-import NewReleasesLoading from "@/components/loadingpages/NewReleasesLoading";
-import PopularCardLoading from "@/components/loadingpages/PopularCardLoading";
 import { getAllCourses } from "@/lib/api/courses";
 import { Suspense } from "react";
 import LearningJourney from "@/components/homepage/LearningJourney";
+import PopularCardLoading from "@/components/ui/PopularCardLoading";
+import NewReleasesLoading from "@/components/ui/NewReleasesLoading";
 
 export default async function Home() {
   let courses = [];
@@ -24,7 +24,7 @@ export default async function Home() {
   }
 
   return (
-    <div >
+    <div>
       <Banner />
       <Stats />
       <Suspense fallback={<PopularCardLoading />}>
@@ -34,7 +34,7 @@ export default async function Home() {
       <WhatOurStudentSay />
       <StartLearningToday />
       <Suspense fallback={<NewReleasesLoading />}>
-        <NewReleases courses={courses}/>
+        <NewReleases courses={courses} />
       </Suspense>
       <LearningTips />
       <LearningJourney />

@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 import {
   Clock,
@@ -27,13 +26,6 @@ const learnPoints = [
   "Gain job-ready skills",
 ];
 
-const requirements = [
-  "Basic computer knowledge",
-  "Internet connection",
-  "No prior experience required",
-  "Willingness to learn and practice",
-];
-
 const reviews = [
   {
     name: "Alex Johnson",
@@ -51,19 +43,6 @@ const reviews = [
     rating: 4,
     comment: "Very detailed curriculum and easy-to-follow lessons.",
   },
-];
-
-const curriculum = [
-  "Course Introduction & Overview",
-  "Understanding the Fundamentals",
-  "Core Concepts and Strategies",
-  "Practical Tools & Techniques",
-  "Advanced Strategies & Best Practices",
-  "Hands-on Projects & Case Studies",
-  "Common Challenges and Solutions",
-  "Industry Best Practices",
-  "Final Project & Assessment",
-  "Course Summary & Next Steps",
 ];
 
 export async function generateMetadata({ params }) {
@@ -109,7 +88,6 @@ const CourseDetailPage = async ({ params }) => {
 
   return (
     <div className="relative min-h-screen bg-background transition-colors duration-300 py-20 transition-colors duration-300 overflow-hidden">
-      
       {/* Background Ambient Radial Space Lights */}
       <div className="pointer-events-none absolute inset-0 z-0">
         <div className="absolute top-10 right-[-10%] w-[600px] h-[600px] bg-purple-600/5 rounded-full blur-[140px]" />
@@ -155,10 +133,8 @@ const CourseDetailPage = async ({ params }) => {
             ========================================================= */}
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 max-w-7xl">
           <div className="grid lg:grid-cols-12 gap-8 items-start">
-            
             {/* LEFT CONTENT CONTAINER */}
             <div className="lg:col-span-8 space-y-6">
-              
               {/* About Course Section */}
               <div className="bg-card-bg/60 transition-colors duration-300 backdrop-blur-2xl rounded-[28px] p-6 md:p-8 border border-card-border transition-colors duration-300 shadow-xl">
                 <h2 className="text-lg sm:text-xl font-black tracking-wide text-foreground mb-4 flex items-center gap-2 uppercase tracking-wider transition-colors duration-300 ">
@@ -166,7 +142,8 @@ const CourseDetailPage = async ({ params }) => {
                   About This Course
                 </h2>
                 <p className="text-muted transition-colors duration-300 font-medium leading-relaxed text-xs sm:text-sm">
-                  {course.description || `Immerse yourself in a program explicitly curated to target
+                  {course.description ||
+                    `Immerse yourself in a program explicitly curated to target
                   current industry demands. This pathway integrates elementary
                   baseline foundations with high-tier real-world structural
                   paradigms. By pursuing targeted case exercises, you will
@@ -200,7 +177,7 @@ const CourseDetailPage = async ({ params }) => {
                   Requirements
                 </h2>
                 <ul className="grid sm:grid-cols-2 gap-3.5">
-                  {(course.requirements || []).map((item, index) => (
+                  {(course.requirements || requirements).map((item, index) => (
                     <li
                       key={index}
                       className="flex items-center gap-2 text-muted transition-colors duration-300 text-xs sm:text-sm font-medium"
@@ -211,12 +188,37 @@ const CourseDetailPage = async ({ params }) => {
                   ))}
                 </ul>
               </div>
+
+              {/* Curriculum Section */}
+              <div className="bg-card-bg/60 transition-colors duration-300 backdrop-blur-2xl rounded-[28px] p-6 md:p-8 border border-card-border transition-colors duration-300 shadow-xl">
+                <h2 className="text-lg sm:text-xl font-black tracking-wide text-foreground mb-6 flex items-center gap-3 uppercase tracking-wider transition-colors duration-300 ">
+                  <PlayCircle className="w-5 h-5 text-[#8b7eff]" />
+                  Course Curriculum
+                </h2>
+                <div className="space-y-3">
+                  {curriculum.map((item, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center justify-between border border-card-border transition-colors duration-300 rounded-2xl p-4 bg-card-bg/40 transition-colors duration-300 hover:bg-foreground/5 transition-colors duration-300 transition-all duration-200 group cursor-pointer active:scale-[0.99]"
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className="w-9 h-9 rounded-xl bg-purple-500/10 border border-purple-500/20 text-[#8b7eff] font-bold text-xs flex items-center justify-center shrink-0">
+                          {String(index + 1).padStart(2, "0")}
+                        </div>
+                        <p className="text-secondary transition-colors duration-300 text-xs sm:text-sm font-bold tracking-tight group-hover:text-[#8b7eff] transition-colors duration-300 ">
+                          {item}
+                        </p>
+                      </div>
+                      <PlayCircle className="w-4 h-4 text-slate-600 group-hover:text-[#8b7eff] transition-colors duration-300 shrink-0" />
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
 
             {/* RIGHT STICKY SIDEBAR */}
             <div className="lg:col-span-4 lg:sticky lg:top-28 space-y-6">
               <div className="bg-card-bg/60 transition-colors duration-300 backdrop-blur-2xl rounded-[28px] border border-card-border transition-colors duration-300 p-6 md:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.3)] space-y-6">
-                
                 {/* Pricing Blocks */}
                 <div className="text-center">
                   <div className="flex items-baseline justify-center gap-2">
@@ -297,7 +299,8 @@ const CourseDetailPage = async ({ params }) => {
                     </div>
                     <div className="flex justify-between py-3.5">
                       <span className="text-muted transition-colors duration-300 flex items-center gap-2 font-bold">
-                        <PlayCircle className="w-4 h-4 text-slate-600" /> Lessons
+                        <PlayCircle className="w-4 h-4 text-slate-600" />{" "}
+                        Lessons
                       </span>
                       <span className="font-bold text-primary transition-colors duration-300 ">
                         {course.lessons} lectures
@@ -343,22 +346,22 @@ const CourseDetailPage = async ({ params }) => {
                     </div>
                     <div className="min-w-0">
                       <h4 className="font-bold text-primary transition-colors duration-300 truncate text-sm">
-                        {course.instructorName || course.instructor || "Lead Faculty"}
+                        {course.instructorName ||
+                          course.instructor ||
+                          "Lead Faculty"}
                       </h4>
                       <p className="text-[11px] text-muted transition-colors duration-300 font-bold tracking-tight truncate mt-0.5">
-                        {course.instructorRole || "Senior Engineering Instructor"}
+                        {course.instructorRole ||
+                          "Senior Engineering Instructor"}
                       </p>
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
-
           </div>
         </div>
       </div>
-
     </div>
   );
 };

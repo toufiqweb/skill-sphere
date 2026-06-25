@@ -1,21 +1,28 @@
 "use client";
 
 import { Button } from "@heroui/react";
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import MyNavLink from "../ui/MyNavLink";
 import Link from "next/link";
 import { Avatar } from "@heroui/react";
-import { Menu, X, LogOut, Search, GraduationCap, LayoutDashboard, User } from "lucide-react";
-import { authClient } from "@/lib/auth-client";
+import {
+  Menu,
+  X,
+  LogOut,
+  Search,
+  GraduationCap,
+  LayoutDashboard,
+  User,
+} from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
+import { useUserClientSession } from "@/lib/api/getUserServerSession";
 
 const Navbar = () => {
-  const { data: session } = authClient.useSession();
-  const user = session?.user;
-  
+  const { user, isPending } = useUserClientSession();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  
+
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -52,7 +59,6 @@ const Navbar = () => {
     <div className="fixed top-0 left-0 z-50 w-full backdrop-blur-xl transition-colors duration-300 ">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <nav className="flex h-20 items-center justify-between">
-          
           {/* Left Side: Hamburger & Logo Identity */}
           <div className="flex items-center gap-4">
             <button
@@ -60,7 +66,11 @@ const Navbar = () => {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
             >
-              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {isMenuOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
             </button>
 
             <Link
@@ -95,26 +105,34 @@ const Navbar = () => {
             <button className="text-muted hover:text-foreground p-2 transition-colors duration-300 duration-200 rounded-full hover:bg-foreground/5 hidden sm:block">
               <Search size={18} />
             </button>
-            
+
             <ThemeToggle />
 
             {/* Desktop Dynamic Auth & Dropdown (Hidden on Mobile) */}
             <div className="hidden md:flex items-center gap-3">
               {user ? (
-                <div ref={dropdownRef} className="relative flex items-center gap-3 rounded-full border border-card-border bg-card-bg/80 pl-3 pr-1.5 py-1.5 backdrop-blur-md transition-colors duration-300 ">
+                <div
+                  ref={dropdownRef}
+                  className="relative flex items-center gap-3 rounded-full border border-card-border bg-card-bg/80 pl-3 pr-1.5 py-1.5 backdrop-blur-md transition-colors duration-300 "
+                >
                   <span className="max-w-[100px] truncate text-xs font-medium text-primary">
                     {user?.name}
                   </span>
 
                   {/* Avatar Trigger Button */}
-                  <button 
+                  <button
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                     type="button"
                     className="focus:outline-none active:scale-95 transition-transform"
                   >
-                    <Avatar size="sm" className="h-7 w-7 ring-2 ring-violet-500/30 hover:ring-violet-500/60 transition-all">
+                    <Avatar
+                      size="sm"
+                      className="h-7 w-7 ring-2 ring-violet-500/30 hover:ring-violet-500/60 transition-all"
+                    >
                       <Avatar.Image alt={user?.name} src={user?.image} />
-                      <Avatar.Fallback className="bg-foreground text-background text-xs">{user?.name?.[0]}</Avatar.Fallback>
+                      <Avatar.Fallback className="bg-foreground text-background text-xs">
+                        {user?.name?.[0]}
+                      </Avatar.Fallback>
                     </Avatar>
                   </button>
 
@@ -122,11 +140,15 @@ const Navbar = () => {
                   {isDropdownOpen && (
                     <div className="absolute right-0 top-full mt-2 w-48 rounded-xl border border-card-border bg-card-bg p-1.5 text-foreground shadow-2xl backdrop-blur-xl animate-in fade-in slide-in-from-top-2 duration-150 z-50">
                       <div className="px-3 py-2 border-b border-card-border mb-1">
-                        <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">Signed in as</p>
-                        <p className="text-xs font-medium text-brand-purple truncate mt-0.5">{user?.name}</p>
+                        <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+                          Signed in as
+                        </p>
+                        <p className="text-xs font-medium text-brand-purple truncate mt-0.5">
+                          {user?.name}
+                        </p>
                       </div>
 
-                      <Link 
+                      <Link
                         href="/dashboard"
                         onClick={() => setIsDropdownOpen(false)}
                         className="flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-secondary hover:text-foreground hover:bg-foreground/5 rounded-lg transition-colors duration-300 "
@@ -135,7 +157,7 @@ const Navbar = () => {
                         <span>Dashboard</span>
                       </Link>
 
-                      <Link 
+                      <Link
                         href="/profile"
                         onClick={() => setIsDropdownOpen(false)}
                         className="flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-secondary hover:text-foreground hover:bg-foreground/5 rounded-lg transition-colors duration-300 "
@@ -162,7 +184,10 @@ const Navbar = () => {
               ) : (
                 <div className="flex gap-4 items-center">
                   <Link href="/signin">
-                    <Button variant="light" className="text-secondary hover:text-foreground font-medium text-sm px-3 bg-transparent transition-colors duration-300 ">
+                    <Button
+                      variant="light"
+                      className="text-secondary hover:text-foreground font-medium text-sm px-3 bg-transparent transition-colors duration-300 "
+                    >
                       Login
                     </Button>
                   </Link>
@@ -179,13 +204,16 @@ const Navbar = () => {
             {!user && (
               <div className="md:hidden">
                 <Link href="/signin">
-                  <Button size="sm" variant="flat" className="bg-foreground/5 text-foreground border border-card-border font-medium text-xs rounded-lg px-3">
+                  <Button
+                    size="sm"
+                    variant="flat"
+                    className="bg-foreground/5 text-foreground border border-card-border font-medium text-xs rounded-lg px-3"
+                  >
                     Login
                   </Button>
                 </Link>
               </div>
             )}
-
           </div>
         </nav>
       </div>
@@ -193,7 +221,6 @@ const Navbar = () => {
       {/* Mobile Hamburger Menu Dropdown Panel */}
       {isMenuOpen && (
         <div className="md:hidden border-t border-nav-border bg-nav-bg backdrop-blur-2xl px-4 py-6 shadow-xl animate-in fade-in slide-in-from-top-2 duration-200">
-          
           {/* Main Navigation Links */}
           <ul className="flex flex-col gap-4 text-base text-secondary px-2 font-medium">
             {links}
@@ -204,15 +231,24 @@ const Navbar = () => {
               <div className="flex flex-col gap-2 px-2">
                 {/* User Info Card */}
                 <div className="flex items-center gap-3 bg-foreground/5 p-3 rounded-xl border border-card-border mb-2">
-                  <Avatar size="sm" src={user?.image} name={user?.name?.[0]} className="h-8 w-8 ring-2 ring-brand-purple/20" />
+                  <Avatar
+                    size="sm"
+                    src={user?.image}
+                    name={user?.name?.[0]}
+                    className="h-8 w-8 ring-2 ring-brand-purple/20"
+                  />
                   <div className="flex flex-col min-w-0">
-                    <span className="text-sm font-medium text-foreground truncate">{user?.name}</span>
-                    <span className="text-[10px] text-muted truncate">Logged In</span>
+                    <span className="text-sm font-medium text-foreground truncate">
+                      {user?.name}
+                    </span>
+                    <span className="text-[10px] text-muted truncate">
+                      Logged In
+                    </span>
                   </div>
                 </div>
 
                 {/* Mobile Dashboard Link */}
-                <Link 
+                <Link
                   href="/dashboard"
                   onClick={() => setIsMenuOpen(false)}
                   className="flex items-center gap-3 p-3 text-sm font-medium text-secondary hover:text-foreground bg-foreground/5 hover:bg-foreground/10 rounded-xl transition-all"
@@ -222,7 +258,7 @@ const Navbar = () => {
                 </Link>
 
                 {/* Mobile Profile Link */}
-                <Link 
+                <Link
                   href="/profile"
                   onClick={() => setIsMenuOpen(false)}
                   className="flex items-center gap-3 p-3 text-sm font-medium text-secondary hover:text-foreground bg-foreground/5 hover:bg-foreground/10 rounded-xl transition-all"
@@ -245,7 +281,11 @@ const Navbar = () => {
               </div>
             ) : (
               <div className="px-2">
-                <Link href="/signup" className="w-full" onClick={() => setIsMenuOpen(false)}>
+                <Link
+                  href="/signup"
+                  className="w-full"
+                  onClick={() => setIsMenuOpen(false)}
+                >
                   <Button className="w-full bg-gradient-to-r from-brand-purple to-brand-indigo text-white font-semibold rounded-xl h-11 shadow-md">
                     Sign Up
                   </Button>

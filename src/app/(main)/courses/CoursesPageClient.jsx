@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
-import CourseCard from "../ui/CourseCard";
-import SearchCourses from "./SearchCourses";
+import { useState, useEffect, useCallback } from "react";
+import CourseCard from "../../../components/ui/CourseCard";
+import SearchCourses from "../../../components/ui/SearchCourses";
 import { Sparkles, ArrowLeft, ArrowRight } from "lucide-react";
 import { getAllCourses } from "@/lib/api/courses";
 
@@ -26,16 +26,16 @@ function useDebounce(value, delay) {
 const CoursesPageClient = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
-  
+
   // Filter States
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
   const [level, setLevel] = useState("All");
   const [sort, setSort] = useState("");
-  
+
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  
+
   const coursesPerPage = 12;
 
   const debouncedSearch = useDebounce(search, 500);
@@ -43,14 +43,14 @@ const CoursesPageClient = () => {
   const fetchCourses = useCallback(async () => {
     try {
       setLoading(true);
-      
+
       const response = await getAllCourses({
         page: currentPage,
         limit: coursesPerPage,
         search: debouncedSearch,
         category: category === "All" ? "" : category,
         level: level === "All" ? "" : level,
-        sort: sort
+        sort: sort,
       });
 
       if (response.success) {
@@ -83,7 +83,6 @@ const CoursesPageClient = () => {
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 my-10 pt-28 lg:pt-36 space-y-12 max-w-7xl">
-      
       {/* Header — Aligned with Deep Space Branding Principles */}
       <div className="mb-10 text-center relative">
         <div className="inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-purple-500/10 px-4 py-1.5 text-xs font-bold text-purple-300 uppercase tracking-wider shadow-[0_0_15px_rgba(168,85,247,0.1)]">
@@ -93,7 +92,10 @@ const CoursesPageClient = () => {
 
         <h1 className="mt-5 text-4xl font-black text-foreground sm:text-5xl lg:text-6xl tracking-tight leading-none transition-colors duration-300 ">
           Discover Our
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#5643ff] to-[#8b7eff]"> Premium Courses</span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#5643ff] to-[#8b7eff]">
+            {" "}
+            Premium Courses
+          </span>
         </h1>
 
         <p className="mx-auto mt-5 max-w-2xl text-sm sm:text-base text-muted transition-colors duration-300 font-medium leading-relaxed">
@@ -104,7 +106,7 @@ const CoursesPageClient = () => {
 
       {/* Search Input Box Area Segment Wrapper */}
       <div className="relative z-20">
-        <SearchCourses 
+        <SearchCourses
           search={search}
           setSearch={setSearch}
           category={category}
@@ -122,19 +124,22 @@ const CoursesPageClient = () => {
         {loading ? (
           /* Skeletons to match CourseCard */
           [...Array(coursesPerPage)].map((_, i) => (
-             <div key={i} className="bg-card-bg/40 border border-card-border transition-colors duration-300 rounded-[32px] p-4 flex flex-col h-[400px]">
-               <div className="w-full h-48 bg-foreground/5 rounded-2xl animate-pulse mb-4"></div>
-               <div className="w-24 h-4 bg-foreground/5 rounded-full animate-pulse mb-4"></div>
-               <div className="w-full h-6 bg-foreground/5 rounded-full animate-pulse mb-2"></div>
-               <div className="w-2/3 h-6 bg-foreground/5 rounded-full animate-pulse mb-4"></div>
-               <div className="mt-auto flex justify-between items-center">
-                 <div className="flex gap-2">
-                    <div className="w-8 h-8 bg-foreground/5 rounded-full animate-pulse"></div>
-                    <div className="w-20 h-4 bg-foreground/5 rounded-full animate-pulse mt-2"></div>
-                 </div>
-                 <div className="w-16 h-6 bg-foreground/5 rounded-full animate-pulse"></div>
-               </div>
-             </div>
+            <div
+              key={i}
+              className="bg-card-bg/40 border border-card-border transition-colors duration-300 rounded-[32px] p-4 flex flex-col h-[400px]"
+            >
+              <div className="w-full h-48 bg-foreground/5 rounded-2xl animate-pulse mb-4"></div>
+              <div className="w-24 h-4 bg-foreground/5 rounded-full animate-pulse mb-4"></div>
+              <div className="w-full h-6 bg-foreground/5 rounded-full animate-pulse mb-2"></div>
+              <div className="w-2/3 h-6 bg-foreground/5 rounded-full animate-pulse mb-4"></div>
+              <div className="mt-auto flex justify-between items-center">
+                <div className="flex gap-2">
+                  <div className="w-8 h-8 bg-foreground/5 rounded-full animate-pulse"></div>
+                  <div className="w-20 h-4 bg-foreground/5 rounded-full animate-pulse mt-2"></div>
+                </div>
+                <div className="w-16 h-6 bg-foreground/5 rounded-full animate-pulse"></div>
+              </div>
+            </div>
           ))
         ) : courses.length > 0 ? (
           courses.map((course) => (

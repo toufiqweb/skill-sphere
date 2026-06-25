@@ -1,4 +1,4 @@
-import SignInPage from "@/components/authPages/SignInPage";
+import SignInPage from "@/app/(auth)/signin/SignInPage";
 
 export const dynamic = "force-dynamic";
 

@@ -1,9 +1,35 @@
+import { redirect } from "next/navigation";
+import { useUserServerSession } from "@/lib/actions/getUserServerSession";
+import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
+import DashboardNavbar from "@/components/dashboard/DashboardNavbar";
+import { SidebarProvider } from "@/components/dashboard/SidebarProvider";
+
 export default async function DashboardLayout({ children }) {
+  const user = await useUserServerSession();
+  
+  if (!user) {
+    redirect("/login");
+  }
+
   return (
-    <div className="flex h-screen overflow-hidden bg-background">
-      <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 bg-muted/20">
-        {children}
-      </main>
-    </div>
+    <SidebarProvider>
+      <div className="flex h-screen bg-gray-50 dark:bg-zinc-950 font-sans transition-colors duration-300">
+        {/* Sidebar Component */}
+        <DashboardSidebar role={user.role} />
+
+        {/* Main Content Area */}
+        <div className="flex flex-1 flex-col overflow-hidden">
+          {/* Navbar Component */}
+          <DashboardNavbar />
+          
+          {/* Main Content */}
+          <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
+            <div className="mx-auto max-w-7xl">
+              {children}
+            </div>
+          </main>
+        </div>
+      </div>
+    </SidebarProvider>
   );
 }
