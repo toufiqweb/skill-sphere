@@ -106,10 +106,10 @@ export const deleteCourse = async (courseId, instructorId) => {
       return { success: false, error: "Unauthorized: No active auth token found." };
     }
 
-    // Call deletion API on backend, passing instructorId in request body for validation
+    // Call deletion API on backend, passing instructorId and userRole in request body for validation
     const response = await serverMutation(
       `/api/courses/${courseId}`,
-      { instructorId: instructorId || user.id },
+      { instructorId: instructorId || user.id, userRole: user.role },
       "DELETE",
       token
     );
