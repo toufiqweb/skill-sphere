@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import CourseCard from "../../../components/ui/CourseCard";
 import SearchCourses from "../../../components/ui/SearchCourses";
+import Pagination from "../../../components/ui/Pagination";
 import { Sparkles, ArrowLeft, ArrowRight } from "lucide-react";
 import { getAllCourses } from "@/lib/api/courses";
 
@@ -166,49 +167,13 @@ const CoursesPageClient = () => {
         )}
       </div>
 
-      {/* Futuristic Glassmorphism Pagination Control Strip */}
+      {/* Reusable Pagination Component */}
       {!loading && totalPages > 1 && (
-        <div className="flex items-center justify-center gap-2 pt-8 border-t border-card-border transition-colors duration-300 ">
-          <button
-            onClick={() => setCurrentPage((prev) => prev - 1)}
-            disabled={currentPage === 1}
-            className={`flex items-center gap-1.5 px-4 py-2.5 rounded-xl border font-bold text-xs transition-all duration-200 ${
-              currentPage === 1
-                ? "border-card-border transition-colors duration-300 text-slate-600 opacity-40 cursor-not-allowed"
-                : "border-card-border transition-colors duration-300 bg-card-bg/40 transition-colors duration-300 hover:bg-foreground/5 transition-colors duration-300 text-secondary transition-colors duration-300 cursor-pointer active:scale-[0.98]"
-            }`}
-          >
-            <ArrowLeft size={13} />
-            <span>Previous</span>
-          </button>
-
-          {Array.from({ length: totalPages }, (_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentPage(index + 1)}
-              className={`w-10 h-10 rounded-xl font-bold text-xs transition-all duration-200 cursor-pointer ${
-                currentPage === index + 1
-                  ? "bg-gradient-to-r from-[#5643ff] to-[#6d5dfc] text-white shadow-lg shadow-indigo-600/20 scale-[1.03]"
-                  : "border border-card-border transition-colors duration-300 bg-card-bg/40 transition-colors duration-300 hover:bg-foreground/5 transition-colors duration-300 text-muted transition-colors duration-300 hover:text-white active:scale-[0.95]"
-              }`}
-            >
-              {index + 1}
-            </button>
-          ))}
-
-          <button
-            onClick={() => setCurrentPage((prev) => prev + 1)}
-            disabled={currentPage === totalPages}
-            className={`flex items-center gap-1.5 px-4 py-2.5 rounded-xl border font-bold text-xs transition-all duration-200 ${
-              currentPage === totalPages
-                ? "border-card-border transition-colors duration-300 text-slate-600 opacity-40 cursor-not-allowed"
-                : "border-card-border transition-colors duration-300 bg-card-bg/40 transition-colors duration-300 hover:bg-foreground/5 transition-colors duration-300 text-secondary transition-colors duration-300 cursor-pointer active:scale-[0.98]"
-            }`}
-          >
-            <span>Next</span>
-            <ArrowRight size={13} />
-          </button>
-        </div>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
       )}
     </div>
   );

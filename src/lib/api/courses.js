@@ -55,3 +55,50 @@ export const getCoursesByInstructorClient = async (instructorId, page = 1, limit
   if (sort) params.append("sort", sort);
   return serverFetch(`/api/courses/instructor/${instructorId}?${params.toString()}`);
 };
+
+export const getPendingCoursesClient = async (adminId) => {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:5000";
+  const res = await fetch(`${baseUrl}/api/admin/courses/pending`, {
+    headers: {
+      "x-user-id": adminId,
+    },
+  });
+  return res.json();
+};
+
+export const toggleCourseStatus = async (courseId, actionType, instructorId) => {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:5000";
+  const res = await fetch(`${baseUrl}/api/courses/${courseId}/toggle-status`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      "x-instructor-id": instructorId,
+    },
+    body: JSON.stringify({ action: actionType }),
+  });
+  return res.json();
+};
+
+export const approveOrRejectCourse = async (courseId, actionType, adminId) => {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:5000";
+  const res = await fetch(`${baseUrl}/api/admin/courses/${courseId}/approval`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      "x-user-id": adminId,
+    },
+    body: JSON.stringify({ action: actionType }),
+  });
+  return res.json();
+};
+
+export const getAllAdminCoursesClient = async (adminId, page = 1, limit = 10) => {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:5000";
+  const res = await fetch(`${baseUrl}/api/admin/courses?page=${page}&limit=${limit}`, {
+    headers: {
+      "x-user-id": adminId,
+    },
+  });
+  return res.json();
+};
+

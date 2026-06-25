@@ -19,9 +19,9 @@ import {
   ArrowRight,
   ChevronDown
 } from "lucide-react";
-import { getCoursesByInstructorClient } from "@/lib/api/courses";
+import { getCoursesByInstructorClient, toggleCourseStatus } from "@/lib/api/courses";
 import { deleteCourse } from "@/lib/actions/courses";
-import Pagination from "@/components/Pagination";
+import Pagination from "@/components/ui/Pagination";
 import { toast } from "react-toastify";
 import { motion, AnimatePresence } from "framer-motion";
 import CoursesTableView from "./CoursesTableView";
@@ -166,16 +166,7 @@ export default function MyCoursesContainer({ user, initialCoursesData }) {
     if (!courseId) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/api/courses/${courseId}/toggle-status`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          "x-instructor-id": user.id,
-        },
-        body: JSON.stringify({ action: actionType }),
-      });
-
-      const data = await response.json();
+      const data = await toggleCourseStatus(courseId, actionType, user.id);
 
       if (data.success) {
         toast.success(data.message || `Status updated successfully!`);
