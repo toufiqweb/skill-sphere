@@ -50,7 +50,7 @@ const PopularCourses = ({ courses = [] }) => {
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {topCourses.map((course) => (
             <div
-              key={course.id}
+              key={course.id || course._id}
               className="h-full transition-transform duration-300 hover:-translate-y-1.5"
             >
               <CourseCard course={course} />

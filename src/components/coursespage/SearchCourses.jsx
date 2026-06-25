@@ -1,120 +1,43 @@
 "use client";
 
-import { CourseContext } from "@/lib/context/CourseProvider";
 import {
   Search,
   RotateCcw,
   SlidersHorizontal,
 } from "lucide-react";
-import React, {
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React from "react";
 
-const SearchCourses = ({ courses }) => {
-  const {
-    setFilteredCourses,
-    setSearchPerformed,
-  } = useContext(CourseContext);
+const CATEGORIES = [
+  "All",
+  "Development",
+  "Design",
+  "Data Science",
+  "Marketing",
+  "Cloud",
+  "Security",
+  "Business",
+];
 
-  const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("All");
-  const [level, setLevel] = useState("All");
-  const [sort, setSort] = useState("");
+const LEVELS = [
+  "All",
+  "Beginner",
+  "Intermediate",
+  "Advanced",
+];
 
-  const categories = [
-    "All",
-    ...new Set(courses.map((course) => course.category)),
-  ];
-
-  const levels = [
-    "All",
-    ...new Set(courses.map((course) => course.level)),
-  ];
-
-  const applyFilters = (searchValue = search) => {
-    let filtered = [...courses];
-
-    // Search by title & instructor
-    if (searchValue.trim()) {
-      filtered = filtered.filter(
-        (course) =>
-          course.title
-            .toLowerCase()
-            .includes(searchValue.toLowerCase()) ||
-          course.instructor
-            .toLowerCase()
-            .includes(searchValue.toLowerCase())
-      );
-    }
-
-    // Category Filter
-    if (category !== "All") {
-      filtered = filtered.filter(
-        (course) => course.category === category
-      );
-    }
-
-    // Level Filter
-    if (level !== "All") {
-      filtered = filtered.filter(
-        (course) => course.level === level
-      );
-    }
-
-    // Sorting
-    switch (sort) {
-      case "rating":
-        filtered.sort((a, b) => b.rating - a.rating);
-        break;
-
-      case "students":
-        filtered.sort(
-          (a, b) => b.students - a.students
-        );
-        break;
-
-      case "price-low":
-        filtered.sort((a, b) => a.price - b.price);
-        break;
-
-      case "price-high":
-        filtered.sort((a, b) => b.price - a.price);
-        break;
-
-      default:
-        break;
-    }
-
-    setFilteredCourses(filtered);
-
-    setSearchPerformed(
-      searchValue.trim() !== "" ||
-        category !== "All" ||
-        level !== "All" ||
-        sort !== ""
-    );
-  };
-
-  // Auto filter when dropdown changes
-  useEffect(() => {
-    applyFilters();
-  }, [category, level, sort]);
-
+const SearchCourses = ({
+  search,
+  setSearch,
+  category,
+  setCategory,
+  level,
+  setLevel,
+  sort,
+  setSort,
+  handleReset,
+}) => {
   const handleSearch = (e) => {
     e.preventDefault();
-    applyFilters(search);
-  };
-
-  const handleReset = () => {
-    setSearch("");
-    setCategory("All");
-    setLevel("All");
-    setSort("");
-
-    setFilteredCourses([]);
-    setSearchPerformed(false);
   };
 
   return (
@@ -186,7 +109,7 @@ const SearchCourses = ({ courses }) => {
             }
             className="h-12 rounded-xl border border-card-border transition-colors duration-300 bg-background/50 px-4 outline-none focus:border-violet-500/40"
           >
-            {categories.map((item) => (
+            {CATEGORIES.map((item) => (
               <option
                 key={item}
                 value={item}
@@ -204,7 +127,7 @@ const SearchCourses = ({ courses }) => {
             }
             className="h-12 rounded-xl border border-card-border transition-colors duration-300 bg-background/50 px-4 outline-none focus:border-violet-500/40"
           >
-            {levels.map((item) => (
+            {LEVELS.map((item) => (
               <option
                 key={item}
                 value={item}
@@ -259,7 +182,7 @@ const SearchCourses = ({ courses }) => {
 
         {/* Category Pills */}
         <div className="mt-6 flex flex-wrap gap-2">
-          {categories
+          {CATEGORIES
             .filter((cat) => cat !== "All")
             .map((cat) => (
               <button

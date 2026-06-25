@@ -89,7 +89,7 @@ const NewReleases = ({ courses = [] }) => {
         >
           {latestCourses.map((course) => (
             <motion.div
-              key={course.id}
+              key={course.id || course._id}
               variants={cardVariants}
               className="group relative overflow-hidden rounded-3xl border border-card-border transition-colors duration-300 bg-card-bg/60 transition-colors duration-300 transition-all duration-300 hover:border-violet-500/30 hover:bg-card-bg/80 transition-colors duration-300 "
             >
@@ -161,7 +161,7 @@ const NewReleases = ({ courses = [] }) => {
                   {/* Actions / CTA Trigger Strip */}
                   <div className="pt-2">
                     <Link
-                      href={`/courses/${course.id}`}
+                      href={`/courses/${course.id || course._id}`}
                       className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#5643ff] px-5 py-2.5 text-xs font-bold text-white transition-all duration-300 hover:bg-[#4332eb] hover:shadow-[0_4px_20px_rgba(86,67,255,0.3)]"
                     >
                       <span>View Details</span>

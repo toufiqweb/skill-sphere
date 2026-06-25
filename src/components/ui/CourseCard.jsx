@@ -34,10 +34,11 @@ const item = {
 };
 
 export default function CourseCard({ course }) {
+  const courseId = course.id || course._id;
   const {
-    id,
     title,
     instructor,
+    instructorName,
     image,
     rating,
     price,
@@ -121,7 +122,7 @@ export default function CourseCard({ course }) {
               className="flex h-9 w-9 items-center justify-center rounded-full text-xs font-black text-foreground shadow-md shadow-indigo-600/10 transition-colors duration-300 "
               style={{ backgroundImage: "linear-gradient(to right, #5643ff, #6d5dfc)" }}
             >
-              {instructor
+              {(instructorName || instructor || "I")
                 .split(" ")
                 .map((n) => n[0])
                 .join("")
@@ -133,7 +134,7 @@ export default function CourseCard({ course }) {
               <span className="text-[10px] uppercase tracking-wider font-bold text-muted transition-colors duration-300 ">Instructor</span>
 
               <span className="text-sm font-bold text-secondary transition-colors duration-300 ">
-                {instructor}
+                {instructorName || instructor}
               </span>
             </div>
           </motion.div>
@@ -194,7 +195,7 @@ export default function CourseCard({ course }) {
             </div>
 
             <Link
-              href={`/courses/${id}`}
+              href={`/courses/${courseId}`}
               className="group/btn relative inline-flex items-center gap-1.5 overflow-hidden rounded-xl bg-gradient-to-r from-[#5643ff] to-[#6d5dfc] px-4 py-2.5 text-xs font-bold text-white shadow-md shadow-indigo-600/10 transition-all duration-300 hover:scale-[1.03] hover:brightness-110"
             >
               <span>View Details</span>

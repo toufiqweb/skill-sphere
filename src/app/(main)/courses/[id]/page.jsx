@@ -15,7 +15,7 @@ import {
   Bookmark,
   Sparkles,
 } from "lucide-react";
-import { getAllCoursesData } from "@/lib/getAllCourses";
+import { getCourseById } from "@/lib/api/courses";
 import { FaStar } from "react-icons/fa";
 
 const learnPoints = [
@@ -68,8 +68,13 @@ const curriculum = [
 
 export async function generateMetadata({ params }) {
   const { id } = await params;
-  const courses = await getAllCoursesData();
-  const course = courses.find((c) => c.id === Number(id));
+  let course = null;
+  try {
+    const response = await getCourseById(id);
+    course = response?.success ? response.data : null;
+  } catch (error) {
+    console.error("Course fetch failed:", error);
+  }
 
   if (!course) {
     return {
@@ -86,8 +91,13 @@ export async function generateMetadata({ params }) {
 
 const CourseDetailPage = async ({ params }) => {
   const { id } = await params;
-  const courses = await getAllCoursesData();
-  const course = courses.find((c) => c.id === Number(id));
+  let course = null;
+  try {
+    const response = await getCourseById(id);
+    course = response?.success ? response.data : null;
+  } catch (error) {
+    console.error("Course fetch failed:", error);
+  }
 
   if (!course) {
     return (
@@ -133,7 +143,7 @@ const CourseDetailPage = async ({ params }) => {
                 </h1>
 
                 <p className="text-sm sm:text-base md:text-lg text-muted transition-colors duration-300 max-w-2xl font-medium leading-relaxed line-clamp-2">
-                  {course.description}
+                  {course.subTitle || course.description}
                 </p>
               </div>
             </div>
@@ -156,12 +166,12 @@ const CourseDetailPage = async ({ params }) => {
                   About This Course
                 </h2>
                 <p className="text-muted transition-colors duration-300 font-medium leading-relaxed text-xs sm:text-sm">
-                  Immerse yourself in a program explicitly curated to target
+                  {course.description || `Immerse yourself in a program explicitly curated to target
                   current industry demands. This pathway integrates elementary
                   baseline foundations with high-tier real-world structural
                   paradigms. By pursuing targeted case exercises, you will
                   transform conceptual theory into production-ready tactical
-                  configurations.
+                  configurations.`}
                 </p>
               </div>
 
@@ -172,7 +182,7 @@ const CourseDetailPage = async ({ params }) => {
                   What You'll Learn
                 </h2>
                 <div className="grid sm:grid-cols-2 gap-4">
-                  {learnPoints.map((item, index) => (
+                  {(course.whatYoullLearn || learnPoints).map((item, index) => (
                     <div key={index} className="flex gap-3 items-start group">
                       <div className="w-2 h-2 rounded-full bg-indigo-500 mt-1.5 shrink-0 transition-transform duration-200 group-hover:scale-125" />
                       <p className="text-muted transition-colors duration-300 text-xs sm:text-sm font-medium leading-normal">
@@ -190,7 +200,7 @@ const CourseDetailPage = async ({ params }) => {
                   Requirements
                 </h2>
                 <ul className="grid sm:grid-cols-2 gap-3.5">
-                  {requirements.map((item, index) => (
+                  {(course.requirements || []).map((item, index) => (
                     <li
                       key={index}
                       className="flex items-center gap-2 text-muted transition-colors duration-300 text-xs sm:text-sm font-medium"
@@ -200,32 +210,6 @@ const CourseDetailPage = async ({ params }) => {
                     </li>
                   ))}
                 </ul>
-              </div>
-
-              {/* Curriculum Section */}
-              <div className="bg-card-bg/60 transition-colors duration-300 backdrop-blur-2xl rounded-[28px] p-6 md:p-8 border border-card-border transition-colors duration-300 shadow-xl">
-                <h2 className="text-lg sm:text-xl font-black tracking-wide text-foreground mb-6 flex items-center gap-3 uppercase tracking-wider transition-colors duration-300 ">
-                  <PlayCircle className="w-5 h-5 text-[#8b7eff]" />
-                  Course Curriculum
-                </h2>
-                <div className="space-y-3">
-                  {curriculum.map((item, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center justify-between border border-card-border transition-colors duration-300 rounded-2xl p-4 bg-card-bg/40 transition-colors duration-300 hover:bg-foreground/5 transition-colors duration-300 transition-all duration-200 group cursor-pointer active:scale-[0.99]"
-                    >
-                      <div className="flex items-center gap-4">
-                        <div className="w-9 h-9 rounded-xl bg-purple-500/10 border border-purple-500/20 text-[#8b7eff] font-bold text-xs flex items-center justify-center shrink-0">
-                          {String(index + 1).padStart(2, "0")}
-                        </div>
-                        <p className="text-secondary transition-colors duration-300 text-xs sm:text-sm font-bold tracking-tight group-hover:text-[#8b7eff] transition-colors duration-300 ">
-                          {item}
-                        </p>
-                      </div>
-                      <PlayCircle className="w-4 h-4 text-slate-600 group-hover:text-[#8b7eff] transition-colors duration-300 shrink-0" />
-                    </div>
-                  ))}
-                </div>
               </div>
             </div>
 
@@ -355,14 +339,14 @@ const CourseDetailPage = async ({ params }) => {
                   </h3>
                   <div className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-card-bg/40 transition-colors duration-300 border border-card-border transition-colors duration-300 ">
                     <div className="w-11 h-11 rounded-xl bg-gradient-to-tr from-[#5643ff] to-[#8b7eff] text-white font-black text-base flex items-center justify-center shrink-0 shadow-md">
-                      {course.instructor ? course.instructor[0] : "I"}
+                      {(course.instructorName || course.instructor || "I")[0]}
                     </div>
                     <div className="min-w-0">
                       <h4 className="font-bold text-primary transition-colors duration-300 truncate text-sm">
-                        {course.instructor || "Lead Faculty"}
+                        {course.instructorName || course.instructor || "Lead Faculty"}
                       </h4>
                       <p className="text-[11px] text-muted transition-colors duration-300 font-bold tracking-tight truncate mt-0.5">
-                        Senior Engineering Instructor
+                        {course.instructorRole || "Senior Engineering Instructor"}
                       </p>
                     </div>
                   </div>

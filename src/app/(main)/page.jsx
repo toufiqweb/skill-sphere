@@ -8,12 +8,20 @@ import TopInstructors from "@/components/homepage/TopInstructors";
 import WhatOurStudentSay from "@/components/homepage/WhatOurStudentSay";
 import NewReleasesLoading from "@/components/loadingpages/NewReleasesLoading";
 import PopularCardLoading from "@/components/loadingpages/PopularCardLoading";
-import { getAllCoursesData } from "@/lib/getAllCourses";
+import { getAllCourses } from "@/lib/api/courses";
 import { Suspense } from "react";
 import LearningJourney from "@/components/homepage/LearningJourney";
 
 export default async function Home() {
-  const courses = await getAllCoursesData();
+  let courses = [];
+  try {
+    const response = await getAllCourses({ limit: 50 });
+    if (response?.success) {
+      courses = response.data;
+    }
+  } catch (err) {
+    console.error("Failed to load courses for home page", err);
+  }
 
   return (
     <div >

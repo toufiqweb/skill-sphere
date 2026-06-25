@@ -1,40 +1,83 @@
 "use client";
 
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import CourseCard from "../ui/CourseCard";
-import { CourseContext } from "@/lib/context/CourseProvider";
 import SearchCourses from "./SearchCourses";
 import { Sparkles, ArrowLeft, ArrowRight } from "lucide-react";
+import { getAllCourses } from "@/lib/api/courses";
 
-const CoursesPageClient = ({ courses }) => {
-  const {
-    filteredCourses,
-    searchPerformed,
-    setFilteredCourses,
-    setSearchPerformed,
-  } = useContext(CourseContext);
+// Debounce hook
+function useDebounce(value, delay) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
 
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
+}
+
+const CoursesPageClient = () => {
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
+  
+  // Filter States
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("All");
+  const [level, setLevel] = useState("All");
+  const [sort, setSort] = useState("");
+  
   const [currentPage, setCurrentPage] = useState(1);
-
+  const [totalPages, setTotalPages] = useState(1);
+  
   const coursesPerPage = 12;
 
-  const displayCourses = searchPerformed ? filteredCourses : courses;
+  const debouncedSearch = useDebounce(search, 500);
 
-  // Reset page when search result changes
+  const fetchCourses = useCallback(async () => {
+    try {
+      setLoading(true);
+      
+      const response = await getAllCourses({
+        page: currentPage,
+        limit: coursesPerPage,
+        search: debouncedSearch,
+        category: category === "All" ? "" : category,
+        level: level === "All" ? "" : level,
+        sort: sort
+      });
+
+      if (response.success) {
+        setCourses(response.data);
+        setTotalPages(response.meta.totalPages || 1);
+      }
+    } catch (err) {
+      console.error("Failed to fetch courses:", err);
+    } finally {
+      setLoading(false);
+    }
+  }, [currentPage, debouncedSearch, category, level, sort]);
+
+  useEffect(() => {
+    fetchCourses();
+  }, [fetchCourses]);
+
+  // Reset page when filters change
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchPerformed, filteredCourses]);
-
-  const totalPages = Math.ceil(displayCourses.length / coursesPerPage);
-
-  const startIndex = (currentPage - 1) * coursesPerPage;
-  const endIndex = startIndex + coursesPerPage;
-
-  const currentCourses = displayCourses.slice(startIndex, endIndex);
+  }, [debouncedSearch, category, level, sort]);
 
   const handleReset = () => {
-    setFilteredCourses([]);
-    setSearchPerformed(false);
+    setSearch("");
+    setCategory("All");
+    setLevel("All");
+    setSort("");
     setCurrentPage(1);
   };
 
@@ -61,14 +104,41 @@ const CoursesPageClient = ({ courses }) => {
 
       {/* Search Input Box Area Segment Wrapper */}
       <div className="relative z-20">
-        <SearchCourses courses={courses} />
+        <SearchCourses 
+          search={search}
+          setSearch={setSearch}
+          category={category}
+          setCategory={setCategory}
+          level={level}
+          setLevel={setLevel}
+          sort={sort}
+          setSort={setSort}
+          handleReset={handleReset}
+        />
       </div>
 
       {/* Courses Grid Container Block */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-6">
-        {currentCourses.length > 0 ? (
-          currentCourses.map((course) => (
-            <CourseCard key={course.id} course={course} />
+        {loading ? (
+          /* Skeletons to match CourseCard */
+          [...Array(coursesPerPage)].map((_, i) => (
+             <div key={i} className="bg-card-bg/40 border border-card-border transition-colors duration-300 rounded-[32px] p-4 flex flex-col h-[400px]">
+               <div className="w-full h-48 bg-foreground/5 rounded-2xl animate-pulse mb-4"></div>
+               <div className="w-24 h-4 bg-foreground/5 rounded-full animate-pulse mb-4"></div>
+               <div className="w-full h-6 bg-foreground/5 rounded-full animate-pulse mb-2"></div>
+               <div className="w-2/3 h-6 bg-foreground/5 rounded-full animate-pulse mb-4"></div>
+               <div className="mt-auto flex justify-between items-center">
+                 <div className="flex gap-2">
+                    <div className="w-8 h-8 bg-foreground/5 rounded-full animate-pulse"></div>
+                    <div className="w-20 h-4 bg-foreground/5 rounded-full animate-pulse mt-2"></div>
+                 </div>
+                 <div className="w-16 h-6 bg-foreground/5 rounded-full animate-pulse"></div>
+               </div>
+             </div>
+          ))
+        ) : courses.length > 0 ? (
+          courses.map((course) => (
+            <CourseCard key={course.id || course._id} course={course} />
           ))
         ) : (
           /* Empty State Node Block Integration Form matching design rules */
@@ -92,7 +162,7 @@ const CoursesPageClient = ({ courses }) => {
       </div>
 
       {/* Futuristic Glassmorphism Pagination Control Strip */}
-      {displayCourses.length > coursesPerPage && (
+      {!loading && totalPages > 1 && (
         <div className="flex items-center justify-center gap-2 pt-8 border-t border-card-border transition-colors duration-300 ">
           <button
             onClick={() => setCurrentPage((prev) => prev - 1)}
