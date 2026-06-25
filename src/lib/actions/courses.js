@@ -1,5 +1,7 @@
 "use server";
 
+/* eslint-disable react-hooks/rules-of-hooks */
+
 import { revalidatePath } from "next/cache";
 import { useUserServerSession } from "./getUserServerSession";
 import { getTokenServer } from "../core/BetterAuthToken";
@@ -88,6 +90,36 @@ export const createCourse = async (courseData) => {
     return response;
   } catch (error) {
     console.error("Error creating course:", error);
+    return { success: false, error: error.message || "An unexpected error occurred." };
+  }
+};
+
+export const deleteCourse = async (courseId) => {
+  try {
+    const user = await useUserServerSession();
+    if (!user) {
+      return { success: false, error: "Unauthorized: You must be logged in." };
+    }
+
+    const token = await getTokenServer();
+    if (!token) {
+      return { success: false, error: "Unauthorized: No active auth token found." };
+    }
+
+    // Call deletion API on backend
+    const response = await serverMutation(
+      `/api/courses/${courseId}`,
+      null,
+      "DELETE",
+      token
+    );
+
+    revalidatePath("/dashboard/my-courses");
+    revalidatePath("/courses");
+
+    return response;
+  } catch (error) {
+    console.error("Error deleting course:", error);
     return { success: false, error: error.message || "An unexpected error occurred." };
   }
 };

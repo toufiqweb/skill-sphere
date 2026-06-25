@@ -1,7 +1,7 @@
 import { serverFetch } from "../core/server";
 
 export const getAllCourses = async (queryParams = {}) => {
-  const { page, limit, search, category, level, sort } = queryParams;
+  const { page, limit, search, category, level, sort, instructorId } = queryParams;
   
   const params = new URLSearchParams();
   
@@ -30,6 +30,10 @@ export const getAllCourses = async (queryParams = {}) => {
     params.append("sort", sort);
   }
 
+  if (instructorId !== undefined && instructorId !== null && instructorId !== "") {
+    params.append("instructorId", instructorId);
+  }
+
   const queryString = params.toString();
   const path = queryString ? `/api/courses?${queryString}` : "/api/courses";
 
@@ -38,4 +42,16 @@ export const getAllCourses = async (queryParams = {}) => {
 
 export const getCourseById = async (id) => {
   return serverFetch(`/api/courses/${id}`);
+};
+
+export const getCoursesByInstructorClient = async (instructorId, page = 1, limit = 10, filters = {}) => {
+  const { search, category, status, sort } = filters;
+  const params = new URLSearchParams();
+  params.append("page", page);
+  params.append("limit", limit);
+  if (search) params.append("search", search);
+  if (category && category !== "all") params.append("category", category);
+  if (status && status !== "all") params.append("status", status);
+  if (sort) params.append("sort", sort);
+  return serverFetch(`/api/courses/instructor/${instructorId}?${params.toString()}`);
 };
