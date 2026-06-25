@@ -62,11 +62,8 @@ export default function MyCoursesPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [totalCourses, setTotalCourses] = useState(0);
-
   // Deletion Modal State
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [courseToDelete, setCourseToDelete] = useState(null);
-
   // Dynamic Pagination Limit
   const limit = viewMode === "grid" ? 9 : 10;
 
@@ -137,50 +134,29 @@ export default function MyCoursesPage() {
     };
   }, [user?.id, currentPage, limit, debouncedSearch, selectedCategory, selectedStatus, sortBy]);
 
-  // Open delete warning dialog
-  const confirmDelete = (course) => {
-    setCourseToDelete(course);
-    setIsDeleteModalOpen(true);
-  };
-
-  // Perform backend deletion
-  const handleDelete = async () => {
-    if (!courseToDelete) return;
-    const courseId = courseToDelete.id || courseToDelete._id;
+  // Handler for course deletion
+  const handleDeleteCourse = async (courseId) => {
+    if (!courseId) return;
 
     startTransition(async () => {
       try {
-        const result = await deleteCourse(courseId);
+        const result = await deleteCourse(courseId, user.id);
         if (result?.success) {
           toast.success(result.message || "Course deleted successfully");
           
-          // Re-fetch logic or step back a page
-          if (courses.length === 1 && currentPage > 1) {
+          // UI Update: Filter out the deleted course from local React state array instantly
+          setCourses(prev => prev.filter(c => c._id !== courseId && c.id !== courseId));
+          setTotalCourses(prev => Math.max(0, prev - 1));
+          
+          // Adjust page number if the current page becomes empty and we're not on page 1
+          if (courses.length <= 1 && currentPage > 1) {
             setCurrentPage(prev => prev - 1);
-          } else {
-            // Force re-fetch manually
-            const res = await getCoursesByInstructorClient(
-              user.id,
-              currentPage,
-              limit,
-              {
-                search: debouncedSearch,
-                category: selectedCategory,
-                status: selectedStatus,
-                sort: sortBy
-              }
-            );
-            if (res?.success) {
-              setCourses(res.data || []);
-              setTotalPages(res.meta?.totalPages || 1);
-              setTotalCourses(res.meta?.totalCourses || 0);
-            }
           }
 
-          setIsDeleteModalOpen(false);
+          // Reset deletion state on completion
           setCourseToDelete(null);
         } else {
-          toast.error(result?.error || "Failed to delete course");
+          toast.error(result?.error || result?.message || "Failed to delete course");
         }
       } catch (error) {
         console.error("Error deleting course:", error);
@@ -496,7 +472,7 @@ export default function MyCoursesPage() {
                                 <Edit2 className="w-3.5 h-3.5" />
                               </Link>
                               <button
-                                onClick={() => confirmDelete(course)}
+                                onClick={() => setCourseToDelete(course)}
                                 className="p-2.5 rounded-xl border border-card-border bg-card-bg/60 text-muted hover:text-rose-500 hover:border-rose-500/25 hover:bg-rose-500/5 transition-all cursor-pointer"
                                 title="Delete Course"
                               >
@@ -594,7 +570,7 @@ export default function MyCoursesPage() {
                                 <span className="hidden sm:inline">Edit</span>
                               </Link>
                               <button
-                                onClick={() => confirmDelete(course)}
+                                onClick={() => setCourseToDelete(course)}
                                 className="p-2 rounded-xl border border-card-border bg-card-bg text-muted hover:text-rose-500 hover:border-rose-500/20 hover:bg-rose-500/5 transition-all cursor-pointer inline-flex items-center gap-1.5 text-xs font-extrabold uppercase px-3"
                                 title="Delete Course"
                               >
@@ -623,17 +599,17 @@ export default function MyCoursesPage() {
         </div>
       )}
 
-      {/* Delete Confirmation Modal (Framer Motion + Glassmorphic UI) */}
+      {/* Dynamic Confirmation Modal */}
       <AnimatePresence>
-        {isDeleteModalOpen && (
+        {courseToDelete && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            {/* Backdrop Overlay */}
+            {/* Backdrop Overlay with motion */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => !isPending && setIsDeleteModalOpen(false)}
-              className="absolute inset-0 bg-black/40 backdrop-blur-md"
+              onClick={() => !isPending && setCourseToDelete(null)}
+              className="absolute inset-0 bg-slate-900/60 backdrop-blur-md dark:bg-black/80"
             />
 
             {/* Modal Box */}
@@ -642,34 +618,34 @@ export default function MyCoursesPage() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 15 }}
               transition={{ type: "spring", duration: 0.45 }}
-              className="relative w-full max-w-md overflow-hidden rounded-[32px] border border-glass-border bg-background shadow-2xl p-6 sm:p-8 z-10"
+              className="relative w-full max-w-md overflow-hidden rounded-3xl border border-card-border bg-white dark:bg-slate-900 shadow-2xl p-6 sm:p-8 z-10 text-center"
             >
-              {/* Top alert badge layout */}
-              <div className="flex flex-col items-center text-center gap-4">
-                <div className="flex items-center justify-center w-14 h-14 rounded-full bg-rose-500/10 text-rose-500 border border-rose-500/20">
-                  <AlertTriangle className="w-7 h-7" />
-                </div>
-                <h3 className="text-xl font-black text-primary tracking-tight">Delete Course?</h3>
-                <p className="text-sm text-muted leading-relaxed">
-                  Are you sure you want to permanently delete <strong className="text-primary font-bold">&ldquo;{courseToDelete?.title}&rdquo;</strong>? 
-                  This will remove all curriculum chapters, pricing models, and students cannot access it. This action is irreversible.
-                </p>
+              {/* Alert/Warning Icon */}
+              <div className="mx-auto flex items-center justify-center w-14 h-14 rounded-full bg-rose-500/10 text-rose-500 border border-rose-500/20 mb-4 animate-bounce">
+                <AlertTriangle className="w-7 h-7" />
               </div>
 
+              {/* Title & Warning message */}
+              <h3 className="text-xl font-black text-primary tracking-tight mb-2 dark:text-white">Delete Course?</h3>
+              <p className="text-sm text-muted dark:text-slate-300 leading-relaxed mb-6">
+                Are you sure you want to permanently delete <strong className="text-primary dark:text-white font-bold">&ldquo;{courseToDelete?.title}&rdquo;</strong>? 
+                This action is irreversible.
+              </p>
+
               {/* Action Buttons */}
-              <div className="flex gap-3 items-center justify-end mt-8 pt-4 border-t border-card-border">
+              <div className="flex gap-3 items-center justify-end pt-4 border-t border-card-border dark:border-slate-800">
                 <button
                   type="button"
                   disabled={isPending}
-                  onClick={() => setIsDeleteModalOpen(false)}
-                  className="flex-1 py-3 px-5 text-center text-xs font-extrabold uppercase tracking-wider text-primary border border-card-border bg-card-bg hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                  onClick={() => setCourseToDelete(null)}
+                  className="flex-1 py-3 px-5 text-center text-xs font-extrabold uppercase tracking-wider text-slate-700 dark:text-slate-200 border border-card-border bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Cancel
                 </button>
                 <button
                   type="button"
                   disabled={isPending}
-                  onClick={handleDelete}
+                  onClick={() => handleDeleteCourse(courseToDelete.id || courseToDelete._id)}
                   className="flex-1 py-3 px-5 text-center text-xs font-extrabold uppercase tracking-wider text-white bg-gradient-to-r from-rose-500 to-red-600 hover:brightness-110 shadow-lg shadow-rose-500/15 rounded-xl transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   {isPending ? (
@@ -680,7 +656,7 @@ export default function MyCoursesPage() {
                   ) : (
                     <>
                       <Trash2 className="w-3.5 h-3.5" />
-                      <span>Delete Course</span>
+                      <span>Delete</span>
                     </>
                   )}
                 </button>

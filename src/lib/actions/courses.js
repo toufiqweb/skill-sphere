@@ -94,7 +94,7 @@ export const createCourse = async (courseData) => {
   }
 };
 
-export const deleteCourse = async (courseId) => {
+export const deleteCourse = async (courseId, instructorId) => {
   try {
     const user = await useUserServerSession();
     if (!user) {
@@ -106,10 +106,10 @@ export const deleteCourse = async (courseId) => {
       return { success: false, error: "Unauthorized: No active auth token found." };
     }
 
-    // Call deletion API on backend
+    // Call deletion API on backend, passing instructorId in request body for validation
     const response = await serverMutation(
       `/api/courses/${courseId}`,
-      null,
+      { instructorId: instructorId || user.id },
       "DELETE",
       token
     );
