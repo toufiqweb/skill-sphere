@@ -103,6 +103,11 @@ const CourseDetailPage = async ({ params }) => {
 
   const courseRequirements = course.requirements || fallbackRequirements;
   const courseCurriculum = course.curriculum || fallbackCurriculum;
+  
+  // Safely resolve the instructor's name from string or object format
+  const resolvedInstructorName = course.instructorName || 
+    (course.instructor && typeof course.instructor === "object" ? course.instructor.name : course.instructor) || 
+    "Lead Faculty";
 
   return (
     <div className="relative min-h-screen bg-gray-50 dark:bg-zinc-950 py-12 lg:py-20 overflow-hidden transition-colors duration-300">
@@ -224,11 +229,18 @@ const CourseDetailPage = async ({ params }) => {
                     >
                       <div className="flex items-center gap-4">
                         <div className="w-9 h-9 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 font-bold text-xs flex items-center justify-center shrink-0">
-                          {String(index + 1).padStart(2, "0")}
+                          {typeof item === "object" ? (item.id || String(index + 1).padStart(2, "0")) : String(index + 1).padStart(2, "0")}
                         </div>
-                        <p className="text-gray-700 dark:text-zinc-200 text-sm font-semibold tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                          {item}
-                        </p>
+                        <div className="flex flex-col">
+                          <p className="text-gray-700 dark:text-zinc-200 text-sm font-semibold tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                            {typeof item === "object" ? item.title : item}
+                          </p>
+                          {typeof item === "object" && item.lectures !== undefined && (
+                            <span className="text-[10px] text-gray-500 dark:text-zinc-400 font-medium mt-0.5">
+                              {item.lectures} lectures
+                            </span>
+                          )}
+                        </div>
                       </div>
                       <PlayCircle className="w-4 h-4 text-gray-400 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors shrink-0" />
                     </div>
@@ -361,11 +373,11 @@ const CourseDetailPage = async ({ params }) => {
                   </h3>
                   <div className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-gray-50/50 dark:bg-zinc-800/20 border border-gray-200 dark:border-zinc-800/60">
                     <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white font-bold text-base flex items-center justify-center shrink-0">
-                      {(course.instructorName || course.instructor || "I")[0]}
+                      {resolvedInstructorName[0].toUpperCase()}
                     </div>
                     <div className="min-w-0">
                       <h4 className="font-bold text-gray-900 dark:text-white truncate text-sm">
-                        {course.instructorName || course.instructor || "Lead Faculty"}
+                        {resolvedInstructorName}
                       </h4>
                       <p className="text-[10px] text-gray-500 dark:text-zinc-400 font-bold truncate mt-0.5">
                         {course.instructorRole || "Senior Engineering Instructor"}

@@ -50,7 +50,7 @@ export default function CourseCard({ course }) {
     category,
   } = course;
 
-  // console.log(course);
+  const nameOfInstructor = instructorName || (instructor && typeof instructor === "object" ? instructor.name : instructor) || "Instructor";
 
   return (
     <motion.article
@@ -122,7 +122,7 @@ export default function CourseCard({ course }) {
               className="flex h-9 w-9 items-center justify-center rounded-full text-xs font-black text-foreground shadow-md shadow-indigo-600/10 transition-colors duration-300 "
               style={{ backgroundImage: "linear-gradient(to right, #5643ff, #6d5dfc)" }}
             >
-              {(instructorName || instructor || "I")
+              {nameOfInstructor
                 .split(" ")
                 .map((n) => n[0])
                 .join("")
@@ -134,7 +134,7 @@ export default function CourseCard({ course }) {
               <span className="text-[10px] uppercase tracking-wider font-bold text-muted transition-colors duration-300 ">Instructor</span>
 
               <span className="text-sm font-bold text-secondary transition-colors duration-300 ">
-                {instructorName || instructor}
+                {nameOfInstructor}
               </span>
             </div>
           </motion.div>

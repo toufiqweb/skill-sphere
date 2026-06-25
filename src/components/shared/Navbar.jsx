@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 import { useUserClientSession } from "@/lib/api/getUserServerSession";
+import { authClient } from "@/lib/auth-client";
 
 const Navbar = () => {
   const { user, isPending } = useUserClientSession();
