@@ -1,6 +1,7 @@
 import { Outfit } from "next/font/google";
 import "./globals.css";
 import { CourseProvider } from "@/lib/context/CourseProvider";
+import { WishlistProvider } from "@/lib/context/WishlistProvider";
 import { ToastContainer } from "react-toastify";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 
@@ -29,7 +30,9 @@ export default function RootLayout({ children }) {
           disableTransitionOnChange
         >
           <main>
-            <CourseProvider>{children}</CourseProvider>
+            <CourseProvider>
+              <WishlistProvider>{children}</WishlistProvider>
+            </CourseProvider>
           </main>
 
           <ToastContainer position="top-center" theme="colored" />

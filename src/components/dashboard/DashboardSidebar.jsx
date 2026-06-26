@@ -14,6 +14,7 @@ import {
   Heart,
   User,
   X,
+  House,
 } from "lucide-react";
 import { useSidebar } from "./SidebarProvider";
 
@@ -50,6 +51,7 @@ const studentLinks = [
 ];
 
 const commonLinks = [
+  { name: "Home", href: "/dashboard", icon: House },
   { name: "Profile", href: "/dashboard/profile", icon: User },
 ];
 
@@ -62,7 +64,7 @@ export default function DashboardSidebar({ role }) {
   else if (role === "instructor") links = instructorLinks;
   else if (role === "student") links = studentLinks;
 
-  const allLinks = [...links, ...commonLinks];
+  const allLinks = [...commonLinks, ...links];
 
   return (
     <>
