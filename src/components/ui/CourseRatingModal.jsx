@@ -8,6 +8,7 @@ import { rateCourseAction } from "@/lib/actions/courseRating";
 export default function CourseRatingModal({ isOpen, onClose, courseId, courseTitle, onRatingSuccess }) {
   const [hoveredRating, setHoveredRating] = useState(0);
   const [selectedRating, setSelectedRating] = useState(0);
+  const [reviewMessage, setReviewMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   if (!isOpen) return null;
@@ -17,10 +18,14 @@ export default function CourseRatingModal({ isOpen, onClose, courseId, courseTit
       toast.error("Please select a rating first.");
       return;
     }
+    if (!reviewMessage.trim()) {
+      toast.error("Please write a review message.");
+      return;
+    }
 
     setIsSubmitting(true);
     try {
-      const result = await rateCourseAction(courseId, selectedRating);
+      const result = await rateCourseAction(courseId, selectedRating, reviewMessage);
 
       if (result.success) {
         toast.success("Rating submitted successfully!");
@@ -82,11 +87,21 @@ export default function CourseRatingModal({ isOpen, onClose, courseId, courseTit
             ))}
           </div>
 
+          <div className="w-full text-left">
+            <textarea
+              className="w-full p-3 text-sm rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-800/50 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all resize-none"
+              rows={4}
+              placeholder="Write your review message..."
+              value={reviewMessage}
+              onChange={(e) => setReviewMessage(e.target.value)}
+            />
+          </div>
+
           <button
             onClick={handleSubmit}
-            disabled={isSubmitting || selectedRating === 0}
+            disabled={isSubmitting || selectedRating === 0 || !reviewMessage.trim()}
             className={`w-full py-3.5 rounded-xl font-bold text-sm tracking-wide transition-all duration-200 ${
-              selectedRating > 0 && !isSubmitting
+              selectedRating > 0 && reviewMessage.trim() && !isSubmitting
                 ? "bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-600/20 active:scale-[0.98]"
                 : "bg-gray-100 dark:bg-zinc-800 text-gray-400 dark:text-zinc-500 cursor-not-allowed"
             }`}

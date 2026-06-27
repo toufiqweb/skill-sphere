@@ -5,7 +5,7 @@ import { getTokenServer } from "../core/BetterAuthToken";
 import { getUserServerSession } from "./getUserServerSession";
 import { revalidatePath } from "next/cache";
 
-export const rateCourseAction = async (courseId, ratingValue) => {
+export const rateCourseAction = async (courseId, ratingValue, reviewMessage) => {
   try {
     const user = await getUserServerSession();
     const token = await getTokenServer();
@@ -15,8 +15,8 @@ export const rateCourseAction = async (courseId, ratingValue) => {
     }
 
     const response = await serverMutation(
-      "/api/courses/rate",
-      { courseId, ratingValue },
+      "/api/courses/review",
+      { courseId, ratingValue, reviewMessage },
       "POST",
       token,
       { "x-user-id": user.id }

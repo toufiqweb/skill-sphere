@@ -15,7 +15,7 @@ import {
   Bookmark,
   Sparkles,
 } from "lucide-react";
-import { getCourseById } from "@/lib/api/courses";
+import { getCourseById, getCourseReviews } from "@/lib/api/courses";
 import { FaStar } from "react-icons/fa";
 import { getUserServerSession } from "@/lib/actions/getUserServerSession";
 import { serverFetch } from "@/lib/core/server";
@@ -44,24 +44,7 @@ const fallbackCurriculum = [
   "Final Projects & Code Reviews"
 ];
 
-const reviews = [
-  {
-    name: "Alex Johnson",
-    rating: 5,
-    comment:
-      "Excellent course. Everything is explained clearly with practical examples.",
-  },
-  {
-    name: "Sarah Williams",
-    rating: 5,
-    comment: "One of the best online courses I've taken. Highly recommended.",
-  },
-  {
-    name: "Michael Brown",
-    rating: 4,
-    comment: "Very detailed curriculum and easy-to-follow lessons.",
-  },
-];
+
 
 export async function generateMetadata({ params }) {
   const { id } = await params;
@@ -89,9 +72,14 @@ export async function generateMetadata({ params }) {
 const CourseDetailPage = async ({ params }) => {
   const { id } = await params;
   let course = null;
+  let dynamicReviews = [];
   try {
-    const response = await getCourseById(id);
-    course = response?.success ? response.data : null;
+    const [courseResponse, reviewsResponse] = await Promise.all([
+      getCourseById(id),
+      getCourseReviews(id)
+    ]);
+    course = courseResponse?.success ? courseResponse.data : null;
+    dynamicReviews = reviewsResponse?.success ? reviewsResponse.reviews : [];
   } catch (error) {
     console.error("Course fetch failed:", error);
   }
@@ -323,27 +311,33 @@ const CourseDetailPage = async ({ params }) => {
                     Student Reviews
                   </h3>
                   <div className="space-y-4 max-h-[280px] overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-zinc-200 dark:scrollbar-thumb-zinc-800">
-                    {reviews.map((review, index) => (
-                      <div
-                        key={index}
-                        className="bg-gray-50/50 dark:bg-zinc-800/30 border border-gray-200 dark:border-zinc-800/60 rounded-xl p-3.5 space-y-1.5"
-                      >
-                        <h4 className="font-semibold text-gray-800 dark:text-zinc-200 text-xs sm:text-sm">
-                          {review.name}
-                        </h4>
-                        <div className="flex gap-0.5">
-                          {[...Array(5)].map((_, i) => (
-                            <FaStar
-                              key={i}
-                              className={`w-3 h-3 ${i < review.rating ? "text-yellow-400" : "text-gray-300 dark:text-zinc-700"}`}
-                            />
-                          ))}
+                    {dynamicReviews.length > 0 ? (
+                      dynamicReviews.map((review, index) => (
+                        <div
+                          key={review._id || index}
+                          className="bg-gray-50/50 dark:bg-zinc-800/30 border border-gray-200 dark:border-zinc-800/60 rounded-xl p-3.5 space-y-1.5"
+                        >
+                          <h4 className="font-semibold text-gray-800 dark:text-zinc-200 text-xs sm:text-sm">
+                            {review.userName}
+                          </h4>
+                          <div className="flex gap-0.5">
+                            {[...Array(5)].map((_, i) => (
+                              <FaStar
+                                key={i}
+                                className={`w-3 h-3 ${i < review.rating ? "text-yellow-400" : "text-gray-300 dark:text-zinc-700"}`}
+                              />
+                            ))}
+                          </div>
+                          <p className="text-gray-600 dark:text-zinc-400 text-[11px] sm:text-xs font-normal leading-relaxed">
+                            "{review.message}"
+                          </p>
                         </div>
-                        <p className="text-gray-600 dark:text-zinc-400 text-[11px] sm:text-xs font-normal leading-relaxed">
-                          "{review.comment}"
-                        </p>
-                      </div>
-                    ))}
+                      ))
+                    ) : (
+                      <p className="text-gray-500 dark:text-zinc-400 text-xs italic text-center py-4">
+                        No student reviews submitted yet for this course.
+                      </p>
+                    )}
                   </div>
                 </div>
 

@@ -126,3 +126,7 @@ export const getAllAdminCoursesClient = async (
   );
   return res.json();
 };
+
+export const getCourseReviews = async (id) => {
+  return await serverFetch(`/api/courses/${id}/reviews`);
+};
