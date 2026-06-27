@@ -6,12 +6,14 @@ export const serverMutation = async (
   data,
   method = "POST",
   token = null,
+  customHeaders = {}
 ) => {
   const res = await fetch(`${baseUrl}${path}`, {
     method,
     headers: {
       "Content-Type": "application/json",
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...customHeaders,
     },
     body: JSON.stringify(data),
   });
@@ -19,16 +21,21 @@ export const serverMutation = async (
   return handleStatus(res);
 };
 
-export const serverFetch = async (path) => {
-  const res = await fetch(`${baseUrl}${path}`);
+export const serverFetch = async (path, customHeaders = {}) => {
+  const res = await fetch(`${baseUrl}${path}`, {
+    headers: {
+      ...customHeaders,
+    },
+  });
 
   return handleStatus(res);
 };
 
-export const protectedServerFetch = async (path, token) => {
+export const protectedServerFetch = async (path, token, customHeaders = {}) => {
   const res = await fetch(`${baseUrl}${path}`, {
     headers: {
       Authorization: `Bearer ${token}`,
+      ...customHeaders,
     },
   });
 

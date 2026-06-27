@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { useUserServerSession } from "@/lib/actions/getUserServerSession";
+import { getUserServerSession } from "@/lib/actions/getUserServerSession";
 import AdminUsersContainer from "@/components/dashboard/AdminUsersContainer";
 
 export const metadata = {
@@ -8,7 +8,7 @@ export const metadata = {
 };
 
 export default async function AllUsersPage() {
-  const user = await useUserServerSession();
+  const user = await getUserServerSession();
 
   if (!user || user.role !== "admin") {
     redirect("/dashboard");

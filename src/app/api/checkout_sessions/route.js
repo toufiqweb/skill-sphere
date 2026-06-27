@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { headers } from "next/headers";
 
 import { stripe } from "../../../lib/stripe";
-import { useUserServerSession } from "@/lib/actions/getUserServerSession";
+import { getUserServerSession } from "@/lib/actions/getUserServerSession";
 import { serverFetch } from "@/lib/core/server";
 
 // POST /api/checkout_sessions
@@ -18,7 +18,7 @@ export async function POST(request) {
       throw new Error("Course ID is required.");
     }
 
-    const user = await useUserServerSession();
+    const user = await getUserServerSession();
     if (!user) {
       throw new Error("Unauthorized. Please log in.");
     }

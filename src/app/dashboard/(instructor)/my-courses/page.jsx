@@ -1,11 +1,10 @@
-import { useUserServerSession } from "@/lib/actions/getUserServerSession";
+import { getUserServerSession } from "@/lib/actions/getUserServerSession";
 import { getCoursesByInstructorClient } from "@/lib/api/courses";
 import MyCoursesContainer from "@/components/dashboard/MyCoursesContainer";
 import { redirect } from "next/navigation";
 
 export default async function MyCoursesPage() {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const user = await useUserServerSession();
+  const user = await getUserServerSession();
   
   if (!user) {
     redirect("/login");

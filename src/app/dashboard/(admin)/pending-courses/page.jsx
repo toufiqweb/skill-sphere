@@ -1,9 +1,9 @@
 import { redirect } from "next/navigation";
-import { useUserServerSession } from "@/lib/actions/getUserServerSession";
+import { getUserServerSession } from "@/lib/actions/getUserServerSession";
 import PendingCoursesContainer from "@/components/dashboard/PendingCoursesContainer";
 
 export default async function PendingCoursesPage() {
-  const user = await useUserServerSession();
+  const user = await getUserServerSession();
 
   if (!user || user.role !== "admin") {
     redirect("/dashboard");

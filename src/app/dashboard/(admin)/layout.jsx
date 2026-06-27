@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation";
-import { useUserServerSession } from "@/lib/actions/getUserServerSession";
+import { getUserServerSession } from "@/lib/actions/getUserServerSession";
 
 export default async function AdminLayout({ children }) {
-  const user = await useUserServerSession();
+  const user = await getUserServerSession();
 
   if (!user || user.role !== "admin") {
     // If not logged in, or not an admin, redirect to main dashboard

@@ -1,16 +1,14 @@
 "use server";
 
-/* eslint-disable react-hooks/rules-of-hooks */
-
 import { revalidatePath } from "next/cache";
-import { useUserServerSession } from "./getUserServerSession";
+import { getUserServerSession } from "./getUserServerSession";
 import { getTokenServer } from "../core/BetterAuthToken";
 import { serverMutation } from "../core/server";
 
 export const createCourse = async (courseData) => {
   try {
     // 1. Get user session on the server side
-    const user = await useUserServerSession();
+    const user = await getUserServerSession();
     if (!user) {
       return { success: false, error: "Unauthorized: You must be logged in." };
     }
@@ -96,7 +94,7 @@ export const createCourse = async (courseData) => {
 
 export const deleteCourse = async (courseId, instructorId) => {
   try {
-    const user = await useUserServerSession();
+    const user = await getUserServerSession();
     if (!user) {
       return { success: false, error: "Unauthorized: You must be logged in." };
     }

@@ -1,11 +1,11 @@
 import { redirect } from "next/navigation";
-import { useUserServerSession } from "@/lib/actions/getUserServerSession";
+import { getUserServerSession } from "@/lib/actions/getUserServerSession";
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import DashboardNavbar from "@/components/dashboard/DashboardNavbar";
 import { SidebarProvider } from "@/components/dashboard/SidebarProvider";
 
 export default async function DashboardLayout({ children }) {
-  const user = await useUserServerSession();
+  const user = await getUserServerSession();
   
   if (!user) {
     redirect("/login");

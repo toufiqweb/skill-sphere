@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import { getCourseById } from "@/lib/api/courses";
 import { FaStar } from "react-icons/fa";
-import { useUserServerSession } from "@/lib/actions/getUserServerSession";
+import { getUserServerSession } from "@/lib/actions/getUserServerSession";
 import { serverFetch } from "@/lib/core/server";
 
 const learnPoints = [
@@ -104,7 +104,7 @@ const CourseDetailPage = async ({ params }) => {
     );
   }
 
-  const user = await useUserServerSession();
+  const user = await getUserServerSession();
   let isEnrolled = false;
   if (user && course) {
     try {

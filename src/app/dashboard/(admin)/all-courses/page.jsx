@@ -1,9 +1,9 @@
 import { redirect } from "next/navigation";
-import { useUserServerSession } from "@/lib/actions/getUserServerSession";
+import { getUserServerSession } from "@/lib/actions/getUserServerSession";
 import AdminCoursesContainer from "@/components/dashboard/AdminCoursesContainer";
 
 export default async function AllCoursesPage() {
-  const user = await useUserServerSession();
+  const user = await getUserServerSession();
 
   if (!user || user.role !== "admin") {
     redirect("/dashboard");
