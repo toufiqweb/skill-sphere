@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Grid, List, PlayCircle, BookOpen, Clock, Star } from "lucide-react";
-import Pagination from "@/components/Pagination";
+import Pagination from "@/components/ui/Pagination";
 import CourseCard from "@/components/ui/CourseCard";
 import CourseRatingModal from "@/components/ui/CourseRatingModal";
 import { useRouter, usePathname } from "next/navigation";
@@ -15,12 +15,14 @@ export default function MyLearningClient({ initialData, currentPage }) {
   const router = useRouter();
   const pathname = usePathname();
 
+  const [prevInitialData, setPrevInitialData] = useState(initialData);
   const [courses, setCourses] = useState(initialData?.data || []);
   const totalPages = initialData?.totalPages || 1;
 
-  useEffect(() => {
+  if (initialData !== prevInitialData) {
+    setPrevInitialData(initialData);
     setCourses(initialData?.data || []);
-  }, [initialData]);
+  }
 
   const handleRatingSuccess = (newAverageRating) => {
     if (!ratingModalCourse) return;

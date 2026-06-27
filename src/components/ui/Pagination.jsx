@@ -1,70 +1,138 @@
-import React from "react";
+"use client";
 
-const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+import React from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
+
+export default function Pagination({
+  currentPage,
+  totalPages,
+  onPageChange,
+  useUrlQuery = false,
+}) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   if (totalPages <= 1) return null;
 
-  const handlePrevious = () => {
-    if (currentPage > 1) {
-      onPageChange(currentPage - 1);
+  const handlePageChange = (page) => {
+    if (useUrlQuery) {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("page", page.toString());
+      router.push(`${pathname}?${params.toString()}`);
+    }
+    
+    if (onPageChange) {
+      onPageChange(page);
     }
   };
 
-  const handleNext = () => {
-    if (currentPage < totalPages) {
-      onPageChange(currentPage + 1);
+  // Generate paginated page numbers with ellipses
+  const getPageNumbers = () => {
+    const pages = [];
+    const siblingCount = 1;
+    const totalPageNumbers = 5; // Minimum slots to show
+
+    if (totalPages <= totalPageNumbers) {
+      for (let i = 1; i <= totalPages; i++) pages.push(i);
+      return pages;
     }
+
+    const leftSiblingIndex = Math.max(currentPage - siblingCount, 1);
+    const rightSiblingIndex = Math.min(currentPage + siblingCount, totalPages);
+
+    const shouldShowLeftDots = leftSiblingIndex > 2;
+    const shouldShowRightDots = rightSiblingIndex < totalPages - 1;
+
+    if (!shouldShowLeftDots && shouldShowRightDots) {
+      const leftItemCount = 3;
+      for (let i = 1; i <= leftItemCount; i++) pages.push(i);
+      pages.push("...");
+      pages.push(totalPages);
+    } else if (shouldShowLeftDots && !shouldShowRightDots) {
+      const rightItemCount = 3;
+      pages.push(1);
+      pages.push("...");
+      for (let i = totalPages - rightItemCount + 1; i <= totalPages; i++) {
+        pages.push(i);
+      }
+    } else if (shouldShowLeftDots && shouldShowRightDots) {
+      pages.push(1);
+      pages.push("...");
+      for (let i = leftSiblingIndex; i <= rightSiblingIndex; i++) {
+        pages.push(i);
+      }
+      pages.push("...");
+      pages.push(totalPages);
+    }
+
+    return pages;
   };
 
-  // Generate an array of page numbers
-  const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+  const pageNumbers = getPageNumbers();
 
   return (
-    <div className="flex items-center justify-center space-x-2 mt-12 mb-8">
+    <nav
+      className="flex items-center justify-center gap-2 select-none py-4"
+      aria-label="Pagination Navigation"
+    >
+      {/* Previous Button */}
       <button
-        onClick={handlePrevious}
+        type="button"
         disabled={currentPage === 1}
-        className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-          currentPage === 1
-            ? "bg-gray-100 text-gray-400 cursor-not-allowed border border-gray-200"
-            : "bg-white text-gray-700 hover:bg-gray-50 border border-gray-300 shadow-sm"
-        }`}
+        onClick={() => handlePageChange(currentPage - 1)}
+        className="flex items-center justify-center w-10 h-10 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white dark:disabled:hover:bg-gray-900 shadow-sm cursor-pointer"
+        aria-label="Previous Page"
       >
-        Previous
+        <ChevronLeft className="w-5 h-5" />
       </button>
-      
-      <div className="hidden sm:flex space-x-1">
-        {pages.map((page) => (
-          <button
-            key={page}
-            onClick={() => onPageChange(page)}
-            className={`w-10 h-10 flex items-center justify-center rounded-lg font-medium transition-all ${
-              currentPage === page
-                ? "bg-blue-600 text-white shadow-md"
-                : "bg-white text-gray-700 hover:bg-gray-50 border border-gray-300 shadow-sm"
-            }`}
-          >
-            {page}
-          </button>
-        ))}
+
+      {/* Page Numbers */}
+      <div className="flex items-center gap-1.5">
+        {pageNumbers.map((page, idx) => {
+          if (page === "...") {
+            return (
+              <span
+                key={`dots-${idx}`}
+                className="flex items-center justify-center w-10 h-10 text-gray-400 font-bold text-sm tracking-wide"
+              >
+                &bull;&bull;&bull;
+              </span>
+            );
+          }
+
+          const isActive = page === currentPage;
+
+          return (
+            <button
+              key={`page-${page}`}
+              type="button"
+              onClick={() => handlePageChange(page)}
+              className={`flex items-center justify-center w-10 h-10 text-sm font-bold rounded-xl transition-all duration-300 shadow-sm cursor-pointer hover:scale-[1.04] ${
+                isActive
+                  ? "bg-blue-600 text-white shadow-blue-600/20"
+                  : "bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-gray-700 dark:text-gray-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+              }`}
+              aria-label={`Page ${page}`}
+              aria-current={isActive ? "page" : undefined}
+            >
+              {page}
+            </button>
+          );
+        })}
       </div>
 
-      <div className="sm:hidden flex items-center text-gray-600 font-medium px-4">
-        Page {currentPage} of {totalPages}
-      </div>
-
+      {/* Next Button */}
       <button
-        onClick={handleNext}
+        type="button"
         disabled={currentPage === totalPages}
-        className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-          currentPage === totalPages
-            ? "bg-gray-100 text-gray-400 cursor-not-allowed border border-gray-200"
-            : "bg-white text-gray-700 hover:bg-gray-50 border border-gray-300 shadow-sm"
-        }`}
+        onClick={() => handlePageChange(currentPage + 1)}
+        className="flex items-center justify-center w-10 h-10 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white dark:disabled:hover:bg-gray-900 shadow-sm cursor-pointer"
+        aria-label="Next Page"
       >
-        Next
+        <ChevronRight className="w-5 h-5" />
       </button>
-    </div>
+    </nav>
   );
-};
-
-export default Pagination;
+}
