@@ -140,3 +140,13 @@ export const getInstructorEnrolledStudentsClient = async (instructorId, page = 1
   });
   return res.json();
 };
+
+export const getInstructorAnalyticsClient = async (instructorId) => {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:5000";
+  const res = await fetch(`${baseUrl}/api/instructor/analytics`, {
+    headers: {
+      "x-user-id": instructorId,
+    },
+  });
+  return res.json();
+};
