@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import {
   Clock,
   Users,
@@ -16,6 +17,8 @@ import {
 } from "lucide-react";
 import { getCourseById } from "@/lib/api/courses";
 import { FaStar } from "react-icons/fa";
+import { useUserServerSession } from "@/lib/actions/getUserServerSession";
+import { serverFetch } from "@/lib/core/server";
 
 const learnPoints = [
   "Build real-world projects from scratch",
@@ -99,6 +102,17 @@ const CourseDetailPage = async ({ params }) => {
         Course not found
       </div>
     );
+  }
+
+  const user = await useUserServerSession();
+  let isEnrolled = false;
+  if (user && course) {
+    try {
+      const enrollmentCheck = await serverFetch(`/api/enrollments/check?userId=${user.id}&courseId=${course._id}`);
+      isEnrolled = enrollmentCheck?.isEnrolled || false;
+    } catch (err) {
+      console.error("Error checking enrollment status:", err);
+    }
   }
 
   const courseRequirements = course.requirements || fallbackRequirements;
@@ -273,9 +287,29 @@ const CourseDetailPage = async ({ params }) => {
 
                 {/* Action Buttons */}
                 <div className="space-y-3">
-                  <button className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-md shadow-indigo-600/10 hover:scale-[1.01] active:scale-[0.99] cursor-pointer">
-                    Enroll Now
-                  </button>
+                  {isEnrolled ? (
+                    <Link
+                      href="/dashboard/my-learning"
+                      className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-md shadow-emerald-600/10 hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
+                    >
+                      <BookOpen className="w-4 h-4" />
+                      Go to Course
+                    </Link>
+                  ) : (
+                    <>
+                      {/* Native form POST — same pattern as RapidRole pricing page */}
+                      <form action="/api/checkout_sessions" method="POST">
+                        <input type="hidden" name="course_id" value={course._id} />
+                        <button
+                          id="enroll-now-btn"
+                          type="submit"
+                          className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-md shadow-indigo-600/10 hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
+                        >
+                          Enroll Now
+                        </button>
+                      </form>
+                    </>
+                  )}
                   <button className="w-full flex items-center justify-center gap-2 border border-gray-200 dark:border-zinc-800 bg-white/40 dark:bg-zinc-900/40 hover:bg-gray-100 dark:hover:bg-zinc-800/50 text-gray-700 dark:text-zinc-200 font-bold py-3 rounded-xl text-xs uppercase tracking-wider transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] cursor-pointer">
                     <Bookmark className="w-3.5 h-3.5 text-blue-500 dark:text-blue-400" />
                     Add to Wishlist
