@@ -1,20 +1,44 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Grid, List, PlayCircle, BookOpen, Clock } from "lucide-react";
+import { Grid, List, PlayCircle, BookOpen, Clock, Star } from "lucide-react";
 import Pagination from "@/components/Pagination";
 import CourseCard from "@/components/ui/CourseCard";
+import CourseRatingModal from "@/components/ui/CourseRatingModal";
 import { useRouter, usePathname } from "next/navigation";
 
 export default function MyLearningClient({ initialData, currentPage }) {
   const [view, setView] = useState("grid");
+  const [ratingModalCourse, setRatingModalCourse] = useState(null);
   const router = useRouter();
   const pathname = usePathname();
 
-  const courses = initialData?.data || [];
+  const [courses, setCourses] = useState(initialData?.data || []);
   const totalPages = initialData?.totalPages || 1;
+
+  useEffect(() => {
+    setCourses(initialData?.data || []);
+  }, [initialData]);
+
+  const handleRatingSuccess = (newAverageRating) => {
+    if (!ratingModalCourse) return;
+    setCourses(prev => prev.map(enrollment => {
+      const courseData = enrollment.course;
+      if (!courseData) return enrollment;
+      if (courseData._id === ratingModalCourse._id || courseData.id === ratingModalCourse.id) {
+        return {
+          ...enrollment,
+          course: {
+            ...courseData,
+            rating: newAverageRating
+          }
+        };
+      }
+      return enrollment;
+    }));
+  };
 
   // Format date helper
   const formatDate = (isoString) => {
@@ -95,7 +119,14 @@ export default function MyLearningClient({ initialData, currentPage }) {
           {courses.map((enrollment) => {
             const courseData = enrollment.course;
             if (!courseData) return null;
-            return <CourseCard key={enrollment._id} course={courseData} />;
+            return (
+              <CourseCard 
+                key={enrollment._id} 
+                course={courseData} 
+                allowRating={true} 
+                onRateClick={(course) => setRatingModalCourse(course)}
+              />
+            );
           })}
         </div>
       ) : (
@@ -155,13 +186,23 @@ export default function MyLearningClient({ initialData, currentPage }) {
                         ${enrollment.amount}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right">
-                        <Link
-                          href={`/courses/${courseData._id || courseData.id}`}
-                          className="inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-indigo-50 dark:bg-indigo-500/10 hover:bg-indigo-100 dark:hover:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 font-bold text-xs uppercase tracking-wider rounded-lg transition-colors"
-                        >
-                          <PlayCircle className="w-4 h-4" />
-                          Start Learning
-                        </Link>
+                        <div className="flex items-center justify-end gap-2">
+                          <button
+                            onClick={() => setRatingModalCourse(courseData)}
+                            className="inline-flex items-center justify-center rounded-lg bg-amber-50 dark:bg-amber-500/10 hover:bg-amber-100 dark:hover:bg-amber-500/20 text-amber-600 dark:text-amber-400 p-2 transition-colors duration-300"
+                            aria-label="Rate this course"
+                            title="Rate Course"
+                          >
+                            <Star className="h-4 w-4" />
+                          </button>
+                          <Link
+                            href={`/courses/${courseData._id || courseData.id}`}
+                            className="inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-indigo-50 dark:bg-indigo-500/10 hover:bg-indigo-100 dark:hover:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 font-bold text-xs uppercase tracking-wider rounded-lg transition-colors"
+                          >
+                            <PlayCircle className="w-4 h-4" />
+                            Start Learning
+                          </Link>
+                        </div>
                       </td>
                     </tr>
                   );
@@ -177,6 +218,15 @@ export default function MyLearningClient({ initialData, currentPage }) {
         currentPage={currentPage}
         totalPages={totalPages}
         onPageChange={handlePageChange}
+      />
+
+      {/* Shared Rating Modal for List View */}
+      <CourseRatingModal
+        isOpen={!!ratingModalCourse}
+        onClose={() => setRatingModalCourse(null)}
+        courseId={ratingModalCourse?._id || ratingModalCourse?.id}
+        courseTitle={ratingModalCourse?.title}
+        onRatingSuccess={handleRatingSuccess}
       />
     </div>
   );

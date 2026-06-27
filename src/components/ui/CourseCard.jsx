@@ -35,7 +35,7 @@ const item = {
   },
 };
 
-export default function CourseCard({ course }) {
+export default function CourseCard({ course, allowRating = false, onRateClick }) {
   const courseId = course.id || course._id;
   const {
     title,
@@ -242,16 +242,31 @@ export default function CourseCard({ course }) {
               )}
             </div>
 
-            <Link
-              href={`/courses/${courseId}`}
-              className="group/btn relative inline-flex items-center gap-1.5 overflow-hidden rounded-xl bg-gradient-to-r from-[#5643ff] to-[#6d5dfc] px-4 py-2.5 text-xs font-bold text-white shadow-md shadow-indigo-600/10 transition-all duration-300 hover:scale-[1.03] hover:brightness-110"
-            >
-              <span>View Details</span>
-              <ArrowUpRight
-                className="h-3.5 w-3.5 transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
-                strokeWidth={2.5}
-              />
-            </Link>
+            <div className="flex items-center gap-2">
+              {allowRating && (
+                <button
+                  onClick={(e) => { 
+                    e.preventDefault(); 
+                    if (onRateClick) onRateClick(course); 
+                  }}
+                  className="inline-flex items-center justify-center rounded-xl bg-amber-50 dark:bg-amber-500/10 hover:bg-amber-100 dark:hover:bg-amber-500/20 text-amber-600 dark:text-amber-400 p-2.5 transition-colors duration-300"
+                  aria-label="Rate this course"
+                  title="Rate Course"
+                >
+                  <Star className="h-4 w-4" />
+                </button>
+              )}
+              <Link
+                href={`/courses/${courseId}`}
+                className="group/btn relative inline-flex items-center gap-1.5 overflow-hidden rounded-xl bg-gradient-to-r from-[#5643ff] to-[#6d5dfc] px-4 py-2.5 text-xs font-bold text-white shadow-md shadow-indigo-600/10 transition-all duration-300 hover:scale-[1.03] hover:brightness-110"
+              >
+                <span>View Details</span>
+                <ArrowUpRight
+                  className="h-3.5 w-3.5 transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
+                  strokeWidth={2.5}
+                />
+              </Link>
+            </div>
           </motion.div>
         </motion.div>
       </div>
