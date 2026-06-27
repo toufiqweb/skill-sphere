@@ -34,6 +34,22 @@ export const auth = betterAuth({
         type: "string",
         defaultValue: "active", // active, blocked
       },
+      bio: {
+        type: "string",
+        required: false,
+      },
+      skills: {
+        type: "string[]",
+        required: false,
+      },
+      socialLinks: {
+        type: "object",
+        required: false,
+      },
+      phoneNumber: {
+        type: "string",
+        required: false,
+      },
     },
   },
   session: {

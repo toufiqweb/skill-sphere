@@ -159,7 +159,7 @@ const Navbar = () => {
                       </Link>
 
                       <Link
-                        href="/profile"
+                        href="/dashboard/profile"
                         onClick={() => setIsDropdownOpen(false)}
                         className="flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-secondary hover:text-foreground hover:bg-foreground/5 rounded-lg transition-colors duration-300 "
                       >
@@ -260,7 +260,7 @@ const Navbar = () => {
 
                 {/* Mobile Profile Link */}
                 <Link
-                  href="/profile"
+                  href="/dashboard/profile"
                   onClick={() => setIsMenuOpen(false)}
                   className="flex items-center gap-3 p-3 text-sm font-medium text-secondary hover:text-foreground bg-foreground/5 hover:bg-foreground/10 rounded-xl transition-all"
                 >

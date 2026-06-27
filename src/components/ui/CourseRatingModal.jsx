@@ -31,7 +31,11 @@ export default function CourseRatingModal({
 
     setIsSubmitting(true);
     try {
-      const result = await rateCourseAction(courseId, selectedRating, reviewMessage);
+      const result = await rateCourseAction(
+        courseId,
+        selectedRating,
+        reviewMessage,
+      );
 
       if (result.success) {
         toast.success("Rating submitted successfully!");
@@ -51,7 +55,7 @@ export default function CourseRatingModal({
   };
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm transition-opacity">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm transition-opacity">
       <div className="relative w-full max-w-sm bg-white dark:bg-zinc-900 rounded-2xl shadow-xl p-6 m-4 border border-gray-200 dark:border-zinc-800 animate-in fade-in zoom-in-95 duration-200">
         {/* Close Button */}
         <button
@@ -104,7 +108,9 @@ export default function CourseRatingModal({
 
           <button
             onClick={handleSubmit}
-            disabled={isSubmitting || selectedRating === 0 || !reviewMessage.trim()}
+            disabled={
+              isSubmitting || selectedRating === 0 || !reviewMessage.trim()
+            }
             className={`w-full py-3.5 rounded-xl font-bold text-sm tracking-wide transition-all duration-200 ${
               selectedRating > 0 && reviewMessage.trim() && !isSubmitting
                 ? "bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-600/20 active:scale-[0.98]"
