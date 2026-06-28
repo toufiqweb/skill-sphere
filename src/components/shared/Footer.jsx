@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { GraduationCap, Mail, Phone, MapPin } from "lucide-react";
-
+import { GraduationCap, Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
 import {
   FaFacebookF,
   FaInstagram,
@@ -10,78 +9,63 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="relative overflow-hidden bg-background transition-colors duration-300 border-t border-card-border transition-colors duration-300 pt-16 pb-8">
-      {/* Structural Atmospheric Glow Accents */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-0 bottom-0 h-64 w-64 rounded-full bg-violet-600/5 blur-[100px]" />
-        <div className="absolute right-0 top-0 h-64 w-64 rounded-full bg-blue-600/5 blur-[100px]" />
+    <footer className="relative overflow-hidden bg-background border-t border-card-border pt-20 pb-10 transition-colors duration-300">
+      {/* Structural Atmospheric Glow Accents utilizing Theme variables */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute left-0 bottom-0 h-72 w-72 rounded-full bg-brand-cyan/5 blur-[120px]" />
+        <div className="absolute right-0 top-0 h-72 w-72 rounded-full bg-brand-ocean/5 blur-[120px]" />
       </div>
 
       <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 pb-12">
-          {/* Brand Presentation Column */}
-          <div className="space-y-4">
-            <Link href="/" className="inline-flex items-center gap-2.5">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-[#5643ff] to-[#4332eb] text-white shadow-md">
-                <GraduationCap size={18} />
+        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-12 pb-16">
+          {/* Brand Presentation Column (Takes up 4 cols on large layouts) */}
+          <div className="lg:col-span-4 space-y-6">
+            <Link href="/" className="inline-flex items-center gap-3 group">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-main-gradient text-white shadow-md group-hover:scale-105 transition-transform duration-300">
+                <GraduationCap size={20} />
               </div>
 
               <div className="flex flex-col">
-                <h1 className="text-lg font-black tracking-tight text-foreground leading-none transition-colors duration-300 ">
-                  Skill{" "}
-                  <span className="bg-gradient-to-r from-violet-400 to-indigo-300 bg-clip-text text-transparent">
-                    Sphere
-                  </span>
-                </h1>
-                <span className="text-[8px] uppercase tracking-[0.22em] text-violet-400 font-bold mt-1">
+                <h2 className="text-xl font-black tracking-tight text-foreground leading-none">
+                  Skill <span className="text-main-gradient">Sphere</span>
+                </h2>
+                <span className="text-[9px] uppercase tracking-[0.25em] text-brand-cyan font-black mt-1.5">
                   Learn • Grow • Succeed
                 </span>
               </div>
             </Link>
 
-            <p className="max-w-xs text-xs font-medium leading-relaxed text-muted transition-colors duration-300 ">
+            <p className="max-w-xs text-xs font-semibold leading-relaxed text-muted">
               Empowering learners worldwide through high-quality online
-              education, practical skills, and industry-focused courses.
+              education, practical skills, and interactive, industry-focused
+              courses.
             </p>
 
-            {/* Circular Social Platform Links Grid matching the bottom layout */}
-            <div className="flex gap-2 pt-2">
-              <Link
-                href="#"
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-card-border transition-colors duration-300 bg-card-bg/40 transition-colors duration-300 text-muted transition-colors duration-300 transition-all duration-300 hover:border-violet-500 hover:bg-[#5643ff] hover:text-white"
-              >
-                <FaFacebookF size={12} />
-              </Link>
-
-              <Link
-                href="#"
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-card-border transition-colors duration-300 bg-card-bg/40 transition-colors duration-300 text-muted transition-colors duration-300 transition-all duration-300 hover:border-violet-500 hover:bg-[#5643ff] hover:text-white"
-              >
-                <FaTwitter size={12} />
-              </Link>
-
-              <Link
-                href="#"
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-card-border transition-colors duration-300 bg-card-bg/40 transition-colors duration-300 text-muted transition-colors duration-300 transition-all duration-300 hover:border-violet-500 hover:bg-[#5643ff] hover:text-white"
-              >
-                <FaInstagram size={12} />
-              </Link>
-
-              <Link
-                href="#"
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-card-border transition-colors duration-300 bg-card-bg/40 transition-colors duration-300 text-muted transition-colors duration-300 transition-all duration-300 hover:border-violet-500 hover:bg-[#5643ff] hover:text-white"
-              >
-                <FaLinkedinIn size={12} />
-              </Link>
+            {/* Circular Social Platform Links Grid */}
+            <div className="flex gap-3 pt-2">
+              {[
+                { icon: <FaFacebookF size={12} />, href: "#" },
+                { icon: <FaTwitter size={12} />, href: "#" },
+                { icon: <FaInstagram size={12} />, href: "#" },
+                { icon: <FaLinkedinIn size={12} />, href: "#" },
+              ].map((social, idx) => (
+                <Link
+                  key={idx}
+                  href={social.href}
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-card-border bg-card-bg/40 text-muted transition-all duration-300 hover:border-brand-mint hover:bg-main-gradient hover:text-white hover:-translate-y-0.5 shadow-sm"
+                >
+                  {social.icon}
+                </Link>
+              ))}
             </div>
           </div>
 
-          {/* Navigation Column: Quick Links */}
-          <div>
-            <h3 className="mb-4 text-sm font-bold text-foreground tracking-wide transition-colors duration-300 ">
+          {/* Links Column: Quick Links (Takes 2 cols) */}
+          <div className="lg:col-span-2">
+            <h3 className="mb-5 text-xs font-black uppercase tracking-wider text-foreground">
               Quick Links
             </h3>
-            <ul className="space-y-2.5">
+            <ul className="space-y-3">
               {[
                 { name: "Courses", path: "/courses" },
                 { name: "Instructors", path: "/instructors" },
@@ -92,7 +76,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <Link
                     href={link.path}
-                    className="text-xs font-semibold text-muted transition-colors duration-300 hover:text-[#5643ff]"
+                    className="text-xs font-semibold text-muted transition-colors duration-200 hover:text-brand-mint"
                   >
                     {link.name}
                   </Link>
@@ -101,12 +85,12 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Navigation Column: Support Details */}
-          <div>
-            <h3 className="mb-4 text-sm font-bold text-foreground tracking-wide transition-colors duration-300 ">
+          {/* Links Column: Support Details (Takes 2 cols) */}
+          <div className="lg:col-span-2">
+            <h3 className="mb-5 text-xs font-black uppercase tracking-wider text-foreground">
               Support
             </h3>
-            <ul className="space-y-2.5">
+            <ul className="space-y-3">
               {[
                 { name: "Help Center", path: "/help" },
                 { name: "Contact Us", path: "/contact" },
@@ -117,7 +101,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <Link
                     href={link.path}
-                    className="text-xs font-semibold text-muted transition-colors duration-300 hover:text-[#5643ff]"
+                    className="text-xs font-semibold text-muted transition-colors duration-200 hover:text-brand-mint"
                   >
                     {link.name}
                   </Link>
@@ -126,64 +110,80 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Navigation Column: Contact Details with CTA CTA Button */}
-          <div className="space-y-4">
-            <h3 className="text-sm font-bold text-foreground tracking-wide transition-colors duration-300 ">
+          {/* Links Column: Contact & CTA Panel (Takes 4 cols) */}
+          <div className="lg:col-span-4 space-y-6">
+            <h3 className="text-xs font-black uppercase tracking-wider text-foreground">
               Contact Info
             </h3>
 
-            <div className="space-y-2.5">
-              <div className="flex items-center gap-2.5 text-xs text-muted transition-colors duration-300 font-medium">
-                <Mail size={13} className="text-violet-400 shrink-0" />
-                <span>hello@vectralearn.com</span>
+            <div className="space-y-3.5">
+              <div className="flex items-center gap-3 text-xs text-muted font-semibold group cursor-pointer">
+                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-card-border bg-card-bg/30 text-brand-ocean group-hover:text-brand-mint transition-colors">
+                  <Mail size={13} />
+                </div>
+                <span className="group-hover:text-foreground transition-colors">
+                  hello@vectralearn.com
+                </span>
               </div>
 
-              <div className="flex items-center gap-2.5 text-xs text-muted transition-colors duration-300 font-medium">
-                <Phone size={13} className="text-violet-400 shrink-0" />
-                <span>+1 (555) 123-4567</span>
+              <div className="flex items-center gap-3 text-xs text-muted font-semibold group cursor-pointer">
+                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-card-border bg-card-bg/30 text-brand-ocean group-hover:text-brand-mint transition-colors">
+                  <Phone size={13} />
+                </div>
+                <span className="group-hover:text-foreground transition-colors">
+                  +1 (555) 123-4567
+                </span>
               </div>
 
-              <div className="flex items-center gap-2.5 text-xs text-muted transition-colors duration-300 font-medium">
-                <MapPin size={13} className="text-violet-400 shrink-0" />
-                <span>New York, USA</span>
+              <div className="flex items-center gap-3 text-xs text-muted font-semibold group cursor-pointer">
+                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-card-border bg-card-bg/30 text-brand-ocean group-hover:text-brand-mint transition-colors">
+                  <MapPin size={13} />
+                </div>
+                <span className="group-hover:text-foreground transition-colors">
+                  New York, USA
+                </span>
               </div>
             </div>
 
-            {/* Custom Interactive Floating Action Element from image blueprint */}
-            <div className="pt-1">
+            {/* Premium Interactive Floating Action Card */}
+            <div className="pt-2">
               <Link
                 href="/become-instructor"
-                className="inline-flex items-center justify-center rounded-full border border-violet-500/30 bg-card-bg/60 transition-colors duration-300 px-4 py-2 text-[11px] font-bold text-primary transition-colors duration-300 transition-all duration-300 hover:border-violet-500 hover:bg-[#5643ff] hover:text-white"
+                className="group flex items-center justify-between p-3.5 px-5 rounded-2xl border border-card-border bg-card-bg/50 backdrop-blur-md hover:border-brand-mint/40 transition-all duration-300"
               >
-                Become an Instructor
+                <div className="text-left">
+                  <p className="text-xs font-black text-foreground">
+                    Share Your Knowledge
+                  </p>
+                  <p className="text-[10px] font-semibold text-muted">
+                    Become an Instructor
+                  </p>
+                </div>
+                <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-brand-cyan/10 text-brand-cyan group-hover:bg-main-gradient group-hover:text-white transition-all duration-300">
+                  <ArrowUpRight
+                    size={14}
+                    className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+                  />
+                </div>
               </Link>
             </div>
           </div>
         </div>
 
         {/* Global Copyright and Legal Links Row */}
-        <div className="mt-6 flex flex-col items-center justify-between gap-4 border-t border-card-border transition-colors duration-300 pt-6 text-[11px] font-medium text-muted transition-colors duration-300 sm:flex-row">
+        <div className="mt-4 flex flex-col items-center justify-between gap-4 border-t border-card-border/60 pt-8 text-[11px] font-bold text-muted sm:flex-row">
           <p>© 2026 VectraLearn. All rights reserved.</p>
 
-          <div className="flex gap-5">
-            <Link
-              href="/privacy-policy"
-              className="hover:text-violet-400 transition-colors duration-300 "
-            >
-              Privacy
-            </Link>
-            <Link
-              href="/terms"
-              className="hover:text-violet-400 transition-colors duration-300 "
-            >
-              Terms
-            </Link>
-            <Link
-              href="/cookies"
-              className="hover:text-violet-400 transition-colors duration-300 "
-            >
-              Cookies
-            </Link>
+          <div className="flex gap-6">
+            {["Privacy", "Terms", "Cookies"].map((legal) => (
+              <Link
+                key={legal}
+                href={`/${legal.toLowerCase()}`}
+                className="hover:text-brand-mint transition-colors duration-200"
+              >
+                {legal}
+              </Link>
+            ))}
           </div>
         </div>
       </div>

@@ -70,7 +70,7 @@ const Navbar = () => {
               href="/"
               className="text-2xl font-black tracking-tight text-foreground active:scale-95 transition-transform"
             >
-              E-Online.
+              VectraLearn
             </Link>
           </div>
 

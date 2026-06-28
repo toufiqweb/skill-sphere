@@ -10,7 +10,7 @@ const PopularCourses = ({ courses = [] }) => {
   }, [courses]);
 
   return (
-    <section className="relative overflow-hidden bg-background transition-colors duration-300 py-16 lg:py-20">
+    <section className="relative overflow-hidden section-soft transition-colors duration-300 py-16 lg:py-20">
       {/* Background Section Glow Accent */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 right-0 h-[400px] w-[400px] rounded-full bg-brand-ocean/10 blur-[120px]" />
@@ -24,9 +24,7 @@ const PopularCourses = ({ courses = [] }) => {
               BROWSE TOP COURSES
             </span>
 
-            <h2 className="section-title">
-              Popular Courses
-            </h2>
+            <h2 className="section-title">Popular Courses</h2>
 
             <p className="section-desc">
               Discover our most in-demand courses across various fields.

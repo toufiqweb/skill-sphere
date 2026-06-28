@@ -4,13 +4,13 @@ import PopularCourses from "@/components/homepage/PopularCourses";
 import StartLearningToday from "@/components/homepage/StartLearningToday";
 import Stats from "@/components/homepage/Stats";
 import TopInstructors from "@/components/homepage/TopInstructors";
-import WhatOurStudentSay from "@/components/homepage/WhatOurStudentSay";
+import Testimonials from "@/components/homepage/Testimonials";
 import { getAllCourses } from "@/lib/api/courses";
 import { Suspense } from "react";
-import LearningJourney from "@/components/homepage/LearningJourney";
 import PopularCardLoading from "@/components/ui/PopularCardLoading";
 import NewReleasesLoading from "@/components/ui/NewReleasesLoading";
 import Banner from "@/components/homepage/Banner";
+import CTASection from "@/components/homepage/CTA";
 
 export default async function Home() {
   let courses = [];
@@ -30,14 +30,14 @@ export default async function Home() {
       <Suspense fallback={<PopularCardLoading />}>
         <PopularCourses courses={courses} />
       </Suspense>
+      <LearningTips />
       <TopInstructors />
-      <WhatOurStudentSay />
+      <Testimonials />
       <StartLearningToday />
       <Suspense fallback={<NewReleasesLoading />}>
         <NewReleases courses={courses} />
       </Suspense>
-      <LearningTips />
-      <LearningJourney />
+      <CTASection />
     </div>
   );
 }

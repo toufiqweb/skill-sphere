@@ -24,7 +24,7 @@ const stats = [
 
 export default function StatsSection() {
   return (
-    <section className="relative overflow-hidden  bg-card-bg/40 border border-card-border shadow-sm py-24">
+    <section className="relative overflow-hidden  section-light border border-card-border shadow-sm py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid items-center gap-20 lg:grid-cols-2">
           {/* Left Side */}

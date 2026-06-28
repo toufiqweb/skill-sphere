@@ -44,7 +44,7 @@ const LearningTips = () => {
   }, []);
 
   return (
-    <section className="relative overflow-hidden bg-background py-16 lg:py-24 transition-colors duration-300">
+    <section className="relative overflow-hidden section-light py-16 lg:py-24 transition-colors duration-300">
       {/* Background Ambient Glow */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute top-1/2 left-0 h-[400px] w-[400px] -translate-y-1/2 rounded-full bg-brand-mint/5 blur-[120px]" />
