@@ -8,6 +8,10 @@ export const searchDonors = async (queryParams) => {
   return serverFetch(`/api/courses/search?${queryParams}`);
 };
 
+export const getAllUsers = async () => {
+  return serverFetch(`/api/users`);
+};
+
 // ── Admin User Management API ─────────────────────────────────────────────────
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:5000";

@@ -1,129 +1,202 @@
-import React from "react";
+"use client";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Clock, Target, ArrowRight, BookOpen } from "lucide-react";
+import { CheckCircle, Star } from "lucide-react";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { getAllUsers } from "@/lib/api/users";
+import person2 from "../../assets/person2.jpg";
+import person3 from "../../assets/person3.jpg";
 
-const learningTips = [
-  {
-    id: 1,
-    title: "Effective Study Techniques",
-    description:
-      "Learn proven methods to improve focus and retention.",
-    icon: BookOpen,
-    iconColor: "text-purple-400",
-    badges: [
-      { text: "Study Smart", className: "bg-purple-500/10 text-purple-400" },
-      { text: "Optimization", className: "bg-slate-500/10 text-muted transition-colors duration-300 " }
-    ],
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
   },
-  {
-    id: 2,
-    title: "Time Management",
-    description:
-      "Master time management and boost your productivity.",
-    icon: Clock,
-    iconColor: "text-emerald-400",
-    badges: [
-      { text: "Productivity", className: "bg-emerald-500/10 text-emerald-400" }
-    ],
-  },
-  {
-    id: 3,
-    title: "Stay Focused & Motivated",
-    description:
-      "Tips to maintain motivation throughout your learning.",
-    icon: Target,
-    iconColor: "text-blue-400",
-    badges: [
-      { text: "Mindset", className: "bg-blue-500/10 text-blue-400" }
-    ],
-  },
-];
+};
 
 const LearningTips = () => {
+  const [students, setStudents] = useState([]);
+
+  useEffect(() => {
+    const fetchStudents = async () => {
+      try {
+        const data = await getAllUsers();
+        if (Array.isArray(data)) {
+          const studentUsers = data
+            .filter((u) => u.role === "student")
+            .slice(0, 5);
+          setStudents(studentUsers);
+        }
+      } catch (err) {
+        console.error("Failed to fetch dynamic students", err);
+      }
+    };
+    fetchStudents();
+  }, []);
+
   return (
-    <section className="relative overflow-hidden bg-background transition-colors duration-300 py-16 lg:py-20">
-      
+    <section className="relative overflow-hidden bg-background py-16 lg:py-24 transition-colors duration-300">
       {/* Background Ambient Glow */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/2 left-1/4 h-[300px] w-[500px] -translate-y-1/2 rounded-full bg-indigo-500/5 blur-[120px]" />
+        <div className="absolute top-1/2 left-0 h-[400px] w-[400px] -translate-y-1/2 rounded-full bg-brand-mint/5 blur-[120px]" />
       </div>
 
       <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        
-        {/* Header Block matching ChatGPT Image May 31, 2026, 03_05_55 PM_11.png */}
-        <div className="mb-10 flex flex-col justify-between items-start md:flex-row md:items-end gap-4">
-          <div className="space-y-1">
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-violet-400 block">
-              LEARNING RESOURCES
-            </span>
-            <h2 className="text-2xl font-black tracking-tight text-foreground sm:text-3xl transition-colors duration-300 ">
-              Learning Tips & Guides
-            </h2>
-            <p className="text-xs sm:text-sm text-muted transition-colors duration-300 font-medium">
-              Practical tips and insights to accelerate your learning journey.
-            </p>
-          </div>
-
-          <Link
-            href="/tips"
-            className="text-[11px] font-medium text-secondary transition-colors duration-300 border border-slate-800 rounded-full px-4 py-1.5 hover:bg-foreground/5 transition-colors duration-300 hover:text-foreground transition-all duration-300 transition-colors duration-300 "
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-10 items-center">
+          {/* LEFT COLUMN (Text Content) */}
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="flex flex-col items-start max-w-xl"
           >
-            View All Tips
-          </Link>
-        </div>
+            <motion.h2 variants={fadeUp} className="section-title mb-6">
+              Our Commitment to Excellence, Learn, Grow & Success.
+            </motion.h2>
 
-        {/* 3-Column Content Grid */}
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {learningTips.map((tip) => {
-            const Icon = tip.icon;
+            <motion.p variants={fadeUp} className="section-desc mb-8">
+              We are passionate about transforming lives through education.
+              Founded with a vision to make learning accessible to all, we
+              believe in the power of knowledge to
+            </motion.p>
 
-            return (
-              <div
-                key={tip.id}
-                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-card-border transition-colors duration-300 bg-card-bg/30 transition-colors duration-300 p-6 transition-all duration-300 hover:border-card-border transition-colors duration-300 hover:bg-card-bg/40 transition-colors duration-300 min-h-[190px]"
-              >
-                <div>
-                  {/* Row for Multiple Badges */}
-                  <div className="mb-4 flex flex-wrap gap-2">
-                    {tip.badges.map((badge, idx) => (
-                      <span 
-                        key={idx} 
-                        className={`text-[9px] font-bold px-2 py-0.5 rounded ${badge.className}`}
-                      >
-                        {badge.text}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Card Title Layer */}
-                  <h3 className="text-sm font-bold text-foreground tracking-tight sm:text-base mb-2 transition-colors duration-300 ">
-                    {tip.title}
-                  </h3>
-
-                  {/* Card Description Paragraph */}
-                  <p className="text-xs text-muted transition-colors duration-300 leading-relaxed font-medium">
-                    {tip.description}
-                  </p>
+            <motion.div
+              variants={fadeUp}
+              className="grid sm:grid-cols-2 gap-y-5 gap-x-6 mb-10 w-full"
+            >
+              {[
+                "9/10 Average Satisfaction Rate",
+                "Friendly Environment & Expert Teacher",
+                "96% Completion Rate",
+                "9/10 Average Satisfaction Rate",
+              ].map((item, i) => (
+                <div key={i} className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 fill-brand-mint text-white shrink-0 mt-0.5 shadow-sm rounded-full" />
+                  <span className="text-sm font-bold text-foreground leading-snug">
+                    {item}
+                  </span>
                 </div>
+              ))}
+            </motion.div>
 
-                {/* Unified Footer Call-To-Action Link */}
-                <div className="mt-6 flex items-center justify-between">
-                  <Link
-                    href="/tips"
-                    className="inline-flex items-center gap-1 text-[11px] font-bold text-violet-400 transition-all duration-300 hover:text-violet-300 group-hover:gap-2"
-                  >
-                    Read More
-                    <ArrowRight size={12} className="mt-0.5 transition-transform duration-300" />
-                  </Link>
+            <motion.div variants={fadeUp}>
+              <Link
+                href="/about"
+                className="inline-flex items-center justify-center rounded-xl bg-brand-mint px-8 py-3.5 text-sm font-bold text-white shadow-glow hover:brightness-110 transition-all duration-300 hover:scale-105"
+              >
+                Read More
+              </Link>
+            </motion.div>
+          </motion.div>
 
-                  {/* Contextual Icon Indicator */}
-                  <Icon className={`${tip.iconColor} opacity-40 group-hover:opacity-90 transition-all duration-300`} size={16} />
+          {/* RIGHT COLUMN (Collage Grid) */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="grid grid-cols-2 gap-4 lg:gap-5"
+          >
+            {/* Left Sub-Column */}
+            <div className="flex flex-col gap-4 lg:gap-5">
+              {/* Green Reviews Card */}
+              <div className="bg-brand-mint rounded-3xl p-6 flex flex-col items-center justify-center text-center text-white shadow-lg h-44 sm:h-52 hover:-translate-y-1 transition-transform duration-300">
+                <div className="bg-white rounded-full p-2.5 mb-3 shadow-md flex items-center justify-center">
+                  <Star className="w-6 h-6 text-orange-500 fill-orange-500" />
+                </div>
+                <div className="font-extrabold text-xl sm:text-2xl mb-1">
+                  4.6 (2.4k)
+                </div>
+                <div className="text-xs sm:text-sm font-bold opacity-90 tracking-wide uppercase">
+                  AVG Reviews
                 </div>
               </div>
-            );
-          })}
-        </div>
 
+              {/* Small Image */}
+              <div className="relative rounded-3xl overflow-hidden h-44 sm:h-56 shadow-lg bg-muted/20 group">
+                <Image
+                  src={person2}
+                  alt="Students collaborating"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+              </div>
+            </div>
+
+            {/* Right Sub-Column */}
+            <div className="flex flex-col gap-4 lg:gap-5">
+              {/* Tall Image */}
+              <div className="relative rounded-3xl overflow-hidden h-full min-h-[250px] sm:min-h-[300px] shadow-lg bg-muted/20 group">
+                <Image
+                  src={person3}
+                  alt="Student Success"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+              </div>
+            </div>
+
+            {/* Bottom Full-Width Card */}
+            <div className="col-span-2 bg-brand-ocean rounded-3xl p-5 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-white shadow-lg hover:-translate-y-1 transition-transform duration-300">
+              <div className="font-bold text-base sm:text-lg">
+                36k+ Enrolled Students
+              </div>
+              <div className="flex -space-x-3">
+                {students.length > 0 ? (
+                  students.map((student, idx) => (
+                    <Image
+                      height={40}
+                      width={40}
+                      key={student._id || idx}
+                      src={
+                        student.image ||
+                        student.photoURL ||
+                        `https://i.pravatar.cc/150?u=${student._id || idx}`
+                      }
+                      className="w-10 h-10 rounded-full ring-2 ring-brand-ocean object-cover bg-white"
+                      alt={student.name || "Student"}
+                    />
+                  ))
+                ) : (
+                  // Fallback while loading
+                  <>
+                    <Image
+                      height={40}
+                      width={40}
+                      src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
+                      className="w-10 h-10 rounded-full ring-2 ring-brand-ocean object-cover bg-white"
+                      alt="Student"
+                    />
+                    <Image
+                      height={40}
+                      width={40}
+                      src="https://i.pravatar.cc/150?u=a04258a2462d826712d"
+                      className="w-10 h-10 rounded-full ring-2 ring-brand-ocean object-cover bg-white"
+                      alt="Student"
+                    />
+                    <Image
+                      height={40}
+                      width={40}
+                      src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                      className="w-10 h-10 rounded-full ring-2 ring-brand-ocean object-cover bg-white"
+                      alt="Student"
+                    />
+                  </>
+                )}
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

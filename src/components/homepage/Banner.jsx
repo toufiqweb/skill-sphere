@@ -1,33 +1,17 @@
 "use client";
-
 import { motion } from "framer-motion";
 import {
-  Award,
-  Clock,
-  FileCheck,
-  Play,
   ArrowRight,
-  GraduationCap,
-  Users2,
-  Smile,
+  Code2,
+  Eraser,
+  LayoutGrid,
+  Megaphone,
+  User,
 } from "lucide-react";
-import bannerImage from "@/assets/download.jpg";
 import Link from "next/link";
 import Image from "next/image";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: [0.215, 0.61, 0.355, 1],
-    },
-  },
-};
-
-const stagger = {
+const staggerContainer = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
@@ -37,193 +21,276 @@ const stagger = {
   },
 };
 
-const float = (delay = 0, distance = 8) => ({
-  y: [-distance, distance, -distance],
-  transition: {
-    duration: 5,
-    repeat: Infinity,
-    ease: "easeInOut",
-    delay,
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
+
+const float = {
+  animate: {
+    y: [0, -10, 0],
+    transition: {
+      duration: 4,
+      repeat: Infinity,
+      ease: "easeInOut",
+    },
   },
-});
+};
 
 export default function Banner() {
   return (
-    <section className="relative min-h-screen w-full overflow-hidden bg-background px-4 py-20 flex items-center transition-colors duration-300 ">
-      {/* Dynamic Background Glows matching reference asset color weight */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute top-[-10%] left-[-10%] h-[600px] w-[600px] rounded-full bg-violet-900/20 blur-[140px]" />
-        <div className="absolute bottom-[10%] right-[-5%] h-[500px] w-[500px] rounded-full bg-indigo-900/20 blur-[130px]" />
-      </div>
-
-      <div className="relative z-10 mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8">
-        <div className="grid w-full items-center gap-12 lg:grid-cols-12">
-          
-          {/* LEFT SIDE: Content Column */}
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            animate="show"
-            className="space-y-6 text-center lg:text-left flex flex-col items-center lg:items-start lg:col-span-5"
+    <section className="mx-auto max-w-7xl px-6 py-24 ">
+      {/* --- HERO SECTION --- */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[65vh]">
+        {/* Left Column (Content) */}
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          animate="show"
+          className="flex flex-col items-start space-y-8 z-10"
+        >
+          <motion.h1
+            variants={fadeUp}
+            className="text-5xl sm:text-6xl lg:text-[4.5rem] font-extrabold leading-[1.1] tracking-tight text-foreground"
           >
-            {/* Top Micro Label */}
-            <motion.div variants={fadeUp} className="inline-flex items-center gap-1.5 rounded-full bg-violet-500/10 px-3.5 py-1 border border-violet-500/20">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-violet-400">
-                #1 Online Learning Platform
-              </span>
-            </motion.div>
+            Investing in <br />
+            Knowledge and <br />
+            <span className="text-main-gradient drop-shadow-sm">
+              Your Future
+            </span>
+          </motion.h1>
 
-            {/* Typography Heading Structure */}
-            <motion.h1
-              variants={fadeUp}
-              className="text-4xl font-extrabold leading-[1.1] tracking-tight text-foreground sm:text-5xl xl:text-6xl transition-colors duration-300 "
-            >
-              Upgrade Your
-              <br />
-              <span className="bg-gradient-to-r from-violet-400 via-indigo-300 to-cyan-300 bg-clip-text text-transparent">
-                Skills Today
-              </span>
-            </motion.h1>
-
-            {/* Paragraph Subtext */}
-            <motion.p
-              variants={fadeUp}
-              className="max-w-md text-sm sm:text-base leading-relaxed text-muted transition-colors duration-300 "
-            >
-              Learn from expert instructors and advance your career with our interactive courses and hands-on projects.
-            </motion.p>
-
-            {/* Bullet Perks Horizontal Row */}
-            <motion.div 
-              variants={fadeUp} 
-              className="flex flex-wrap items-center justify-center lg:justify-start gap-x-4 gap-y-2 text-xs text-secondary font-medium pt-2 transition-colors duration-300 "
-            >
-              <div className="flex items-center gap-1.5 bg-foreground/5 border border-card-border px-3 py-1.5 rounded-xl transition-colors duration-300 ">
-                <Award size={14} className="text-violet-400" />
-                <span>Expert Instructors</span>
-              </div>
-              <div className="flex items-center gap-1.5 bg-foreground/5 border border-card-border px-3 py-1.5 rounded-xl transition-colors duration-300 ">
-                <Clock size={14} className="text-violet-400" />
-                <span>Lifetime Access</span>
-              </div>
-              <div className="flex items-center gap-1.5 bg-foreground/5 border border-card-border px-3 py-1.5 rounded-xl transition-colors duration-300 ">
-                <FileCheck size={14} className="text-violet-400" />
-                <span>Certificate Included</span>
-              </div>
-            </motion.div>
-
-            {/* Primary & Secondary Action Layout */}
-            <motion.div
-              variants={fadeUp}
-              className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2"
-            >
-              <Link
-                href="/courses"
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-violet-600/20 hover:brightness-110 active:scale-98 transition-all duration-200"
-              >
-                Explore Courses
-                <ArrowRight size={14} />
-              </Link>
-
-              <button className="inline-flex items-center gap-2 rounded-full border border-card-border bg-foreground/5 px-6 py-3 text-sm font-semibold text-foreground backdrop-blur-md hover:bg-foreground/10 transition-all duration-200">
-                <div className="flex h-5 w-5 items-center justify-center rounded-full bg-foreground text-background">
-                  <Play size={10} fill="currentColor" className="ml-0.5" />
-                </div>
-                How It Works
-              </button>
-            </motion.div>
-
-            {/* Social Social Proof Reviews Badge */}
-            <motion.div
-              variants={fadeUp}
-              className="flex items-center justify-center lg:justify-start gap-3 pt-2"
-            >
-              <div className="flex -space-x-2.5">
-                {[0, 1, 2, 3].map((i) => (
-                  <div
-                    key={i}
-                    className="h-7 w-7 rounded-full border-2 border-background bg-gradient-to-tr from-violet-600 to-indigo-400 shadow-inner"
-                  />
-                ))}
-              </div>
-              <p className="text-xs text-muted font-medium transition-colors duration-300 ">
-                <span className="text-violet-400 font-bold">4.8/5</span> from{" "}
-                <span className="text-foreground font-semibold">10K+</span> learners worldwide
-              </p>
-            </motion.div>
-          </motion.div>
-
-          {/* RIGHT SIDE: Interactive Media Frame with Absolute Badges */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-            className="relative w-full lg:col-span-7 flex justify-center lg:justify-end"
+          <motion.p
+            variants={fadeUp}
+            className="max-w-md text-muted text-base leading-relaxed font-medium"
           >
-            {/* Ambient Background Container Ring System */}
-            <div className="relative w-full max-w-[580px] aspect-[4/3] rounded-3xl border border-card-border bg-card-bg/40 p-4 shadow-2xl backdrop-blur-sm transition-colors duration-300 ">
-              
-              {/* Internal Framed Core Hero Image Asset */}
-              <div className="relative h-full w-full overflow-hidden rounded-2xl border border-card-border shadow-inner transition-colors duration-300 ">
-                <Image
-                  src={bannerImage}
-                  alt="Online learning illustration"
-                  priority
-                  fill
-                  sizes="(max-w-7xl) 50vw, 100vw"
-                  className="object-cover object-center brightness-95 contrast-105"
-                />
-                {/* Clean vignette matching darkness profile */}
-                <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent transition-colors duration-300 " />
+            Our e-learning programs has been developed to be a vehicle of
+            delivering multimedia learning solutions for your business.
+          </motion.p>
+
+          <motion.div
+            variants={fadeUp}
+            className="flex flex-wrap items-center gap-8 pt-4"
+          >
+            <Link
+              href="#"
+              className="inline-flex items-center justify-center rounded-full bg-main-gradient px-8 py-3.5 text-base font-bold text-white shadow-glow hover:brightness-110 active:scale-95 transition-all duration-200"
+            >
+              Contact
+            </Link>
+
+            <div className="flex items-center gap-8">
+              <div>
+                <h3 className="text-3xl font-black text-foreground">
+                  50<span className="text-brand-ocean">+</span>
+                </h3>
+                <p className="text-xs font-medium text-muted mt-1">
+                  Career Courses
+                </p>
               </div>
-
-              {/* Floating Badge 1: Expert Courses (Top Left) */}
-              <motion.div
-                animate={float(0, 6)}
-                className="absolute -top-3 -left-3 sm:-left-6 z-20 flex items-center gap-2 rounded-xl border border-card-border bg-card-bg p-2.5 pr-4 backdrop-blur-md shadow-xl transition-colors duration-300 "
-              >
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-600/20 text-violet-400">
-                  <GraduationCap size={16} />
-                </div>
-                <div>
-                  <div className="text-xs font-black text-foreground leading-none transition-colors duration-300 ">250+</div>
-                  <div className="text-[9px] text-muted font-medium mt-0.5 whitespace-nowrap transition-colors duration-300 ">Expert Courses</div>
-                </div>
-              </motion.div>
-
-              {/* Floating Badge 2: Expert Instructors (Bottom Left) */}
-              <motion.div
-                animate={float(1.5, 5)}
-                className="absolute -bottom-3 left-4 z-20 flex items-center gap-2 rounded-xl border border-card-border bg-card-bg p-2.5 pr-4 backdrop-blur-md shadow-xl transition-colors duration-300 "
-              >
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-600/20 text-indigo-400">
-                  <Users2 size={16} />
-                </div>
-                <div>
-                  <div className="text-xs font-black text-foreground leading-none transition-colors duration-300 ">500+</div>
-                  <div className="text-[9px] text-muted font-medium mt-0.5 whitespace-nowrap transition-colors duration-300 ">Expert Instructors</div>
-                </div>
-              </motion.div>
-
-              {/* Floating Badge 3: Satisfaction Rate (Right Side Center) */}
-              <motion.div
-                animate={float(0.8, 7)}
-                className="absolute top-1/2 -right-3 sm:-right-6 -translate-y-1/2 z-20 flex items-center gap-2 rounded-xl border border-card-border bg-card-bg p-2.5 pr-4 backdrop-blur-md shadow-xl transition-colors duration-300 "
-              >
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-cyan-600/20 text-cyan-400">
-                  <Smile size={16} />
-                </div>
-                <div>
-                  <div className="text-xs font-black text-foreground leading-none transition-colors duration-300 ">98%</div>
-                  <div className="text-[9px] text-muted font-medium mt-0.5 whitespace-nowrap transition-colors duration-300 ">Satisfaction Rate</div>
-                </div>
-              </motion.div>
-
+              <div>
+                <h3 className="text-3xl font-black text-foreground">
+                  1M<span className="text-brand-ocean">+</span>
+                </h3>
+                <p className="text-xs font-medium text-muted mt-1">
+                  Our Students
+                </p>
+              </div>
             </div>
           </motion.div>
+        </motion.div>
 
+        {/* Right Column (Visuals) */}
+        <div className="flex items-center justify-center w-full mt-12 lg:mt-0">
+          <div className="relative w-[350px] h-[350px] sm:w-[450px] sm:h-[450px] mx-auto">
+            {/* Background Circular Shape */}
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="absolute inset-0 rounded-full bg-gradient-to-tr from-brand-ocean/10 to-brand-ocean/30 z-0"
+            />
+
+            {/* Decorative inner dark circle ring (if dark mode) or outline */}
+            <div className="absolute inset-0 rounded-full border-[20px] border-background/50 mix-blend-overlay z-0" />
+
+            {/* Decorative Dots */}
+            <motion.div
+              variants={float}
+              initial="animate"
+              animate="animate"
+              className="absolute top-[10%] right-[10%] w-4 h-4 rounded-full bg-brand-ocean/60 z-10"
+            />
+            <motion.div
+              variants={float}
+              initial="animate"
+              animate="animate"
+              style={{ animationDelay: "1s" }}
+              className="absolute top-[5%] right-[20%] w-3 h-3 rounded-full bg-brand-ocean/40 z-10"
+            />
+            <motion.div
+              variants={float}
+              initial="animate"
+              animate="animate"
+              style={{ animationDelay: "0.5s" }}
+              className="absolute bottom-[20%] left-[10%] w-5 h-5 rounded-full bg-brand-mint/40 z-10"
+            />
+
+            {/* Main Image - CLIPPED AT BOTTOM, BREAKING OUT TOP */}
+            <motion.div
+              initial={{ y: 50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              // Overflow hidden with rounded-b-full creates a perfect bottom semicircle mask!
+              className="absolute bottom-0 left-0 w-full h-[115%] overflow-hidden rounded-b-full z-10"
+            >
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[90%] sm:w-[85%] h-full">
+                <Image
+                  src="/hero-image.png"
+                  alt="Student holding books"
+                  fill
+                  priority
+                  className="object-contain object-bottom drop-shadow-2xl"
+                />
+              </div>
+            </motion.div>
+
+            {/* Floating Badge 1 (Top Left) */}
+            <motion.div
+              variants={float}
+              initial="animate"
+              animate="animate"
+              className="absolute top-[5%] -left-4 sm:-left-12 z-20 flex items-center gap-3 glass-card border-gradient p-3 pr-6 shadow-card"
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-ocean/20 text-brand-ocean">
+                <User size={18} fill="currentColor" />
+              </div>
+              <div>
+                <div className="text-sm font-black text-foreground">175K</div>
+                <div className="text-[10px] font-semibold text-muted">
+                  Assisted Students
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Floating Badge 2 (Bottom Left) */}
+            <motion.div
+              variants={float}
+              initial="animate"
+              animate="animate"
+              style={{ animationDelay: "1.5s" }}
+              className="absolute bottom-[5%] -left-8 sm:-left-16 z-20 flex flex-col gap-4 glass-card border-gradient p-5 shadow-card w-[220px]"
+            >
+              <div className="text-xs font-bold text-foreground">
+                Learning Chart
+              </div>
+
+              <div className="flex items-end gap-2 h-16 w-full">
+                {/* Y-axis */}
+                <div className="flex flex-col justify-between h-full text-[8px] font-bold text-muted mr-1">
+                  <span>20k</span>
+                  <span>10k</span>
+                  <span>5k</span>
+                </div>
+                {/* Bars */}
+                <div className="flex-1 flex items-end justify-between h-full border-b border-muted/20 pb-1 gap-1">
+                  <div className="w-full bg-brand-ocean rounded-sm h-[60%]" />
+                  <div className="w-full bg-brand-cyan rounded-sm h-[80%]" />
+                  <div className="w-full bg-brand-mint rounded-sm h-[40%]" />
+                  <div className="w-full bg-brand-cyan rounded-sm h-[90%]" />
+                  <div className="w-full bg-brand-ocean rounded-sm h-[70%]" />
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
+      {/* --- BOTTOM SECTION (CATEGORIES) --- */}
+      <motion.div
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        variants={staggerContainer}
+        className="mt-10"
+      >
+        <motion.h2 variants={fadeUp} className="section-title mb-10">
+          Browse Top Essential <br />
+          Career Courses
+        </motion.h2>
+
+        <div className="flex flex-wrap items-center gap-6">
+          {/* Card 1: UI/UX Design */}
+          <motion.div
+            variants={fadeUp}
+            className="group relative flex flex-col justify-between w-40 h-40 sm:w-48 sm:h-48 glass-card border-gradient p-6 cursor-pointer"
+          >
+            <div className="bg-brand-ocean/10 p-2.5 rounded-xl w-fit">
+              <Eraser className="text-brand-ocean" size={24} />
+            </div>
+            <h3 className="text-foreground font-bold text-lg leading-tight mt-auto group-hover:text-brand-ocean transition-colors">
+              UI/UX <br /> Design
+            </h3>
+          </motion.div>
+
+          {/* Card 2: Web Development */}
+          <motion.div
+            variants={fadeUp}
+            className="group relative flex flex-col justify-between w-40 h-40 sm:w-48 sm:h-48 glass-card border-gradient p-6 cursor-pointer"
+          >
+            <div className="bg-brand-cyan/10 p-2.5 rounded-xl w-fit">
+              <Code2 className="text-brand-cyan" size={24} />
+            </div>
+            <h3 className="text-foreground font-bold text-lg leading-tight mt-auto group-hover:text-brand-cyan transition-colors">
+              Web <br /> Development
+            </h3>
+          </motion.div>
+
+          {/* Card 3: Digital Marketing */}
+          <motion.div
+            variants={fadeUp}
+            className="group relative flex flex-col justify-between w-40 h-40 sm:w-48 sm:h-48 glass-card border-gradient p-6 cursor-pointer"
+          >
+            <div className="bg-brand-mint/10 p-2.5 rounded-xl w-fit">
+              <Megaphone className="text-brand-mint" size={24} />
+            </div>
+            <h3 className="text-foreground font-bold text-lg leading-tight mt-auto group-hover:text-brand-mint transition-colors">
+              Digital <br /> Marketing
+            </h3>
+          </motion.div>
+
+          {/* Card 4: Practical Learning */}
+          <motion.div
+            variants={fadeUp}
+            className="group relative flex flex-col justify-between w-40 h-40 sm:w-48 sm:h-48 glass-card border-gradient p-6 cursor-pointer"
+          >
+            <div className="bg-brand-ocean/10 p-2.5 rounded-xl w-fit">
+              <LayoutGrid className="text-brand-ocean" size={24} />
+            </div>
+            <h3 className="text-foreground font-bold text-lg leading-tight mt-auto group-hover:text-brand-ocean transition-colors">
+              Practical <br /> Learning
+            </h3>
+          </motion.div>
+
+          {/* Action Button: Browse All */}
+          <motion.div
+            variants={fadeUp}
+            className="flex flex-col items-center justify-center gap-3 ml-4 sm:ml-8 mt-4 sm:mt-0"
+          >
+            <Link
+              href="#"
+              className="group flex h-16 w-16 items-center justify-center rounded-full bg-brand-ocean/10 text-brand-ocean hover:bg-brand-ocean hover:text-white hover:shadow-lg hover:shadow-brand-ocean/30 transition-all duration-300"
+            >
+              <ArrowRight
+                size={24}
+                className="group-hover:translate-x-1 transition-transform duration-300"
+              />
+            </Link>
+            <span className="text-sm font-bold text-foreground">
+              Browse All
+            </span>
+          </motion.div>
+        </div>
+      </motion.div>
     </section>
   );
 }

@@ -135,7 +135,7 @@ const Footer = () => {
             <div className="space-y-2.5">
               <div className="flex items-center gap-2.5 text-xs text-muted transition-colors duration-300 font-medium">
                 <Mail size={13} className="text-violet-400 shrink-0" />
-                <span>hello@skillsphere.com</span>
+                <span>hello@vectralearn.com</span>
               </div>
 
               <div className="flex items-center gap-2.5 text-xs text-muted transition-colors duration-300 font-medium">
@@ -163,7 +163,7 @@ const Footer = () => {
 
         {/* Global Copyright and Legal Links Row */}
         <div className="mt-6 flex flex-col items-center justify-between gap-4 border-t border-card-border transition-colors duration-300 pt-6 text-[11px] font-medium text-muted transition-colors duration-300 sm:flex-row">
-          <p>© 2026 SkillSphere. All rights reserved.</p>
+          <p>© 2026 VectraLearn. All rights reserved.</p>
 
           <div className="flex gap-5">
             <Link

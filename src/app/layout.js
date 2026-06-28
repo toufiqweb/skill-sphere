@@ -1,25 +1,33 @@
-import { Outfit } from "next/font/google";
+import { Poppins, Inter } from "next/font/google";
 import "./globals.css";
 import { CourseProvider } from "@/lib/context/CourseProvider";
 import { WishlistProvider } from "@/lib/context/WishlistProvider";
 import { ToastContainer } from "react-toastify";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 
-const OutfitFont = Outfit({
+const poppins = Poppins({
   subsets: ["latin"],
+  weight: ["600", "700"],
+  variable: "--font-heading",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-sans",
 });
 
 export const metadata = {
-  title: "Skill Sphere",
+  title: "VectraLearn",
   description:
-    "Skill Sphere is an online learning platform to explore courses, improve skills, and grow your career.",
+    "VectraLearn is an online learning platform to explore courses, improve skills, and grow your career.",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${OutfitFont.className} h-full antialiased`}
+      className={`${inter.variable} ${poppins.variable} font-sans h-full antialiased`}
       suppressHydrationWarning
     >
       <body>

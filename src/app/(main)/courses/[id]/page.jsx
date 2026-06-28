@@ -58,13 +58,13 @@ export async function generateMetadata({ params }) {
 
   if (!course) {
     return {
-      title: "Course Not Found | SkillSphere",
+      title: "Course Not Found | VectraLearn",
       description: "The requested course could not be found.",
     };
   }
 
   return {
-    title: `${course.title} | SkillSphere`,
+    title: `${course.title} | VectraLearn`,
     description: course.description,
   };
 }

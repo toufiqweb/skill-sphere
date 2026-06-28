@@ -5,7 +5,7 @@ import { stripe } from "../../lib/stripe";
 import { createTransaction } from "@/lib/actions/transactions";
 
 export const metadata = {
-  title: "Enrollment Confirmed | SkillSphere",
+  title: "Enrollment Confirmed | VectraLearn",
   description: "Your payment was successful and you are now enrolled in the course.",
 };
 

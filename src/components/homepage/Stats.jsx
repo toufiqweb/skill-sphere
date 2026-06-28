@@ -1,133 +1,94 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  Users,
-  Award,
-  BookOpen,
-  Smile,
-} from "lucide-react";
-
-const fadeUp = {
-  hidden: {
-    opacity: 0,
-    y: 24,
-  },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: [0.215, 0.61, 0.355, 1],
-    },
-  },
-};
-
-const stagger = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.08,
-    },
-  },
-};
+import Image from "next/image";
 
 const stats = [
   {
-    icon: Users,
     value: "200K+",
     label: "Happy Students",
-    color: "from-blue-500/20 to-indigo-500/20",
-    iconColor: "text-blue-400",
   },
   {
-    icon: Award,
     value: "500+",
     label: "Expert Instructors",
-    color: "from-purple-500/20 to-violet-500/20",
-    iconColor: "text-purple-400",
   },
   {
-    icon: BookOpen,
     value: "200+",
     label: "Top Quality Courses",
-    color: "from-violet-500/20 to-fuchsia-500/20",
-    iconColor: "text-violet-400",
   },
   {
-    icon: Smile,
     value: "98%",
     label: "Satisfaction Rate",
-    color: "from-cyan-500/20 to-blue-500/20",
-    iconColor: "text-cyan-400",
   },
 ];
 
-export default function Stats() {
+export default function StatsSection() {
   return (
-    <section className="relative overflow-hidden bg-background py-16 transition-colors duration-300 ">
-      
-      {/* Background Decorative Ambient Spotlights
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 h-[450px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-600/5 blur-[120px]" />
-      </div> */}
-
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        
-        {/* Header Branding Row Stack */}
-        <div className="mb-12 text-center">
-          <h2 className="text-2xl font-black tracking-tight text-foreground sm:text-3xl lg:text-4xl transition-colors duration-300 ">
-            Trusted By Learners{" "}
-            <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
-              Worldwide
-            </span>
-          </h2>
-          <p className="mx-auto mt-2.5 max-w-md text-xs sm:text-sm text-muted font-medium transition-colors duration-300 ">
-            Join thousands of learners who are transforming their lives with new skills.
-          </p>
-        </div>
-
-        {/* Custom Isolated Floating Cards Grid Container */}
-        <motion.div
-          variants={stagger}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-60px" }}
-          className="grid grid-cols-2 gap-4 md:grid-cols-4 sm:gap-6"
-        >
-          {stats.map(({ icon: Icon, value, label, color, iconColor }) => (
-            <motion.div
-              key={label}
-              variants={fadeUp}
-              whileHover={{ y: -6, scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 400, damping: 25 }}
-              className="group relative rounded-2xl border border-card-border bg-card-bg/50 p-6 text-center backdrop-blur-xl transition-all duration-300 hover:border-card-border hover:bg-card-bg/70 shadow-lg"
+    <section className="relative overflow-hidden  bg-card-bg/40 border border-card-border shadow-sm py-24">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="grid items-center gap-20 lg:grid-cols-2">
+          {/* Left Side */}
+          <div>
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="mb-4 text-sm font-bold tracking-widest uppercase text-brand-ocean"
             >
-              {/* Subtle Inner Dynamic Glow Glow */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-foreground/[0.01] to-transparent pointer-events-none transition-colors duration-300 " />
+              Trusted by learners worldwide
+            </motion.p>
 
-              {/* Icon Container Capsule */}
-              <div className={`relative mx-auto mb-4 flex h-11 w-11 items-center justify-center rounded-xl border border-card-border bg-foreground/5 backdrop-blur-md transition-all duration-300 group-hover:scale-105 group-hover:border-card-border`}>
-                <div className={`absolute inset-0 rounded-xl bg-gradient-to-br ${color} opacity-40`} />
-                <Icon
-                  size={18}
-                  className={`relative z-10 ${iconColor}`}
-                />
-              </div>
+            <motion.h2
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="section-title max-w-md"
+            >
+              Numbers speaking
+              <br />
+              <span className="text-main-gradient drop-shadow-sm">
+                for themselves
+              </span>
+            </motion.h2>
 
-              {/* Numerical Presentation Frame */}
-              <h3 className="bg-gradient-to-r from-foreground via-foreground/90 to-foreground/80 bg-clip-text text-2xl font-black tracking-tight text-transparent sm:text-3xl lg:text-4xl transition-colors duration-300 ">
-                {value}
-              </h3>
+            <div className="mt-16 grid grid-cols-2 gap-y-14 gap-x-12">
+              {stats.map((item) => (
+                <motion.div
+                  key={item.label}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="flex gap-4"
+                >
+                  <div className="mt-1 h-14 w-[3px] rounded-full bg-main-gradient" />
 
-              {/* Categorical Secondary Descriptive Copy */}
-              <p className="mt-1 text-[11px] font-semibold tracking-wide text-muted sm:text-xs transition-colors duration-300 ">
-                {label}
-              </p>
-            </motion.div>
-          ))}
-        </motion.div>
-        
+                  <div>
+                    <h3 className="text-5xl font-black text-foreground">
+                      {item.value}
+                    </h3>
+
+                    <p className="mt-2 text-sm font-medium text-muted">
+                      {item.label}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right Side */}
+          <div className="relative hidden lg:block">
+            <div className="relative flex items-center justify-center mx-auto h-[600px] w-[600px] rounded-full">
+              <Image
+                src="/globe.png"
+                alt="Globe"
+                width={500}
+                height={500}
+                className="object-contain z-10 drop-shadow-2xl"
+                priority
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

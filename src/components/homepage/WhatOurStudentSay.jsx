@@ -18,7 +18,7 @@ const testimonials = [
     name: "Alex Thompson",
     role: "Software Engineer",
     image: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150&fit=crop&crop=face",
-    review: "SkillSphere transformed my career. The courses are well-structured and the instructors are amazing!",
+    review: "VectraLearn transformed my career. The courses are well-structured and the instructors are amazing!",
   },
   {
     id: 2,

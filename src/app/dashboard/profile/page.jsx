@@ -2,8 +2,8 @@ import { getUserServerSession } from "@/lib/actions/getUserServerSession";
 import ProfileView from "./ProfileView";
 
 export const metadata = {
-  title: "Profile | SkillSphere",
-  description: "Manage your SkillSphere profile and account settings.",
+  title: "Profile | VectraLearn",
+  description: "Manage your VectraLearn profile and account settings.",
 };
 
 export default async function UserProfilePage() {

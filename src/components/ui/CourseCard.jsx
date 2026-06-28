@@ -4,10 +4,8 @@ import {
   Star,
   Clock,
   BookOpen,
-  Users,
   Signal,
-  ArrowUpRight,
-  Heart,
+  Bookmark,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -47,9 +45,7 @@ export default function CourseCard({ course, allowRating = false, onRateClick })
     originalPrice,
     duration,
     lessons,
-    students,
     level,
-    category,
   } = course;
 
   const nameOfInstructor =
@@ -57,8 +53,6 @@ export default function CourseCard({ course, allowRating = false, onRateClick })
     (instructor && typeof instructor === "object" ? instructor.name : instructor) ||
     "Instructor";
 
-  // Wishlist context — safe to call unconditionally (hook rule),
-  // but the button renders only when isStudent is true.
   const { wishlistedIds, toggleWishlist, loadingIds, isStudent } = useWishlist();
 
   const courseIdStr = courseId?.toString();
@@ -66,7 +60,6 @@ export default function CourseCard({ course, allowRating = false, onRateClick })
   const isToggling = loadingIds.has(courseIdStr);
 
   const handleWishlistClick = (e) => {
-    // Stop propagation so the click doesn't navigate to the course page
     e.preventDefault();
     e.stopPropagation();
     if (!isToggling) {
@@ -79,197 +72,129 @@ export default function CourseCard({ course, allowRating = false, onRateClick })
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-      whileHover={{ y: -8 }}
-      className="group relative h-full rounded-[28px] border border-card-border transition-colors duration-300 p-[1px] shadow-[0_8px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.2)] transition-shadow duration-500 hover:shadow-[0_8px_30px_rgba(109,93,252,0.1)] bg-gradient-to-b from-white/10 to-transparent"
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ y: -6 }}
+      className="group relative h-full flex flex-col rounded-2xl border border-card-border bg-card-bg shadow-md transition-all hover:shadow-lg overflow-hidden"
     >
-      {/* Inner Glass Surface */}
-      <div className="relative flex h-full flex-col overflow-hidden rounded-[27px] bg-card-bg/75 transition-colors duration-300 backdrop-blur-2xl">
+      {/* 1. Card Container & Image */}
+      <div className="relative h-48 w-full overflow-hidden bg-muted/10">
+        <Image
+          fill
+          src={image}
+          alt={title}
+          loading="lazy"
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
+        />
 
-        {/* Image */}
-        <div className="relative h-52 overflow-hidden m-2 rounded-[20px]">
-          <Image
-            fill
-            src={image}
-            alt={title}
-            loading="lazy"
-            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-          />
-
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60 transition-colors duration-300" />
-
-          {/* Top Badges Row */}
-          <div className="absolute left-3 right-3 top-3 flex items-start justify-between">
-            <span className="rounded-full border border-card-border bg-card-bg/60 px-3 py-1 text-[11px] font-semibold text-primary transition-colors duration-300 backdrop-blur-md">
-              {category}
-            </span>
-
-            <div className="flex items-center gap-1.5">
-              {/* ── Wishlist Heart Button (students only) ── */}
-              {isStudent && (
-                <motion.button
-                  onClick={handleWishlistClick}
-                  disabled={isToggling}
-                  whileTap={{ scale: 0.85 }}
-                  whileHover={{ scale: 1.15 }}
-                  aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
-                  className={`
-                    flex items-center justify-center w-7 h-7 rounded-full
-                    border border-card-border backdrop-blur-md
-                    transition-all duration-200 cursor-pointer
-                    ${isWishlisted
-                      ? "bg-red-500/20 border-red-400/40"
-                      : "bg-card-bg/60 hover:bg-red-500/10 hover:border-red-400/30"
-                    }
-                    ${isToggling ? "opacity-50 cursor-not-allowed" : ""}
-                  `}
-                >
-                  <Heart
-                    className={`
-                      w-3.5 h-3.5 transition-all duration-200
-                      ${isWishlisted
-                        ? "fill-red-500 text-red-500 drop-shadow-[0_0_4px_rgba(239,68,68,0.6)]"
-                        : "text-zinc-400 group-hover/heart:text-red-400"
-                      }
-                      ${isToggling ? "animate-pulse" : ""}
-                    `}
-                    strokeWidth={isWishlisted ? 0 : 2}
-                  />
-                </motion.button>
-              )}
-
-              {/* Rating Badge */}
-              <span className="flex items-center gap-1 rounded-full border border-card-border bg-card-bg/60 px-2.5 py-1 text-[11px] font-black text-foreground backdrop-blur-md transition-colors duration-300">
-                <Star
-                  className="h-3 w-3 fill-yellow-400 text-yellow-400"
-                  strokeWidth={1.5}
-                />
-                {rating?.toFixed(1) ?? "0.0"}
-              </span>
-            </div>
-          </div>
-
-          {/* Level Badge */}
-          <div className="absolute bottom-3 left-3 flex items-center gap-1.5 rounded-full border border-card-border bg-card-bg/70 px-2.5 py-1 text-[11px] font-bold text-primary transition-colors duration-300 backdrop-blur-md">
-            <Signal className="h-3 w-3 text-indigo-400" strokeWidth={2.5} />
-            {level}
-          </div>
-        </div>
-
-        {/* Body */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="flex flex-1 flex-col gap-4 p-5"
-        >
-          <motion.h3
-            variants={item}
-            className="line-clamp-2 text-base sm:text-lg font-black leading-snug text-foreground tracking-tight group-hover:text-brand-purple transition-colors duration-300"
+        {/* Top-Right Bookmark (Wishlist) */}
+        {isStudent && (
+          <motion.button
+            onClick={handleWishlistClick}
+            disabled={isToggling}
+            whileTap={{ scale: 0.85 }}
+            whileHover={{ scale: 1.1 }}
+            aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
+            className={`
+              absolute top-3 right-3 flex items-center justify-center w-8 h-8 rounded-full
+              backdrop-blur-md transition-all duration-300 cursor-pointer shadow-sm
+              ${isWishlisted
+                ? "bg-card-bg border border-card-border text-brand-cyan shadow-glow" 
+                : "bg-white/70 hover:bg-white border-transparent text-muted hover:text-foreground dark:bg-black/50 dark:hover:bg-black/80"
+              }
+              ${isToggling ? "opacity-50 cursor-not-allowed" : ""}
+            `}
           >
+            <Bookmark
+              className={`w-4 h-4 transition-all duration-200 ${isToggling ? "animate-pulse" : ""}`}
+              fill={isWishlisted ? "currentColor" : "none"}
+              strokeWidth={2}
+            />
+          </motion.button>
+        )}
+      </div>
+
+      {/* Content wrapper */}
+      <motion.div
+        variants={container}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="flex flex-1 flex-col p-5"
+      >
+        {/* 2. Header & Subtitle */}
+        <motion.div variants={item} className="flex justify-between items-start gap-4 mb-1">
+          <h3 className="line-clamp-2 text-lg font-bold leading-snug text-foreground group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-main-gradient transition-colors">
             {title}
-          </motion.h3>
+          </h3>
+          <div className="flex items-center gap-1 shrink-0 mt-0.5">
+            <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+            <span className="text-sm font-bold text-foreground">
+              {rating?.toFixed(1) ?? "0.0"}
+            </span>
+          </div>
+        </motion.div>
 
-          {/* Instructor */}
-          <motion.div variants={item} className="flex items-center gap-3">
-            <div
-              className="flex h-9 w-9 items-center justify-center rounded-full text-xs font-black text-foreground shadow-md shadow-indigo-600/10 transition-colors duration-300"
-              style={{ backgroundImage: "linear-gradient(to right, #5643ff, #6d5dfc)" }}
-            >
-              {nameOfInstructor
-                .split(" ")
-                .map((n) => n[0])
-                .join("")
-                .slice(0, 2)
-                .toUpperCase()}
-            </div>
+        <motion.p variants={item} className="text-sm font-medium text-muted mb-5">
+          Instructor: {nameOfInstructor}
+        </motion.p>
 
-            <div className="flex flex-col">
-              <span className="text-[10px] uppercase tracking-wider font-bold text-muted transition-colors duration-300">
-                Instructor
-              </span>
-              <span className="text-sm font-bold text-secondary transition-colors duration-300">
-                {nameOfInstructor}
-              </span>
-            </div>
-          </motion.div>
+        {/* 3. Body (Vertical Info List) */}
+        <motion.div variants={item} className="flex flex-col gap-2.5 mb-6 mt-auto text-sm font-medium text-muted">
+          <div className="flex items-center gap-3">
+            <Signal className="h-4 w-4 text-brand-ocean" strokeWidth={2.5} />
+            <span>{level} Level</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <Clock className="h-4 w-4 text-brand-ocean" strokeWidth={2.5} />
+            <span>{duration}</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <BookOpen className="h-4 w-4 text-brand-ocean" strokeWidth={2.5} />
+            <span>{lessons} Lessons</span>
+          </div>
+        </motion.div>
 
-          {/* Meta Info */}
-          <motion.div
-            variants={item}
-            className="grid grid-cols-3 gap-1 rounded-2xl border border-card-border transition-colors duration-300 bg-card-bg/40 p-2.5"
-          >
-            <div className="flex flex-col items-center gap-1 text-center justify-center">
-              <Clock className="h-3.5 w-3.5 text-indigo-400" strokeWidth={2.5} />
-              <span className="text-[10px] font-bold text-muted transition-colors duration-300">
-                {duration}
-              </span>
-            </div>
-
-            <div className="flex flex-col items-center gap-1 border-x border-card-border transition-colors duration-300 text-center justify-center">
-              <BookOpen className="h-3.5 w-3.5 text-purple-400" strokeWidth={2.5} />
-              <span className="text-[10px] font-bold text-muted transition-colors duration-300">
-                {lessons} lessons
-              </span>
-            </div>
-
-            <div className="flex flex-col items-center gap-1 text-center justify-center">
-              <Users className="h-3.5 w-3.5 text-pink-400" strokeWidth={2.5} />
-              <span className="text-[10px] font-bold text-muted transition-colors duration-300">
-                {students} students
-              </span>
-            </div>
-          </motion.div>
-
-          {/* Price + CTA */}
-          <motion.div
-            variants={item}
-            className="mt-auto flex items-center justify-between gap-3 pt-3 border-t border-card-border transition-colors duration-300"
-          >
+        {/* 4. Footer (Price & Action) */}
+        <motion.div variants={item} className="flex items-center justify-between pt-4 border-t border-card-border mt-auto">
+          <div className="flex flex-col">
+            <span className="text-[11px] font-semibold text-muted uppercase tracking-wider mb-0.5">
+              Start from
+            </span>
             <div className="flex items-baseline gap-1.5">
-              <span className="bg-clip-text text-xl font-black text-transparent bg-gradient-to-r from-foreground via-foreground/90 to-foreground/70 transition-colors duration-300">
+              <span className="text-xl font-bold text-foreground">
                 ${price}
               </span>
-
               {originalPrice > price && (
-                <span className="text-xs text-muted transition-colors duration-300 font-semibold line-through">
+                <span className="text-xs text-muted font-semibold line-through">
                   ${originalPrice}
                 </span>
               )}
             </div>
+          </div>
 
-            <div className="flex items-center gap-2">
-              {allowRating && (
-                <button
-                  onClick={(e) => { 
-                    e.preventDefault(); 
-                    if (onRateClick) onRateClick(course); 
-                  }}
-                  className="inline-flex items-center justify-center rounded-xl bg-amber-50 dark:bg-amber-500/10 hover:bg-amber-100 dark:hover:bg-amber-500/20 text-amber-600 dark:text-amber-400 p-2.5 transition-colors duration-300"
-                  aria-label="Rate this course"
-                  title="Rate Course"
-                >
-                  <Star className="h-4 w-4" />
-                </button>
-              )}
-              <Link
-                href={`/courses/${courseId}`}
-                className="group/btn relative inline-flex items-center gap-1.5 overflow-hidden rounded-xl bg-gradient-to-r from-[#5643ff] to-[#6d5dfc] px-4 py-2.5 text-xs font-bold text-white shadow-md shadow-indigo-600/10 transition-all duration-300 hover:scale-[1.03] hover:brightness-110"
+          <div className="flex items-center gap-2">
+            {allowRating && (
+              <button
+                onClick={(e) => { 
+                  e.preventDefault(); 
+                  if (onRateClick) onRateClick(course); 
+                }}
+                className="inline-flex items-center justify-center rounded-lg bg-amber-50 dark:bg-amber-500/10 hover:bg-amber-100 dark:hover:bg-amber-500/20 text-amber-600 dark:text-amber-400 p-2.5 transition-colors duration-300"
+                aria-label="Rate this course"
+                title="Rate Course"
               >
-                <span>View Details</span>
-                <ArrowUpRight
-                  className="h-3.5 w-3.5 transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
-                  strokeWidth={2.5}
-                />
-              </Link>
-            </div>
-          </motion.div>
+                <Star className="h-4 w-4" />
+              </button>
+            )}
+            <Link
+              href={`/courses/${courseId}`}
+              className="inline-flex items-center justify-center rounded-xl bg-main-gradient px-5 py-2.5 text-sm font-bold text-white shadow-glow transition-all duration-300 hover:scale-105"
+            >
+              View Details
+            </Link>
+          </div>
         </motion.div>
-      </div>
+      </motion.div>
     </motion.article>
   );
 }

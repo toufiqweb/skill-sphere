@@ -1,4 +1,3 @@
-import Banner from "@/components/homepage/Banner";
 import LearningTips from "@/components/homepage/LearningTips";
 import NewReleases from "@/components/homepage/NewReleases";
 import PopularCourses from "@/components/homepage/PopularCourses";
@@ -11,6 +10,7 @@ import { Suspense } from "react";
 import LearningJourney from "@/components/homepage/LearningJourney";
 import PopularCardLoading from "@/components/ui/PopularCardLoading";
 import NewReleasesLoading from "@/components/ui/NewReleasesLoading";
+import Banner from "@/components/homepage/Banner";
 
 export default async function Home() {
   let courses = [];

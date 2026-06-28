@@ -16,7 +16,7 @@ export default async function AllCoursesPage() {
           All Platform Courses
         </h1>
         <p className="text-gray-500 dark:text-gray-400 mt-2">
-          Manage, review, and moderate all courses across the SkillSphere platform.
+          Manage, review, and moderate all courses across the VectraLearn platform.
         </p>
       </div>
 

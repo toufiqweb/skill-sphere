@@ -5,15 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import MyNavLink from "../ui/MyNavLink";
 import Link from "next/link";
 import { Avatar } from "@heroui/react";
-import {
-  Menu,
-  X,
-  LogOut,
-  Search,
-  GraduationCap,
-  LayoutDashboard,
-  User,
-} from "lucide-react";
+import { Menu, X, LogOut, Search, LayoutDashboard, User } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 import { useUserClientSession } from "@/lib/api/getUserServerSession";
 import { authClient } from "@/lib/auth-client";
@@ -57,9 +49,9 @@ const Navbar = () => {
   );
 
   return (
-    <div className="fixed top-0 left-0 z-50 w-full backdrop-blur-xl transition-colors duration-300 ">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <nav className="flex h-20 items-center justify-between">
+    <div className="fixed top-0 left-0 z-50 w-full bg-transparent backdrop-blur-2xl  transition-colors duration-300">
+      <div className="mx-auto max-w-7xl px-6">
+        <nav className="flex py-3 b items-center justify-between">
           {/* Left Side: Hamburger & Logo Identity */}
           <div className="flex items-center gap-4">
             <button
@@ -76,28 +68,14 @@ const Navbar = () => {
 
             <Link
               href="/"
-              className="flex items-center gap-2.5 active:scale-98 transition-transform"
+              className="text-2xl font-black tracking-tight text-foreground active:scale-95 transition-transform"
             >
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-[#5643ff] to-[#4332eb] text-white shadow-md">
-                <GraduationCap size={18} />
-              </div>
-
-              <div className="flex flex-col">
-                <h1 className="text-xl font-bold tracking-tight text-foreground flex items-center gap-0.5 transition-colors duration-300 ">
-                  <span>Skill</span>
-                  <span className="bg-gradient-to-r from-violet-500 to-indigo-500 dark:from-violet-400 dark:to-indigo-300 bg-clip-text text-transparent">
-                    Sphere
-                  </span>
-                </h1>
-                <span className="text-[8px] uppercase tracking-[0.2em] text-muted font-medium -mt-0.5 transition-colors duration-300 ">
-                  Learn • Grow • Succeed
-                </span>
-              </div>
+              E-Online.
             </Link>
           </div>
 
           {/* Middle Side: Centered Navigation Links (Desktop) */}
-          <ul className="hidden items-center gap-8 md:flex text-[14px] font-medium text-secondary tracking-wide">
+          <ul className="hidden items-center gap-8 md:flex text-sm font-semibold text-muted">
             {links}
           </ul>
 
@@ -114,9 +92,9 @@ const Navbar = () => {
               {user ? (
                 <div
                   ref={dropdownRef}
-                  className="relative flex items-center gap-3 rounded-full border border-card-border bg-card-bg/80 pl-3 pr-1.5 py-1.5 backdrop-blur-md transition-colors duration-300 "
+                  className="relative flex items-center gap-3 rounded-full border border-card-border bg-card-bg/80 pl-4 pr-2 py-2 backdrop-blur-md transition-colors duration-300"
                 >
-                  <span className="max-w-[100px] truncate text-xs font-medium text-primary">
+                  <span className="max-w-[100px] truncate text-sm font-semibold text-foreground">
                     {user?.name}
                   </span>
 
@@ -128,7 +106,7 @@ const Navbar = () => {
                   >
                     <Avatar
                       size="sm"
-                      className="h-7 w-7 ring-2 ring-violet-500/30 hover:ring-violet-500/60 transition-all"
+                      className="h-8 w-8 ring-2 ring-brand-mint/30 hover:ring-brand-mint/60 transition-all"
                     >
                       <Avatar.Image alt={user?.name} src={user?.image} />
                       <Avatar.Fallback className="bg-foreground text-background text-xs">
@@ -139,12 +117,12 @@ const Navbar = () => {
 
                   {/* Manual Dropdown (Desktop Only) */}
                   {isDropdownOpen && (
-                    <div className="absolute right-0 top-full mt-2 w-48 rounded-xl border border-card-border bg-card-bg p-1.5 text-foreground shadow-2xl backdrop-blur-xl animate-in fade-in slide-in-from-top-2 duration-150 z-50">
+                    <div className="absolute right-0 top-full mt-2 w-48 rounded-2xl border border-card-border bg-card-bg p-2 text-foreground shadow-2xl backdrop-blur-xl animate-in fade-in slide-in-from-top-2 duration-150 z-50">
                       <div className="px-3 py-2 border-b border-card-border mb-1">
                         <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
                           Signed in as
                         </p>
-                        <p className="text-xs font-medium text-brand-purple truncate mt-0.5">
+                        <p className="text-sm font-bold text-foreground truncate mt-0.5">
                           {user?.name}
                         </p>
                       </div>
@@ -152,18 +130,18 @@ const Navbar = () => {
                       <Link
                         href="/dashboard"
                         onClick={() => setIsDropdownOpen(false)}
-                        className="flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-secondary hover:text-foreground hover:bg-foreground/5 rounded-lg transition-colors duration-300 "
+                        className="flex items-center gap-2.5 px-3 py-2 text-sm font-medium text-muted hover:text-foreground hover:bg-foreground/5 rounded-xl transition-colors duration-300"
                       >
-                        <LayoutDashboard size={14} className="text-muted" />
+                        <LayoutDashboard size={16} />
                         <span>Dashboard</span>
                       </Link>
 
                       <Link
                         href="/dashboard/profile"
                         onClick={() => setIsDropdownOpen(false)}
-                        className="flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-secondary hover:text-foreground hover:bg-foreground/5 rounded-lg transition-colors duration-300 "
+                        className="flex items-center gap-2.5 px-3 py-2 text-sm font-medium text-muted hover:text-foreground hover:bg-foreground/5 rounded-xl transition-colors duration-300"
                       >
-                        <User size={14} className="text-muted" />
+                        <User size={16} />
                         <span>My Profile</span>
                       </Link>
 
@@ -174,26 +152,26 @@ const Navbar = () => {
                           setIsDropdownOpen(false);
                           await authClient.signOut();
                         }}
-                        className="flex w-full items-center gap-2.5 px-3 py-2 text-xs font-medium text-red-500 hover:text-red-600 hover:bg-red-500/10 rounded-lg transition-colors duration-300 text-left"
+                        className="flex w-full items-center gap-2.5 px-3 py-2 text-sm font-medium text-red-500 hover:text-red-600 hover:bg-red-500/10 rounded-xl transition-colors duration-300 text-left"
                       >
-                        <LogOut size={14} />
+                        <LogOut size={16} />
                         <span>Log Out</span>
                       </button>
                     </div>
                   )}
                 </div>
               ) : (
-                <div className="flex gap-4 items-center">
+                <div className="flex gap-2 items-center">
                   <Link href="/signin">
                     <Button
                       variant="light"
-                      className="text-secondary hover:text-foreground font-medium text-sm px-3 bg-transparent transition-colors duration-300 "
+                      className="text-foreground font-semibold text-sm px-4 bg-transparent transition-colors duration-300 hover:bg-foreground/5 rounded-full"
                     >
                       Login
                     </Button>
                   </Link>
                   <Link href="/signup">
-                    <Button className="bg-gradient-to-r from-brand-purple to-brand-indigo text-white font-medium text-sm rounded-xl h-10 px-5 shadow-lg shadow-violet-500/20 hover:brightness-110 transition-all duration-200">
+                    <Button className="bg-main-gradient text-white font-semibold text-sm rounded-full h-10 px-7 shadow-glow hover:brightness-110 transition-all duration-200">
                       Sign Up
                     </Button>
                   </Link>
@@ -208,7 +186,7 @@ const Navbar = () => {
                   <Button
                     size="sm"
                     variant="flat"
-                    className="bg-foreground/5 text-foreground border border-card-border font-medium text-xs rounded-lg px-3"
+                    className="bg-main-gradient text-white font-medium text-xs rounded-full px-4 shadow-glow"
                   >
                     Login
                   </Button>
@@ -221,28 +199,28 @@ const Navbar = () => {
 
       {/* Mobile Hamburger Menu Dropdown Panel */}
       {isMenuOpen && (
-        <div className="md:hidden border-t border-nav-border bg-nav-bg backdrop-blur-2xl px-4 py-6 shadow-xl animate-in fade-in slide-in-from-top-2 duration-200">
+        <div className="md:hidden border-t border-nav-border bg-nav-bg backdrop-blur-3xl px-6 py-8 shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200">
           {/* Main Navigation Links */}
-          <ul className="flex flex-col gap-4 text-base text-secondary px-2 font-medium">
+          <ul className="flex flex-col gap-6 text-lg text-foreground font-semibold">
             {links}
           </ul>
 
-          <div className="border-t border-card-border mt-5 pt-5">
+          <div className="border-t border-nav-border mt-8 pt-8">
             {user ? (
-              <div className="flex flex-col gap-2 px-2">
+              <div className="flex flex-col gap-3">
                 {/* User Info Card */}
-                <div className="flex items-center gap-3 bg-foreground/5 p-3 rounded-xl border border-card-border mb-2">
+                <div className="flex items-center gap-4 bg-card-bg p-4 rounded-2xl border border-card-border mb-2">
                   <Avatar
-                    size="sm"
+                    size="md"
                     src={user?.image}
                     name={user?.name?.[0]}
-                    className="h-8 w-8 ring-2 ring-brand-purple/20"
+                    className="h-10 w-10 ring-2 ring-brand-mint/30"
                   />
                   <div className="flex flex-col min-w-0">
-                    <span className="text-sm font-medium text-foreground truncate">
+                    <span className="text-base font-bold text-foreground truncate">
                       {user?.name}
                     </span>
-                    <span className="text-[10px] text-muted truncate">
+                    <span className="text-xs text-muted truncate">
                       Logged In
                     </span>
                   </div>
@@ -252,9 +230,9 @@ const Navbar = () => {
                 <Link
                   href="/dashboard"
                   onClick={() => setIsMenuOpen(false)}
-                  className="flex items-center gap-3 p-3 text-sm font-medium text-secondary hover:text-foreground bg-foreground/5 hover:bg-foreground/10 rounded-xl transition-all"
+                  className="flex items-center gap-3 p-4 text-base font-semibold text-muted hover:text-foreground bg-card-bg/50 hover:bg-card-bg rounded-2xl transition-all"
                 >
-                  <LayoutDashboard size={16} className="text-brand-purple" />
+                  <LayoutDashboard size={20} className="text-brand-ocean" />
                   <span>Dashboard</span>
                 </Link>
 
@@ -262,9 +240,9 @@ const Navbar = () => {
                 <Link
                   href="/dashboard/profile"
                   onClick={() => setIsMenuOpen(false)}
-                  className="flex items-center gap-3 p-3 text-sm font-medium text-secondary hover:text-foreground bg-foreground/5 hover:bg-foreground/10 rounded-xl transition-all"
+                  className="flex items-center gap-3 p-4 text-base font-semibold text-muted hover:text-foreground bg-card-bg/50 hover:bg-card-bg rounded-2xl transition-all"
                 >
-                  <User size={16} className="text-brand-purple" />
+                  <User size={20} className="text-brand-ocean" />
                   <span>My Profile</span>
                 </Link>
 
@@ -274,20 +252,20 @@ const Navbar = () => {
                     setIsMenuOpen(false);
                     await authClient.signOut();
                   }}
-                  className="flex w-full items-center gap-3 p-3 text-sm font-semibold text-red-500 bg-red-500/5 hover:bg-red-500/10 border border-red-500/10 rounded-xl transition-all mt-2"
+                  className="flex w-full items-center gap-3 p-4 text-base font-bold text-red-500 bg-red-500/5 hover:bg-red-500/10 border border-red-500/10 rounded-2xl transition-all mt-2"
                 >
-                  <LogOut size={16} />
+                  <LogOut size={20} />
                   <span>Logout</span>
                 </button>
               </div>
             ) : (
-              <div className="px-2">
+              <div>
                 <Link
                   href="/signup"
                   className="w-full"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  <Button className="w-full bg-gradient-to-r from-brand-purple to-brand-indigo text-white font-semibold rounded-xl h-11 shadow-md">
+                  <Button className="w-full bg-main-gradient text-white font-bold rounded-2xl h-14 text-lg shadow-glow">
                     Sign Up
                   </Button>
                 </Link>

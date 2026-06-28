@@ -85,7 +85,7 @@ export default function DashboardSidebar({ role }) {
             href="/"
             className="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent"
           >
-            SkillSphere
+            VectraLearn
           </Link>
           <button
             className="lg:hidden p-2 -mr-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800"
