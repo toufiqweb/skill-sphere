@@ -1,5 +1,8 @@
 import Link from "next/link";
 import { GraduationCap, Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
+import Image from "next/image";
+import mainLightModeLogo from "@/assets/mainLightModeLogo.png";
+import mainlogo from "@/assets/mainlogo.png";
 import {
   FaFacebookF,
   FaInstagram,
@@ -20,19 +23,9 @@ const Footer = () => {
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-12 pb-16">
           {/* Brand Presentation Column (Takes up 4 cols on large layouts) */}
           <div className="lg:col-span-4 space-y-6">
-            <Link href="/" className="inline-flex items-center gap-3 group">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-main-gradient text-white shadow-md group-hover:scale-105 transition-transform duration-300">
-                <GraduationCap size={20} />
-              </div>
-
-              <div className="flex flex-col">
-                <h2 className="text-xl font-black tracking-tight text-foreground leading-none">
-                  Skill <span className="text-main-gradient">Sphere</span>
-                </h2>
-                <span className="text-[9px] uppercase tracking-[0.25em] text-brand-cyan font-black mt-1.5">
-                  Learn • Grow • Succeed
-                </span>
-              </div>
+            <Link href="/" className="inline-flex items-center group active:scale-95 transition-transform">
+              <Image src={mainLightModeLogo} alt="SkillSphere" width={250} height={70} className="dark:hidden block w-[220px] sm:w-[250px] h-auto" />
+              <Image src={mainlogo} alt="SkillSphere" width={250} height={70} className="hidden dark:block w-[220px] sm:w-[250px] h-auto" />
             </Link>
 
             <p className="max-w-xs text-xs font-semibold leading-relaxed text-muted">

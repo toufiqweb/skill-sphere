@@ -9,6 +9,9 @@ import { Menu, X, LogOut, Search, LayoutDashboard, User } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 import { useUserClientSession } from "@/lib/api/getUserServerSession";
 import { authClient } from "@/lib/auth-client";
+import Image from "next/image";
+import mainLightModeLogo from "@/assets/mainLightModeLogo.png";
+import mainlogo from "@/assets/mainlogo.png";
 
 const Navbar = () => {
   const { user, isPending } = useUserClientSession();
@@ -65,9 +68,29 @@ const Navbar = () => {
 
             <Link
               href="/"
-              className="text-2xl font-black tracking-tight text-foreground active:scale-95 transition-transform"
+              className="active:scale-95 transition-transform flex items-center"
+              suppressHydrationWarning
             >
-              VectraLearn
+              <div className="dark:hidden flex">
+                <Image
+                  src={mainLightModeLogo}
+                  alt="SkillSphere"
+                  width={200}
+                  height={55}
+                  priority
+                  className="block w-[160px] sm:w-[200px] h-auto object-cover"
+                />
+              </div>
+              <div className="hidden dark:flex">
+                <Image
+                  src={mainlogo}
+                  alt="SkillSphere"
+                  width={200}
+                  height={55}
+                  priority
+                  className="block w-[160px] sm:w-[200px] h-auto"
+                />
+              </div>
             </Link>
           </div>
 

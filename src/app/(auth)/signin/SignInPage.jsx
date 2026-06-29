@@ -3,17 +3,24 @@
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import Image from "next/image";
+import mainLightModeLogo from "@/assets/mainLightModeLogo.png";
+import mainlogo from "@/assets/mainlogo.png";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
-import { Mail, Lock, ShieldCheck, LogIn, ArrowRight, GraduationCap, Eye, Paperclip, UserPlus } from "lucide-react";
+import { Mail, Lock, ShieldCheck, ArrowRight, Eye, LayoutDashboard, PlayCircle, Users } from "lucide-react";
+import { useState } from "react";
 
 const SignInPage = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/";
+  const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const formData = new FormData(e.target);
     const userData = Object.fromEntries(formData.entries());
     const { email, password } = userData;
@@ -36,9 +43,11 @@ const SignInPage = () => {
       }
 
       toast.error(String(error?.message || error || "Something went wrong"));
+      setIsLoading(false);
     } catch (err) {
       console.error("Login error:", err);
       toast.error(String(err?.message || err || "Something went wrong"));
+      setIsLoading(false);
     }
   };
 
@@ -59,149 +68,174 @@ const SignInPage = () => {
   };
 
   return (
-    <div className="relative min-h-screen bg-background transition-colors duration-300 pt-32 pb-16 flex flex-col items-center justify-center p-4 overflow-hidden">
-      
-      {/* Background Graphic Curves & Neon Spot Highlights */}
-      <div className="pointer-events-none absolute inset-0 z-0">
-        <div className="absolute top-1/4 left-[-10%] w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[140px]" />
-        <div className="absolute bottom-1/4 right-[-10%] w-[500px] h-[500px] bg-purple-600/5 rounded-full blur-[140px]" />
+    <div className="min-h-screen flex bg-background">
+      {/* Left Side - Hero / Branding (Hidden on mobile) */}
+      <div className="hidden lg:flex w-1/2 hero-bg relative items-center justify-center p-12 overflow-hidden border-r border-card-border">
+        {/* Background glow effects */}
+        <div className="absolute top-0 left-0 w-full h-full bg-main-gradient opacity-5"></div>
+        <div className="absolute -top-32 -left-32 w-96 h-96 bg-brand-mint/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-brand-cyan/10 rounded-full blur-3xl"></div>
         
-        {/* Subtle decorative background stars */}
-        <span className="absolute top-1/3 left-24 text-indigo-400/20 font-serif text-xl select-none">✦</span>
-        <span className="absolute bottom-1/3 right-20 text-purple-400/20 font-serif text-2xl select-none">✦</span>
-      </div>
-
-      {/* Top-Left Platform Brand Identity Logo Block */}
-      <div className="absolute top-8 left-6 md:left-12 z-20 flex items-center gap-2.5 select-none">
-        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-600 text-white shadow-lg shadow-indigo-600/20">
-          <Paperclip size={18} className="hidden" /> {/* Structural backup reference */}
-          <GraduationCap size={18} />
-        </div>
-        <div className="flex flex-col">
-          <h1 className="text-base font-black tracking-tight text-foreground leading-none transition-colors duration-300 ">
-            Skill<span className="text-muted transition-colors duration-300 font-semibold">Sphere</span>
+        <div className="relative z-10 w-full max-w-lg">
+          {/* Logo */}
+          <Link href="/" className="inline-block mb-12">
+            <Image src={mainLightModeLogo} alt="SkillSphere" width={220} height={60} className="dark:hidden block w-[180px] h-auto" />
+            <Image src={mainlogo} alt="SkillSphere" width={220} height={60} className="hidden dark:block w-[180px] h-auto" />
+          </Link>
+          
+          <h1 className="text-4xl lg:text-5xl font-black text-foreground leading-tight mb-6 tracking-tight">
+            Unlock Your Potential with <span className="text-main-gradient">Expert-Led</span> Courses.
           </h1>
-          <span className="text-[7px] uppercase tracking-[0.25em] text-muted transition-colors duration-300 font-bold mt-0.5">
-            Learn • Grow • Succeed
-          </span>
-        </div>
-      </div>
+          <p className="text-lg text-muted font-medium mb-12">
+            Join thousands of learners worldwide. Upgrade your skills and accelerate your career growth with interactive learning.
+          </p>
 
-      {/* Main Form Structural Layout Frame */}
-      <div className="w-full max-w-[480px] relative z-10 mt-6">
-        
-        {/* Floating Top Header Circular Icon Accent Node */}
-        <div className="absolute -top-10 left-1/2 -translate-x-1/2 z-20 flex h-20 w-20 items-center justify-center rounded-full border border-purple-500/30 bg-background transition-colors duration-300 text-purple-300 shadow-[0_0_30px_rgba(109,93,252,0.25)]">
-          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-b from-[#6d5dfc]/20 to-transparent">
-            <UserPlus size={22} className="text-[#8b7eff]" />
+          {/* Feature list */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-4 p-4 glass-card rounded-2xl border border-card-border hover:-translate-y-1 transition-transform duration-300 shadow-sm">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-mint/10 text-brand-mint shrink-0 border border-brand-mint/20">
+                <Users size={24} />
+              </div>
+              <div>
+                <h4 className="font-bold text-foreground text-sm">Top Instructors</h4>
+                <p className="text-xs text-muted font-medium">Learn from the best industry experts globally.</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4 p-4 glass-card rounded-2xl border border-card-border hover:-translate-y-1 transition-transform duration-300 shadow-sm">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-cyan/10 text-brand-cyan shrink-0 border border-brand-cyan/20">
+                <PlayCircle size={24} />
+              </div>
+              <div>
+                <h4 className="font-bold text-foreground text-sm">Interactive Content</h4>
+                <p className="text-xs text-muted font-medium">Engage with high-quality videos and assignments.</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4 p-4 glass-card rounded-2xl border border-card-border hover:-translate-y-1 transition-transform duration-300 shadow-sm">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-ocean/10 text-brand-ocean shrink-0 border border-brand-ocean/20">
+                <LayoutDashboard size={24} />
+              </div>
+              <div>
+                <h4 className="font-bold text-foreground text-sm">Track Progress</h4>
+                <p className="text-xs text-muted font-medium">Monitor your learning journey efficiently.</p>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
 
-        {/* Main Card Component Box Framework */}
-        <div className="bg-card-bg/60 transition-colors duration-300 backdrop-blur-2xl rounded-[32px] border border-card-border transition-colors duration-300 pt-16 pb-2 overflow-hidden shadow-[0_24px_60px_rgba(0,0,0,0.4)]">
-          
-          {/* Main Integrated Header Typography Group */}
-          <div className="px-8 mb-8 text-center">
-            <h2 className="text-2xl font-black text-foreground tracking-tight sm:text-3xl transition-colors duration-300 ">
-              Welcome <span className="text-[#8b7eff]">Back</span>
+      {/* Right Side - Form */}
+      <div className="w-full lg:w-1/2 flex flex-col justify-center p-6 sm:p-12 md:px-24 bg-background relative">
+        
+        {/* Mobile Logo */}
+        <div className="absolute top-8 left-6 sm:left-12 lg:hidden z-20">
+            <Link href="/">
+              <Image src={mainLightModeLogo} alt="SkillSphere" width={220} height={60} className="dark:hidden block w-[150px] h-auto" />
+              <Image src={mainlogo} alt="SkillSphere" width={220} height={60} className="hidden dark:block w-[150px] h-auto" />
+            </Link>
+        </div>
+
+        <div className="w-full max-w-md mx-auto mt-16 lg:mt-0">
+          <div className="text-left mb-8">
+            <h2 className="text-3xl font-black text-foreground tracking-tight mb-2">
+              Welcome Back
             </h2>
-            <p className="text-muted transition-colors duration-300 text-xs sm:text-sm font-medium mt-2.5">
-              Sign in to continue your learning journey
+            <p className="text-muted text-sm font-medium">
+              Sign in to your account to continue learning.
             </p>
           </div>
 
-          {/* Social OAuth Integration Interface Link */}
-          <div className="px-8 space-y-6">
-            <button
-              type="button"
-              onClick={handleGoogleLogin}
-              className="w-full flex items-center justify-center gap-3 border border-card-border transition-colors duration-300 bg-card-bg/50 transition-colors duration-300 hover:bg-foreground/5 transition-colors duration-300 text-primary transition-colors duration-300 font-bold py-3.5 rounded-xl text-xs sm:text-sm transition-all duration-200 cursor-pointer"
-            >
-              <FcGoogle className="text-lg shrink-0" />
-              <span>Continue with Google</span>
-            </button>
+          {/* Social Auth */}
+          <button
+            type="button"
+            onClick={handleGoogleLogin}
+            className="w-full flex items-center justify-center gap-3 border border-card-border bg-card-bg hover:bg-foreground/5 text-primary font-bold py-3.5 rounded-xl text-sm transition-all duration-200 shadow-sm"
+          >
+            <FcGoogle className="text-xl" />
+            <span>Continue with Google</span>
+          </button>
 
-            {/* Symmetric Midsection Text Separator Module */}
-            <div className="relative flex items-center justify-center py-2">
-              <div className="border-t border-card-border transition-colors duration-300 w-full"></div>
-              <span className="absolute bg-card-bg transition-colors duration-300 px-3 py-0.5 rounded-md border border-card-border transition-colors duration-300 text-[9px] font-black tracking-widest text-muted transition-colors duration-300 uppercase">
-                OR
-              </span>
-            </div>
+          <div className="relative flex items-center justify-center py-7">
+            <div className="border-t border-card-border w-full"></div>
+            <span className="absolute bg-background px-4 text-[10px] font-black tracking-widest text-muted uppercase">
+              OR
+            </span>
           </div>
 
-          {/* Form Action Handling Module Interface Section */}
-          <form onSubmit={onSubmit} className="px-8 space-y-5">
-            
-            {/* Input Block: Electronic Mailing Address Field */}
+          <form onSubmit={onSubmit} className="space-y-5">
             <div className="space-y-2">
-              <label className="text-xs font-bold text-secondary transition-colors duration-300 flex items-center gap-2 tracking-wide">
-                <Mail size={13} className="text-indigo-400" />
-                Email Address
-              </label>
-              <input
-                type="email"
-                name="email"
-                placeholder="john@example.com"
-                className="w-full px-4 py-3.5 rounded-xl bg-card-bg/60 transition-colors duration-300 border border-card-border transition-colors duration-300 text-sm text-foreground placeholder:text-slate-600 focus:border-indigo-500 focus:bg-background transition-colors duration-300 outline-none transition-all duration-200 transition-colors duration-300 "
-                required
-              />
-            </div>
-
-            {/* Input Block: Secure Cipher Cryptographic Password Field */}
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <label className="text-xs font-bold text-secondary transition-colors duration-300 flex items-center gap-2 tracking-wide">
-                  <Lock size={13} className="text-indigo-400" />
-                  Password
+                <label className="text-xs font-bold text-foreground flex items-center gap-2">
+                  Email Address
                 </label>
-                <Link href="/forgot-password" className="text-[11px] font-bold text-muted transition-colors duration-300 hover:text-[#8b7eff] transition-colors duration-300 ">
-                  Forgot?
-                </Link>
-              </div>
-              <div className="relative">
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="Enter your password"
-                  className="w-full px-4 py-3.5 pr-10 rounded-xl bg-card-bg/60 transition-colors duration-300 border border-card-border transition-colors duration-300 text-sm text-foreground placeholder:text-slate-600 focus:border-indigo-500 focus:bg-background transition-colors duration-300 outline-none transition-all duration-200 transition-colors duration-300 "
-                  required
-                />
-                <button type="button" className="absolute right-3.5 top-1/2 -translate-y-1/2 text-muted transition-colors duration-300 hover:text-secondary transition-colors duration-300 ">
-                  <Eye size={14} />
-                </button>
-              </div>
+                <div className="relative">
+                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-muted">
+                    <Mail size={16} />
+                  </div>
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    placeholder="name@example.com"
+                    className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-card-bg border border-card-border text-sm text-foreground placeholder:text-muted focus:border-brand-mint focus:ring-1 focus:ring-brand-mint outline-none transition-all shadow-sm"
+                  />
+                </div>
+            </div>
+            
+            <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <label className="text-xs font-bold text-foreground flex items-center gap-2">
+                    Password
+                  </label>
+                  <Link href="/forgot-password" className="text-[11px] font-bold text-brand-ocean hover:text-brand-mint transition-colors">
+                    Forgot password?
+                  </Link>
+                </div>
+                <div className="relative">
+                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-muted">
+                    <Lock size={16} />
+                  </div>
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    required
+                    placeholder="Enter your password"
+                    className="w-full pl-11 pr-10 py-3.5 rounded-xl bg-card-bg border border-card-border text-sm text-foreground placeholder:text-muted focus:border-brand-mint focus:ring-1 focus:ring-brand-mint outline-none transition-all shadow-sm"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-muted hover:text-foreground transition-colors"
+                  >
+                    <Eye size={16} />
+                  </button>
+                </div>
             </div>
 
-            {/* Primary Navigation / Operational Submission CTA Triggers Section */}
-            <div className="pt-3 pb-2">
-              <button
-                type="submit"
-                className="w-full bg-gradient-to-r from-[#5643ff] to-[#6d5dfc] text-white font-bold py-3.5 px-6 rounded-xl text-xs sm:text-sm transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer border-none outline-none tracking-wide shadow-lg shadow-indigo-600/20 hover:shadow-indigo-600/30 hover:brightness-110 active:scale-[0.99]"
-              >
-                <LogIn size={14} />
-                <span>Sign In to Account</span>
-              </button>
+            <div className="pt-2">
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full bg-main-gradient text-white font-bold py-3.5 px-6 rounded-xl text-sm flex items-center justify-center gap-2 shadow-glow hover:brightness-110 active:scale-[0.98] transition-all disabled:opacity-70 disabled:cursor-not-allowed"
+                >
+                  <span>{isLoading ? "Signing in..." : "Sign In"}</span>
+                  {!isLoading && <ArrowRight size={16} />}
+                </button>
             </div>
           </form>
 
-          {/* Bottom Interface Redirection Route Navigation Strip */}
-          <div className="mt-6 px-8 py-4 border-t border-card-border transition-colors duration-300 bg-card-bg/40 transition-colors duration-300 text-center">
-            <p className="text-xs sm:text-sm text-muted transition-colors duration-300 font-medium">
-              Don&apos;t have an account yet?{" "}
-              <Link href="/signup" className="text-[#8b7eff] font-bold tracking-wide inline-flex items-center gap-0.5 group hover:underline">
-                Register
-                <ArrowRight size={12} className="text-[#8b7eff] transition-transform duration-200 group-hover:translate-x-0.5" />
-              </Link>
-            </p>
+          <p className="mt-8 text-center text-sm text-muted font-medium">
+            Don't have an account?{" "}
+            <Link href="/signup" className="text-brand-ocean hover:text-brand-mint font-bold transition-colors">
+              Create one
+            </Link>
+          </p>
+          
+          <div className="mt-10 flex items-center justify-center gap-2 text-[10px] font-bold text-muted uppercase tracking-wider bg-card-bg/50 py-2 rounded-lg border border-card-border">
+            <ShieldCheck size={14} className="text-brand-mint" />
+            <span>Secure Encrypted Login</span>
           </div>
         </div>
-
-        {/* Global Structural Protection Badge / Validation Seal Element */}
-        <p className="text-center text-[10px] font-bold tracking-wider uppercase text-muted transition-colors duration-300 mt-6 flex items-center justify-center gap-2 select-none">
-          <ShieldCheck size={13} className="text-emerald-500 shrink-0" />
-          <span>Secured by industry-leading encryption parameters</span>
-        </p>
       </div>
     </div>
   );

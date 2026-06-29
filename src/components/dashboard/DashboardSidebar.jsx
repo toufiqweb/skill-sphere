@@ -25,6 +25,9 @@ import {
 } from "lucide-react";
 import { useSidebar } from "./SidebarProvider";
 import Image from "next/image";
+import standaloneIcon from "@/assets/standaloneIcon.png";
+import mainLightModeLogo from "@/assets/mainLightModeLogo.png";
+import mainlogo from "@/assets/mainlogo.png";
 
 const adminLinks = [
   {
@@ -125,16 +128,18 @@ export default function DashboardSidebar({ role }) {
       >
         {/* Top Header Logo Area */}
         <div className={`flex shrink-0 ${isCollapsed ? 'flex-col items-center py-5 gap-5' : 'h-[72px] items-center justify-between px-4'}`}>
-          <div className="flex items-center gap-3 overflow-hidden">
-            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#f97316] text-white shadow-lg shadow-orange-500/20">
-              <Zap size={16} fill="currentColor" />
-            </div>
-            {!isCollapsed && (
-              <span className="text-sm font-bold text-foreground whitespace-nowrap tracking-tight">
-                VectraLearn Workspace
-              </span>
+          <Link href="/" className="flex items-center gap-3 overflow-hidden active:scale-95 transition-transform">
+            {isCollapsed ? (
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden">
+                <Image src={standaloneIcon} alt="SkillSphere Icon" width={32} height={32} className="w-8 h-8 object-contain" />
+              </div>
+            ) : (
+              <div className="flex items-center pt-2">
+                <Image src={mainLightModeLogo} alt="SkillSphere" width={200} height={55} className="dark:hidden block w-[180px] h-auto" />
+                <Image src={mainlogo} alt="SkillSphere" width={200} height={55} className="hidden dark:block w-[180px] h-auto" />
+              </div>
             )}
-          </div>
+          </Link>
 
           {/* Desktop Collapse Toggle */}
           <button

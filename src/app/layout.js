@@ -18,9 +18,9 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "VectraLearn",
+  title: "SkillSphere",
   description:
-    "VectraLearn is an online learning platform to explore courses, improve skills, and grow your career.",
+    "SkillSphere is an online learning platform to explore courses, improve skills, and grow your career.",
 };
 
 export default function RootLayout({ children }) {

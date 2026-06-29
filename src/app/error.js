@@ -1,16 +1,19 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
-import {
-  AlertCircle,
-  Home,
-  RefreshCw,
-  MoveLeft,
-  Terminal,
-} from "lucide-react";
+import Image from "next/image";
+import { AlertTriangle, Home, RefreshCw, Terminal } from "lucide-react";
 
-const ErrorPage = ({ error, reset }) => {
+import mainLightModeLogo from "@/assets/mainLightModeLogo.png";
+import mainlogo from "@/assets/mainlogo.png";
+
+export default function ErrorPage({ error, reset }) {
+  useEffect(() => {
+    // Optionally log the error to an error reporting service
+    console.error(error);
+  }, [error]);
+
   const handleReload = () => {
     if (reset) {
       reset();
@@ -20,80 +23,83 @@ const ErrorPage = ({ error, reset }) => {
   };
 
   return (
-    <div className="relative min-h-screen bg-background transition-colors duration-300 flex flex-col items-center justify-center px-4 transition-colors duration-300 overflow-hidden">
-      {/* Background Deep Atmospheric Vector Glows */}
-      <div className="pointer-events-none absolute inset-0 z-0">
-        <div className="absolute top-1/3 left-[-10%] w-[500px] h-[500px] bg-red-600/[0.03] rounded-full blur-[130px]" />
-        <div className="absolute bottom-1/3 right-[-10%] w-[500px] h-[500px] bg-purple-600/5 rounded-full blur-[130px]" />
+    <main className="min-h-screen w-full flex flex-col items-center justify-center bg-background p-4 relative overflow-hidden transition-colors duration-300">
+      {/* Ambient background glowing orbs */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+        <div className="absolute top-[10%] left-[20%] w-[30%] h-[30%] bg-red-500/5 dark:bg-red-500/10 blur-[120px] rounded-full" />
+        <div className="absolute bottom-[20%] right-[20%] w-[30%] h-[30%] bg-brand-cyan/10 blur-[120px] rounded-full" />
       </div>
 
-      <div className="w-full max-w-md relative z-10 space-y-4">
-        {/* Main Error Display */}
-        <div className="bg-card-bg/40 transition-colors duration-300 backdrop-blur-3xl rounded-[32px] border border-card-border transition-colors duration-300 p-8 md:p-10 text-center shadow-[0_24px_60px_rgba(0,0,0,0.5)] relative overflow-hidden">
-          <div className="absolute -top-12 -right-12 w-32 h-32 bg-red-500/10 rounded-full blur-2xl pointer-events-none animate-pulse" />
+      <div className="relative z-10 w-full max-w-3xl mx-auto flex flex-col items-center text-center">
+        {/* Brand Logo */}
+        <Link href="/" className="mb-12 hover:opacity-80 transition-opacity drop-shadow-sm">
+          <Image 
+            src={mainLightModeLogo} 
+            alt="SkillSphere" 
+            width={200} 
+            height={55} 
+            className="dark:hidden block w-[160px] sm:w-[200px] h-auto" 
+            priority
+          />
+          <Image 
+            src={mainlogo} 
+            alt="SkillSphere" 
+            width={200} 
+            height={55} 
+            className="hidden dark:block w-[160px] sm:w-[200px] h-auto" 
+            priority
+          />
+        </Link>
 
-          <div className="w-16 h-16 bg-red-500/10 text-red-400 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-red-500/20 shadow-inner">
-            <AlertCircle className="w-8 h-8 animate-pulse" />
-          </div>
-
-          <h1 className="text-3xl font-black text-foreground tracking-tight mb-2 transition-colors duration-300 ">
-            System Exception
+        {/* Error Visual Header */}
+        <div className="relative mb-6">
+          <h1 className="text-[100px] sm:text-[140px] font-black text-transparent bg-clip-text bg-gradient-to-b from-red-500/80 to-red-600/20 dark:from-red-400 dark:to-red-900/30 tracking-tighter leading-none select-none drop-shadow-sm">
+            500
           </h1>
-
-          <p className="text-muted transition-colors duration-300 text-xs sm:text-sm leading-relaxed max-w-sm mx-auto mb-8 font-medium">
-            An unexpected runtime breakdown or structural request interception
-            error occurred while processing your query dataset.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-3">
-            <button
-              onClick={handleReload}
-              className="flex-1 order-2 sm:order-1 border border-card-border transition-colors duration-300 bg-card-bg/40 transition-colors duration-300 hover:bg-foreground/5 transition-colors duration-300 text-secondary transition-colors duration-300 font-bold py-3.5 rounded-2xl text-xs uppercase tracking-wider transition-all active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer backdrop-blur-md"
-            >
-              <RefreshCw className="w-3.5 h-3.5 text-muted transition-colors duration-300 " />
-              Retry Operation
-            </button>
-
-            <Link
-              href="/"
-              className="flex-1 order-1 sm:order-2 bg-gradient-to-r from-[#5643ff] to-[#6d5dfc] text-white font-bold py-3.5 rounded-2xl text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer select-none border-none outline-none shadow-md shadow-indigo-600/10 hover:brightness-110 active:scale-[0.98]"
-            >
-              <Home className="w-3.5 h-3.5" />
-              Go Back Home
-            </Link>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="bg-white/80 dark:bg-[#093c5d]/80 backdrop-blur-md p-4 rounded-2xl shadow-glow border border-red-500/20">
+              <AlertTriangle className="w-10 h-10 text-red-500 dark:text-red-400" />
+            </div>
           </div>
+        </div>
 
-          <div className="mt-8 pt-5 border-t border-card-border transition-colors duration-300 ">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-muted transition-colors duration-300 hover:text-foreground transition-colors duration-300 tracking-wide uppercase group transition-colors duration-300 "
-            >
-              <MoveLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-1" />
-              Return to primary workspace
-            </Link>
-          </div>
+        {/* Typography */}
+        <h2 className="section-title mb-4">Application Error</h2>
+        
+        <p className="section-desc max-w-lg mx-auto mb-10 text-muted">
+          We encountered an unexpected error while trying to process your request. Our engineering team has been notified.
+        </p>
+
+        {/* Action Controls */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md mx-auto">
+          {/* Primary Action Button */}
+          <button
+            onClick={handleReload}
+            className="w-full sm:w-1/2 px-6 py-4 rounded-xl bg-main-gradient text-white font-bold tracking-wide shadow-glow hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <RefreshCw className="w-5 h-5" />
+            Try Again
+          </button>
+
+          {/* Secondary Action Button */}
+          <Link
+            href="/"
+            className="w-full sm:w-1/2 px-6 py-4 border-gradient text-secondary font-bold tracking-wide hover:text-primary transition-all duration-300 flex items-center justify-center gap-2 glass-card rounded-xl"
+          >
+            <Home className="w-5 h-5" />
+            Back to Home
+          </Link>
         </div>
 
         {/* Error Digest */}
-        <div className="bg-card-bg/90 transition-colors duration-300 border border-card-border transition-colors duration-300 rounded-2xl p-4 flex items-center gap-3 shadow-xl backdrop-blur-md">
-          <div className="w-7 h-7 rounded-lg bg-foreground/5 transition-colors duration-300 flex items-center justify-center shrink-0 border border-card-border transition-colors duration-300 ">
-            <Terminal className="w-3.5 h-3.5 text-red-400" />
-          </div>
-
-          <div className="min-w-0 flex-1 text-left">
-            <p className="text-[9px] font-black tracking-widest text-muted transition-colors duration-300 uppercase">
-              Exception Digest Token
-            </p>
-
-            <p className="text-xs font-mono font-medium text-secondary transition-colors duration-300 truncate mt-0.5">
-              {error?.digest ||
-                "CRITICAL_CORE_THREAD_INTERRUPTION // EV_MUTATION_FAULT"}
-            </p>
+        <div className="mt-16 flex items-center gap-3 text-muted text-xs font-mono font-medium opacity-80 bg-glass-bg border border-glass-border px-5 py-2.5 rounded-full shadow-sm">
+          <Terminal className="w-4 h-4 text-red-500/70" />
+          <div className="flex flex-col text-left">
+            <span className="text-[9px] uppercase tracking-wider text-muted/70">Reference Code</span>
+            <span className="truncate max-w-[200px] sm:max-w-xs">{error?.digest || "ERR_INTERNAL_SERVER_ERROR"}</span>
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
-};
-
-export default ErrorPage;
+}
