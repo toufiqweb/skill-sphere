@@ -10,8 +10,9 @@ import { imageUpload } from "@/lib/imageUpload";
 import { 
   BookOpen, Plus, Trash2, ArrowRight, ArrowLeft, 
   Check, Save, DollarSign, FileText, 
-  HelpCircle, Clock, RefreshCw, AlertTriangle, ChevronDown
+  HelpCircle, Clock, RefreshCw, AlertTriangle, ChevronDown, Edit
 } from "lucide-react";
+import DashboardPageHeader from "@/components/ui/DashboardPageHeader";
 
 export default function EditCoursePage({ params }) {
   const router = useRouter();
@@ -327,12 +328,15 @@ export default function EditCoursePage({ params }) {
   return (
     <div className="mx-auto max-w-4xl py-6 pb-16">
       <div className="mb-8">
-        <h1 className="text-2xl sm:text-3xl font-black text-primary tracking-tight">
-          Edit Course
-        </h1>
-        <p className="text-sm text-muted mt-1 font-medium">
-          Modify your course information, pricing options, requirements, or chapters.
-        </p>
+        <DashboardPageHeader
+          icon={Edit}
+          title={
+            <>
+              Edit <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan to-brand-ocean">Course</span>
+            </>
+          }
+          subtitle="Modify your course information, pricing options, requirements, or chapters."
+        />
       </div>
 
       {/* Multi-Step Indicators */}

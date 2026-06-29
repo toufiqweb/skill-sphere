@@ -7,10 +7,14 @@ import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 
 import { getPendingCoursesClient, approveOrRejectCourse } from "@/lib/api/courses";
+import SearchFilterBar from "@/components/ui/SearchFilterBar";
 
 export default function PendingCoursesContainer({ user }) {
   const [courses, setCourses] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   useEffect(() => {
     const fetchPendingCourses = async () => {
@@ -77,15 +81,45 @@ export default function PendingCoursesContainer({ user }) {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-64">
-        <Loader2 className="w-10 h-10 animate-spin text-blue-600" />
+      <div className="space-y-6 pb-12">
+        <div className="flex justify-center items-center h-64">
+          <Loader2 className="w-10 h-10 animate-spin text-blue-600" />
+        </div>
       </div>
     );
   }
 
+  const uniqueCategories = ["", ...new Set(courses.map(c => c.category).filter(Boolean))];
+
+  const filteredCourses = courses.filter((course) => {
+    const matchesSearch = 
+      course.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+      (course.instructor?.name || "").toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = selectedCategory === "" || course.category === selectedCategory;
+    return matchesSearch && matchesCategory;
+  });
+
   return (
-    <div className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-2xl shadow-sm overflow-hidden transition-colors duration-300">
-      <div className="overflow-x-auto min-h-[400px]">
+    <div className="space-y-6 pb-12">
+      <SearchFilterBar
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+        onClearSearch={() => setSearchQuery("")}
+        searchPlaceholder="Search pending courses..."
+        filters={[
+          {
+            value: selectedCategory,
+            onChange: setSelectedCategory,
+            options: uniqueCategories.map(cat => ({
+              value: cat,
+              label: cat === "" ? "ALL CATEGORIES" : cat,
+            })),
+          },
+        ]}
+      />
+
+      <div className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-2xl shadow-sm overflow-hidden transition-colors duration-300">
+        <div className="overflow-x-auto min-h-[400px]">
         <table className="w-full text-left border-collapse">
           <thead>
             <tr className="bg-gray-50 dark:bg-zinc-800/50 border-b border-gray-200 dark:border-zinc-800 text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">
@@ -96,20 +130,20 @@ export default function PendingCoursesContainer({ user }) {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200 dark:divide-zinc-800">
-            {courses.length === 0 ? (
+            {filteredCourses.length === 0 ? (
               <tr>
                 <td colSpan="4" className="px-6 py-12 text-center text-gray-500 dark:text-gray-400">
                   <div className="flex flex-col items-center justify-center space-y-3">
                     <div className="p-4 rounded-full bg-gray-100 dark:bg-zinc-800">
                       <CheckCircle className="w-8 h-8 text-gray-400 dark:text-gray-500" />
                     </div>
-                    <p className="text-sm font-medium">No pending courses found.</p>
+                    <p className="text-sm font-medium">No courses match your criteria.</p>
                     <p className="text-xs">You&apos;re all caught up!</p>
                   </div>
                 </td>
               </tr>
             ) : (
-              courses.map((course) => (
+              filteredCourses.map((course) => (
                 <tr
                   key={course._id || course.id}
                   className="hover:bg-gray-50 dark:hover:bg-zinc-800/50 transition-colors group"
@@ -188,6 +222,7 @@ export default function PendingCoursesContainer({ user }) {
           </tbody>
         </table>
       </div>
+    </div>
     </div>
   );
 }

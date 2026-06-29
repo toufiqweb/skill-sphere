@@ -26,6 +26,8 @@ import { toast } from "react-toastify";
 import { motion, AnimatePresence } from "framer-motion";
 import CoursesTableView from "./CoursesTableView";
 import CoursesGridView from "./CoursesGridView";
+import SearchFilterBar from "@/components/ui/SearchFilterBar";
+import DashboardPageHeader from "@/components/ui/DashboardPageHeader";
 
 const CATEGORY_OPTIONS = [
   "",
@@ -197,125 +199,69 @@ export default function MyCoursesContainer({ user, initialCoursesData }) {
   return (
     <div className="w-full space-y-8 pb-12">
       {/* Top Banner Header */}
-      <div className="relative overflow-hidden rounded-3xl border border-card-border bg-card-bg/40 p-6 sm:p-8 backdrop-blur-xl shadow-lg">
-        <div className="absolute inset-0 bg-gradient-to-tr from-[var(--brand-purple)]/5 via-transparent to-transparent opacity-40 pointer-events-none" />
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 relative z-10">
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-[var(--brand-purple)]/10 text-[var(--brand-purple)]">
-                <GraduationCap className="w-5 h-5" />
-              </span>
-              <span className="text-xs uppercase font-extrabold tracking-widest text-[var(--brand-purple)]">Instructor Dashboard</span>
-            </div>
-            <h1 className="text-2xl sm:text-3xl font-black text-primary tracking-tight">My Courses</h1>
-            <p className="text-sm text-muted mt-1 font-medium">
-              Manage, monitor, and configure the learning material you&apos;ve designed.
-            </p>
-          </div>
+      <DashboardPageHeader
+        icon={GraduationCap}
+        title={
+          <>
+            My <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan to-brand-ocean">Courses</span>
+          </>
+        }
+        subtitle="Manage, monitor, and configure the learning material you've designed."
+        rightContent={
           <Link
             href="/dashboard/create-course"
             className="group inline-flex items-center gap-2 bg-gradient-to-r from-[var(--primary-gradient-start)] to-[var(--primary-gradient-end)] text-white text-xs sm:text-sm font-bold px-5 py-3 rounded-2xl shadow-lg shadow-indigo-600/15 hover:shadow-indigo-600/30 transition-all duration-300 hover:scale-[1.02]"
           >
             <Plus className="w-4 h-4" />
-            <span>Create New Course</span>
+            <span>Create Course</span>
             <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" />
           </Link>
-        </div>
-      </div>
+        }
+      />
 
       {/* Control Actions / Filter Panels */}
       {(totalCourses > 0 || isFiltered) && (
-        <div className="flex flex-col lg:flex-row justify-between gap-4 p-4 rounded-2xl border border-card-border bg-card-bg/20 backdrop-blur-md">
-          {/* Searching */}
-          <div className="relative flex-1 max-w-md">
-            <span className="absolute inset-y-0 left-4 flex items-center text-muted">
-              <Search className="w-4.5 h-4.5" />
-            </span>
-            <input
-              type="text"
-              placeholder="Search courses by title..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-11 pr-4 py-3 rounded-xl bg-card-bg border border-card-border text-primary placeholder:text-muted focus:border-[var(--brand-purple)] focus:ring-2 focus:ring-[var(--brand-purple)]/15 outline-none transition-all text-sm font-medium"
-            />
-            {searchQuery && (
-              <button
-                onClick={() => setSearchQuery("")}
-                className="absolute inset-y-0 right-3 flex items-center text-muted hover:text-primary transition-colors"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            )}
-          </div>
-
-          {/* Filtering parameters */}
-          <div className="flex flex-wrap items-center gap-3">
-            {/* Category selection */}
-            <div className="relative">
-              <select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className="appearance-none bg-card-bg border border-card-border text-primary font-bold text-xs uppercase tracking-wider pl-4 pr-10 py-3 rounded-xl focus:border-[var(--brand-purple)] outline-none cursor-pointer transition-all min-w-[150px]"
-              >
-                {CATEGORY_OPTIONS.map((cat) => (
-                  <option key={cat} value={cat}>
-                    {cat === "" ? "ALL CATEGORIES" : cat}
-                  </option>
-                ))}
-              </select>
-              <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted pointer-events-none" />
-            </div>
-
-            {/* Status selection */}
-            <div className="relative">
-              <select
-                value={selectedStatus}
-                onChange={(e) => setSelectedStatus(e.target.value)}
-                className="appearance-none bg-card-bg border border-card-border text-primary font-bold text-xs uppercase tracking-wider pl-4 pr-10 py-3 rounded-xl focus:border-[var(--brand-purple)] outline-none cursor-pointer transition-all min-w-[150px]"
-              >
-                <option value="">ALL STATUSES</option>
-                <option value="pending">Pending</option>
-                <option value="published">Published</option>
-                <option value="unpublished">Unpublished</option>
-              </select>
-              <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted pointer-events-none" />
-            </div>
-
-            {/* Sort Selection */}
-            <div className="relative">
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="appearance-none bg-card-bg border border-card-border text-primary font-bold text-xs uppercase tracking-wider pl-4 pr-10 py-3 rounded-xl focus:border-[var(--brand-purple)] outline-none cursor-pointer transition-all min-w-[140px]"
-              >
-                <option value="newest">Newest First</option>
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
-                <option value="title-asc">Title: A-Z</option>
-                <option value="title-desc">Title: Z-A</option>
-              </select>
-              <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted pointer-events-none" />
-            </div>
-
-            {/* Grid/Table Mode Toggles */}
-            <div className="flex border border-card-border rounded-xl bg-card-bg p-1.5 gap-1 self-stretch">
-              <button
-                onClick={() => setViewMode("grid")}
-                className={`p-2 rounded-lg transition-colors cursor-pointer ${viewMode === "grid" ? "bg-[var(--brand-purple)] text-white" : "text-muted hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800"}`}
-                title="Grid view"
-              >
-                <Grid className="w-4 h-4" />
-              </button>
-              <button
-                onClick={() => setViewMode("table")}
-                className={`p-2 rounded-lg transition-colors cursor-pointer ${viewMode === "table" ? "bg-[var(--brand-purple)] text-white" : "text-muted hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800"}`}
-                title="Table view"
-              >
-                <List className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-        </div>
+        <SearchFilterBar
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
+          onClearSearch={() => setSearchQuery("")}
+          searchPlaceholder="Search courses by title..."
+          filters={[
+            {
+              value: selectedCategory,
+              onChange: setSelectedCategory,
+              options: CATEGORY_OPTIONS.map((cat) => ({
+                value: cat,
+                label: cat === "" ? "ALL CATEGORIES" : cat,
+              })),
+            },
+            {
+              value: selectedStatus,
+              onChange: setSelectedStatus,
+              options: [
+                { value: "", label: "ALL STATUSES" },
+                { value: "pending", label: "Pending" },
+                { value: "published", label: "Published" },
+                { value: "unpublished", label: "Unpublished" },
+              ],
+            },
+          ]}
+          sort={{
+            value: sortBy,
+            onChange: setSortBy,
+            options: [
+              { value: "newest", label: "Newest First" },
+              { value: "price-low", label: "Price: Low to High" },
+              { value: "price-high", label: "Price: High to Low" },
+              { value: "title-asc", label: "Title: A-Z" },
+              { value: "title-desc", label: "Title: Z-A" },
+            ],
+          }}
+          viewMode={{
+            value: viewMode,
+            onChange: setViewMode,
+          }}
+        />
       )}
 
       {/* Main Course Listing section */}

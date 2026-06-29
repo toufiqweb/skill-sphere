@@ -6,10 +6,11 @@ import { toast } from "react-toastify";
 import { 
   BookOpen, Plus, Trash2, ArrowRight, ArrowLeft, 
   Check, Save, DollarSign, Layers, FileText, 
-  HelpCircle, Settings, Award, Clock, RefreshCw
+  HelpCircle, Settings, Award, Clock, RefreshCw, PlusCircle
 } from "lucide-react";
 import { createCourse } from "@/lib/actions/courses";
 import { imageUpload } from "@/lib/imageUpload";
+import DashboardPageHeader from "@/components/ui/DashboardPageHeader";
 
 export default function CreateCoursePage() {
   const router = useRouter();
@@ -204,12 +205,15 @@ export default function CreateCoursePage() {
   return (
     <div className="mx-auto max-w-4xl py-6">
       <div className="mb-8">
-        <h1 className="text-2xl sm:text-3xl font-black text-gray-900 dark:text-white">
-          Create New Course
-        </h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-          Provide detailed information to set up your course. It will go live once approved by the administrators.
-        </p>
+        <DashboardPageHeader
+          icon={PlusCircle}
+          title={
+            <>
+              Create New <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan to-brand-ocean">Course</span>
+            </>
+          }
+          subtitle="Provide detailed information to set up your course. It will go live once approved by the administrators."
+        />
       </div>
 
       {/* Multi-Step Indicator Bar */}

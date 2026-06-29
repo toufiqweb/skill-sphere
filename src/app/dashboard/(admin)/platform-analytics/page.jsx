@@ -19,6 +19,7 @@ import {
   Legend,
 } from "recharts";
 import { useSession } from "@/lib/auth-client";
+import DashboardPageHeader from "@/components/ui/DashboardPageHeader";
 
 const PlatformAnalyticsPage = () => {
   const { data: session, isPending } = useSession();
@@ -110,27 +111,21 @@ const PlatformAnalyticsPage = () => {
   return (
     <div className="space-y-8 pb-8">
       {/* Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 glass-card rounded-[28px]">
-        <div className="flex items-center gap-5">
-          <div className="w-14 h-14 rounded-[20px] bg-brand-cyan/10 border border-brand-cyan/20 flex items-center justify-center shrink-0 shadow-inner">
-            <Activity size={28} className="text-brand-cyan" />
-          </div>
-          <div>
-            <h1 className="text-2xl sm:text-3xl font-black text-foreground tracking-tight flex items-center gap-2">
-              Platform <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan to-brand-ocean">Analytics</span>
-            </h1>
-            <p className="text-xs sm:text-sm font-medium text-muted mt-1">
-              Comprehensive real-time reports and platform growth metrics.
-            </p>
-          </div>
-        </div>
-        <div className="flex items-center gap-3">
-            <span className="px-4 py-2 rounded-xl bg-foreground/5 border border-card-border text-xs font-bold text-muted flex items-center gap-2 shadow-sm">
-                <Activity size={16} className="text-brand-mint" /> 
-                Real-time Data
-            </span>
-        </div>
-      </div>
+      <DashboardPageHeader
+        icon={Activity}
+        title={
+          <>
+            Platform <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan to-brand-ocean">Analytics</span>
+          </>
+        }
+        subtitle="Comprehensive real-time reports and platform growth metrics."
+        rightContent={
+          <span className="px-4 py-2 rounded-xl bg-foreground/5 border border-card-border text-xs font-bold text-muted flex items-center gap-2 shadow-sm">
+            <Activity size={16} className="text-brand-mint" /> 
+            Real-time Data
+          </span>
+        }
+      />
 
       {/* Top Metrics Dashboard Cards Matrix Layout */}
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">

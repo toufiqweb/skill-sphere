@@ -8,9 +8,12 @@ import Pagination from "@/components/ui/Pagination";
 import CourseCard from "@/components/ui/CourseCard";
 import CourseRatingModal from "@/components/ui/CourseRatingModal";
 import { useRouter, usePathname } from "next/navigation";
+import SearchFilterBar from "@/components/ui/SearchFilterBar";
+import DashboardPageHeader from "@/components/ui/DashboardPageHeader";
 
 export default function MyLearningClient({ initialData, currentPage }) {
   const [view, setView] = useState("grid");
+  const [searchQuery, setSearchQuery] = useState("");
   const [ratingModalCourse, setRatingModalCourse] = useState(null);
   const router = useRouter();
   const pathname = usePathname();
@@ -81,39 +84,33 @@ export default function MyLearningClient({ initialData, currentPage }) {
 
   return (
     <div className="space-y-8 pb-10">
-      {/* Header & Controls */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white dark:bg-zinc-900 p-6 rounded-[28px] border border-gray-200 dark:border-zinc-800 shadow-sm">
-        <div>
-          <h1 className="text-2xl font-black text-gray-900 dark:text-white tracking-tight">My Learning</h1>
-          <p className="text-sm text-gray-500 dark:text-zinc-400 mt-1">
-            Pick up right where you left off
-          </p>
-        </div>
+      {/* Page Header */}
+      <DashboardPageHeader
+        icon={BookOpen}
+        title={
+          <>
+            My <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan to-brand-ocean">Learning</span>
+          </>
+        }
+        subtitle="Pick up right where you left off"
+        rightContent={
+          <span className="px-4 py-2 rounded-xl bg-foreground/5 border border-card-border text-xs font-bold text-muted flex items-center gap-2 shadow-sm">
+            <PlayCircle size={16} className="text-brand-mint" /> 
+            Active Student
+          </span>
+        }
+      />
 
-        {/* View Toggle */}
-        <div className="flex items-center bg-gray-100 dark:bg-zinc-800/50 p-1 rounded-xl">
-          <button
-            onClick={() => setView("grid")}
-            className={`p-2 rounded-lg transition-colors cursor-pointer ${
-              view === "grid" 
-                ? "bg-white dark:bg-zinc-700 shadow-sm text-indigo-600 dark:text-indigo-400" 
-                : "text-gray-500 hover:text-gray-900 dark:text-zinc-400 dark:hover:text-white"
-            }`}
-          >
-            <Grid className="w-5 h-5" />
-          </button>
-          <button
-            onClick={() => setView("list")}
-            className={`p-2 rounded-lg transition-colors cursor-pointer ${
-              view === "list" 
-                ? "bg-white dark:bg-zinc-700 shadow-sm text-indigo-600 dark:text-indigo-400" 
-                : "text-gray-500 hover:text-gray-900 dark:text-zinc-400 dark:hover:text-white"
-            }`}
-          >
-            <List className="w-5 h-5" />
-          </button>
-        </div>
-      </div>
+      <SearchFilterBar
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+        onClearSearch={() => setSearchQuery("")}
+        searchPlaceholder="Search enrolled courses..."
+        viewMode={{
+          value: view,
+          onChange: setView,
+        }}
+      />
 
       {/* Content Area */}
       {view === "grid" ? (
@@ -144,7 +141,10 @@ export default function MyLearningClient({ initialData, currentPage }) {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100 dark:divide-zinc-800">
-                {courses.map((enrollment) => {
+                {courses.filter(enrollment => {
+                  const course = enrollment.course;
+                  return course && course.title.toLowerCase().includes(searchQuery.toLowerCase());
+                }).map((enrollment) => {
                   const courseData = enrollment.course;
                   if (!courseData) return null;
 

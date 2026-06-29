@@ -13,6 +13,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import DashboardPageHeader from "@/components/ui/DashboardPageHeader";
 
 export default function CourseAnalyticsPage() {
   const { data: session, isPending } = useSession();
@@ -54,19 +55,15 @@ export default function CourseAnalyticsPage() {
 
   return (
     <div className="w-full max-w-7xl mx-auto space-y-6 pb-10">
-      <div className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-3xl p-6 sm:p-8 flex items-start sm:items-center gap-5 shadow-sm">
-        <div className="w-14 h-14 bg-indigo-50 dark:bg-indigo-500/10 rounded-2xl flex items-center justify-center shrink-0">
-          <TrendingUp className="text-indigo-600 dark:text-indigo-400 w-7 h-7" />
-        </div>
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">
-            Course Analytics
-          </h1>
-          <p className="text-sm text-gray-500 dark:text-zinc-400 mt-1">
-            Track your financial performance and student engagement.
-          </p>
-        </div>
-      </div>
+      <DashboardPageHeader
+        icon={TrendingUp}
+        title={
+          <>
+            Course <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan to-brand-ocean">Analytics</span>
+          </>
+        }
+        subtitle="Track your financial performance and student engagement."
+      />
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Total Earnings */}

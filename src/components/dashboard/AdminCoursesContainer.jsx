@@ -12,6 +12,7 @@ import {
 import { deleteCourse } from "@/lib/actions/courses";
 import Pagination from "@/components/ui/Pagination";
 import AdminCoursesTable from "./AdminCoursesTable";
+import SearchFilterBar from "@/components/ui/SearchFilterBar";
 
 export default function AdminCoursesContainer({ user }) {
   const [courses, setCourses] = useState([]);
@@ -21,6 +22,9 @@ export default function AdminCoursesContainer({ user }) {
   const [totalPages, setTotalPages] = useState(1);
   const [totalCourses, setTotalCourses] = useState(0);
   const [isPending, startTransition] = useTransition();
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState("");
 
   const [activeMenu, setActiveMenu] = useState({
     courseId: null,
@@ -157,15 +161,43 @@ export default function AdminCoursesContainer({ user }) {
     }
   };
 
+  const filteredCourses = courses.filter((course) => {
+    const matchesSearch = 
+      course.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+      (course.instructor?.name || "").toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesStatus = selectedStatus === "" || course.status === selectedStatus;
+    return matchesSearch && matchesStatus;
+  });
+
   return (
     <div className="space-y-6 pb-12">
+      <SearchFilterBar
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+        onClearSearch={() => setSearchQuery("")}
+        searchPlaceholder="Search courses or instructors..."
+        filters={[
+          {
+            value: selectedStatus,
+            onChange: setSelectedStatus,
+            options: [
+              { value: "", label: "ALL STATUSES" },
+              { value: "published", label: "Published" },
+              { value: "pending", label: "Pending" },
+              { value: "rejected", label: "Rejected" },
+              { value: "unpublished", label: "Unpublished" },
+            ],
+          },
+        ]}
+      />
+
       {isLoading ? (
         <div className="glass-card rounded-2xl p-6 min-h-[400px] flex items-center justify-center dark:bg-gray-800/40">
           <Loader2 className="w-10 h-10 animate-spin text-brand-mint" />
         </div>
       ) : (
         <AdminCoursesTable
-          courses={courses}
+          courses={filteredCourses}
           activeMenu={activeMenu}
           setActiveMenu={setActiveMenu}
           onAction={handleAction}

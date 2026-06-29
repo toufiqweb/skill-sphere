@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import { getAllUsersAdmin, updateUserRoleAdmin, toggleUserBlockAdmin } from "@/lib/api/users";
 import Pagination from "@/components/ui/Pagination";
 import AdminUsersTable from "./AdminUsersTable";
+import SearchFilterBar from "@/components/ui/SearchFilterBar";
 
 const SUPER_ADMIN_EMAIL = process.env.NEXT_PUBLIC_SUPER_ADMIN_EMAIL ?? "";
 
@@ -154,51 +155,36 @@ export default function AdminUsersContainer({ user }) {
   return (
     <div className="space-y-6 pb-12">
       {/* ── Filter Bar ──────────────────────────────────────────────────────── */}
-      <div className="flex flex-col sm:flex-row gap-3">
-        {/* Search Input */}
-        <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
-          <input
-            type="text"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search by name or email..."
-            className="w-full pl-10 pr-4 py-2.5 text-sm bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-xl text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-400 transition-all"
-          />
+      <SearchFilterBar
+        searchQuery={search}
+        onSearchChange={setSearch}
+        onClearSearch={() => setSearch("")}
+        searchPlaceholder="Search by name or email..."
+        filters={[
+          {
+            value: roleFilter,
+            onChange: setRoleFilter,
+            options: ROLE_OPTIONS,
+          },
+          {
+            value: statusFilter,
+            onChange: setStatusFilter,
+            options: [
+              { value: "", label: "ALL STATUSES" },
+              { value: "false", label: "Active" },
+              { value: "true", label: "Blocked" },
+            ],
+          },
+        ]}
+      />
+      
+      {/* Results count */}
+      {!isLoading && (
+        <div className="flex items-center justify-end gap-2 text-sm text-gray-500 dark:text-gray-400">
+          <Users className="w-4 h-4" />
+          <span>{totalUsers} user{totalUsers !== 1 ? "s" : ""} found</span>
         </div>
-
-        {/* Role Filter */}
-        <select
-          value={roleFilter}
-          onChange={(e) => setRoleFilter(e.target.value)}
-          className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 text-gray-900 dark:text-white text-sm font-medium rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-400 cursor-pointer transition-all min-w-[150px]"
-        >
-          {ROLE_OPTIONS.map((opt) => (
-            <option key={opt.value} value={opt.value}>
-              {opt.label}
-            </option>
-          ))}
-        </select>
-
-        {/* Status (Blocked / Active) Filter */}
-        <select
-          value={statusFilter}
-          onChange={(e) => setStatusFilter(e.target.value)}
-          className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 text-gray-900 dark:text-white text-sm font-medium rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-400 cursor-pointer transition-all min-w-[150px]"
-        >
-          <option value="">All Statuses</option>
-          <option value="false">Active</option>
-          <option value="true">Blocked</option>
-        </select>
-
-        {/* Results count */}
-        {!isLoading && (
-          <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 self-center sm:ml-auto">
-            <Users className="w-4 h-4" />
-            <span>{totalUsers} user{totalUsers !== 1 ? "s" : ""} found</span>
-          </div>
-        )}
-      </div>
+      )}
 
       {/* ── Table ──────────────────────────────────────────────────────────── */}
       {isLoading ? (

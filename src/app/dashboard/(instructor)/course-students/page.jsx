@@ -6,6 +6,8 @@ import { Users, Mail, BookOpen, Clock, Loader2 } from "lucide-react";
 import { useSession } from "@/lib/auth-client";
 import Pagination from "@/components/ui/Pagination";
 import { getInstructorEnrolledStudentsClient } from "@/lib/api/courses";
+import SearchFilterBar from "@/components/ui/SearchFilterBar";
+import DashboardPageHeader from "@/components/ui/DashboardPageHeader";
 
 
 export default function CourseStudentsPage() {
@@ -14,6 +16,7 @@ export default function CourseStudentsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const fetchStudents = async () => {
@@ -63,20 +66,24 @@ export default function CourseStudentsPage() {
 
   return (
     <div className="w-full max-w-7xl mx-auto space-y-6 pb-10">
-      {/* Header */}
-      <div className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-3xl p-6 sm:p-8 flex items-start sm:items-center gap-5 shadow-sm">
-        <div className="w-14 h-14 bg-indigo-50 dark:bg-indigo-500/10 rounded-2xl flex items-center justify-center shrink-0">
-          <Users className="text-indigo-600 dark:text-indigo-400 w-7 h-7" />
-        </div>
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">
-            Enrolled Students
-          </h1>
-          <p className="text-sm text-gray-500 dark:text-zinc-400 mt-1">
-            Monitor and manage students registered for your published courses.
-          </p>
-        </div>
-      </div>
+      {/* Header Area */}
+      <DashboardPageHeader
+        icon={Users}
+        title={
+          <>
+            Enrolled <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan to-brand-ocean">Students</span>
+          </>
+        }
+        subtitle="Monitor and manage students registered for your published courses."
+      />
+
+      <SearchFilterBar
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+        onClearSearch={() => setSearchQuery("")}
+        searchPlaceholder="Search by student name, email, or course..."
+        filters={[]}
+      />
 
       {/* Content Area */}
       <div className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-3xl shadow-sm overflow-hidden">
@@ -93,7 +100,7 @@ export default function CourseStudentsPage() {
               No students found
             </h3>
             <p className="text-gray-500 dark:text-zinc-400 max-w-sm mx-auto">
-              No students have registered for your courses yet. Once they enroll, their details will appear here.
+              No students found matching your criteria. Once they enroll, their details will appear here.
             </p>
           </div>
         ) : (
@@ -108,7 +115,11 @@ export default function CourseStudentsPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100 dark:divide-zinc-800/60">
-                {students.map((student) => (
+                {students.filter(student => 
+                  (student.studentName || "").toLowerCase().includes(searchQuery.toLowerCase()) ||
+                  (student.studentEmail || "").toLowerCase().includes(searchQuery.toLowerCase()) ||
+                  (student.courseTitle || "").toLowerCase().includes(searchQuery.toLowerCase())
+                ).map((student) => (
                   <tr key={student._id} className="hover:bg-gray-50/50 dark:hover:bg-zinc-800/30 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">

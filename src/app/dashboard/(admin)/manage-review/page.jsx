@@ -8,6 +8,8 @@ import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import { getAllReviewsForModerationClient } from "@/lib/api/reviews";
 import { deleteReviewAdminClient } from "@/lib/actions/reviews";
+import SearchFilterBar from "@/components/ui/SearchFilterBar";
+import DashboardPageHeader from "@/components/ui/DashboardPageHeader";
 
 
 
@@ -17,6 +19,9 @@ export default function ManageReviewPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  
+  const [searchQuery, setSearchQuery] = useState("");
+  const [ratingFilter, setRatingFilter] = useState("");
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -88,37 +93,59 @@ export default function ManageReviewPage() {
     );
   }
 
+  const filteredReviews = reviews.filter(r => {
+    const searchMatch = (r.userName || "").toLowerCase().includes(searchQuery.toLowerCase()) ||
+                        (r.message || "").toLowerCase().includes(searchQuery.toLowerCase());
+    const ratingMatch = ratingFilter === "" || r.rating.toString() === ratingFilter;
+    return searchMatch && ratingMatch;
+  });
+
   return (
     <div className="w-full max-w-7xl mx-auto space-y-8 pb-10">
       {/* Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 glass-card rounded-[28px]">
-        <div className="flex items-center gap-5">
-          <div className="w-14 h-14 rounded-[20px] bg-brand-cyan/10 border border-brand-cyan/20 flex items-center justify-center shrink-0 shadow-inner">
-            <MessageSquareWarning size={28} className="text-brand-cyan" />
-          </div>
-          <div>
-            <h1 className="text-2xl sm:text-3xl font-black text-foreground tracking-tight flex items-center gap-2">
-              Manage <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan to-brand-ocean">Reviews</span>
-            </h1>
-            <p className="text-xs sm:text-sm font-medium text-muted mt-1">
-              Monitor, moderate, and remove inappropriate course reviews from the platform.
-            </p>
-          </div>
-        </div>
-        <div className="flex items-center gap-3">
-            <span className="px-4 py-2 rounded-xl bg-foreground/5 border border-card-border text-xs font-bold text-muted flex items-center gap-2 shadow-sm">
-                <ShieldCheck size={16} className="text-brand-mint" /> 
-                Community Moderation
-            </span>
-        </div>
-      </div>
+      <DashboardPageHeader
+        icon={MessageSquareWarning}
+        title={
+          <>
+            Manage <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan to-brand-ocean">Reviews</span>
+          </>
+        }
+        subtitle="Monitor, moderate, and remove inappropriate course reviews from the platform."
+        rightContent={
+          <span className="px-4 py-2 rounded-xl bg-foreground/5 border border-card-border text-xs font-bold text-muted flex items-center gap-2 shadow-sm">
+            <ShieldCheck size={16} className="text-brand-mint" /> 
+            Community Moderation
+          </span>
+        }
+      />
+
+      <SearchFilterBar
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+        onClearSearch={() => setSearchQuery("")}
+        searchPlaceholder="Search reviews or students..."
+        filters={[
+          {
+            value: ratingFilter,
+            onChange: setRatingFilter,
+            options: [
+              { value: "", label: "ALL RATINGS" },
+              { value: "5", label: "5 Stars" },
+              { value: "4", label: "4 Stars" },
+              { value: "3", label: "3 Stars" },
+              { value: "2", label: "2 Stars" },
+              { value: "1", label: "1 Star" },
+            ],
+          },
+        ]}
+      />
 
       <div className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-3xl shadow-sm overflow-hidden">
         {isLoading ? (
           <div className="flex justify-center items-center py-24">
             <Loader2 className="w-8 h-8 text-indigo-500 animate-spin" />
           </div>
-        ) : reviews.length === 0 ? (
+        ) : filteredReviews.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-24 px-4 text-center">
             <div className="w-16 h-16 bg-gray-50 dark:bg-zinc-800/50 rounded-full flex items-center justify-center mb-4">
               <MessageSquareWarning className="w-8 h-8 text-gray-400 dark:text-zinc-500" />
@@ -142,7 +169,7 @@ export default function ManageReviewPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100 dark:divide-zinc-800/60">
-                {reviews.map((review) => (
+                {filteredReviews.map((review) => (
                   <tr key={review._id} className="hover:bg-gray-50/50 dark:hover:bg-zinc-800/30 transition-colors group">
                     <td className="px-6 py-4 align-top whitespace-nowrap">
                       <div className="font-semibold text-gray-900 dark:text-white">

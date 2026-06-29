@@ -9,6 +9,8 @@ import { getWishlist } from "@/lib/api/wishlist";
 import { useUserClientSession } from "@/lib/api/getUserServerSession";
 import WishlistCourseCard from "@/components/dashboard/WishlistCourseCard";
 import Pagination from "@/components/ui/Pagination";
+import SearchFilterBar from "@/components/ui/SearchFilterBar";
+import DashboardPageHeader from "@/components/ui/DashboardPageHeader";
 
 // ─────────────────────────────────────────────────────
 // Wishlist Page — Student Dashboard
@@ -75,64 +77,38 @@ export default function WishlistPage() {
     <div className="w-full space-y-8 pb-12">
 
       {/* ── Page Header ──────────────────────────────────────────────────── */}
-      <div className="relative overflow-hidden rounded-3xl border border-card-border bg-card-bg/40 p-6 sm:p-8 backdrop-blur-xl shadow-lg">
-        <div className="absolute inset-0 bg-gradient-to-tr from-rose-500/5 via-transparent to-violet-500/5 pointer-events-none" />
-
-        <div className="relative z-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
-          {/* Left: title block */}
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-rose-500/10 text-rose-500">
-                <Heart className="w-5 h-5 fill-rose-500" />
-              </span>
-              <span className="text-xs uppercase font-extrabold tracking-widest text-rose-500">
-                Student Wishlist
-              </span>
-            </div>
-            <h1 className="text-2xl sm:text-3xl font-black text-primary tracking-tight">
-              My Wishlist
-            </h1>
-            <p className="text-sm text-muted mt-1 font-medium">
-              {loading
-                ? "Loading your saved courses…"
-                : `${items.length} course${items.length !== 1 ? "s" : ""} saved for later`}
-            </p>
-          </div>
-
-          {/* Right: browse CTA */}
+      <DashboardPageHeader
+        icon={Heart}
+        title={
+          <>
+            My <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--brand-cyan)] to-[var(--brand-ocean)]">Wishlist</span>
+          </>
+        }
+        subtitle={
+          loading
+            ? "Loading your saved courses…"
+            : `${items.length} course${items.length !== 1 ? "s" : ""} saved for later`
+        }
+        rightContent={
           <Link
             href="/courses"
-            className="group inline-flex items-center gap-2 bg-gradient-to-r from-[var(--primary-gradient-start)] to-[var(--primary-gradient-end)] text-white text-xs sm:text-sm font-bold px-5 py-3 rounded-2xl shadow-lg shadow-indigo-600/15 hover:shadow-indigo-600/30 transition-all duration-300 hover:scale-[1.02]"
+            className="group inline-flex items-center gap-2 bg-gradient-to-r from-[var(--primary-gradient-start)] to-[var(--primary-gradient-end)] text-white text-xs sm:text-sm font-bold px-5 py-3 rounded-xl shadow-lg transition-all duration-300 hover:scale-[1.02]"
           >
             <Sparkles className="w-4 h-4" />
-            <span>Browse More Courses</span>
+            <span>Browse Courses</span>
             <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" />
           </Link>
-        </div>
-      </div>
+        }
+      />
 
       {/* ── Search Bar (shown only when list is non-empty) ───────────────── */}
       {!loading && items.length > 0 && (
-        <div className="relative max-w-md">
-          <span className="absolute inset-y-0 left-4 flex items-center text-muted pointer-events-none">
-            <Search className="w-4 h-4" />
-          </span>
-          <input
-            type="text"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search your wishlist…"
-            className="w-full pl-11 pr-10 py-3 rounded-xl bg-card-bg border border-card-border text-primary placeholder:text-muted focus:border-[var(--brand-purple)] focus:ring-2 focus:ring-[var(--brand-purple)]/15 outline-none transition-all text-sm font-medium"
-          />
-          {search && (
-            <button
-              onClick={() => setSearch("")}
-              className="absolute inset-y-0 right-3 flex items-center text-muted hover:text-primary transition-colors"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          )}
-        </div>
+        <SearchFilterBar
+          searchQuery={search}
+          onSearchChange={setSearch}
+          onClearSearch={() => setSearch("")}
+          searchPlaceholder="Search your wishlist…"
+        />
       )}
 
       {/* ── Content Area ─────────────────────────────────────────────────── */}

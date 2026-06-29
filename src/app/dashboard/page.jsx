@@ -14,8 +14,8 @@ const DashboardHomePage = () => {
   if (isPending) {
     return (
       <div className="flex h-[80vh] flex-col items-center justify-center gap-4">
-        <Loader2 className="h-10 w-10 animate-spin text-primary" />
-        <p className="text-sm font-medium text-gray-500 animate-pulse dark:text-gray-400">
+        <Loader2 className="h-10 w-10 animate-spin text-[var(--brand-cyan)]" />
+        <p className="text-sm font-bold text-muted animate-pulse">
           Loading your dashboard...
         </p>
       </div>
@@ -25,9 +25,9 @@ const DashboardHomePage = () => {
   if (error) {
     return (
       <div className="flex h-[50vh] items-center justify-center">
-        <div className="rounded-xl border border-red-200 bg-red-50 p-6 text-center shadow-sm dark:border-red-900/30 dark:bg-red-900/10">
-          <p className="text-lg font-semibold text-red-600 dark:text-red-400">Error loading session</p>
-          <p className="mt-1 text-sm text-red-500 dark:text-red-400/80">{error.message || "Please log in again."}</p>
+        <div className="rounded-2xl border border-red-500/20 bg-red-500/10 p-6 text-center shadow-sm backdrop-blur-md">
+          <p className="text-lg font-bold text-red-500">Error loading session</p>
+          <p className="mt-1 text-sm font-medium text-red-500/80">{error.message || "Please log in again."}</p>
         </div>
       </div>
     );
@@ -47,9 +47,9 @@ const DashboardHomePage = () => {
       return <StudentHomeView user={user} />;
     default:
       return (
-        <div className="p-6">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white">Welcome, {user.name}!</h2>
-          <p className="text-gray-500">Your role ({user.role}) is not recognized by the dashboard yet.</p>
+        <div className="p-8 bg-card-bg border border-card-border rounded-3xl shadow-card backdrop-blur-md max-w-lg mx-auto mt-10 text-center">
+          <h2 className="text-2xl font-black text-primary">Welcome, {user.name}!</h2>
+          <p className="text-muted mt-3 font-medium">Your role ({user.role}) is not recognized by the dashboard yet.</p>
         </div>
       );
   }
