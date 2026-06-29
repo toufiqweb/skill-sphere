@@ -203,7 +203,7 @@ export default function CreateCoursePage() {
   ];
 
   return (
-    <div className="mx-auto max-w-4xl py-6">
+    <div className="mx-auto max-w-7xl py-6 px-4 md:px-8">
       <div className="mb-8">
         <DashboardPageHeader
           icon={PlusCircle}
@@ -217,7 +217,7 @@ export default function CreateCoursePage() {
       </div>
 
       {/* Multi-Step Indicator Bar */}
-      <div className="grid grid-cols-4 gap-2 mb-8 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-2xl p-3 shadow-sm">
+      <div className="grid grid-cols-4 gap-2 mb-10 glass-card rounded-2xl p-3 shadow-sm border border-card-border overflow-x-auto">
         {steps.map((step, idx) => {
           const StepIcon = step.icon;
           const isCompleted = activeTab > idx;
@@ -238,44 +238,48 @@ export default function CreateCoursePage() {
                 }
                 if (valid) setActiveTab(idx);
               }}
-              className={`flex flex-col sm:flex-row items-center justify-center gap-2 p-2 rounded-xl text-center sm:text-left transition-all duration-200 ${
+              className={`flex flex-col xl:flex-row items-center justify-center gap-3 p-3 rounded-xl text-center xl:text-left transition-all duration-300 min-w-[80px] ${
                 isActive
-                  ? "bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400"
+                  ? "bg-[var(--brand-cyan)]/10 text-[var(--brand-cyan)] shadow-inner"
                   : isCompleted
-                  ? "text-emerald-600 dark:text-emerald-400"
-                  : "text-gray-400 dark:text-gray-600"
+                  ? "text-[var(--brand-mint)]"
+                  : "text-muted hover:bg-foreground/5"
               }`}
             >
-              <div className={`h-8 w-8 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 ${
+              <div className={`h-10 w-10 sm:h-12 sm:w-12 xl:h-10 xl:w-10 rounded-[14px] flex items-center justify-center font-bold text-xs shrink-0 transition-colors ${
                 isActive
-                  ? "bg-blue-600 text-white"
+                  ? "bg-[var(--brand-cyan)] text-white shadow-md shadow-[var(--brand-cyan)]/30"
                   : isCompleted
-                  ? "bg-emerald-500 text-white"
-                  : "bg-gray-100 dark:bg-zinc-800 text-gray-500 dark:text-gray-400"
+                  ? "bg-[var(--brand-mint)] text-white shadow-sm shadow-[var(--brand-mint)]/20"
+                  : "bg-foreground/10 text-muted"
               }`}>
-                {isCompleted ? <Check className="h-4 w-4" /> : <StepIcon className="h-4.5 w-4.5" />}
+                {isCompleted ? <Check className="h-5 w-5 sm:h-6 sm:w-6 xl:h-5 xl:w-5" /> : <StepIcon className="h-5 w-5 sm:h-6 sm:w-6 xl:h-5 xl:w-5" />}
               </div>
-              <span className="hidden sm:inline text-xs font-semibold">{step.title}</span>
+              <span className="text-xs sm:text-sm font-bold tracking-tight mt-1 xl:mt-0">{step.title}</span>
             </button>
           );
         })}
       </div>
 
       {/* Form Container */}
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="bg-white dark:bg-zinc-900 rounded-[28px] border border-gray-200 dark:border-zinc-800 shadow-sm p-6 md:p-8 transition-colors duration-300">
+      <form onSubmit={handleSubmit} className="space-y-8">
+        <div className="glass-card rounded-[32px] border border-card-border shadow-card p-6 md:p-10 lg:p-12 transition-colors duration-300">
           
           {/* STEP 0: BASIC INFORMATION */}
           {activeTab === 0 && (
-            <div className="space-y-6 animate-fadeIn">
-              <h2 className="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                <FileText className="h-5 w-5 text-blue-500" />
-                Step 1: Basic Information
-              </h2>
+            <div className="space-y-8 animate-fadeIn">
+              <div className="flex items-center gap-3 border-b border-card-border pb-6">
+                <div className="p-2.5 bg-[var(--brand-cyan)]/10 rounded-xl">
+                  <FileText className="h-6 w-6 text-[var(--brand-cyan)]" />
+                </div>
+                <h2 className="text-xl sm:text-2xl font-black text-foreground tracking-tight">
+                  Step 1: Basic Information
+                </h2>
+              </div>
               
-              <div className="grid gap-6">
+              <div className="grid gap-8">
                 <div>
-                  <label htmlFor="title" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                  <label htmlFor="title" className="block text-sm font-bold text-muted mb-2 uppercase tracking-wider">
                     Course Title *
                   </label>
                   <input
@@ -285,13 +289,13 @@ export default function CreateCoursePage() {
                     value={formData.title}
                     onChange={handleInputChange}
                     placeholder="e.g., Master React.js & Next.js from Scratch"
-                    className="w-full rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50/50 dark:bg-zinc-800/40 px-4 py-3 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
+                    className="w-full rounded-2xl border border-card-border bg-foreground/5 px-5 py-4 text-sm font-medium text-foreground focus:outline-none focus:ring-2 focus:ring-[var(--brand-cyan)] focus:border-transparent transition-all placeholder:text-muted/50"
                     required
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="subTitle" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                  <label htmlFor="subTitle" className="block text-sm font-bold text-muted mb-2 uppercase tracking-wider">
                     Subtitle / Short Summary
                   </label>
                   <input
@@ -301,13 +305,13 @@ export default function CreateCoursePage() {
                     value={formData.subTitle}
                     onChange={handleInputChange}
                     placeholder="e.g., Build production-ready web applications using App Router"
-                    className="w-full rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50/50 dark:bg-zinc-800/40 px-4 py-3 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
+                    className="w-full rounded-2xl border border-card-border bg-foreground/5 px-5 py-4 text-sm font-medium text-foreground focus:outline-none focus:ring-2 focus:ring-[var(--brand-cyan)] focus:border-transparent transition-all placeholder:text-muted/50"
                   />
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid lg:grid-cols-2 gap-8">
                   <div>
-                    <label htmlFor="category" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                    <label htmlFor="category" className="block text-sm font-bold text-muted mb-2 uppercase tracking-wider">
                       Category *
                     </label>
                     <input
@@ -317,41 +321,46 @@ export default function CreateCoursePage() {
                       value={formData.category}
                       onChange={handleInputChange}
                       placeholder="e.g., Web Development"
-                      className="w-full rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50/50 dark:bg-zinc-800/40 px-4 py-3 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
+                      className="w-full rounded-2xl border border-card-border bg-foreground/5 px-5 py-4 text-sm font-medium text-foreground focus:outline-none focus:ring-2 focus:ring-[var(--brand-cyan)] focus:border-transparent transition-all placeholder:text-muted/50"
                       required
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="level" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                    <label htmlFor="level" className="block text-sm font-bold text-muted mb-2 uppercase tracking-wider">
                       Difficulty Level *
                     </label>
-                    <select
-                      id="level"
-                      name="level"
-                      value={formData.level}
-                      onChange={handleInputChange}
-                      className="w-full rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50/50 dark:bg-zinc-800/40 px-4 py-3 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
-                    >
-                      <option value="Beginner">Beginner</option>
-                      <option value="Intermediate">Intermediate</option>
-                      <option value="Advanced">Advanced</option>
-                    </select>
+                    <div className="relative">
+                      <select
+                        id="level"
+                        name="level"
+                        value={formData.level}
+                        onChange={handleInputChange}
+                        className="w-full rounded-2xl border border-card-border bg-foreground/5 px-5 py-4 text-sm font-medium text-foreground focus:outline-none focus:ring-2 focus:ring-[var(--brand-cyan)] focus:border-transparent transition-all appearance-none"
+                      >
+                        <option value="Beginner" className="bg-card-bg">Beginner</option>
+                        <option value="Intermediate" className="bg-card-bg">Intermediate</option>
+                        <option value="Advanced" className="bg-card-bg">Advanced</option>
+                      </select>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-5 text-muted">
+                        <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="description" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                  <label htmlFor="description" className="block text-sm font-bold text-muted mb-2 uppercase tracking-wider">
                     Detailed Description *
                   </label>
                   <textarea
                     id="description"
                     name="description"
-                    rows="6"
+                    rows="8"
                     value={formData.description}
                     onChange={handleInputChange}
                     placeholder="Describe what the course is about, targeted audiences, and what they will gain."
-                    className="w-full rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50/50 dark:bg-zinc-800/40 px-4 py-3 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all resize-y"
+                    className="w-full rounded-2xl border border-card-border bg-foreground/5 px-5 py-4 text-sm font-medium text-foreground focus:outline-none focus:ring-2 focus:ring-[var(--brand-cyan)] focus:border-transparent transition-all resize-y placeholder:text-muted/50"
                     required
                   ></textarea>
                 </div>
@@ -361,20 +370,24 @@ export default function CreateCoursePage() {
 
           {/* STEP 1: PRICING & MEDIA */}
           {activeTab === 1 && (
-            <div className="space-y-6 animate-fadeIn">
-              <h2 className="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                <DollarSign className="h-5 w-5 text-emerald-500" />
-                Step 2: Pricing & Details
-              </h2>
+            <div className="space-y-8 animate-fadeIn">
+              <div className="flex items-center gap-3 border-b border-card-border pb-6">
+                <div className="p-2.5 bg-[var(--brand-mint)]/10 rounded-xl">
+                  <DollarSign className="h-6 w-6 text-[var(--brand-mint)]" />
+                </div>
+                <h2 className="text-xl sm:text-2xl font-black text-foreground tracking-tight">
+                  Step 2: Pricing & Details
+                </h2>
+              </div>
 
-              <div className="grid gap-6">
-                <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid gap-8">
+                <div className="grid lg:grid-cols-2 gap-8">
                   <div>
-                    <label htmlFor="price" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                    <label htmlFor="price" className="block text-sm font-bold text-muted mb-2 uppercase tracking-wider">
                       Course Price ($) *
                     </label>
                     <div className="relative">
-                      <DollarSign className="absolute left-3 top-3.5 h-4.5 w-4.5 text-gray-400" />
+                      <DollarSign className="absolute left-4 top-4 h-5 w-5 text-muted" />
                       <input
                         type="number"
                         id="price"
@@ -383,18 +396,18 @@ export default function CreateCoursePage() {
                         value={formData.price}
                         onChange={handleInputChange}
                         placeholder="99"
-                        className="w-full rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50/50 dark:bg-zinc-800/40 pl-9 pr-4 py-3 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
+                        className="w-full rounded-2xl border border-card-border bg-foreground/5 pl-11 pr-5 py-4 text-sm font-medium text-foreground focus:outline-none focus:ring-2 focus:ring-[var(--brand-cyan)] focus:border-transparent transition-all placeholder:text-muted/50"
                         required
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label htmlFor="originalPrice" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                    <label htmlFor="originalPrice" className="block text-sm font-bold text-muted mb-2 uppercase tracking-wider">
                       Original Price ($) (Optional)
                     </label>
                     <div className="relative">
-                      <DollarSign className="absolute left-3 top-3.5 h-4.5 w-4.5 text-gray-400" />
+                      <DollarSign className="absolute left-4 top-4 h-5 w-5 text-muted" />
                       <input
                         type="number"
                         id="originalPrice"
@@ -403,19 +416,19 @@ export default function CreateCoursePage() {
                         value={formData.originalPrice}
                         onChange={handleInputChange}
                         placeholder="199"
-                        className="w-full rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50/50 dark:bg-zinc-800/40 pl-9 pr-4 py-3 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
+                        className="w-full rounded-2xl border border-card-border bg-foreground/5 pl-11 pr-5 py-4 text-sm font-medium text-foreground focus:outline-none focus:ring-2 focus:ring-[var(--brand-cyan)] focus:border-transparent transition-all placeholder:text-muted/50"
                       />
                     </div>
                   </div>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid lg:grid-cols-2 gap-8">
                   <div>
-                    <label htmlFor="duration" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                    <label htmlFor="duration" className="block text-sm font-bold text-muted mb-2 uppercase tracking-wider">
                       Estimated Duration
                     </label>
                     <div className="relative">
-                      <Clock className="absolute left-3 top-3.5 h-4.5 w-4.5 text-gray-400" />
+                      <Clock className="absolute left-4 top-4 h-5 w-5 text-muted" />
                       <input
                         type="text"
                         id="duration"
@@ -423,13 +436,13 @@ export default function CreateCoursePage() {
                         value={formData.duration}
                         onChange={handleInputChange}
                         placeholder="e.g., 24 hours or Self-paced"
-                        className="w-full rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50/50 dark:bg-zinc-800/40 pl-9 pr-4 py-3 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
+                        className="w-full rounded-2xl border border-card-border bg-foreground/5 pl-11 pr-5 py-4 text-sm font-medium text-foreground focus:outline-none focus:ring-2 focus:ring-[var(--brand-cyan)] focus:border-transparent transition-all placeholder:text-muted/50"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label htmlFor="lessons" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                    <label htmlFor="lessons" className="block text-sm font-bold text-muted mb-2 uppercase tracking-wider">
                       Number of Lessons *
                     </label>
                     <input
@@ -440,34 +453,34 @@ export default function CreateCoursePage() {
                       value={formData.lessons}
                       onChange={handleInputChange}
                       placeholder="e.g., 45"
-                      className="w-full rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50/50 dark:bg-zinc-800/40 px-4 py-3 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
+                      className="w-full rounded-2xl border border-card-border bg-foreground/5 px-5 py-4 text-sm font-medium text-foreground focus:outline-none focus:ring-2 focus:ring-[var(--brand-cyan)] focus:border-transparent transition-all placeholder:text-muted/50"
                       required
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-bold text-muted mb-2 uppercase tracking-wider">
                     Course Thumbnail Image *
                   </label>
-                  <div className="mt-1 flex flex-col items-center justify-center border-2 border-dashed border-gray-300 dark:border-zinc-800 rounded-2xl p-6 bg-gray-50/50 dark:bg-zinc-800/40 hover:bg-gray-100/50 dark:hover:bg-zinc-800/60 transition-all relative">
+                  <div className="mt-2 flex flex-col items-center justify-center border-2 border-dashed border-card-border rounded-[24px] p-8 bg-foreground/5 hover:bg-foreground/10 transition-all relative overflow-hidden group">
                     {uploadingImage ? (
-                      <div className="flex flex-col items-center gap-2 py-4">
-                        <RefreshCw className="h-8 w-8 text-blue-600 animate-spin" />
-                        <span className="text-xs font-bold text-gray-500">Uploading thumbnail...</span>
+                      <div className="flex flex-col items-center gap-3 py-8">
+                        <RefreshCw className="h-10 w-10 text-[var(--brand-cyan)] animate-spin" />
+                        <span className="text-sm font-bold text-muted">Uploading thumbnail...</span>
                       </div>
                     ) : formData.image ? (
-                      <div className="flex flex-col items-center gap-3 w-full">
-                        <div className="relative w-full h-48 rounded-xl overflow-hidden border border-gray-200 dark:border-zinc-800">
+                      <div className="flex flex-col items-center gap-4 w-full max-w-2xl">
+                        <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-card-border shadow-md">
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src={formData.image}
                             alt="Course preview"
-                            className="object-cover w-full h-full"
+                            className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
                           />
                         </div>
-                        <div className="flex gap-2">
-                          <label className="px-4 py-2 bg-white dark:bg-zinc-800 border border-gray-300 dark:border-zinc-700 rounded-xl text-xs font-bold text-gray-700 dark:text-gray-200 cursor-pointer hover:bg-gray-50 dark:hover:bg-zinc-700 transition-colors">
+                        <div className="flex gap-3 mt-2">
+                          <label className="px-5 py-2.5 bg-card-bg border border-card-border rounded-xl text-sm font-bold text-foreground cursor-pointer hover:bg-foreground/5 transition-colors shadow-sm">
                             Change Image
                             <input
                               type="file"
@@ -481,17 +494,19 @@ export default function CreateCoursePage() {
                             onClick={() => {
                               setFormData(prev => ({ ...prev, image: "" }));
                             }}
-                            className="px-4 py-2 bg-rose-50 dark:bg-rose-950/20 hover:bg-rose-100 dark:hover:bg-rose-950/40 text-rose-600 border border-rose-200 dark:border-rose-950/30 rounded-xl text-xs font-bold transition-colors cursor-pointer"
+                            className="px-5 py-2.5 bg-rose-500/10 hover:bg-rose-500/20 text-rose-500 border border-rose-500/30 rounded-xl text-sm font-bold transition-colors cursor-pointer shadow-sm"
                           >
                             Remove
                           </button>
                         </div>
                       </div>
                     ) : (
-                      <label className="flex flex-col items-center justify-center cursor-pointer w-full py-4">
-                        <Plus className="h-8 w-8 text-gray-400 mb-2" />
-                        <span className="text-sm font-bold text-gray-600 dark:text-gray-300">Upload Course Image</span>
-                        <span className="text-xs text-gray-400 mt-1">PNG, JPG, JPEG up to 10MB</span>
+                      <label className="flex flex-col items-center justify-center cursor-pointer w-full py-10">
+                        <div className="h-16 w-16 bg-foreground/10 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                          <Plus className="h-8 w-8 text-muted" />
+                        </div>
+                        <span className="text-base font-bold text-foreground mb-1">Upload Course Image</span>
+                        <span className="text-sm font-medium text-muted mt-1">PNG, JPG, JPEG up to 10MB</span>
                         <input
                           type="file"
                           accept="image/*"
@@ -509,44 +524,51 @@ export default function CreateCoursePage() {
 
           {/* STEP 2: REQUIREMENTS & WHAT YOU'LL LEARN */}
           {activeTab === 2 && (
-            <div className="space-y-8 animate-fadeIn">
-              <h2 className="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                <HelpCircle className="h-5 w-5 text-indigo-500" />
-                Step 3: Goals & Prerequisites
-              </h2>
+            <div className="space-y-10 animate-fadeIn">
+              <div className="flex items-center gap-3 border-b border-card-border pb-6">
+                <div className="p-2.5 bg-[var(--brand-deep)]/10 rounded-xl">
+                  <HelpCircle className="h-6 w-6 text-[var(--brand-deep)]" />
+                </div>
+                <h2 className="text-xl sm:text-2xl font-black text-foreground tracking-tight">
+                  Step 3: Goals & Prerequisites
+                </h2>
+              </div>
 
               {/* What You'll Learn */}
-              <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                  <label className="block text-sm font-bold text-gray-700 dark:text-gray-300">
+              <div className="space-y-5">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                  <label className="block text-base font-bold text-foreground">
                     What will students learn in this course?
                   </label>
                   <button
                     type="button"
                     onClick={() => addListField("learn")}
-                    className="text-xs text-blue-600 hover:text-blue-700 dark:text-blue-400 font-bold flex items-center gap-1 cursor-pointer"
+                    className="text-sm text-[var(--brand-cyan)] bg-[var(--brand-cyan)]/10 px-4 py-2 rounded-xl hover:bg-[var(--brand-cyan)]/20 font-bold flex items-center gap-1.5 cursor-pointer transition-colors"
                   >
-                    <Plus className="h-4 w-4" /> Add Item
+                    <Plus className="h-4 w-4" /> Add Goal
                   </button>
                 </div>
                 
-                <div className="space-y-3">
+                <div className="space-y-4">
                   {whatYoullLearn.map((val, idx) => (
-                    <div key={idx} className="flex gap-2 items-center">
+                    <div key={idx} className="flex gap-3 items-center group">
+                      <div className="hidden sm:flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-foreground/5 text-muted font-bold text-sm border border-card-border">
+                        {idx + 1}
+                      </div>
                       <input
                         type="text"
                         value={val}
                         onChange={(e) => handleListFieldChange("learn", idx, e.target.value)}
                         placeholder={`e.g., Build custom React Server Components`}
-                        className="flex-1 rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50/50 dark:bg-zinc-800/40 px-4 py-2.5 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
+                        className="flex-1 rounded-2xl border border-card-border bg-foreground/5 px-5 py-4 text-sm font-medium text-foreground focus:outline-none focus:ring-2 focus:ring-[var(--brand-cyan)] transition-all placeholder:text-muted/50"
                       />
                       <button
                         type="button"
                         onClick={() => removeListField("learn", idx)}
-                        className="p-2.5 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-all cursor-pointer"
+                        className="p-4 text-rose-500/70 hover:text-rose-500 hover:bg-rose-500/10 rounded-2xl transition-all cursor-pointer border border-transparent hover:border-rose-500/30"
                         disabled={whatYoullLearn.length === 1 && !val}
                       >
-                        <Trash2 className="h-4.5 w-4.5" />
+                        <Trash2 className="h-5 w-5" />
                       </button>
                     </div>
                   ))}
@@ -554,37 +576,40 @@ export default function CreateCoursePage() {
               </div>
 
               {/* Requirements */}
-              <div className="space-y-4 pt-4 border-t border-gray-100 dark:border-zinc-800">
-                <div className="flex justify-between items-center">
-                  <label className="block text-sm font-bold text-gray-700 dark:text-gray-300">
+              <div className="space-y-5 pt-8 border-t border-card-border">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                  <label className="block text-base font-bold text-foreground">
                     What are the requirements/prerequisites?
                   </label>
                   <button
                     type="button"
                     onClick={() => addListField("req")}
-                    className="text-xs text-blue-600 hover:text-blue-700 dark:text-blue-400 font-bold flex items-center gap-1 cursor-pointer"
+                    className="text-sm text-[var(--brand-cyan)] bg-[var(--brand-cyan)]/10 px-4 py-2 rounded-xl hover:bg-[var(--brand-cyan)]/20 font-bold flex items-center gap-1.5 cursor-pointer transition-colors"
                   >
-                    <Plus className="h-4 w-4" /> Add Item
+                    <Plus className="h-4 w-4" /> Add Requirement
                   </button>
                 </div>
                 
-                <div className="space-y-3">
+                <div className="space-y-4">
                   {requirements.map((val, idx) => (
-                    <div key={idx} className="flex gap-2 items-center">
+                    <div key={idx} className="flex gap-3 items-center group">
+                      <div className="hidden sm:flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-foreground/5 text-muted font-bold text-sm border border-card-border">
+                        {idx + 1}
+                      </div>
                       <input
                         type="text"
                         value={val}
                         onChange={(e) => handleListFieldChange("req", idx, e.target.value)}
                         placeholder={`e.g., Decent understanding of modern Javascript ES6+`}
-                        className="flex-1 rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50/50 dark:bg-zinc-800/40 px-4 py-2.5 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
+                        className="flex-1 rounded-2xl border border-card-border bg-foreground/5 px-5 py-4 text-sm font-medium text-foreground focus:outline-none focus:ring-2 focus:ring-[var(--brand-cyan)] transition-all placeholder:text-muted/50"
                       />
                       <button
                         type="button"
                         onClick={() => removeListField("req", idx)}
-                        className="p-2.5 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-all cursor-pointer"
+                        className="p-4 text-rose-500/70 hover:text-rose-500 hover:bg-rose-500/10 rounded-2xl transition-all cursor-pointer border border-transparent hover:border-rose-500/30"
                         disabled={requirements.length === 1 && !val}
                       >
-                        <Trash2 className="h-4.5 w-4.5" />
+                        <Trash2 className="h-5 w-5" />
                       </button>
                     </div>
                   ))}
@@ -595,31 +620,35 @@ export default function CreateCoursePage() {
 
           {/* STEP 3: CURRICULUM */}
           {activeTab === 3 && (
-            <div className="space-y-6 animate-fadeIn">
-              <div className="flex justify-between items-center mb-2">
-                <h2 className="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                  <BookOpen className="h-5 w-5 text-purple-500" />
-                  Step 4: Course Curriculum Chapters
-                </h2>
+            <div className="space-y-8 animate-fadeIn">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-card-border pb-6">
+                <div className="flex items-center gap-3">
+                  <div className="p-2.5 bg-[var(--brand-ocean)]/10 rounded-xl">
+                    <BookOpen className="h-6 w-6 text-[var(--brand-ocean)]" />
+                  </div>
+                  <h2 className="text-xl sm:text-2xl font-black text-foreground tracking-tight">
+                    Step 4: Curriculum Chapters
+                  </h2>
+                </div>
                 <button
                   type="button"
                   onClick={addCurriculumRow}
-                  className="text-xs bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 border border-blue-100 dark:border-blue-800/30 px-3.5 py-1.5 rounded-xl font-bold flex items-center gap-1 hover:brightness-105 active:scale-[0.98] transition-all cursor-pointer"
+                  className="text-sm bg-[var(--brand-ocean)]/10 text-[var(--brand-ocean)] hover:bg-[var(--brand-ocean)]/20 px-5 py-2.5 rounded-xl font-bold flex items-center gap-2 transition-all cursor-pointer shadow-sm"
                 >
-                  <Plus className="h-4.5 w-4.5" /> Add Chapter
+                  <Plus className="h-5 w-5" /> Add Chapter
                 </button>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-6">
                 {curriculum.map((chapter, idx) => (
-                  <div key={idx} className="flex flex-col sm:flex-row gap-4 items-start bg-gray-50/60 dark:bg-zinc-800/20 p-4 border border-gray-150 dark:border-zinc-800/50 rounded-2xl relative">
-                    <div className="w-8 h-8 rounded-lg bg-gray-100 dark:bg-zinc-850 flex items-center justify-center font-bold text-xs shrink-0 mt-1">
+                  <div key={idx} className="flex flex-col md:flex-row gap-5 items-start bg-foreground/5 p-5 sm:p-6 border border-card-border rounded-[24px] relative group hover:border-card-border/80 transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-card-bg border border-card-border flex items-center justify-center font-black text-lg text-foreground shrink-0 shadow-sm">
                       {String(idx + 1).padStart(2, "0")}
                     </div>
                     
-                    <div className="flex-1 grid md:grid-cols-3 gap-4 w-full">
-                      <div className="md:col-span-2">
-                        <label className="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1">
+                    <div className="flex-1 grid lg:grid-cols-3 gap-5 w-full">
+                      <div className="lg:col-span-2">
+                        <label className="block text-xs font-bold uppercase tracking-wider text-muted mb-2">
                           Chapter/Module Title
                         </label>
                         <input
@@ -627,13 +656,13 @@ export default function CreateCoursePage() {
                           value={chapter.title}
                           onChange={(e) => handleCurriculumChange(idx, "title", e.target.value)}
                           placeholder="e.g., Introduction to the framework"
-                          className="w-full rounded-xl border border-gray-250 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-3.5 py-2 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
+                          className="w-full rounded-2xl border border-card-border bg-card-bg px-4 py-3.5 text-sm font-medium text-foreground focus:outline-none focus:ring-2 focus:ring-[var(--brand-ocean)] transition-all placeholder:text-muted/50 shadow-sm"
                           required
                         />
                       </div>
                       
                       <div>
-                        <label className="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1">
+                        <label className="block text-xs font-bold uppercase tracking-wider text-muted mb-2">
                           Number of Lectures
                         </label>
                         <input
@@ -642,7 +671,7 @@ export default function CreateCoursePage() {
                           value={chapter.lectures}
                           onChange={(e) => handleCurriculumChange(idx, "lectures", e.target.value)}
                           placeholder="e.g., 5"
-                          className="w-full rounded-xl border border-gray-250 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-3.5 py-2 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
+                          className="w-full rounded-2xl border border-card-border bg-card-bg px-4 py-3.5 text-sm font-medium text-foreground focus:outline-none focus:ring-2 focus:ring-[var(--brand-ocean)] transition-all placeholder:text-muted/50 shadow-sm"
                         />
                       </div>
                     </div>
@@ -650,10 +679,10 @@ export default function CreateCoursePage() {
                     <button
                       type="button"
                       onClick={() => removeCurriculumRow(idx)}
-                      className="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-all self-end sm:self-center cursor-pointer"
+                      className="p-3 text-rose-500/70 hover:text-rose-500 hover:bg-rose-500/10 rounded-xl transition-all self-end md:self-center cursor-pointer border border-transparent hover:border-rose-500/30 md:mt-6"
                       disabled={curriculum.length === 1 && !chapter.title}
                     >
-                      <Trash2 className="h-4.5 w-4.5" />
+                      <Trash2 className="h-5 w-5" />
                     </button>
                   </div>
                 ))}
@@ -664,12 +693,12 @@ export default function CreateCoursePage() {
         </div>
 
         {/* Action Controls */}
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center pt-2">
           {activeTab > 0 ? (
             <button
               type="button"
               onClick={handlePrev}
-              className="flex items-center gap-2 border border-gray-200 dark:border-zinc-800 hover:bg-gray-100 dark:hover:bg-zinc-850/50 bg-white dark:bg-zinc-900 text-gray-700 dark:text-gray-300 font-bold px-5 py-3 rounded-2xl text-xs uppercase tracking-wider cursor-pointer transition-all active:scale-[0.98]"
+              className="flex items-center gap-2 border border-card-border hover:bg-foreground/5 bg-card-bg text-foreground font-bold px-6 py-3.5 rounded-2xl text-sm uppercase tracking-wider cursor-pointer transition-all active:scale-[0.98] shadow-sm"
             >
               <ArrowLeft className="h-4 w-4" /> Previous
             </button>
@@ -681,7 +710,7 @@ export default function CreateCoursePage() {
             <button
               type="button"
               onClick={handleNext}
-              className="flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-bold px-6 py-3 rounded-2xl text-xs uppercase tracking-wider cursor-pointer transition-all hover:scale-[1.01] active:scale-[0.98] shadow-md shadow-blue-500/10"
+              className="flex items-center gap-2 bg-[var(--brand-cyan)] hover:brightness-110 text-white font-bold px-8 py-3.5 rounded-2xl text-sm uppercase tracking-wider cursor-pointer transition-all hover:scale-[1.02] active:scale-[0.98] shadow-md shadow-[var(--brand-cyan)]/20"
             >
               Next Step <ArrowRight className="h-4 w-4" />
             </button>
@@ -689,16 +718,16 @@ export default function CreateCoursePage() {
             <button
               type="submit"
               disabled={isPending}
-              className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:brightness-110 text-white font-bold px-7 py-3.5 rounded-2xl text-xs uppercase tracking-wider cursor-pointer transition-all hover:scale-[1.01] active:scale-[0.98] shadow-md shadow-blue-500/20 disabled:opacity-50 disabled:pointer-events-none"
+              className="flex items-center gap-2 bg-gradient-to-r from-[var(--brand-cyan)] to-[var(--brand-ocean)] hover:brightness-110 text-white font-black px-10 py-4 rounded-2xl text-sm uppercase tracking-wider cursor-pointer transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-[var(--brand-cyan)]/30 disabled:opacity-50 disabled:pointer-events-none"
             >
               {isPending ? (
                 <>
-                  <div className="h-4.5 w-4.5 rounded-full border-2 border-white border-t-transparent animate-spin"></div>
-                  Submitting...
+                  <div className="h-5 w-5 rounded-full border-2 border-white/30 border-t-white animate-spin"></div>
+                  Publishing...
                 </>
               ) : (
                 <>
-                  <Save className="h-4.5 w-4.5" /> Publish Course
+                  <Save className="h-5 w-5" /> Publish Course
                 </>
               )}
             </button>

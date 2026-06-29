@@ -55,22 +55,22 @@ export default function CourseRatingModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm transition-opacity">
-      <div className="relative w-full max-w-sm bg-white dark:bg-zinc-900 rounded-2xl shadow-xl p-6 m-4 border border-gray-200 dark:border-zinc-800 animate-in fade-in zoom-in-95 duration-200">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-background/80 backdrop-blur-md transition-opacity p-4">
+      <div className="relative w-full max-w-sm glass-card rounded-[32px] shadow-card p-8 border border-card-border animate-in fade-in zoom-in-95 duration-200">
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 rounded-full bg-gray-100 dark:bg-zinc-800 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
+          className="absolute top-5 right-5 p-2 rounded-full bg-foreground/5 text-muted hover:text-foreground hover:bg-foreground/10 transition-colors"
         >
-          <X className="w-4 h-4" />
+          <X className="w-5 h-5" />
         </button>
 
-        <div className="text-center space-y-5">
-          <div className="space-y-1.5 pt-2">
-            <h2 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+        <div className="text-center space-y-6">
+          <div className="space-y-2 pt-2">
+            <h2 className="text-2xl font-black tracking-tight text-foreground">
               Rate this Course
             </h2>
-            <p className="text-sm text-gray-500 dark:text-zinc-400 line-clamp-2 px-2">
+            <p className="text-sm font-medium text-muted line-clamp-2 px-2">
               {courseTitle}
             </p>
           </div>
@@ -85,10 +85,10 @@ export default function CourseRatingModal({
                 onClick={() => setSelectedRating(star)}
               >
                 <Star
-                  className={`w-9 h-9 sm:w-10 sm:h-10 transition-colors duration-200 ${
+                  className={`w-9 h-9 sm:w-10 sm:h-10 transition-all duration-300 ${
                     star <= (hoveredRating || selectedRating)
-                      ? "text-amber-500 fill-amber-500 drop-shadow-sm"
-                      : "text-gray-200 dark:text-zinc-700"
+                      ? "text-[#fbbf24] fill-[#fbbf24] drop-shadow-[0_0_8px_rgba(251,191,36,0.5)] scale-110"
+                      : "text-muted/30"
                   }`}
                   strokeWidth={1.5}
                 />
@@ -98,7 +98,7 @@ export default function CourseRatingModal({
 
           <div className="w-full text-left">
             <textarea
-              className="w-full p-3 text-sm rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-800/50 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all resize-none"
+              className="w-full p-4 text-sm font-medium rounded-2xl border border-card-border bg-foreground/5 text-foreground placeholder-muted/50 focus:outline-none focus:ring-2 focus:ring-brand-cyan/50 focus:border-brand-cyan transition-all resize-none shadow-inner"
               rows={4}
               placeholder="Write your review message..."
               value={reviewMessage}
@@ -111,10 +111,10 @@ export default function CourseRatingModal({
             disabled={
               isSubmitting || selectedRating === 0 || !reviewMessage.trim()
             }
-            className={`w-full py-3.5 rounded-xl font-bold text-sm tracking-wide transition-all duration-200 ${
+            className={`w-full py-4 rounded-xl font-bold text-sm tracking-wide transition-all duration-300 uppercase ${
               selectedRating > 0 && reviewMessage.trim() && !isSubmitting
-                ? "bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-600/20 active:scale-[0.98]"
-                : "bg-gray-100 dark:bg-zinc-800 text-gray-400 dark:text-zinc-500 cursor-not-allowed"
+                ? "bg-gradient-to-r from-brand-cyan to-brand-ocean hover:brightness-110 text-background shadow-lg shadow-brand-cyan/20 active:scale-[0.98]"
+                : "bg-foreground/5 text-muted/50 cursor-not-allowed"
             }`}
           >
             {isSubmitting ? "Submitting..." : "Submit Feedback"}

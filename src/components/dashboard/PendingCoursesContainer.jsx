@@ -82,8 +82,8 @@ export default function PendingCoursesContainer({ user }) {
   if (isLoading) {
     return (
       <div className="space-y-6 pb-12">
-        <div className="flex justify-center items-center h-64">
-          <Loader2 className="w-10 h-10 animate-spin text-blue-600" />
+        <div className="flex justify-center items-center h-64 glass-card border border-card-border rounded-[24px]">
+          <Loader2 className="w-10 h-10 animate-spin text-[var(--brand-cyan)]" />
         </div>
       </div>
     );
@@ -118,27 +118,27 @@ export default function PendingCoursesContainer({ user }) {
         ]}
       />
 
-      <div className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-2xl shadow-sm overflow-hidden transition-colors duration-300">
-        <div className="overflow-x-auto min-h-[400px]">
+      <div className="glass-card border border-card-border rounded-[24px] shadow-card overflow-hidden transition-colors duration-300">
+        <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="bg-gray-50 dark:bg-zinc-800/50 border-b border-gray-200 dark:border-zinc-800 text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">
-              <th className="px-6 py-4 font-semibold">Course</th>
-              <th className="px-6 py-4 font-semibold">Instructor</th>
-              <th className="px-6 py-4 font-semibold">Category</th>
-              <th className="px-6 py-4 font-semibold text-right">Actions</th>
+            <tr className="bg-foreground/5 border-b border-card-border text-xs uppercase tracking-wider text-muted">
+              <th className="px-6 py-4 font-bold">Course</th>
+              <th className="px-6 py-4 font-bold">Instructor</th>
+              <th className="px-6 py-4 font-bold">Category</th>
+              <th className="px-6 py-4 font-bold text-right">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-200 dark:divide-zinc-800">
+          <tbody className="divide-y divide-card-border">
             {filteredCourses.length === 0 ? (
               <tr>
-                <td colSpan="4" className="px-6 py-12 text-center text-gray-500 dark:text-gray-400">
+                <td colSpan="4" className="px-6 py-12 text-center text-muted">
                   <div className="flex flex-col items-center justify-center space-y-3">
-                    <div className="p-4 rounded-full bg-gray-100 dark:bg-zinc-800">
-                      <CheckCircle className="w-8 h-8 text-gray-400 dark:text-gray-500" />
+                    <div className="p-4 rounded-full bg-foreground/5">
+                      <CheckCircle className="w-8 h-8 text-muted" />
                     </div>
-                    <p className="text-sm font-medium">No courses match your criteria.</p>
-                    <p className="text-xs">You&apos;re all caught up!</p>
+                    <p className="text-sm font-bold">No courses match your criteria.</p>
+                    <p className="text-xs font-medium">You&apos;re all caught up!</p>
                   </div>
                 </td>
               </tr>
@@ -146,11 +146,11 @@ export default function PendingCoursesContainer({ user }) {
               filteredCourses.map((course) => (
                 <tr
                   key={course._id || course.id}
-                  className="hover:bg-gray-50 dark:hover:bg-zinc-800/50 transition-colors group"
+                  className="hover:bg-foreground/5 transition-colors group"
                 >
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-4">
-                      <div className="relative w-16 h-12 rounded-lg overflow-hidden shrink-0 border border-gray-200 dark:border-zinc-700">
+                      <div className="relative w-16 h-12 rounded-lg overflow-hidden shrink-0 border border-card-border bg-foreground/5">
                         {course.image ? (
                           <Image
                             src={course.image}
@@ -159,16 +159,16 @@ export default function PendingCoursesContainer({ user }) {
                             className="object-cover"
                           />
                         ) : (
-                          <div className="w-full h-full bg-gray-200 dark:bg-zinc-700 flex items-center justify-center">
-                            <span className="text-xs text-gray-400">No Img</span>
+                          <div className="w-full h-full flex items-center justify-center">
+                            <span className="text-xs font-medium text-muted">No Img</span>
                           </div>
                         )}
                       </div>
                       <div>
-                        <h3 className="font-semibold text-gray-900 dark:text-white line-clamp-1 max-w-[250px]">
+                        <h3 className="font-bold text-foreground line-clamp-1 max-w-[250px]">
                           {course.title}
                         </h3>
-                        <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
+                        <p className="text-sm font-medium text-muted mt-0.5">
                           ${course.price} • {course.level || "All Levels"}
                         </p>
                       </div>
@@ -176,23 +176,23 @@ export default function PendingCoursesContainer({ user }) {
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center shrink-0">
-                        <span className="text-sm font-medium text-blue-700 dark:text-blue-400">
+                      <div className="w-8 h-8 rounded-full bg-[var(--brand-cyan)]/10 border border-[var(--brand-cyan)]/20 flex items-center justify-center shrink-0">
+                        <span className="text-sm font-bold text-[var(--brand-cyan)]">
                           {course.instructor?.name?.charAt(0).toUpperCase() || "U"}
                         </span>
                       </div>
                       <div>
-                        <p className="font-medium text-sm text-gray-900 dark:text-white">
+                        <p className="font-bold text-sm text-foreground">
                           {course.instructor?.name || "Unknown Instructor"}
                         </p>
-                        <p className="text-xs text-gray-500 dark:text-gray-400">
+                        <p className="text-xs font-medium text-muted">
                           {course.instructor?.email || ""}
                         </p>
                       </div>
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300 border border-purple-200 dark:border-purple-800/50">
+                    <span className="inline-flex items-center px-2.5 py-1.5 rounded-xl text-xs font-bold bg-[var(--brand-ocean)]/10 text-[var(--brand-ocean)] border border-[var(--brand-ocean)]/20 uppercase tracking-wider">
                       {course.category}
                     </span>
                   </td>
@@ -200,7 +200,7 @@ export default function PendingCoursesContainer({ user }) {
                     <div className="flex items-center justify-end gap-2">
                       <button
                         onClick={() => handleAction(course._id || course.id, "approve", course.title)}
-                        className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-lg transition-colors dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/20 dark:hover:bg-emerald-500/20"
+                        className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-bold text-[var(--brand-mint)] bg-[var(--brand-mint)]/10 hover:bg-[var(--brand-mint)]/20 border border-[var(--brand-mint)]/20 rounded-xl transition-all cursor-pointer"
                         title="Approve Course"
                       >
                         <CheckCircle className="w-4 h-4" />
@@ -208,7 +208,7 @@ export default function PendingCoursesContainer({ user }) {
                       </button>
                       <button
                         onClick={() => handleAction(course._id || course.id, "reject", course.title)}
-                        className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-red-700 bg-red-50 hover:bg-red-100 border border-red-200 rounded-lg transition-colors dark:bg-red-500/10 dark:text-red-400 dark:border-red-500/20 dark:hover:bg-red-500/20"
+                        className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-bold text-rose-500 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/20 rounded-xl transition-all cursor-pointer"
                         title="Reject Course"
                       >
                         <XCircle className="w-4 h-4" />

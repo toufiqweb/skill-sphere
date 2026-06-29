@@ -60,21 +60,21 @@ export default function MyLearningClient({ initialData, currentPage }) {
   // Empty state handling
   if (courses.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center h-[70vh] bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-3xl p-8 text-center space-y-6 shadow-sm">
-        <div className="w-20 h-20 bg-indigo-50 dark:bg-indigo-900/20 rounded-full flex items-center justify-center">
-          <BookOpen className="w-10 h-10 text-indigo-600 dark:text-indigo-400" />
+      <div className="flex flex-col items-center justify-center h-[70vh] glass-card border border-card-border rounded-3xl p-8 text-center space-y-6 shadow-card">
+        <div className="w-20 h-20 bg-[var(--brand-cyan)]/10 rounded-full flex items-center justify-center border border-[var(--brand-cyan)]/20">
+          <BookOpen className="w-10 h-10 text-[var(--brand-cyan)]" />
         </div>
         <div className="space-y-2">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">
+          <h2 className="text-2xl font-black text-foreground tracking-tight">
             You haven't enrolled in any courses yet!
           </h2>
-          <p className="text-gray-500 dark:text-zinc-400 max-w-md mx-auto">
+          <p className="text-muted font-medium max-w-md mx-auto">
             Ready to learn something new? Browse our vast catalog and start your learning journey today.
           </p>
         </div>
         <Link
           href="/courses"
-          className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-sm rounded-xl uppercase tracking-wider transition-all duration-200 shadow-md shadow-indigo-600/10 hover:scale-[1.02]"
+          className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-gradient-to-r from-[var(--brand-cyan)] to-[var(--brand-ocean)] hover:brightness-110 text-background font-black text-sm rounded-xl uppercase tracking-wider transition-all duration-300 shadow-md shadow-[var(--brand-cyan)]/20 active:scale-[0.98]"
         >
           Explore Courses
         </Link>
@@ -129,10 +129,10 @@ export default function MyLearningClient({ initialData, currentPage }) {
           })}
         </div>
       ) : (
-        <div className="bg-white dark:bg-zinc-900 rounded-[28px] border border-gray-200 dark:border-zinc-800 shadow-sm overflow-hidden">
+        <div className="glass-card rounded-[24px] border border-card-border shadow-card overflow-hidden transition-colors duration-300">
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm text-gray-600 dark:text-zinc-400">
-              <thead className="bg-gray-50/80 dark:bg-zinc-800/50 text-xs uppercase font-bold text-gray-500 dark:text-zinc-500 tracking-wider">
+            <table className="w-full text-left text-sm text-muted font-medium border-collapse">
+              <thead className="bg-foreground/5 border-b border-card-border text-xs uppercase font-black text-muted tracking-wider">
                 <tr>
                   <th scope="col" className="px-6 py-4">Course</th>
                   <th scope="col" className="px-6 py-4">Enrolled On</th>
@@ -140,7 +140,7 @@ export default function MyLearningClient({ initialData, currentPage }) {
                   <th scope="col" className="px-6 py-4 text-right">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100 dark:divide-zinc-800">
+              <tbody className="divide-y divide-card-border">
                 {courses.filter(enrollment => {
                   const course = enrollment.course;
                   return course && course.title.toLowerCase().includes(searchQuery.toLowerCase());
@@ -149,10 +149,10 @@ export default function MyLearningClient({ initialData, currentPage }) {
                   if (!courseData) return null;
 
                   return (
-                    <tr key={enrollment._id} className="hover:bg-gray-50/50 dark:hover:bg-zinc-800/30 transition-colors">
+                    <tr key={enrollment._id} className="hover:bg-foreground/5 transition-colors group">
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-4">
-                          <div className="relative h-14 w-20 flex-shrink-0 overflow-hidden rounded-xl border border-gray-200 dark:border-zinc-700">
+                          <div className="relative h-14 w-20 flex-shrink-0 overflow-hidden rounded-xl border border-card-border bg-foreground/5">
                             <Image 
                               src={courseData.image} 
                               alt={courseData.title} 
@@ -161,11 +161,11 @@ export default function MyLearningClient({ initialData, currentPage }) {
                             />
                           </div>
                           <div>
-                            <div className="font-bold text-gray-900 dark:text-white truncate max-w-xs md:max-w-sm">
+                            <div className="font-bold text-foreground group-hover:text-[var(--brand-cyan)] transition-colors truncate max-w-xs md:max-w-sm">
                               {courseData.title}
                             </div>
-                            <div className="text-xs text-gray-500 mt-1 flex items-center gap-1.5">
-                              <span className="font-semibold text-indigo-600 dark:text-indigo-400">
+                            <div className="text-[10px] font-bold text-muted/70 uppercase tracking-wider mt-1 flex items-center gap-1.5">
+                              <span className="text-[var(--brand-cyan)]">
                                 {courseData.category}
                               </span>
                               <span>&bull;</span>
@@ -179,19 +179,19 @@ export default function MyLearningClient({ initialData, currentPage }) {
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="flex items-center gap-1.5 font-medium">
-                          <Clock className="w-3.5 h-3.5 text-gray-400" />
+                        <div className="flex items-center gap-1.5 font-bold text-muted">
+                          <Clock className="w-3.5 h-3.5 text-muted/50" />
                           {formatDate(enrollment.createdAt)}
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap font-bold text-gray-900 dark:text-white">
+                      <td className="px-6 py-4 whitespace-nowrap font-black text-foreground">
                         ${enrollment.amount}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right">
                         <div className="flex items-center justify-end gap-2">
                           <button
                             onClick={() => setRatingModalCourse(courseData)}
-                            className="inline-flex items-center justify-center rounded-lg bg-amber-50 dark:bg-amber-500/10 hover:bg-amber-100 dark:hover:bg-amber-500/20 text-amber-600 dark:text-amber-400 p-2 transition-colors duration-300"
+                            className="inline-flex items-center justify-center rounded-xl bg-[#fbbf24]/10 hover:bg-[#fbbf24]/20 border border-[#fbbf24]/20 text-[#fbbf24] p-2 transition-all duration-300"
                             aria-label="Rate this course"
                             title="Rate Course"
                           >
@@ -199,7 +199,7 @@ export default function MyLearningClient({ initialData, currentPage }) {
                           </button>
                           <Link
                             href={`/courses/${courseData._id || courseData.id}`}
-                            className="inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-indigo-50 dark:bg-indigo-500/10 hover:bg-indigo-100 dark:hover:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 font-bold text-xs uppercase tracking-wider rounded-lg transition-colors"
+                            className="inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-[var(--brand-ocean)]/10 hover:bg-[var(--brand-ocean)]/20 border border-[var(--brand-ocean)]/20 text-[var(--brand-ocean)] font-black text-xs uppercase tracking-wider rounded-xl transition-all"
                           >
                             <PlayCircle className="w-4 h-4" />
                             Start Learning

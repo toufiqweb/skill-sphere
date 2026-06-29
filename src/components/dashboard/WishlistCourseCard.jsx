@@ -36,47 +36,49 @@ export default function WishlistCourseCard({ course, onRemove, isRemoving = fals
   };
 
   return (
-    <div className="w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200">
+    <div className="w-full glass-card border border-card-border rounded-[24px] overflow-hidden shadow-card hover:shadow-[0_8px_30px_rgba(var(--brand-cyan-rgb),0.1)] transition-all duration-300">
 
       {/* ── Thumbnail ─────────────────────────────────────── */}
-      <div className="relative w-full aspect-video">
-        {image ? (
-          <Image
-            fill
-            src={image}
-            alt={title}
-            loading="lazy"
-            className="object-cover"
-          />
-        ) : (
-          // Fallback placeholder when no image URL exists
-          <div className="absolute inset-0 bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center">
-            <span className="text-zinc-400 dark:text-zinc-600 text-xs font-medium">No image</span>
-          </div>
-        )}
+      <div className="relative w-full aspect-video p-2 pb-0">
+        <div className="relative w-full h-full rounded-[20px] overflow-hidden bg-foreground/5">
+          {image ? (
+            <Image
+              fill
+              src={image}
+              alt={title}
+              loading="lazy"
+              className="object-cover"
+            />
+          ) : (
+            // Fallback placeholder when no image URL exists
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="text-muted text-xs font-bold">No image</span>
+            </div>
+          )}
 
-        {/* Subtle bottom gradient so badges stay readable */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+          {/* Subtle bottom gradient so badges stay readable */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60" />
+        </div>
 
         {/* Category badge — top-left */}
         {category && (
-          <span className="absolute top-3 left-3 bg-white/90 dark:bg-zinc-800/90 backdrop-blur-sm text-zinc-800 dark:text-zinc-200 text-xs font-semibold px-3 py-1 rounded-full">
+          <span className="absolute top-5 left-5 bg-background/80 backdrop-blur-md border border-card-border text-foreground text-[10px] font-black uppercase px-3 py-1 rounded-full shadow-sm">
             {category}
           </span>
         )}
 
         {/* Unified pill — top-right: rating + remove heart */}
-        <div className="absolute top-3 right-3 flex items-center gap-2 bg-white/95 dark:bg-zinc-800/95 backdrop-blur-sm px-2.5 py-1.5 rounded-full shadow-sm">
+        <div className="absolute top-5 right-5 flex items-center gap-2 bg-background/80 backdrop-blur-md border border-card-border px-2.5 py-1.5 rounded-full shadow-sm">
           {/* Rating */}
           <div className="flex items-center gap-1">
-            <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
-            <span className="text-xs font-bold text-zinc-700 dark:text-zinc-200 leading-none">
+            <Star className="w-3.5 h-3.5 text-[#fbbf24] fill-[#fbbf24]" />
+            <span className="text-xs font-black text-foreground leading-none">
               {rating.toFixed(1)}
             </span>
           </div>
 
           {/* Divider */}
-          <div className="w-px h-3.5 bg-zinc-200 dark:bg-zinc-700" />
+          <div className="w-px h-3.5 bg-card-border" />
 
           {/* Remove / Heart button */}
           <button
@@ -84,44 +86,44 @@ export default function WishlistCourseCard({ course, onRemove, isRemoving = fals
             disabled={isRemoving}
             aria-label="Remove from wishlist"
             className={`
-              p-1 bg-red-50 dark:bg-red-950/50 rounded-full
-              hover:scale-105 transition-transform
+              p-1 bg-rose-500/10 rounded-full
+              hover:scale-110 hover:bg-rose-500/20 transition-all
               ${isRemoving ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
             `}
           >
             {isRemoving ? (
               // Minimal inline spinner — no libraries needed
-              <span className="block w-4 h-4 rounded-full border-2 border-red-400 border-t-transparent animate-spin" />
+              <span className="block w-4 h-4 rounded-full border-2 border-rose-500 border-t-transparent animate-spin" />
             ) : (
-              <Heart className="w-4 h-4 text-red-500 fill-red-500" />
+              <Heart className="w-4 h-4 text-rose-500 fill-rose-500" />
             )}
           </button>
         </div>
       </div>
 
       {/* ── Content ───────────────────────────────────────── */}
-      <div className="p-4 flex flex-col gap-2">
+      <div className="p-5 flex flex-col gap-3">
 
         {/* Course title */}
-        <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100 line-clamp-2 leading-snug">
+        <h3 className="text-base font-black text-foreground line-clamp-2 leading-snug">
           {title}
         </h3>
 
         {/* Meta row: lessons count + price + enroll CTA */}
-        <div className="flex items-center justify-between text-sm text-zinc-500 dark:text-zinc-400 font-medium mt-1">
+        <div className="flex items-center justify-between text-xs font-bold text-muted mt-1">
           {/* Left: lesson count */}
           <div className="flex items-center gap-1.5">
-            <BookOpen className="w-3.5 h-3.5 shrink-0" />
+            <BookOpen className="w-3.5 h-3.5 shrink-0 text-[var(--brand-cyan)]" />
             <span>{lessons} lesson{lessons !== 1 ? "s" : ""}</span>
           </div>
 
           {/* Right: price block */}
           <div className="flex items-baseline gap-1.5">
-            <span className="text-base font-black text-zinc-900 dark:text-zinc-100">
+            <span className="text-base font-black text-foreground">
               ${price}
             </span>
             {originalPrice > price && (
-              <span className="text-xs font-semibold line-through text-zinc-400">
+              <span className="text-[10px] font-bold line-through text-muted/50">
                 ${originalPrice}
               </span>
             )}
@@ -132,16 +134,16 @@ export default function WishlistCourseCard({ course, onRemove, isRemoving = fals
         <Link
           href={`/courses/${courseId}`}
           className="
-            mt-1 w-full inline-flex items-center justify-center gap-1.5
-            rounded-xl bg-gradient-to-r from-[#5643ff] to-[#6d5dfc]
-            px-4 py-2.5 text-xs font-bold text-white
-            shadow-sm shadow-indigo-600/10
-            hover:brightness-110 hover:shadow-md hover:shadow-indigo-600/15
-            transition-all duration-200
+            mt-2 w-full inline-flex items-center justify-center gap-2
+            rounded-xl bg-gradient-to-r from-[var(--brand-cyan)] to-[var(--brand-ocean)]
+            px-4 py-3 text-xs font-black text-background uppercase tracking-wider
+            shadow-md shadow-[var(--brand-cyan)]/20
+            hover:brightness-110 active:scale-[0.98]
+            transition-all duration-300
           "
         >
           View Course
-          <ArrowRight className="w-3.5 h-3.5" strokeWidth={2.5} />
+          <ArrowRight className="w-4 h-4" strokeWidth={3} />
         </Link>
       </div>
     </div>

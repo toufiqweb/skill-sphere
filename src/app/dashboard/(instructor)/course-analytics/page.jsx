@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { DollarSign, Users, Star, Loader2, TrendingUp } from "lucide-react";
+import { DollarSign, Users, Star, Loader2, TrendingUp, Activity, PlayCircle } from "lucide-react";
 import { useSession } from "@/lib/auth-client";
 import { getInstructorAnalyticsClient } from "@/lib/api/courses";
 import {
@@ -12,6 +12,8 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
+  BarChart,
+  Bar
 } from "recharts";
 import DashboardPageHeader from "@/components/ui/DashboardPageHeader";
 
@@ -44,17 +46,37 @@ export default function CourseAnalyticsPage() {
 
   if (isPending || isLoading) {
     return (
-      <div className="flex justify-center items-center h-[70vh]">
-        <Loader2 className="w-10 h-10 text-indigo-500 animate-spin" />
+      <div className="flex flex-col justify-center items-center h-[70vh] gap-4">
+        <Loader2 className="w-10 h-10 text-[var(--brand-cyan)] animate-spin" />
+        <p className="text-sm font-medium text-muted">Loading Analytics...</p>
       </div>
     );
   }
 
   const overview = analytics?.overview || { totalEarnings: 0, totalEnrollments: 0, avgRating: 0 };
-  const chartData = analytics?.chartData || [];
+  
+  // Static Mock Data for Fallback
+  const staticChartData = [
+    { month: "Jan", earnings: 120, enrollments: 10 },
+    { month: "Feb", earnings: 250, enrollments: 15 },
+    { month: "Mar", earnings: 180, enrollments: 12 },
+    { month: "Apr", earnings: 320, enrollments: 20 },
+    { month: "May", earnings: 450, enrollments: 25 },
+    { month: "Jun", earnings: 600, enrollments: 30 },
+  ];
+  
+  const staticCoursePerformance = [
+    { name: "React Masterclass", revenue: 800, rating: 4.8 },
+    { name: "Next.js for Beginners", revenue: 550, rating: 4.7 },
+    { name: "UI/UX Design", revenue: 400, rating: 4.5 },
+  ];
+
+  const hasChartData = analytics?.chartData && analytics.chartData.length > 0;
+  const chartData = hasChartData ? analytics.chartData : staticChartData;
+  const coursePerformance = analytics?.coursePerformance?.length > 0 ? analytics.coursePerformance : staticCoursePerformance;
 
   return (
-    <div className="w-full max-w-7xl mx-auto space-y-6 pb-10">
+    <div className="w-full space-y-8 pb-12">
       <DashboardPageHeader
         icon={TrendingUp}
         title={
@@ -63,112 +85,193 @@ export default function CourseAnalyticsPage() {
           </>
         }
         subtitle="Track your financial performance and student engagement."
+        rightContent={
+          <span className="px-4 py-2 rounded-xl bg-foreground/5 border border-card-border text-xs font-bold text-muted flex items-center gap-2 shadow-sm">
+            <Activity size={16} className="text-brand-mint" /> 
+            Real-time Metrics
+          </span>
+        }
       />
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Total Earnings */}
-        <div className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-3xl p-6 shadow-sm flex flex-col justify-center">
+        <div className="glass-card rounded-[24px] p-6 shadow-card hover:-translate-y-1 transition-transform duration-300 flex flex-col justify-center">
           <div className="flex items-center gap-3 mb-4">
-            <div className="p-2 bg-emerald-50 dark:bg-emerald-500/10 rounded-xl">
-              <DollarSign className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+            <div className="w-12 h-12 flex items-center justify-center bg-[var(--brand-mint)]/10 border border-[var(--brand-mint)]/20 rounded-[16px] shadow-inner">
+              <DollarSign className="w-6 h-6 text-[var(--brand-mint)] fill-[var(--brand-mint)]/20" />
             </div>
-            <h3 className="font-semibold text-gray-600 dark:text-gray-300">Total Earnings</h3>
+            <h3 className="font-bold text-muted text-sm uppercase tracking-wider">Total Earnings</h3>
           </div>
-          <p className="text-3xl font-bold text-gray-900 dark:text-white">
+          <p className="text-3xl sm:text-4xl font-black text-foreground">
             ${overview.totalEarnings.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </p>
         </div>
 
         {/* Total Enrollments */}
-        <div className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-3xl p-6 shadow-sm flex flex-col justify-center">
+        <div className="glass-card rounded-[24px] p-6 shadow-card hover:-translate-y-1 transition-transform duration-300 flex flex-col justify-center">
           <div className="flex items-center gap-3 mb-4">
-            <div className="p-2 bg-blue-50 dark:bg-blue-500/10 rounded-xl">
-              <Users className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+            <div className="w-12 h-12 flex items-center justify-center bg-[var(--brand-cyan)]/10 border border-[var(--brand-cyan)]/20 rounded-[16px] shadow-inner">
+              <Users className="w-6 h-6 text-[var(--brand-cyan)] fill-[var(--brand-cyan)]/20" />
             </div>
-            <h3 className="font-semibold text-gray-600 dark:text-gray-300">Total Enrollments</h3>
+            <h3 className="font-bold text-muted text-sm uppercase tracking-wider">Enrollments</h3>
           </div>
-          <p className="text-3xl font-bold text-gray-900 dark:text-white">
+          <p className="text-3xl sm:text-4xl font-black text-foreground">
             {overview.totalEnrollments.toLocaleString()}
           </p>
         </div>
 
         {/* Average Rating */}
-        <div className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-3xl p-6 shadow-sm flex flex-col justify-center">
+        <div className="glass-card rounded-[24px] p-6 shadow-card hover:-translate-y-1 transition-transform duration-300 flex flex-col justify-center">
           <div className="flex items-center gap-3 mb-4">
-            <div className="p-2 bg-amber-50 dark:bg-amber-500/10 rounded-xl">
-              <Star className="w-6 h-6 text-amber-500" />
+            <div className="w-12 h-12 flex items-center justify-center bg-amber-500/10 border border-amber-500/20 rounded-[16px] shadow-inner">
+              <Star className="w-6 h-6 text-amber-400 fill-amber-400" />
             </div>
-            <h3 className="font-semibold text-gray-600 dark:text-gray-300">Average Rating</h3>
+            <h3 className="font-bold text-muted text-sm uppercase tracking-wider">Avg Rating</h3>
           </div>
-          <p className="text-3xl font-bold text-gray-900 dark:text-white">
-            {overview.avgRating.toFixed(1)} <span className="text-sm font-medium text-gray-500 dark:text-gray-400">/ 5.0</span>
-          </p>
+          <div className="flex items-end gap-2">
+            <p className="text-3xl sm:text-4xl font-black text-foreground">
+              {overview.avgRating.toFixed(1)}
+            </p>
+            <p className="text-sm font-bold text-muted mb-1">/ 5.0</p>
+          </div>
         </div>
       </div>
 
-      <div className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-3xl p-6 sm:p-8 shadow-sm">
-        <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6">Revenue & Enrollments Overview</h2>
+      {!hasChartData && (
+        <div className="p-4 bg-[var(--brand-ocean)]/10 border border-[var(--brand-ocean)]/30 rounded-xl text-[var(--brand-ocean)] text-sm font-medium flex items-center gap-2 shadow-sm">
+          <Activity className="w-5 h-5 shrink-0" />
+          No sufficient data yet. Showing sample analytics below to demonstrate the dashboard features.
+        </div>
+      )}
+
+      {/* Main Charts Area */}
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
         
-        <div className="h-[350px] w-full">
-          <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={chartData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-              <defs>
-                <linearGradient id="colorEarnings" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#4f46e5" stopOpacity={0.3}/>
-                  <stop offset="95%" stopColor="#4f46e5" stopOpacity={0}/>
-                </linearGradient>
-                <linearGradient id="colorEnrollments" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#0ea5e9" stopOpacity={0.3}/>
-                  <stop offset="95%" stopColor="#0ea5e9" stopOpacity={0}/>
-                </linearGradient>
-              </defs>
-              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#3f3f46" opacity={0.2} />
-              <XAxis 
-                dataKey="month" 
-                axisLine={false} 
-                tickLine={false} 
-                tick={{ fill: '#71717a', fontSize: 12 }} 
-                dy={10}
-              />
-              <YAxis 
-                yAxisId="left"
-                axisLine={false} 
-                tickLine={false} 
-                tick={{ fill: '#71717a', fontSize: 12 }}
-                tickFormatter={(value) => `$${value}`}
-              />
-              <YAxis 
-                yAxisId="right"
-                orientation="right"
-                axisLine={false} 
-                tickLine={false} 
-                tick={{ fill: '#71717a', fontSize: 12 }}
-              />
-              <Tooltip 
-                contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)', backgroundColor: '#18181b', color: '#fff' }}
-                itemStyle={{ color: '#e4e4e7', fontSize: '14px', fontWeight: '500' }}
-              />
-              <Area 
-                yAxisId="left"
-                type="monotone" 
-                dataKey="earnings" 
-                stroke="#4f46e5" 
-                strokeWidth={3}
-                fillOpacity={1} 
-                fill="url(#colorEarnings)" 
-                activeDot={{ r: 6, strokeWidth: 0, fill: '#4f46e5' }}
-              />
-              <Area 
-                yAxisId="right"
-                type="monotone" 
-                dataKey="enrollments" 
-                stroke="#0ea5e9" 
-                strokeWidth={3}
-                fillOpacity={1} 
-                fill="url(#colorEnrollments)" 
-              />
-            </AreaChart>
-          </ResponsiveContainer>
+        {/* Revenue & Enrollments Area Chart */}
+        <div className="glass-card rounded-[28px] p-6 sm:p-8 shadow-card flex flex-col">
+          <div className="flex justify-between items-center mb-8">
+            <h2 className="text-xl font-bold text-foreground tracking-tight">Revenue Trend</h2>
+            <div className="flex items-center gap-4 text-xs font-bold">
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 rounded-full bg-[var(--brand-cyan)] shadow-[0_0_10px_var(--brand-cyan)]" />
+                <span className="text-muted">Earnings</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 rounded-full bg-[var(--brand-ocean)] shadow-[0_0_10px_var(--brand-ocean)]" />
+                <span className="text-muted">Enrollments</span>
+              </div>
+            </div>
+          </div>
+          
+          <div className="h-[300px] w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={chartData} margin={{ top: 10, right: 0, left: -20, bottom: 0 }}>
+                <defs>
+                  <linearGradient id="colorEarnings" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="var(--brand-cyan)" stopOpacity={0.4}/>
+                    <stop offset="95%" stopColor="var(--brand-cyan)" stopOpacity={0}/>
+                  </linearGradient>
+                  <linearGradient id="colorEnrollments" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="var(--brand-ocean)" stopOpacity={0.4}/>
+                    <stop offset="95%" stopColor="var(--brand-ocean)" stopOpacity={0}/>
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="currentColor" className="text-card-border" opacity={0.5} />
+                <XAxis 
+                  dataKey="month" 
+                  axisLine={false} 
+                  tickLine={false} 
+                  tick={{ fill: 'var(--text-muted)', fontSize: 12, fontWeight: 500 }} 
+                  dy={10}
+                />
+                <YAxis 
+                  yAxisId="left"
+                  axisLine={false} 
+                  tickLine={false} 
+                  tick={{ fill: 'var(--text-muted)', fontSize: 12, fontWeight: 500 }}
+                  tickFormatter={(value) => `$${value}`}
+                  width={60}
+                />
+                <YAxis 
+                  yAxisId="right"
+                  orientation="right"
+                  axisLine={false} 
+                  tickLine={false} 
+                  tick={{ fill: 'var(--text-muted)', fontSize: 12, fontWeight: 500 }}
+                  width={40}
+                />
+                <Tooltip 
+                  contentStyle={{ borderRadius: '16px', border: '1px solid var(--card-border)', boxShadow: 'var(--shadow-card)', backgroundColor: 'var(--card-bg)', color: 'var(--foreground)' }}
+                  itemStyle={{ fontSize: '14px', fontWeight: 'bold' }}
+                />
+                <Area 
+                  yAxisId="left"
+                  type="monotone" 
+                  dataKey="earnings" 
+                  stroke="var(--brand-cyan)" 
+                  strokeWidth={4}
+                  fillOpacity={1} 
+                  fill="url(#colorEarnings)" 
+                  activeDot={{ r: 6, strokeWidth: 2, fill: 'var(--card-bg)', stroke: 'var(--brand-cyan)' }}
+                />
+                <Area 
+                  yAxisId="right"
+                  type="monotone" 
+                  dataKey="enrollments" 
+                  stroke="var(--brand-ocean)" 
+                  strokeWidth={4}
+                  fillOpacity={1} 
+                  fill="url(#colorEnrollments)" 
+                  activeDot={{ r: 6, strokeWidth: 2, fill: 'var(--card-bg)', stroke: 'var(--brand-ocean)' }}
+                />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        {/* Top Courses Bar Chart */}
+        <div className="glass-card rounded-[28px] p-6 sm:p-8 shadow-card flex flex-col">
+          <div className="flex justify-between items-center mb-8">
+            <h2 className="text-xl font-bold text-foreground tracking-tight">Top Performing Courses</h2>
+            <div className="flex items-center gap-2 text-xs font-bold">
+              <span className="w-3 h-3 rounded-full bg-[var(--brand-deep)] shadow-[0_0_10px_var(--brand-deep)]" />
+              <span className="text-muted">Revenue</span>
+            </div>
+          </div>
+          
+          <div className="h-[300px] w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={coursePerformance} margin={{ top: 10, right: 0, left: -20, bottom: 0 }} layout="vertical">
+                <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="currentColor" className="text-card-border" opacity={0.5} />
+                <XAxis 
+                  type="number"
+                  axisLine={false} 
+                  tickLine={false} 
+                  tick={{ fill: 'var(--text-muted)', fontSize: 12, fontWeight: 500 }}
+                  tickFormatter={(value) => `$${value}`}
+                />
+                <YAxis 
+                  type="category"
+                  dataKey="name"
+                  axisLine={false} 
+                  tickLine={false} 
+                  tick={{ fill: 'var(--text-muted)', fontSize: 12, fontWeight: 500 }}
+                  width={140}
+                />
+                <Tooltip 
+                  cursor={{ fill: 'var(--foreground)', opacity: 0.05 }}
+                  contentStyle={{ borderRadius: '16px', border: '1px solid var(--card-border)', boxShadow: 'var(--shadow-card)', backgroundColor: 'var(--card-bg)', color: 'var(--foreground)' }}
+                  itemStyle={{ fontSize: '14px', fontWeight: 'bold' }}
+                />
+                <Bar 
+                  dataKey="revenue" 
+                  fill="var(--brand-deep)" 
+                  radius={[0, 8, 8, 0]}
+                  barSize={32}
+                />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
         </div>
       </div>
     </div>

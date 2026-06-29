@@ -67,7 +67,8 @@ const StudentHomeView = ({ user }) => {
   const activeLearningActivity = user?.stats?.learningActivity?.length > 0 ? user.stats.learningActivity : learningActivityData;
   const activeUpcomingTasks = user?.stats?.upcomingTasks?.length > 0 ? user.stats.upcomingTasks : upcomingTasks;
 
-  const lastAccessed = courses[0]; // Just taking the first for demo
+  const lastAccessedEnrollment = courses[0]; // Just taking the first for demo
+  const lastAccessed = lastAccessedEnrollment?.course;
 
   return (
     <div className="flex flex-col gap-6">
@@ -213,7 +214,7 @@ const StudentHomeView = ({ user }) => {
           <div className="flex flex-col gap-6 sm:flex-row sm:items-center relative z-10">
             <div className="h-32 w-full shrink-0 overflow-hidden rounded-xl sm:w-56 border border-card-border relative shadow-lg">
               <Image
-                src={lastAccessed.image || "/placeholder-course.jpg"}
+                src={lastAccessed.image || "/fallback-course.jpg"}
                 alt={lastAccessed?.title || "Course Image"}
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -249,7 +250,7 @@ const StudentHomeView = ({ user }) => {
                 </div>
                 
                 <Link 
-                  href={`/dashboard/my-learning/${lastAccessed._id}`}
+                  href={`/dashboard/my-learning/${lastAccessed._id || lastAccessed.id}`}
                   className="inline-flex items-center justify-center rounded-xl bg-foreground px-6 py-2.5 text-xs font-bold text-background transition-transform hover:scale-[1.02] active:scale-[0.98]"
                 >
                   Resume Lesson
@@ -274,29 +275,33 @@ const StudentHomeView = ({ user }) => {
         </div>
         
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {courses.slice(1).map((course) => (
-            <Link key={course._id} href={`/dashboard/my-learning/${course._id}`} className="group flex flex-col overflow-hidden rounded-[20px] glass-card hover:border-foreground/20 transition-all duration-300 hover:shadow-card hover:-translate-y-1">
-              <div className="relative h-36 w-full overflow-hidden border-b border-card-border">
-                <Image
-                  src={course.image || "/placeholder-course.jpg"}
-                  alt={course?.title || "Course Image"}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-              </div>
-              <div className="flex flex-1 flex-col p-5">
-                <h4 className="line-clamp-2 text-sm font-bold text-foreground group-hover:text-brand-cyan transition-colors leading-snug">
-                  {course.title}
-                </h4>
-                <div className="mt-auto pt-5">
-                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-foreground/10">
-                    <div className="h-full rounded-full bg-brand-cyan/70" style={{ width: "10%" }}></div>
-                  </div>
-                  <p className="text-[10px] font-bold text-muted mt-2 uppercase tracking-wider text-right">10% Complete</p>
+          {courses.slice(1).map((enrollment) => {
+            const course = enrollment.course;
+            if (!course) return null;
+            return (
+              <Link key={enrollment._id} href={`/dashboard/my-learning/${course._id || course.id}`} className="group flex flex-col overflow-hidden rounded-[20px] glass-card hover:border-foreground/20 transition-all duration-300 hover:shadow-card hover:-translate-y-1">
+                <div className="relative h-36 w-full overflow-hidden border-b border-card-border bg-foreground/5">
+                  <Image
+                    src={course.image || "/fallback-course.jpg"}
+                    alt={course?.title || "Course Image"}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
                 </div>
-              </div>
-            </Link>
-          ))}
+                <div className="flex flex-1 flex-col p-5">
+                  <h4 className="line-clamp-2 text-sm font-bold text-foreground group-hover:text-brand-cyan transition-colors leading-snug">
+                    {course.title}
+                  </h4>
+                  <div className="mt-auto pt-5">
+                    <div className="h-1.5 w-full overflow-hidden rounded-full bg-foreground/10">
+                      <div className="h-full rounded-full bg-brand-cyan/70" style={{ width: "10%" }}></div>
+                    </div>
+                    <p className="text-[10px] font-bold text-muted mt-2 uppercase tracking-wider text-right">10% Complete</p>
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
           {courses.length <= 1 && (
             <div className="col-span-full flex h-48 flex-col gap-3 items-center justify-center rounded-[24px] glass-card border-dashed">
               <BookOpen className="h-8 w-8 text-muted" />

@@ -78,9 +78,9 @@ export default function CoursesGridView({ courses, handleToggleStatus, setCourse
             transition={{ duration: 0.4 }}
             className="group relative h-full rounded-[28px] border border-card-border bg-card-bg/40 hover:bg-card-bg/75 transition-all duration-300 p-[1px] shadow-[0_8px_30px_rgba(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.15)] hover:shadow-[0_8px_30px_rgba(109,93,252,0.08)] flex flex-col"
           >
-            <div className="relative flex h-full flex-col overflow-hidden rounded-[27px] bg-card-bg/80 backdrop-blur-md p-3">
+            <div className="relative flex h-full flex-col overflow-hidden rounded-[27px] glass-card p-3">
               {/* Image Thumbnail wrapper */}
-              <div className="relative h-44 overflow-hidden rounded-[20px] mb-4 bg-slate-200 dark:bg-slate-800">
+              <div className="relative h-44 overflow-hidden rounded-[20px] mb-4 bg-foreground/5">
                 <Image
                   src={course.image || "/fallback-course.jpg"}
                   alt={course.title || "Course thumbnail"}
@@ -100,18 +100,18 @@ export default function CoursesGridView({ courses, handleToggleStatus, setCourse
 
               {/* Course Content Details */}
               <div className="flex-1 flex flex-col px-2">
-                <h3 className="line-clamp-2 text-base font-extrabold leading-snug text-primary group-hover:text-[var(--brand-purple)] transition-colors min-h-[48px] tracking-tight">
+                <h3 className="line-clamp-2 text-base font-extrabold leading-snug text-foreground group-hover:text-[var(--brand-cyan)] transition-colors min-h-[48px] tracking-tight">
                   {course.title}
                 </h3>
 
                 {/* Metadata row */}
                 <div className="flex items-center gap-4 text-xs font-semibold text-muted my-3 py-2.5 border-y border-card-border/60">
                   <span className="flex items-center gap-1">
-                    <BookOpen className="w-3.5 h-3.5 text-[var(--brand-purple)]" />
+                    <BookOpen className="w-3.5 h-3.5 text-[var(--brand-cyan)]" />
                     {course.lessons || 0} Lessons
                   </span>
                   <span className="flex items-center gap-1">
-                    <DollarSign className="w-3.5 h-3.5 text-emerald-500" />
+                    <DollarSign className="w-3.5 h-3.5 text-[var(--brand-mint)]" />
                     Price: ${course.price || 0}
                   </span>
                 </div>
@@ -124,7 +124,7 @@ export default function CoursesGridView({ courses, handleToggleStatus, setCourse
                   <div className="inline-block text-left">
                     <button
                       onClick={(e) => handleToggleMenu(e, courseId)}
-                      className={`dropdown-trigger-btn p-2 rounded-xl border border-card-border bg-card-bg text-muted hover:text-primary transition-all cursor-pointer relative z-50 flex items-center justify-center ${activeMenu.courseId === courseId ? "ring-2 ring-[var(--brand-purple)]/15 border-[var(--brand-purple)]" : ""}`}
+                      className={`dropdown-trigger-btn p-2 rounded-xl border border-card-border bg-card-bg text-muted hover:text-foreground transition-all cursor-pointer relative z-50 flex items-center justify-center ${activeMenu.courseId === courseId ? "ring-2 ring-[var(--brand-cyan)]/20 border-[var(--brand-cyan)]" : ""}`}
                       title="Actions"
                     >
                       <MoreVertical className="w-4.5 h-4.5" />
@@ -154,16 +154,16 @@ export default function CoursesGridView({ courses, handleToggleStatus, setCourse
               top: `${activeMenu.top}px`, 
               right: `${activeMenu.right}px` 
             }}
-            className="fixed z-[9999] w-48 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-2xl p-1.5 font-medium animate-in fade-in slide-in-from-top-1 duration-150"
+            className="fixed z-[9999] w-48 glass-card border border-card-border rounded-2xl shadow-card p-1.5 font-bold animate-in fade-in slide-in-from-top-1 duration-150"
             onClick={(e) => e.stopPropagation()}
           >
             {/* View Option */}
             <Link
               href={`/courses/${courseId}`}
               onClick={() => setActiveMenu({ courseId: null, top: 0, right: 0 })}
-              className="flex items-center gap-2 w-full text-left px-3 py-2 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-xl transition-colors cursor-pointer"
+              className="flex items-center gap-2 w-full text-left px-3 py-2.5 text-sm text-foreground hover:bg-foreground/5 rounded-xl transition-colors cursor-pointer"
             >
-              <Eye className="w-4 h-4 text-blue-500" />
+              <Eye className="w-4 h-4 text-[var(--brand-cyan)]" />
               <span>View Details</span>
             </Link>
 
@@ -174,7 +174,7 @@ export default function CoursesGridView({ courses, handleToggleStatus, setCourse
                   handleToggleStatus(courseId, "unpublish");
                   setActiveMenu({ courseId: null, top: 0, right: 0 });
                 }}
-                className="flex items-center gap-2 w-full text-left px-3 py-2 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-xl transition-colors cursor-pointer"
+                className="flex items-center gap-2 w-full text-left px-3 py-2.5 text-sm text-foreground hover:bg-foreground/5 rounded-xl transition-colors cursor-pointer"
               >
                 <EyeOff className="w-4 h-4 text-amber-500" />
                 <span>Unpublish</span>
@@ -187,9 +187,9 @@ export default function CoursesGridView({ courses, handleToggleStatus, setCourse
                   handleToggleStatus(courseId, "publish");
                   setActiveMenu({ courseId: null, top: 0, right: 0 });
                 }}
-                className="flex items-center gap-2 w-full text-left px-3 py-2 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-xl transition-colors cursor-pointer"
+                className="flex items-center gap-2 w-full text-left px-3 py-2.5 text-sm text-foreground hover:bg-foreground/5 rounded-xl transition-colors cursor-pointer"
               >
-                <Play className="w-4 h-4 text-emerald-500" />
+                <Play className="w-4 h-4 text-[var(--brand-mint)]" />
                 <span>Publish</span>
               </button>
             )}
@@ -200,16 +200,16 @@ export default function CoursesGridView({ courses, handleToggleStatus, setCourse
                   handleToggleStatus(courseId, "submit");
                   setActiveMenu({ courseId: null, top: 0, right: 0 });
                 }}
-                className="flex items-center gap-2 w-full text-left px-3 py-2 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-xl transition-colors cursor-pointer"
+                className="flex items-center gap-2 w-full text-left px-3 py-2.5 text-sm text-foreground hover:bg-foreground/5 rounded-xl transition-colors cursor-pointer"
               >
-                <Send className="w-4 h-4 text-indigo-500" />
+                <Send className="w-4 h-4 text-[var(--brand-ocean)]" />
                 <span>Submit Review</span>
               </button>
             )}
 
             {status === "pending" && (
               <span 
-                className="flex items-center gap-2 w-full text-left px-3 py-2 text-sm text-amber-500/60 bg-amber-500/5 rounded-xl font-bold select-none cursor-not-allowed"
+                className="flex items-center gap-2 w-full text-left px-3 py-2.5 text-sm text-amber-500/80 bg-amber-500/10 rounded-xl font-bold select-none cursor-not-allowed"
                 title="Under administrative review"
               >
                 <Sparkles className="w-4 h-4 text-amber-500" />
@@ -218,24 +218,24 @@ export default function CoursesGridView({ courses, handleToggleStatus, setCourse
             )}
 
             {/* Divider */}
-            <div className="h-px bg-zinc-100 dark:bg-zinc-800 my-1" />
+            <div className="h-px bg-card-border my-1" />
 
             {/* Edit Option */}
             {isActionDisabled ? (
               <span
-                className="flex items-center gap-2 w-full text-left px-3 py-2 text-sm text-zinc-400 dark:text-zinc-600 cursor-not-allowed select-none opacity-40"
+                className="flex items-center gap-2 w-full text-left px-3 py-2.5 text-sm text-muted/50 cursor-not-allowed select-none"
                 title="Edit is disabled for published/pending courses"
               >
-                <Edit3 className="w-4 h-4 text-zinc-400 dark:text-zinc-600" />
+                <Edit3 className="w-4 h-4 text-muted/50" />
                 <span>Edit Course</span>
               </span>
             ) : (
               <Link
                 href={`/dashboard/edit-course/${courseId}`}
                 onClick={() => setActiveMenu({ courseId: null, top: 0, right: 0 })}
-                className="flex items-center gap-2 w-full text-left px-3 py-2 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-xl transition-colors cursor-pointer"
+                className="flex items-center gap-2 w-full text-left px-3 py-2.5 text-sm text-foreground hover:bg-foreground/5 rounded-xl transition-colors cursor-pointer"
               >
-                <Edit3 className="w-4 h-4 text-zinc-500" />
+                <Edit3 className="w-4 h-4 text-muted" />
                 <span>Edit Course</span>
               </Link>
             )}
@@ -243,10 +243,10 @@ export default function CoursesGridView({ courses, handleToggleStatus, setCourse
             {/* Delete Option */}
             {isActionDisabled ? (
               <span
-                className="flex items-center gap-2 w-full text-left px-3 py-2 text-sm text-zinc-400 dark:text-zinc-600 cursor-not-allowed select-none opacity-40"
+                className="flex items-center gap-2 w-full text-left px-3 py-2.5 text-sm text-muted/50 cursor-not-allowed select-none"
                 title="Delete is disabled for published/pending courses"
               >
-                <Trash2 className="w-4 h-4 text-zinc-400 dark:text-zinc-600" />
+                <Trash2 className="w-4 h-4 text-muted/50" />
                 <span>Delete Course</span>
               </span>
             ) : (
@@ -255,9 +255,9 @@ export default function CoursesGridView({ courses, handleToggleStatus, setCourse
                   setCourseToDelete(activeCourse);
                   setActiveMenu({ courseId: null, top: 0, right: 0 });
                 }}
-                className="flex items-center gap-2 w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20 rounded-xl transition-colors cursor-pointer"
+                className="flex items-center gap-2 w-full text-left px-3 py-2.5 text-sm text-rose-500 hover:bg-rose-500/10 rounded-xl transition-colors cursor-pointer"
               >
-                <Trash2 className="w-4 h-4 text-red-500" />
+                <Trash2 className="w-4 h-4 text-rose-500" />
                 <span>Delete Course</span>
               </button>
             )}

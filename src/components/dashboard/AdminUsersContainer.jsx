@@ -180,7 +180,7 @@ export default function AdminUsersContainer({ user }) {
       
       {/* Results count */}
       {!isLoading && (
-        <div className="flex items-center justify-end gap-2 text-sm text-gray-500 dark:text-gray-400">
+        <div className="flex items-center justify-end gap-2 text-sm text-muted font-bold">
           <Users className="w-4 h-4" />
           <span>{totalUsers} user{totalUsers !== 1 ? "s" : ""} found</span>
         </div>
@@ -188,8 +188,8 @@ export default function AdminUsersContainer({ user }) {
 
       {/* ── Table ──────────────────────────────────────────────────────────── */}
       {isLoading ? (
-        <div className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-2xl min-h-[400px] flex items-center justify-center">
-          <Loader2 className="w-10 h-10 animate-spin text-indigo-500" />
+        <div className="glass-card border border-card-border shadow-card rounded-[24px] min-h-[200px] flex items-center justify-center">
+          <Loader2 className="w-10 h-10 animate-spin text-[var(--brand-cyan)]" />
         </div>
       ) : (
         <AdminUsersTable

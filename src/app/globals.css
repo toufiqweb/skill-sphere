@@ -97,7 +97,7 @@
     135deg,
     #093c5d 0%,
     #3b7597 50%,
-    #5df8d8 100__
+    #5df8d8 100%
   );
   --gradient-text: linear-gradient(
     90deg,
@@ -149,24 +149,24 @@
   --nav-bg: rgba(13, 17, 23, 0.85);
   --nav-border: rgba(255, 255, 255, 0.06);
 
-  /* Brand Palette (Image 2) */
+  /* Brand Palette */
   --brand-deep: #0d1117;
-  --brand-ocean: #1f2937;
-  --brand-cyan: #13667d;
-  --brand-mint: #14b8a6;
+  --brand-ocean: #3b7597; /* Make ocean brighter in dark mode */
+  --brand-cyan: #22d3ee; /* Bright cyan for dark mode */
+  --brand-mint: #2dd4bf; /* Bright mint for dark mode */
 
   /* Primary Gradient */
-  --primary-gradient-start: #13667d;
-  --primary-gradient-end: #14b8a6;
+  --primary-gradient-start: #22d3ee;
+  --primary-gradient-end: #2dd4bf;
 
   /* Glass */
-  --glass-bg: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.06);
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
 
   /* Text */
   --text-primary: #ffffff;
   --text-secondary: #cbd5e1;
-  --text-muted: #6b7280;
+  --text-muted: #9ca3af; /* Brighter muted text for better contrast */
 
   /* Gradients */
   --gradient-primary: linear-gradient(
@@ -337,4 +337,80 @@ body {
   .section-brand {
     background: var(--section-brand);
   }
+}
+
+/* =========================
+   REACT TOASTIFY CUSTOMIZATION
+========================= */
+
+.Toastify__toast {
+  border-radius: 16px !important;
+  background: var(--card-bg) !important;
+  color: var(--foreground) !important;
+  border: 1px solid var(--card-border) !important;
+  box-shadow: var(--shadow-card) !important;
+  backdrop-filter: blur(12px) !important;
+  font-family: var(--font-sans) !important;
+  font-weight: 600 !important;
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--success {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--brand-mint) !important;
+  color: var(--brand-mint) !important;
+  box-shadow: 0 8px 30px rgba(93, 248, 216, 0.15) !important;
+}
+.Toastify__toast-theme--colored.Toastify__toast--success .Toastify__progress-bar {
+  background: var(--brand-mint) !important;
+}
+.Toastify__toast-theme--colored.Toastify__toast--success svg {
+  fill: var(--brand-mint) !important;
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--error {
+  background: var(--card-bg) !important;
+  border: 1px solid #f43f5e !important;
+  color: #f43f5e !important;
+  box-shadow: 0 8px 30px rgba(244, 63, 94, 0.15) !important;
+}
+.Toastify__toast-theme--colored.Toastify__toast--error .Toastify__progress-bar {
+  background: #f43f5e !important;
+}
+.Toastify__toast-theme--colored.Toastify__toast--error svg {
+  fill: #f43f5e !important;
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--info {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--brand-cyan) !important;
+  color: var(--brand-cyan) !important;
+  box-shadow: 0 8px 30px rgba(111, 209, 215, 0.15) !important;
+}
+.Toastify__toast-theme--colored.Toastify__toast--info .Toastify__progress-bar {
+  background: var(--brand-cyan) !important;
+}
+.Toastify__toast-theme--colored.Toastify__toast--info svg {
+  fill: var(--brand-cyan) !important;
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--warning {
+  background: var(--card-bg) !important;
+  border: 1px solid #f59e0b !important;
+  color: #f59e0b !important;
+  box-shadow: 0 8px 30px rgba(245, 158, 11, 0.15) !important;
+}
+.Toastify__toast-theme--colored.Toastify__toast--warning .Toastify__progress-bar {
+  background: #f59e0b !important;
+}
+.Toastify__toast-theme--colored.Toastify__toast--warning svg {
+  fill: #f59e0b !important;
+}
+
+.Toastify__close-button {
+  color: var(--muted) !important;
+  opacity: 0.7 !important;
+}
+.Toastify__close-button:hover {
+  opacity: 1 !important;
+  color: var(--foreground) !important;
 }
