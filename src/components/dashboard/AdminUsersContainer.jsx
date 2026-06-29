@@ -22,6 +22,7 @@ export default function AdminUsersContainer({ user }) {
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
+  const [limit, setLimit] = useState(10);
   const [totalPages, setTotalPages] = useState(1);
   const [totalUsers, setTotalUsers] = useState(0);
 
@@ -41,13 +42,13 @@ export default function AdminUsersContainer({ user }) {
     return () => clearTimeout(timer);
   }, [search]);
 
-  // Reset to page 1 when filters change
+  // Reset to page 1 when filters or limit change
   useEffect(() => {
     const timer = setTimeout(() => setCurrentPage(1), 0);
     return () => clearTimeout(timer);
-  }, [debouncedSearch, roleFilter, statusFilter]);
+  }, [debouncedSearch, roleFilter, statusFilter, limit]);
 
-  // Fetch users whenever page or filters change
+  // Fetch users whenever page, limit, or filters change
   useEffect(() => {
     let active = true;
 
@@ -56,7 +57,7 @@ export default function AdminUsersContainer({ user }) {
       try {
         const data = await getAllUsersAdmin(user.id, {
           page: currentPage,
-          limit: 10,
+          limit: limit,
           search: debouncedSearch,
           role: roleFilter,
           blocked: statusFilter,
@@ -80,7 +81,7 @@ export default function AdminUsersContainer({ user }) {
 
     fetchUsers();
     return () => { active = false; };
-  }, [user.id, currentPage, debouncedSearch, roleFilter, statusFilter]);
+  }, [user.id, currentPage, limit, debouncedSearch, roleFilter, statusFilter]);
 
   // ── Role Change Handler ──────────────────────────────────────────────────────
   const handleRoleChange = useCallback(async (userId, newRole) => {
@@ -216,13 +217,17 @@ export default function AdminUsersContainer({ user }) {
       )}
 
       {/* ── Pagination ─────────────────────────────────────────────────────── */}
-      {!isLoading && totalPages > 1 && (
+      {!isLoading && (totalPages > 1 || totalUsers > 0) && (
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
           onPageChange={setCurrentPage}
+          totalItems={totalUsers}
+          itemsPerPage={limit}
+          onItemsPerPageChange={setLimit}
         />
       )}
     </div>
   );
 }
+

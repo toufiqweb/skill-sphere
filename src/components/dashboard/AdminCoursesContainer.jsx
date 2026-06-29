@@ -17,7 +17,9 @@ export default function AdminCoursesContainer({ user }) {
   const [courses, setCourses] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
+  const [limit, setLimit] = useState(10);
   const [totalPages, setTotalPages] = useState(1);
+  const [totalCourses, setTotalCourses] = useState(0);
   const [isPending, startTransition] = useTransition();
 
   const [activeMenu, setActiveMenu] = useState({
@@ -26,28 +28,42 @@ export default function AdminCoursesContainer({ user }) {
     right: 0,
   });
 
+  // Reset to page 1 when limit changes
   useEffect(() => {
-    const fetchCourses = async (page) => {
+    const timer = setTimeout(() => setCurrentPage(1), 0);
+    return () => clearTimeout(timer);
+  }, [limit]);
+
+  useEffect(() => {
+    let active = true;
+
+    const fetchCourses = async () => {
       setIsLoading(true);
       try {
-        const data = await getAllAdminCoursesClient(user.id, page, 10);
+        const data = await getAllAdminCoursesClient(user.id, currentPage, limit);
+        
+        if (!active) return;
+        
         if (data.success) {
           setCourses(data.data);
           setTotalPages(data.meta.totalPages || 1);
-          setCurrentPage(data.meta.currentPage || 1);
+          setTotalCourses(data.meta.totalCourses || 0);
         } else {
           toast.error(data.message || "Failed to fetch admin courses.");
         }
       } catch (error) {
+        if (!active) return;
         console.error("Error fetching admin courses:", error);
         toast.error("Network error fetching courses.");
       } finally {
-        setIsLoading(false);
+        if (active) setIsLoading(false);
       }
     };
 
-    fetchCourses(currentPage);
-  }, [currentPage, user.id]);
+    fetchCourses();
+    
+    return () => { active = false; };
+  }, [currentPage, limit, user.id]);
 
   const handleAction = async (courseId, actionType, courseTitle) => {
     if (actionType === "delete") {
@@ -144,8 +160,8 @@ export default function AdminCoursesContainer({ user }) {
   return (
     <div className="space-y-6 pb-12">
       {isLoading ? (
-        <div className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-2xl p-6 min-h-[400px] flex items-center justify-center">
-          <Loader2 className="w-10 h-10 animate-spin text-blue-600" />
+        <div className="glass-card rounded-2xl p-6 min-h-[400px] flex items-center justify-center dark:bg-gray-800/40">
+          <Loader2 className="w-10 h-10 animate-spin text-brand-mint" />
         </div>
       ) : (
         <AdminCoursesTable
@@ -156,12 +172,17 @@ export default function AdminCoursesContainer({ user }) {
         />
       )}
 
-      {!isLoading && totalPages > 1 && (
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={(page) => setCurrentPage(page)}
-        />
+      {!isLoading && (totalPages > 1 || totalCourses > 0) && (
+        <div className="overflow-hidden rounded-2xl border border-gray-200 shadow-sm dark:border-white/5">
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+            totalItems={totalCourses}
+            itemsPerPage={limit}
+            onItemsPerPageChange={setLimit}
+          />
+        </div>
       )}
     </div>
   );

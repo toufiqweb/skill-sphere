@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { MessageSquareWarning, Trash2, Star, Loader2 } from "lucide-react";
+import { MessageSquareWarning, Trash2, Star, Loader2, ShieldCheck } from "lucide-react";
 import { useSession } from "@/lib/auth-client";
 import Pagination from "@/components/ui/Pagination";
 import { toast } from "react-toastify";
@@ -89,18 +89,27 @@ export default function ManageReviewPage() {
   }
 
   return (
-    <div className="w-full max-w-7xl mx-auto space-y-6 pb-10">
-      <div className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-3xl p-6 sm:p-8 flex items-start sm:items-center gap-5 shadow-sm">
-        <div className="w-14 h-14 bg-red-50 dark:bg-red-500/10 rounded-2xl flex items-center justify-center shrink-0">
-          <MessageSquareWarning className="text-red-600 dark:text-red-400 w-7 h-7" />
+    <div className="w-full max-w-7xl mx-auto space-y-8 pb-10">
+      {/* Page Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 glass-card rounded-[28px]">
+        <div className="flex items-center gap-5">
+          <div className="w-14 h-14 rounded-[20px] bg-brand-cyan/10 border border-brand-cyan/20 flex items-center justify-center shrink-0 shadow-inner">
+            <MessageSquareWarning size={28} className="text-brand-cyan" />
+          </div>
+          <div>
+            <h1 className="text-2xl sm:text-3xl font-black text-foreground tracking-tight flex items-center gap-2">
+              Manage <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan to-brand-ocean">Reviews</span>
+            </h1>
+            <p className="text-xs sm:text-sm font-medium text-muted mt-1">
+              Monitor, moderate, and remove inappropriate course reviews from the platform.
+            </p>
+          </div>
         </div>
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">
-            Manage Reviews
-          </h1>
-          <p className="text-sm text-gray-500 dark:text-zinc-400 mt-1">
-            Monitor, moderate, and remove inappropriate course reviews from the platform.
-          </p>
+        <div className="flex items-center gap-3">
+            <span className="px-4 py-2 rounded-xl bg-foreground/5 border border-card-border text-xs font-bold text-muted flex items-center gap-2 shadow-sm">
+                <ShieldCheck size={16} className="text-brand-mint" /> 
+                Community Moderation
+            </span>
         </div>
       </div>
 
