@@ -74,7 +74,7 @@ const Navbar = () => {
               <div className="dark:hidden flex">
                 <Image
                   src={mainLightModeLogo}
-                  alt="SkillSphere"
+                  alt="VectraLern"
                   width={200}
                   height={55}
                   priority
@@ -84,7 +84,7 @@ const Navbar = () => {
               <div className="hidden dark:flex">
                 <Image
                   src={mainlogo}
-                  alt="SkillSphere"
+                  alt="VectraLern"
                   width={200}
                   height={55}
                   priority

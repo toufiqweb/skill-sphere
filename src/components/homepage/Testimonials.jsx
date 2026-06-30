@@ -9,7 +9,7 @@ const reviews = [
     name: "Alice Johnson",
     role: "Software Engineer",
     avatar: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
-    text: "SkillSphere completely transformed my career path. The instructors are top-notch and the community is incredibly supportive!",
+    text: "VectraLern completely transformed my career path. The instructors are top-notch and the community is incredibly supportive!",
   },
   {
     id: 2,

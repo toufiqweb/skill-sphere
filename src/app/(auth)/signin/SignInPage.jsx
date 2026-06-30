@@ -79,8 +79,8 @@ const SignInPage = () => {
         <div className="relative z-10 w-full max-w-lg">
           {/* Logo */}
           <Link href="/" className="inline-block mb-12">
-            <Image src={mainLightModeLogo} alt="SkillSphere" width={220} height={60} className="dark:hidden block w-[180px] h-auto" />
-            <Image src={mainlogo} alt="SkillSphere" width={220} height={60} className="hidden dark:block w-[180px] h-auto" />
+            <Image src={mainLightModeLogo} alt="VectraLern" width={220} height={60} className="dark:hidden block w-[180px] h-auto" />
+            <Image src={mainlogo} alt="VectraLern" width={220} height={60} className="hidden dark:block w-[180px] h-auto" />
           </Link>
           
           <h1 className="text-4xl lg:text-5xl font-black text-foreground leading-tight mb-6 tracking-tight">
@@ -131,8 +131,8 @@ const SignInPage = () => {
         {/* Mobile Logo */}
         <div className="absolute top-8 left-6 sm:left-12 lg:hidden z-20">
             <Link href="/">
-              <Image src={mainLightModeLogo} alt="SkillSphere" width={220} height={60} className="dark:hidden block w-[150px] h-auto" />
-              <Image src={mainlogo} alt="SkillSphere" width={220} height={60} className="hidden dark:block w-[150px] h-auto" />
+              <Image src={mainLightModeLogo} alt="VectraLern" width={220} height={60} className="dark:hidden block w-[150px] h-auto" />
+              <Image src={mainlogo} alt="VectraLern" width={220} height={60} className="hidden dark:block w-[150px] h-auto" />
             </Link>
         </div>
 

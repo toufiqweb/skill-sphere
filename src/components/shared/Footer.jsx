@@ -24,8 +24,8 @@ const Footer = () => {
           {/* Brand Presentation Column (Takes up 4 cols on large layouts) */}
           <div className="lg:col-span-4 space-y-6">
             <Link href="/" className="inline-flex items-center group active:scale-95 transition-transform">
-              <Image src={mainLightModeLogo} alt="SkillSphere" width={250} height={70} className="dark:hidden block w-[220px] sm:w-[250px] h-auto" />
-              <Image src={mainlogo} alt="SkillSphere" width={250} height={70} className="hidden dark:block w-[220px] sm:w-[250px] h-auto" />
+              <Image src={mainLightModeLogo} alt="VectraLern" width={250} height={70} className="dark:hidden block w-[220px] sm:w-[250px] h-auto" />
+              <Image src={mainlogo} alt="VectraLern" width={250} height={70} className="hidden dark:block w-[220px] sm:w-[250px] h-auto" />
             </Link>
 
             <p className="max-w-xs text-xs font-semibold leading-relaxed text-muted">

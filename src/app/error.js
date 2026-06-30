@@ -35,7 +35,7 @@ export default function ErrorPage({ error, reset }) {
         <Link href="/" className="mb-12 hover:opacity-80 transition-opacity drop-shadow-sm">
           <Image 
             src={mainLightModeLogo} 
-            alt="SkillSphere" 
+            alt="VectraLern" 
             width={200} 
             height={55} 
             className="dark:hidden block w-[160px] sm:w-[200px] h-auto" 
@@ -43,7 +43,7 @@ export default function ErrorPage({ error, reset }) {
           />
           <Image 
             src={mainlogo} 
-            alt="SkillSphere" 
+            alt="VectraLern" 
             width={200} 
             height={55} 
             className="hidden dark:block w-[160px] sm:w-[200px] h-auto" 

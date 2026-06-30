@@ -95,7 +95,7 @@ const GlobalLoader = ({ fullScreen = true, logs = DEFAULT_LOGS, title = "Loading
              <div className="relative w-14 h-14 animate-pulse">
                 <Image 
                   src={standaloneIcon} 
-                  alt="SkillSphere Icon" 
+                  alt="VectraLern Icon" 
                   fill
                   className="object-contain drop-shadow-lg"
                 />

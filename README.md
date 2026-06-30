@@ -1,8 +1,8 @@
 <div align="center">
 
-# 🎓 SkillSphere – Online Learning Platform
+# 🎓 VectraLern – Online Learning Platform
 
-### SkillSphere is a modern and fully responsive online learning platform where users can explore skill-based courses, view detailed course information, and manage their profiles. The platform provides a smooth learning experience with secure authentication, protected routes, search functionality, and an intuitive user interface.
+### VectraLern is a modern and fully responsive online learning platform where users can explore skill-based courses, view detailed course information, and manage their profiles. The platform provides a smooth learning experience with secure authentication, protected routes, search functionality, and an intuitive user interface.
 
 ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
@@ -28,11 +28,11 @@
 
 ## Mockup
 
-![Skill-Sphere Mockup](https://i.ibb.co.com/pBCGPtdR/skill-Sphere-Mockupe.png)
+![VectraLern Mockup](https://i.ibb.co.com/pBCGPtdR/skill-Sphere-Mockupe.png)
 
 ## 🎯 Project Purpose
 
-The purpose of SkillSphere is to create a modern online learning platform where users can easily discover skill-based courses, explore detailed learning content, and manage their personal profiles. The project focuses on delivering a responsive user experience, secure authentication system, protected learning routes, and a clean interface suitable for mobile, tablet, and desktop devices.
+The purpose of VectraLern is to create a modern online learning platform where users can easily discover skill-based courses, explore detailed learning content, and manage their personal profiles. The project focuses on delivering a responsive user experience, secure authentication system, protected learning routes, and a clean interface suitable for mobile, tablet, and desktop devices.
 
 ## Features
 
@@ -105,7 +105,7 @@ src/
 ## Developer
 
 **Name:** Taj Ahmed  
-**Project:** SkillSphere – Online Learning Platform
+**Project:** VectraLern – Online Learning Platform
 
 ```
 new added

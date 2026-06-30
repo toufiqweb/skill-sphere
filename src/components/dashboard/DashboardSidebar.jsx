@@ -131,12 +131,12 @@ export default function DashboardSidebar({ role }) {
           <Link href="/" className="flex items-center gap-3 overflow-hidden active:scale-95 transition-transform">
             {isCollapsed ? (
               <div className="flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden">
-                <Image src={standaloneIcon} alt="SkillSphere Icon" width={32} height={32} className="w-8 h-8 object-contain" />
+                <Image src={standaloneIcon} alt="VectraLern Icon" width={32} height={32} className="w-8 h-8 object-contain" />
               </div>
             ) : (
               <div className="flex items-center pt-2">
-                <Image src={mainLightModeLogo} alt="SkillSphere" width={200} height={55} className="dark:hidden block w-[180px] h-auto" />
-                <Image src={mainlogo} alt="SkillSphere" width={200} height={55} className="hidden dark:block w-[180px] h-auto" />
+                <Image src={mainLightModeLogo} alt="VectraLern" width={200} height={55} className="dark:hidden block w-[180px] h-auto" />
+                <Image src={mainlogo} alt="VectraLern" width={200} height={55} className="hidden dark:block w-[180px] h-auto" />
               </div>
             )}
           </Link>
