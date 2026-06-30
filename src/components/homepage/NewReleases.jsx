@@ -172,7 +172,7 @@ const NewReleases = ({ courses = [] }) => {
                     </div>
 
                     <Link
-                      href={`/courses/${course.id || course._id || ""}`}
+                      href={`/courses/${course.slug || course.id || course._id || ""}`}
                       className="bg-main-gradient shadow-glow text-white text-xs font-bold px-5 py-2.5 rounded-xl hover:scale-105 transition-transform"
                     >
                       Enroll Now

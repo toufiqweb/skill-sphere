@@ -206,7 +206,7 @@ export default function CourseCard({
               </button>
             )}
             <Link
-              href={`/courses/${courseId}`}
+              href={`/courses/${course.slug || courseId}`}
               className="inline-flex items-center justify-center rounded-xl bg-main-gradient px-5 py-2.5 text-sm font-bold text-white shadow-glow transition-all duration-300 hover:scale-105"
             >
               View Details

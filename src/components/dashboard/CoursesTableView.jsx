@@ -193,7 +193,7 @@ export default function CoursesTableView({ courses, handleToggleStatus, setCours
           >
             {/* View Option */}
             <Link
-              href={`/courses/${courseId}`}
+              href={`/courses/${course.slug || courseId}`}
               onClick={() => setActiveMenu({ courseId: null, top: 0, right: 0 })}
               className="flex items-center gap-2 w-full text-left px-3 py-2.5 text-sm text-foreground hover:bg-foreground/5 rounded-xl transition-colors cursor-pointer"
             >

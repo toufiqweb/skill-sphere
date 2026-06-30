@@ -17,6 +17,8 @@ import {
 } from "lucide-react";
 import { getCourseById } from "@/lib/api/course";
 import { getCourseReviews } from "@/lib/api/review";
+import { getWishlistIds } from "@/lib/api/wishlist";
+import WishlistButton from "@/components/ui/WishlistButton";
 import { FaStar } from "react-icons/fa";
 import { getUserServerSession } from "@/lib/actions/getUserServerSession";
 import { serverFetch, protectedFetch } from "@/lib/core/server";
@@ -47,10 +49,10 @@ const fallbackCurriculum = [
 ];
 
 export async function generateMetadata({ params }) {
-  const { id } = await params;
+  const { slug } = await params;
   let course = null;
   try {
-    const response = await getCourseById(id);
+    const response = await getCourseById(slug);
     course = response?.success ? response.data : null;
   } catch (error) {
     console.error("Course fetch failed:", error);
@@ -70,13 +72,13 @@ export async function generateMetadata({ params }) {
 }
 
 const CourseDetailPage = async ({ params }) => {
-  const { id } = await params;
+  const { slug } = await params;
   let course = null;
   let dynamicReviews = [];
   try {
     const [courseResponse, reviewsResponse] = await Promise.all([
-      getCourseById(id),
-      getCourseReviews(id),
+      getCourseById(slug),
+      getCourseReviews(slug),
     ]);
     course = courseResponse?.success ? courseResponse.data : null;
     dynamicReviews = reviewsResponse?.success ? reviewsResponse.reviews : [];
@@ -94,6 +96,8 @@ const CourseDetailPage = async ({ params }) => {
 
   const user = await getUserServerSession();
   let isEnrolled = false;
+  let isWishlisted = false;
+  
   if (user && course) {
     try {
       const enrollmentCheck = await protectedFetch(
@@ -102,6 +106,15 @@ const CourseDetailPage = async ({ params }) => {
       isEnrolled = enrollmentCheck?.isEnrolled || false;
     } catch (err) {
       console.error("Error checking enrollment status:", err);
+    }
+
+    try {
+      const wishlistRes = await getWishlistIds(user.id);
+      if (wishlistRes?.success && Array.isArray(wishlistRes.data)) {
+        isWishlisted = wishlistRes.data.includes(course._id || course.id);
+      }
+    } catch (err) {
+      console.error("Error fetching wishlist IDs:", err);
     }
   }
 
@@ -385,10 +398,11 @@ const CourseDetailPage = async ({ params }) => {
                       </button>
                     </form>
                   )}
-                  <button className="w-full flex items-center justify-center gap-2 border border-card-border bg-transparent hover:bg-foreground/5 text-foreground font-bold py-3.5 rounded-xl text-xs uppercase tracking-wider transition-all duration-200">
-                    <Bookmark className="w-4 h-4 text-brand-cyan" />
-                    Add to Wishlist
-                  </button>
+                  <WishlistButton 
+                    initialIsWishlisted={isWishlisted}
+                    courseId={course._id || course.id}
+                    userId={user?.id}
+                  />
                 </div>
               </div>
             </div>

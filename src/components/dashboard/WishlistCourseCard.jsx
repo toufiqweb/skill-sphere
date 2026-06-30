@@ -132,7 +132,7 @@ export default function WishlistCourseCard({ course, onRemove, isRemoving = fals
 
         {/* View / Enroll CTA */}
         <Link
-          href={`/courses/${courseId}`}
+          href={`/courses/${course.slug || courseId}`}
           className="
             mt-2 w-full inline-flex items-center justify-center gap-2
             rounded-xl bg-gradient-to-r from-[var(--brand-cyan)] to-[var(--brand-ocean)]

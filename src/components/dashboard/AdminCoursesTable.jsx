@@ -205,7 +205,7 @@ export default function AdminCoursesTable({
             return (
               <div className="flex flex-col">
                 <Link
-                  href={`/courses/${activeMenu.courseId}`}
+                  href={`/courses/${course.slug || activeMenu.courseId}`}
                   className="flex items-center gap-3 px-4 py-2.5 text-sm font-bold text-foreground hover:bg-foreground/5 transition-colors w-full text-left"
                 >
                   <Eye className="w-4 h-4 text-[var(--brand-cyan)]" />
