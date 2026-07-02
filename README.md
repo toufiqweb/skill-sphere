@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🎓 VectraLern
+# 🎓 vectraLearn
 
 <!-- Placeholder Badges -->
 
@@ -20,7 +20,7 @@
 
 <br/>
 
-<a href="https://vectralern.vercel.app" target="_blank"><strong>🌐 Live Demo</strong></a> • <a href="https://github.com/toufiqweb/vectraLearn" target="_blank"><strong>💻 GitHub Repo</strong></a>
+<a href="https://vectraLearn.vercel.app" target="_blank"><strong>🌐 Live Demo</strong></a> • <a href="https://github.com/toufiqweb/vectraLearn" target="_blank"><strong>💻 GitHub Repo</strong></a>
 
 </div>
 
@@ -42,11 +42,11 @@
 
 ## 🎯 Brief Description
 
-VectraLern empowers learners and educators by providing a centralized hub for modern education. The platform solves the problem of disjointed e-learning experiences by combining a polished interface, seamless and secure authentication, role-based dashboards, and protected payment routes into one reliable and scalable environment.
+vectraLearn empowers learners and educators by providing a centralized hub for modern education. The platform solves the problem of disjointed e-learning experiences by combining a polished interface, seamless and secure authentication, role-based dashboards, and protected payment routes into one reliable and scalable environment.
 
 ## 🖼 Mockup
 
-![VectraLern Mockup](https://i.ibb.co.com/MD0RBd2Q/Screenshot-2026-06-30-222142.png)
+![vectraLearn Mockup](https://i.ibb.co.com/MD0RBd2Q/Screenshot-2026-06-30-222142.png)
 
 ## 🛠 Tech Stack
 
@@ -137,7 +137,7 @@ Once the development server is running, open [http://localhost:3000](http://loca
 
 ## 🤝 Contributing
 
-We welcome contributions to VectraLern! If you'd like to help make this project better, please follow these standard guidelines:
+We welcome contributions to vectraLearn! If you'd like to help make this project better, please follow these standard guidelines:
 
 1. **Fork the Project:** Create your own fork of the repository.
 2. **Create a Feature Branch:**
