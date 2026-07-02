@@ -23,21 +23,23 @@ export const serverMutation = async (path, data, method = "POST", customHeaders 
   return handleStatus(res);
 };
 
-export const serverFetch = async (path, customHeaders = {}) => {
+export const serverFetch = async (path, customHeaders = {}, options = {}) => {
   const res = await fetch(`${baseUrl}${path}`, {
     headers: {
       ...customHeaders,
     },
+    ...options,
   });
   return handleStatus(res);
 };
 
-export const protectedFetch = async (path, customHeaders = {}) => {
+export const protectedFetch = async (path, customHeaders = {}, options = {}) => {
   const res = await fetch(`${baseUrl}${path}`, {
     headers: {
       ...(await authHeader()),
       ...customHeaders,
     },
+    ...options,
   });
   return handleStatus(res);
 };

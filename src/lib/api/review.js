@@ -3,7 +3,7 @@
 import { serverFetch, protectedFetch } from "../core/server";
 
 export const getCourseReviews = async (id) => {
-  return serverFetch(`/api/courses/${id}/reviews`);
+  return serverFetch(`/api/courses/${id}/reviews`, {}, { cache: 'no-store' });
 };
 
 export const getAllReviewsForModerationClient = async (adminId, page = 1, limit = 10) => {

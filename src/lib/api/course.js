@@ -20,7 +20,7 @@ export const getAllCourses = async (queryParams = {}) => {
 };
 
 export const getCourseById = async (id) => {
-  return serverFetch(`/api/courses/${id}`);
+  return serverFetch(`/api/courses/${id}`, {}, { cache: 'no-store' });
 };
 
 export const getCoursesByInstructorClient = async (instructorId, page = 1, limit = 10, queryParams = {}) => {
